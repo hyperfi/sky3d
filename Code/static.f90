@@ -270,6 +270,8 @@ CONTAINS
        ! Step 5: gradient step
        delesum=0.0D0  
        sumflu=0.0D0
+       ! Assemble against one unchanged basis before any thread updates psi.
+       IF(tdiag.AND.iter>20) CALL build_static_hmatrix
        !$OMP PARALLEL DO DEFAULT(SHARED) PRIVATE(nst,denerg) &
        !$OMP    SCHEDULE(STATIC) REDUCTION(+: sumflu , delesum)
        DO nst=1,nstmax
@@ -365,9 +367,8 @@ CONTAINS
 !!     <tt>xnormb/xnorm</tt> thus corresponds
 !!     to the expectation value \f$ \|\hat h\| \f$ in \c psin.
 !!
-!!     Then the matrix elements of \f$ \hat h \f$ with all other states of the same
-!!     isospin are calculated and inserted into \c hmatr; in the diagonal
-!!     matrix elements the energy shift \f$ \epsilon \f$ is added back.
+!!     The diagonalization matrix is assembled separately before the gradient
+!!     loop, using an unchanged basis in \c build_static_hmatrix.
 !!  -# for the calculation of the fluctuation in the
 !!     single-particle energy, the quantity
 !!     \f[ {\tt exph2}=\langle {\tt psin}|\hat h^2|{\tt psin}\rangle \f]
@@ -427,18 +428,12 @@ CONTAINS
     INTENT(INOUT) :: spe,psin
     REAL(db) :: x0act,esf,enrold,xnorm,xnormb,exph2,varh2
     COMPLEX(db) :: ps1(nx,ny,nz,2),ps2(nx,ny,nz,2)
-    INTEGER :: nst2
     ! Step 1:(h-esf) on psin yields ps1.                        *
     esf=spe 
     CALL hpsi(iq,esf,psin,ps1)
     ! Step 2: calculate matrix elements
     xnorm=rpsnorm(psin)
     xnormb=overlap(psin,ps1)
-    DO nst2=1,nstmax
-       IF(tdiag.AND.isospin(nst2)==isospin(nst))   &
-            hmatr(nst2,nst)=overlap(psi(:,:,:,:,nst2),ps1)
-    ENDDO
-    IF(tdiag) hmatr(nst,nst)=hmatr(nst,nst)+spe
     ! Step 3: calculate fluctuation, i.e. <h*h> and |h|**2
     IF(output_due(iter,mprint).OR.tvaryx_0) THEN
        CALL hpsi(iq,esf,ps1,ps2)
@@ -468,13 +463,29 @@ CONTAINS
     spe=xnormb+esf  
     denerg=(enrold-spe)/ABS(spe)  
   END SUBROUTINE grstep
+  ! Build the matrix while psi is read-only. Grstep updates psi in place;
+  ! reading other states there races with the OpenMP gradient loop.
+  SUBROUTINE build_static_hmatrix
+    USE Trivial, ONLY: overlap
+    INTEGER :: nst,nst2
+    COMPLEX(db) :: hp(nx,ny,nz,2)
+    !$OMP PARALLEL DO DEFAULT(SHARED) PRIVATE(nst,nst2,hp) SCHEDULE(STATIC)
+    DO nst=1,nstmax
+       CALL hpsi(isospin(nst),0.0D0,psi(:,:,:,:,nst),hp)
+       DO nst2=1,nstmax
+          IF(isospin(nst2)==isospin(nst)) &
+               hmatr(nst2,nst)=overlap(psi(:,:,:,:,nst2),hp)
+       ENDDO
+    ENDDO
+    !$OMP END PARALLEL DO
+  END SUBROUTINE build_static_hmatrix
 !---------------------------------------------------------------------------  
 ! DESCRIPTION: diagstep
 !> @brief
 !!This subroutine performs a diagonalization of the single-particle
 !!Hamiltonian using the LAPACK routine \c ZHEEVD. This is of course
 !!done separately for protons and neutrons indexed by \c iq. The
-!!matrix \c hmatr is produced in \c grstep.
+!!matrix \c hmatr is produced in \c build_static_hmatrix.
 !>
 !> @details
 !!We do not give excessive detail here but summarize the main

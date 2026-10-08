@@ -19,6 +19,25 @@ and restart intervals. Initial state output remains part of initialization;
 `tools/gpu_audit/evidence/controls-fixed.json`; the original failing evidence
 is preserved in `controls.json`.
 
+Fresh-state preparation also exposed a static diagonalization race. `grstep`
+read other orbitals to construct `hmatr` while the OpenMP loop updated those
+orbitals in place. The matrix is now assembled in a separate read-only pass
+before the gradient loop, using the same pre-update basis for every column.
+This adds a Hamiltonian application for iterations that diagonalize, without
+copying the full basis or defeating `tlarge`'s memory-saving transformation.
+The dynamic propagation path is unchanged by this fix. A 120-iteration static
+check compares all seven density/potential outputs across one thread, repeated
+eight-thread reference runs and the optimized CPU build. Maximum field
+differences are below `3e-13`; see `CUDA/results/static.json`.
+
+The static race fix does **not** establish that the supplied 24³ 20Ne input
+meets its requested `serr=1e-6`. Both the earlier build and the repaired build
+reached 3000 iterations at a weighted fluctuation of about `7.56e-5`. The
+original production input is retained. The benchmark preparation script
+rejects unmet convergence criteria; an explicit `--static-serr 1e-4` generates
+a performance-test state and records that tolerance. It does not certify a
+production ground state or silently relax a physics criterion.
+
 These are control and accumulation fixes, not a change to the Skyrme force,
 spectral derivative rules or propagator. Existing production files are kept
 unchanged. The historical GPU audit describes the original source and should
