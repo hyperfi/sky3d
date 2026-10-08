@@ -1,0 +1,1701 @@
+{
+  "date": "2026-10-08",
+  "policy": "Preserved locally, ignored by Git; no deletion or upload",
+  "scopes": [
+    "Code",
+    "Test/Static",
+    "Test/GR",
+    "Utils/Strength_Calculation",
+    "projects/icnpa2026_20Ne_Kresolved_E2",
+    "projects/mg24_mqc_snp2026/data/processed",
+    "projects/mg24_mqc_snp2026/figures",
+    "projects/mg24_mqc_snp2026/paper"
+  ],
+  "files": [
+    {
+      "path": "Code/coulomb.mod",
+      "bytes": 3015,
+      "sha256": "cbc63b56f031f38c1ebb968fd94e3c16903efca9340df520b620dd4e6722a64e"
+    },
+    {
+      "path": "Code/coulomb.o",
+      "bytes": 25496,
+      "sha256": "435d73e967ee0d8df34ee8e379ad3538744277657027a048c3fea2029bbdf102"
+    },
+    {
+      "path": "Code/densities.mod",
+      "bytes": 2107,
+      "sha256": "8f02cbfcb6e88e59eea9b631eec2bf9e7afd93ba08084e39be28b832d5d0bad3"
+    },
+    {
+      "path": "Code/densities.o",
+      "bytes": 67472,
+      "sha256": "88f3eee48d90a47c74e56ce17cf03939c3a353f90478a4de7aff2dad35920060"
+    },
+    {
+      "path": "Code/dynamic.mod",
+      "bytes": 14665,
+      "sha256": "da852c45d03fe694998aaf2577015211b83c1a68eb6216fccb4832d842d33165"
+    },
+    {
+      "path": "Code/dynamic.o",
+      "bytes": 189400,
+      "sha256": "159e8f6e2398f8ba73417786b73561e5d34321e4c86ccdb54ccea64b149384e7"
+    },
+    {
+      "path": "Code/energies.mod",
+      "bytes": 11083,
+      "sha256": "ff3b4e727f0ec1a8a76908f5042ee817feb142af9f2249b5cc903bbe201ee2af"
+    },
+    {
+      "path": "Code/energies.o",
+      "bytes": 40056,
+      "sha256": "2d7a7f03ed6c96568188ab0972972d720d70100d5d8cd1bf1a4a5b5bb017a80c"
+    },
+    {
+      "path": "Code/external.mod",
+      "bytes": 2876,
+      "sha256": "64122a878251b094e8c9de8013fb621cb46c99dffc89b0d0d2a44795a942b4d2"
+    },
+    {
+      "path": "Code/external.o",
+      "bytes": 30368,
+      "sha256": "610ce3e00d1a24a8fd396371375dee0c8bd10a69a046c582e286f375c713a9f1"
+    },
+    {
+      "path": "Code/forces.mod",
+      "bytes": 6429,
+      "sha256": "617573db957c98df6608fa172a8a2aa6cb34966835c0bbf3826e9e112df5d030"
+    },
+    {
+      "path": "Code/forces.o",
+      "bytes": 27032,
+      "sha256": "b8c0b1a95d43e5b503de9a0a2aeb13d19e89545f49be5c503bf488ca69447931"
+    },
+    {
+      "path": "Code/fourier.mod",
+      "bytes": 2770,
+      "sha256": "1ce376daee4d9df26ed032124fcc6fda0e78a15421eadeeccc7231e4f1a1ddc2"
+    },
+    {
+      "path": "Code/fourier.o",
+      "bytes": 6560,
+      "sha256": "61a6506bd94473564f32d263b6e9fece17fce867e404673186b3cbf8abdbc611"
+    },
+    {
+      "path": "Code/fragments.mod",
+      "bytes": 1676,
+      "sha256": "535b5cf4c58faab490e8b9cf7f05ade57a9be7c167e45b504e09c8d2aa4f5cf0"
+    },
+    {
+      "path": "Code/fragments.o",
+      "bytes": 65232,
+      "sha256": "7f10022ad48f35273559c4f66d17c17691f6febd4c0aacf65a974ad2d59e0662"
+    },
+    {
+      "path": "Code/grids.mod",
+      "bytes": 805,
+      "sha256": "32a8dd375e615a9c19e42134e8cc2e3e689cb509aac4740d41cc696fce04b251"
+    },
+    {
+      "path": "Code/grids.o",
+      "bytes": 33288,
+      "sha256": "e259954c47201e16048b1849ff5cece5409b065b3458413e3565fa298d2f13fd"
+    },
+    {
+      "path": "Code/inout.mod",
+      "bytes": 6274,
+      "sha256": "5de4c92fbd71a1e51a0a3373803dff421b8fb200f748890ed980f3b3eb16f42e"
+    },
+    {
+      "path": "Code/inout.o",
+      "bytes": 63376,
+      "sha256": "73204a4dff2448a5ec39461b26f08776e18ec3d60c462b37f6b8a1e8349d54a3"
+    },
+    {
+      "path": "Code/levels.mod",
+      "bytes": 3757,
+      "sha256": "68df820f849736eb8f0da8b6acc200c173fd2e3a151c41b21d2432a634541bdb"
+    },
+    {
+      "path": "Code/levels.o",
+      "bytes": 106160,
+      "sha256": "9ac3d2055abe7a5716997111a4e9854d4dca333dd0249fc39f192f54e08e0274"
+    },
+    {
+      "path": "Code/main3d.o",
+      "bytes": 15808,
+      "sha256": "1c795175e48bdad47303711df0768b5ba4a3ee07418e97941d662c0f8bc4814c"
+    },
+    {
+      "path": "Code/meanfield.mod",
+      "bytes": 8507,
+      "sha256": "2e339564958e92630552b0b094526d7d5c6a8e7e4a7b15711cfe0bb4a9d85894"
+    },
+    {
+      "path": "Code/meanfield.o",
+      "bytes": 164224,
+      "sha256": "dfd168fd9cb23e8deba36befcbf29368fba3cd218cb3528de65518fce4d46bb4"
+    },
+    {
+      "path": "Code/moment.mod",
+      "bytes": 677,
+      "sha256": "e86bd397cd8d55e550438a9ad446fe4b671df085f533a1459051cbb6696ff736"
+    },
+    {
+      "path": "Code/moment.o",
+      "bytes": 27248,
+      "sha256": "1e7d4eb261b23c487edbd0bec636ae378501beff6cd280c46f76795a000fd5c0"
+    },
+    {
+      "path": "Code/pairs.mod",
+      "bytes": 1707,
+      "sha256": "57fd0566438ff7781b918cfd68f7f8f2294c603ab0600b85205ba02d53fa05a4"
+    },
+    {
+      "path": "Code/pairs.o",
+      "bytes": 19352,
+      "sha256": "4a3b42a40dc6e8121ad8ee4f1de6341519c477c242abaa7350e681fce5499f8b"
+    },
+    {
+      "path": "Code/parallel.mod",
+      "bytes": 1987,
+      "sha256": "f63ec750f71720fc02bd596e515fd415931bb3f349bcc05bbc78c9a8f486acd0"
+    },
+    {
+      "path": "Code/params.mod",
+      "bytes": 1035,
+      "sha256": "e6935b5bc17cd408873663ff5007aa17f31608bfe270056207e2708702b4a743"
+    },
+    {
+      "path": "Code/params.o",
+      "bytes": 3296,
+      "sha256": "17cc0f060182d7be5991f9b6d37a1317aa795fb5ccab80f36d7268116e8972b5"
+    },
+    {
+      "path": "Code/sequential.o",
+      "bytes": 8720,
+      "sha256": "3064f5fc1b58b8a55674a5de5531de3570af69a5aedbfe786fea6bc852099eb9"
+    },
+    {
+      "path": "Code/sky3d.omp",
+      "bytes": 793392,
+      "sha256": "cc45c0b3343f7c4a1dba23a4a6c63fb9cbcd89a9e0ac176949615002e93c01a3"
+    },
+    {
+      "path": "Code/sky3d.omp.exe",
+      "bytes": 931984,
+      "sha256": "f81faeb3fe606e2237e620ee8196f1a80d6d4a712c3ca8ca5fe84a316d789303"
+    },
+    {
+      "path": "Code/spherical_harmonics.mod",
+      "bytes": 623,
+      "sha256": "5c53eac5bf20fbf70f6c916ae0017b64a77d6838f387d8ec87e07e97692b9e26"
+    },
+    {
+      "path": "Code/static.mod",
+      "bytes": 13332,
+      "sha256": "9bbf76f80297aa17f6ec52fa634d07134e4d73e8dfb7611ae88d62e77ea99f1c"
+    },
+    {
+      "path": "Code/static.o",
+      "bytes": 137792,
+      "sha256": "528d23da392fc403a09393d6f39bb3dbce9f763315451cdba857ed582fcd9a0c"
+    },
+    {
+      "path": "Code/trivial.mod",
+      "bytes": 1046,
+      "sha256": "fb6a635c81ff5f17931094245c34ac2c6d24b7e98bc960609b4533d68e7fad73"
+    },
+    {
+      "path": "Code/trivial.o",
+      "bytes": 30296,
+      "sha256": "7203578e52489f77e4150755eb46491abaf64c0599b49138d363c43bad6ed5e2"
+    },
+    {
+      "path": "Code/twobody.mod",
+      "bytes": 6290,
+      "sha256": "a4ba4c0833be90bc1a1be9af54fde8b4dd4b85b2011536dce8e405d2e0fe8de3"
+    },
+    {
+      "path": "Code/twobody.o",
+      "bytes": 72944,
+      "sha256": "06d622b18dc2a476fad3de651193b2441ee8be1055d7d66aeb3e6526dede5065"
+    },
+    {
+      "path": "Code/user.mod",
+      "bytes": 4756,
+      "sha256": "bad881ae177d1d054c58db36ec9408acb4744cb2d680ed4f29a52704dda49981"
+    },
+    {
+      "path": "Code/user.o",
+      "bytes": 1432,
+      "sha256": "6d618c0199b4b71cead5b28e4f6eca47b57db22d74515dbd21d448bb4180621c"
+    },
+    {
+      "path": "Code/ylm.o",
+      "bytes": 15688,
+      "sha256": "2200a6d4846445ba5c40734b5df0b3bd4e2b116aa8ea0ca07c95db5f9f725641"
+    },
+    {
+      "path": "Test/GR/000000.tdd",
+      "bytes": 443084,
+      "sha256": "2ada265a126bc84eaa30b1320557d83354cffceb720817d51056bd616cb2e9ee"
+    },
+    {
+      "path": "Test/GR/IS_Strength_quadrupoles.out",
+      "bytes": 25143,
+      "sha256": "ea8bc612b06c857c12bfe5b901e79d0d65db7685078213a0b1ddfa1fa494a232"
+    },
+    {
+      "path": "Test/GR/IV_Strength_quadrupoles.out",
+      "bytes": 25143,
+      "sha256": "86350a9b2cc14379c2005b492e8c1f35f13c18c87e760b5372e82c62820d7ae9"
+    },
+    {
+      "path": "Test/GR/diatriacontapoles.res",
+      "bytes": 70127,
+      "sha256": "e5393770a46de611819214356cefe57baf9eb27fe9da04c13a4bb69e615bd4a1"
+    },
+    {
+      "path": "Test/GR/dipoles.res",
+      "bytes": 80134,
+      "sha256": "2bb3770ae774af1a9dbe213c730cbce8adf11f96f1c39cc3b5eff763fa1c487e"
+    },
+    {
+      "path": "Test/GR/energies.res",
+      "bytes": 96189,
+      "sha256": "dfaf400398fa85bc15713564f1580b98dbda2518712b6636090d1b4fe52d41a6"
+    },
+    {
+      "path": "Test/GR/extfield.res",
+      "bytes": 54109,
+      "sha256": "bdccc96cdc3c5963d5aa66c9e7726015c579d136d4d3bc8db1cf3227e41b22da"
+    },
+    {
+      "path": "Test/GR/for005",
+      "bytes": 467,
+      "sha256": "1b95b582630eebc7aeef05fd69c30dfc0886fe56251f0e56d4389ab38876301d"
+    },
+    {
+      "path": "Test/GR/hexadecapoles.res",
+      "bytes": 80129,
+      "sha256": "0fb7d766281a0ceddb46226df1724a9d9846160a959e006a84314f6bf2ccaff6"
+    },
+    {
+      "path": "Test/GR/momenta.res",
+      "bytes": 54101,
+      "sha256": "0e521ff33d1805218b5a460b0a9a64acda9db2928af0fb92e191e701e3016c3f"
+    },
+    {
+      "path": "Test/GR/monopoles.res",
+      "bytes": 80140,
+      "sha256": "c6e585111a6846cc50c0a9013e18a40ee7cfcaf0ad5ca76c3b7aadc7475b5d8b"
+    },
+    {
+      "path": "Test/GR/my_plot.png",
+      "bytes": 30596,
+      "sha256": "4b5dd5f70bbbfd674158a25a51f63bbade0e51bba51e7f3c6a6ddbd68a0bae27"
+    },
+    {
+      "path": "Test/GR/octupoles.res",
+      "bytes": 80124,
+      "sha256": "5d60fd234618b2957ec95b4718062be45169f18deed71cde9c252cb96448ce63"
+    },
+    {
+      "path": "Test/GR/quadrupoles.res",
+      "bytes": 80127,
+      "sha256": "cc0fb59ae1ed6d4a8f03823b399ea9ef7eb8a32fd29d382c09f382d690505752"
+    },
+    {
+      "path": "Test/GR/restart",
+      "bytes": 7079660,
+      "sha256": "73717a08b1b82a1558bee891133d4529b2d47542a4ad1e0661b15d829a6ab4ad"
+    },
+    {
+      "path": "Test/GR/spin.res",
+      "bytes": 97192,
+      "sha256": "1ba8dd419e8df63df21a70eb70a52e0c257740bed721461c52ef76a8653fc5e4"
+    },
+    {
+      "path": "Test/Static/000000.tdd",
+      "bytes": 111274,
+      "sha256": "81fa7b76677adc981169b0e93847a59ca61594c6e1447d0afb2b835a43f22156"
+    },
+    {
+      "path": "Test/Static/000010.tdd",
+      "bytes": 111274,
+      "sha256": "0b33830cadb453f767433fb61bc226ba65d970f6f90627d0bab81ebda8d14dbd"
+    },
+    {
+      "path": "Test/Static/000020.tdd",
+      "bytes": 111274,
+      "sha256": "a56d8062db7e32fa3fe0862549f4cf9f6e4f46ad59c29152c8b8cf2ed9c29001"
+    },
+    {
+      "path": "Test/Static/000030.tdd",
+      "bytes": 111274,
+      "sha256": "3307414e79ef49498d9cc8eed56ac1f1c96ffa25b1369140e4e3e8c3fece4732"
+    },
+    {
+      "path": "Test/Static/000040.tdd",
+      "bytes": 111274,
+      "sha256": "69b18d21caae65a8e6ec5ee8093209fa28718a25aaf18883b21b76eb08642045"
+    },
+    {
+      "path": "Test/Static/000050.tdd",
+      "bytes": 111274,
+      "sha256": "78113d508e44d70ff6d5e796323f2bc33cdf554c759fb2d51ee4c190f455469e"
+    },
+    {
+      "path": "Test/Static/000060.tdd",
+      "bytes": 111274,
+      "sha256": "f3a5a3603b64f562fb0250c91889123b4742bdf3df57beaf0f05d16f621fb9cb"
+    },
+    {
+      "path": "Test/Static/000070.tdd",
+      "bytes": 111274,
+      "sha256": "b087e06571dd168b7d9d009142927fa222645108c2ae44743857099d66434bac"
+    },
+    {
+      "path": "Test/Static/000080.tdd",
+      "bytes": 111274,
+      "sha256": "d00052b26cc1d9c3250aa912704f04c5d1c263045424aa3f71dec0dcc0fa9db3"
+    },
+    {
+      "path": "Test/Static/000090.tdd",
+      "bytes": 111274,
+      "sha256": "d6d0bbab2d7daf88d1d083d691dd351987443ca94b22687056a89d97c37de0c5"
+    },
+    {
+      "path": "Test/Static/000100.tdd",
+      "bytes": 111274,
+      "sha256": "3aa83054cac9ce8abe8b6f3d12965170f1740bdf5cdb90feabeef34962652591"
+    },
+    {
+      "path": "Test/Static/000110.tdd",
+      "bytes": 111274,
+      "sha256": "74b68b942c2d12f0dfd0744173c2a02e0ed9f28f7041b04abe0405f2d19e22e5"
+    },
+    {
+      "path": "Test/Static/000120.tdd",
+      "bytes": 111274,
+      "sha256": "a43b584948015ee29e87b680c3f79519911abb471a300653a237ff38e8abbaae"
+    },
+    {
+      "path": "Test/Static/000130.tdd",
+      "bytes": 111274,
+      "sha256": "81637f6f95e7c8f4277c78478d8c23515e87ea3dd23e63d5880e1eaf4d4661d3"
+    },
+    {
+      "path": "Test/Static/000140.tdd",
+      "bytes": 111274,
+      "sha256": "1a6b2904890bee93236bfe1d83bba8b7b931fe0f0c07514aa70b67523a98f6ea"
+    },
+    {
+      "path": "Test/Static/000150.tdd",
+      "bytes": 111274,
+      "sha256": "4d217592f56157897e9cabfc5580b90d1c8f15c140183529df9f997032380fc6"
+    },
+    {
+      "path": "Test/Static/000160.tdd",
+      "bytes": 111274,
+      "sha256": "12cbcd458c27c4b268c6edc34f0695de9e4032994a4d98599accdf4caaadf8a1"
+    },
+    {
+      "path": "Test/Static/000170.tdd",
+      "bytes": 111274,
+      "sha256": "0ed9bd34286e278b9ce4cb8d9eedd042d13328a544a5bef77759aff44a4ab3f7"
+    },
+    {
+      "path": "Test/Static/000180.tdd",
+      "bytes": 111274,
+      "sha256": "35629910dcf05cb8c72c3a61a322e6198cddf8ffe90843cddcbfca84cb06f858"
+    },
+    {
+      "path": "Test/Static/000190.tdd",
+      "bytes": 111274,
+      "sha256": "af8b5435f08cf2c4c5e69406606574557f2a0f93174e83154edb78575c8f8186"
+    },
+    {
+      "path": "Test/Static/000200.tdd",
+      "bytes": 111274,
+      "sha256": "4f4bf494d2034b1e09ae135ef537690968299d63326f45c5c5c6f0872cbf4944"
+    },
+    {
+      "path": "Test/Static/000210.tdd",
+      "bytes": 111274,
+      "sha256": "7f9c4f1befab9a987358466740f9a0be9bbb1a760147f44b6b0e4b16fdfa7d7a"
+    },
+    {
+      "path": "Test/Static/000220.tdd",
+      "bytes": 111274,
+      "sha256": "1b4250ad7482b5fd15554f8a9c4ce5e935e44de1853254464b447845aaa485bc"
+    },
+    {
+      "path": "Test/Static/000230.tdd",
+      "bytes": 111274,
+      "sha256": "756825b0e655477934fcec54e5bbcaa4125da94ee41676fbc051875b66c4235c"
+    },
+    {
+      "path": "Test/Static/000240.tdd",
+      "bytes": 111274,
+      "sha256": "2985b9545aea2fe29b8f3b5ce9c51c0bbd10dd5d2a022146589ed2d62f2b2524"
+    },
+    {
+      "path": "Test/Static/000250.tdd",
+      "bytes": 111274,
+      "sha256": "a98721f745388c343c75aef525326eeb81e159ed4ab8f1f5b47655b924ee7ca1"
+    },
+    {
+      "path": "Test/Static/000260.tdd",
+      "bytes": 111274,
+      "sha256": "de91643d0a3c52733ba49a6152d6be753ace1c2ee0e51ad96d961c13b51388af"
+    },
+    {
+      "path": "Test/Static/000270.tdd",
+      "bytes": 111274,
+      "sha256": "b2d204822214451e550ded99d3108881af69f39bdda6d9ea1689a4ec2c025107"
+    },
+    {
+      "path": "Test/Static/000280.tdd",
+      "bytes": 111274,
+      "sha256": "232308796b5b12c365cfd3f06f0ed4cff1881f812d17c9420e105e9a56a39921"
+    },
+    {
+      "path": "Test/Static/000290.tdd",
+      "bytes": 111274,
+      "sha256": "b42f94918b01a4610ee8abe7cb9db74922ff386cf99f2f89d6205ef3e39c2d81"
+    },
+    {
+      "path": "Test/Static/000300.tdd",
+      "bytes": 111274,
+      "sha256": "740953ca0ff6c700652731ad379d2c0d0e3445d0f1b7ff6a80a5503851200800"
+    },
+    {
+      "path": "Test/Static/000310.tdd",
+      "bytes": 111274,
+      "sha256": "f89ce19b97e942bf9a5d0312613096e86ada1983b3f5f27ceb35f96ac1b2a9bd"
+    },
+    {
+      "path": "Test/Static/000320.tdd",
+      "bytes": 111274,
+      "sha256": "0635c671f62dc99f508f1d400652d29cacb1ba667d150f090c9fb09bfbb28c11"
+    },
+    {
+      "path": "Test/Static/000330.tdd",
+      "bytes": 111274,
+      "sha256": "22d9f8860bc9f15b103d2a2c6ec83ecab0840c308ef048cb5ca294e27e8e49da"
+    },
+    {
+      "path": "Test/Static/000340.tdd",
+      "bytes": 111274,
+      "sha256": "0fb6180f0136f6895ec7f428fe57cbf396fad81f2d84b4b358cd7f52661c1742"
+    },
+    {
+      "path": "Test/Static/000350.tdd",
+      "bytes": 111274,
+      "sha256": "120f8b73d7632e5631ff39e062a04738f7d9e7933463943bd5b2cb96126abff6"
+    },
+    {
+      "path": "Test/Static/000360.tdd",
+      "bytes": 111274,
+      "sha256": "bc94395800a683d7e79d1d548efa7414a6770db0739c2584e302a2f865575588"
+    },
+    {
+      "path": "Test/Static/000370.tdd",
+      "bytes": 111274,
+      "sha256": "616f9cc65d58b3369f6f5db6ace64e0ef92d0b147ee79a9236de63c5e02512ea"
+    },
+    {
+      "path": "Test/Static/O16",
+      "bytes": 7079660,
+      "sha256": "9770aa1f9030b9083fa2ec7a6c65f45e448484e3e0857a80270c4e176ba3c177"
+    },
+    {
+      "path": "Test/Static/conver.res",
+      "bytes": 6587,
+      "sha256": "bbb04859cd637e1ca1abcb33956f92974faa5c3bae5aef6e53c266035937decc"
+    },
+    {
+      "path": "Test/Static/dipoles.res",
+      "bytes": 3535,
+      "sha256": "f2ddb6720abbdc7db0452be1e433ec6eb9e8394285a9ff6910e577b742fb9ef2"
+    },
+    {
+      "path": "Test/Static/for005",
+      "bytes": 350,
+      "sha256": "e0a2cf860d48cd5d815195632e09fd5255e2ea188c826cdb4903552197c93153"
+    },
+    {
+      "path": "Test/Static/spin.res",
+      "bytes": 3781,
+      "sha256": "33daa21444e9071579e01daf1a69600159244731b52716a5e6ce7debca6f29ba"
+    },
+    {
+      "path": "Utils/Strength_Calculation/.pytest_cache/.gitignore",
+      "bytes": 37,
+      "sha256": "3ed731b65d06150c138e2dadb0be0697550888a6b47eb8c45ecc9adba8b8e9bd"
+    },
+    {
+      "path": "Utils/Strength_Calculation/.pytest_cache/CACHEDIR.TAG",
+      "bytes": 191,
+      "sha256": "37dc88ef9a0abeddbe81053a6dd8fdfb13afb613045ea1eb4a5c815a74a3bde4"
+    },
+    {
+      "path": "Utils/Strength_Calculation/.pytest_cache/README.md",
+      "bytes": 302,
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    {
+      "path": "Utils/Strength_Calculation/.pytest_cache/v/cache/lastfailed",
+      "bytes": 2,
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "path": "Utils/Strength_Calculation/.pytest_cache/v/cache/nodeids",
+      "bytes": 850,
+      "sha256": "125deedc19b743799c84925d36f15457a93fe28204045679a2496cc8bdd002be"
+    },
+    {
+      "path": "Utils/Strength_Calculation/sky3d_response/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 836,
+      "sha256": "460816026b61c693f88be234579d735d68cf905ef35664369befa4995ab7b450"
+    },
+    {
+      "path": "Utils/Strength_Calculation/sky3d_response/__pycache__/analysis.cpython-312.pyc",
+      "bytes": 18387,
+      "sha256": "e99def1000a77c7c5594f6c084c2744e777ea6dc7fa5db386d5a88d16f817d16"
+    },
+    {
+      "path": "Utils/Strength_Calculation/sky3d_response/__pycache__/cli.cpython-312.pyc",
+      "bytes": 4126,
+      "sha256": "70102ccf4c527616a79d5d20bb2b4016b147036c85b8d1960bdd57f4c73708d3"
+    },
+    {
+      "path": "Utils/Strength_Calculation/sky3d_response/__pycache__/config.cpython-312.pyc",
+      "bytes": 9947,
+      "sha256": "2764a4f8d0ba03a2463abf6998380280fdc0ab2b98ff8479aff4bea4246a19fd"
+    },
+    {
+      "path": "Utils/Strength_Calculation/sky3d_response/__pycache__/constants.cpython-312.pyc",
+      "bytes": 539,
+      "sha256": "65dac59202275ce0409a38653f967eb3f1bdc9f69fcf4030e4126ad350de1b73"
+    },
+    {
+      "path": "Utils/Strength_Calculation/sky3d_response/__pycache__/density.cpython-312.pyc",
+      "bytes": 8744,
+      "sha256": "5b220b25c76410ef041b6025d96aa34c98916dfac95ad3faa1f5353914f6bdf2"
+    },
+    {
+      "path": "Utils/Strength_Calculation/sky3d_response/__pycache__/io.cpython-312.pyc",
+      "bytes": 7122,
+      "sha256": "6eb79211b423d90c48dee8b6ddf15fad99b2b9829377bb07ff789721ef8652d7"
+    },
+    {
+      "path": "Utils/Strength_Calculation/sky3d_response/__pycache__/models.cpython-312.pyc",
+      "bytes": 4884,
+      "sha256": "b08a26b4e37b2a532da59430cf9758cbc531200fbd4f307ee95394d3cd362d18"
+    },
+    {
+      "path": "Utils/Strength_Calculation/sky3d_response/__pycache__/output.cpython-312.pyc",
+      "bytes": 11843,
+      "sha256": "7467b7f91221100ae65de8b02950943aedb0b3adbd2a6117330dcc490ccfc71c"
+    },
+    {
+      "path": "Utils/Strength_Calculation/sky3d_response/__pycache__/pipeline.cpython-312.pyc",
+      "bytes": 9543,
+      "sha256": "47818bf7e1508b6a66567ee6940c49091e1622cc7722a95a1ac866c133aa02af"
+    },
+    {
+      "path": "Utils/Strength_Calculation/sky3d_response/__pycache__/plotting.cpython-312.pyc",
+      "bytes": 9890,
+      "sha256": "1c97b9860ab9f5d28e009ec7dc76f875b2596652e2281d4a16a176c36aea5d33"
+    },
+    {
+      "path": "Utils/Strength_Calculation/tests/__pycache__/test_analysis.cpython-312-pytest-9.1.1.pyc",
+      "bytes": 7607,
+      "sha256": "d8c8cc756a56d3047b9da14177e70bae2e210b8b0ed8887848e3630be3f416fa"
+    },
+    {
+      "path": "Utils/Strength_Calculation/tests/__pycache__/test_analysis.cpython-312.pyc",
+      "bytes": 7494,
+      "sha256": "030417410b4fd8ef11c29d7685664628df54ca61091ebdb8d50f6711a9281efd"
+    },
+    {
+      "path": "Utils/Strength_Calculation/tests/__pycache__/test_density.cpython-312-pytest-9.1.1.pyc",
+      "bytes": 3507,
+      "sha256": "991a0a39f33782aef6d51951a42621d6dd5b48e99651cc2d2891f84ebb9b8c5c"
+    },
+    {
+      "path": "Utils/Strength_Calculation/tests/__pycache__/test_density.cpython-312.pyc",
+      "bytes": 3394,
+      "sha256": "b3ca9481d29af6ded5382fcc41eba3ff5b4e2703d283487b6f734b1898fc367d"
+    },
+    {
+      "path": "Utils/Strength_Calculation/tests/__pycache__/test_io.cpython-312-pytest-9.1.1.pyc",
+      "bytes": 4732,
+      "sha256": "968f8cb3b71f3e50c935792338a5e71b311276e34fb399cdd48788f939f623a2"
+    },
+    {
+      "path": "Utils/Strength_Calculation/tests/__pycache__/test_io.cpython-312.pyc",
+      "bytes": 4619,
+      "sha256": "ee58948d8686c5def01f4c354377389d4635df8f1d1f6e070c22f00735d27eb7"
+    },
+    {
+      "path": "Utils/Strength_Calculation/tests/__pycache__/test_pipeline.cpython-312-pytest-9.1.1.pyc",
+      "bytes": 4567,
+      "sha256": "6e273cae8ab46b7cb5290d9dfc12cae65034dfe2b95042973b74149c213eb7c0"
+    },
+    {
+      "path": "Utils/Strength_Calculation/tests/__pycache__/test_pipeline.cpython-312.pyc",
+      "bytes": 4454,
+      "sha256": "f4c6743d747d4447a6f6dd4cb47178231ee39151c7be51ee04ed4d18b368eaa8"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/figures/20ne_kresolved_e2.pdf",
+      "bytes": 23445,
+      "sha256": "80d297179f225eb1eb7f15686f729984621d2c3182fd7532e48b0225d7e13c11"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/figures/20ne_kresolved_e2.png",
+      "bytes": 130437,
+      "sha256": "76feb70b01bf6c9909141d85851b3165779b39db84e816aa4236fc4c55ea03e1"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/figures/k0_linearity_time_domain.pdf",
+      "bytes": 32578,
+      "sha256": "67ba3cca9f4857fc692796af007392aacfe1d13a9e76ca966713c06e48bdfc86"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/figures/k0_linearity_time_domain.png",
+      "bytes": 266041,
+      "sha256": "5e0fd104742d33089d66f4bc7172cdccd5f1f75c47ae36635c71c21e211f910f"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/logs/K0.driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/logs/K0.log",
+      "bytes": 12621701,
+      "sha256": "6c26cefa6f26e502c9dffa6d469f5a22f75d47a4e98ae845574c0cc42e0eb53a"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/logs/K0_half.driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/logs/K0_half.log",
+      "bytes": 12621701,
+      "sha256": "b05f565c21384daa3f4efb97841287e5d78332a3e19dce42606df4b6562ad844"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/logs/K1.driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/logs/K1.log",
+      "bytes": 12621701,
+      "sha256": "e3a52e6fb56f8e75cc1f0ab732b974fa6b5d19596065a8290e13e6a317f02c93"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/logs/K2.driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/logs/K2.log",
+      "bytes": 12625808,
+      "sha256": "ee6e21189a684cf71c5032ba5212e5c893141ea243f2900d9b5d5f2f49fd9c71"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/logs/reference_K0.driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/logs/reference_K0.log",
+      "bytes": 12623650,
+      "sha256": "71c5288ef2ea8595dc218fce2d26635b5c65b2f0c89d6c520dd8b0623e239a2a"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/logs/static.log",
+      "bytes": 1207408,
+      "sha256": "573c32607eb406a2442a81b145b44c40300597096be8dae183ef626d70cb8412"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0/metadata.json",
+      "bytes": 3118,
+      "sha256": "c754d4f5e3637f307c8feea256fc6a361c3591b14926de8464331832da407b65"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0/response.h5",
+      "bytes": 1376190,
+      "sha256": "f91837d02dbd2b6c4d12633d4b7e2007eed878a69cf3c4e2ad8c6ef772bacda6"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0/spectra.csv",
+      "bytes": 407357,
+      "sha256": "540706633917873c710dc97d83f0ab18babf5c65948e6adb45a43107c489a37d"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0/spectra_overview.pdf",
+      "bytes": 32517,
+      "sha256": "8bcc70cd0503f80815844b5e43ac09ceb83bd344745ed5b24555f49b4da1edfe"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0/spectra_overview.png",
+      "bytes": 140835,
+      "sha256": "4119e493b0466fa31ff84c26c15744cff2d7ab24c0d3cf3c42b40814bc2f80d5"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0/spectrum_K0_code_native.pdf",
+      "bytes": 36462,
+      "sha256": "13d52c48f45242bf00efbcdb770d40c5bf9641116b7637a0ae35bb30aae0bff3"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0/spectrum_K0_code_native.png",
+      "bytes": 156772,
+      "sha256": "8a0b2d27335b389161ba369a70c476a0739a2478c09a795615ba6977a45d2162"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0/summary.csv",
+      "bytes": 1954,
+      "sha256": "f539e73cac86a920942ea8a4d4b59dad3d9d57e0cdfd4b7316c8f1c33d034f14"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0/time_signals.csv",
+      "bytes": 1131030,
+      "sha256": "efb3e11beec3256c40afdc5467a469f15e221657bca453b0715545ad5edf6281"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0_half/metadata.json",
+      "bytes": 3145,
+      "sha256": "a663d72529e0401c89256c460d8e63680aebf46eda85e65e14d1e43b80b91553"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0_half/response.h5",
+      "bytes": 1375737,
+      "sha256": "6466ca2b33247404c5fe24a552a66ca30e331805ebb94956cf559d451eaeef8c"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0_half/spectra.csv",
+      "bytes": 407361,
+      "sha256": "f265ae8b4cc1c0f6cc93ad1f8476a1a148f2d37d11fd63310aa05ce7bc083941"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0_half/spectra_overview.pdf",
+      "bytes": 32632,
+      "sha256": "ba34bbff641306d741a57816e27b8b9b1e8553fc8995fe0abf880d37170592d2"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0_half/spectra_overview.png",
+      "bytes": 142351,
+      "sha256": "47cd93423a8d58670a9a6866fa024bd54e4f82d22cdf651c6b6ab0772cfa5659"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0_half/spectrum_K0_code_native.pdf",
+      "bytes": 36439,
+      "sha256": "3629ab0c3682ac0f233ad8add9dee2aa689c04cc524e74d6abbf36d913778ec3"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0_half/spectrum_K0_code_native.png",
+      "bytes": 158013,
+      "sha256": "557f49520820e4c83873f16d3b332eb7f3c6ac1122a27df515da6876200d5543"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0_half/summary.csv",
+      "bytes": 1959,
+      "sha256": "3c859597e5d9b5bb94b7088023bb7956d73eef01c3fe81966284adb4eedace7c"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K0_half/time_signals.csv",
+      "bytes": 1135299,
+      "sha256": "eaaba063e86bd47d4c9bf0d67e6ce2090ab21cc550c8df8cf7477da71ddfdbe3"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K1/metadata.json",
+      "bytes": 3079,
+      "sha256": "d2953f212e6b7e0a3d680b1e3736205db4d5bf1736007570f01fbfe41e907b88"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K1/response.h5",
+      "bytes": 2681673,
+      "sha256": "02cea47fcdb7b78f8b714a1fcc2a580fb787917ed5c5d02020e54813c2a2f1aa"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K1/spectra.csv",
+      "bytes": 823714,
+      "sha256": "9cc2bb8e4741792739533b3a35ca41dac0465787b7dc2099b7375aab01e65930"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K1/spectra_overview.pdf",
+      "bytes": 34125,
+      "sha256": "ae3d74e1d65d5dee62981af1a16c3e8b8bdb86d5bd319d1bd64ed3b6a81d8a27"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K1/spectra_overview.png",
+      "bytes": 139642,
+      "sha256": "ec4be70bc9fae7ed85a4631987f9c563d8da9ebbc0333c7b2fb882805dee557c"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K1/spectrum_K1_code_native.pdf",
+      "bytes": 32631,
+      "sha256": "473f59fd29086a23f6611de627c46f126fbe73372c8c97a7862a8579b6aa776e"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K1/spectrum_K1_code_native.png",
+      "bytes": 120906,
+      "sha256": "641aa1f16af3002415876ea423234f4dce589ff225fa1daddf77734fc6df7e4e"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K1/spectrum_K1_unit_tesseral.pdf",
+      "bytes": 31430,
+      "sha256": "b8426337a012d664728debda3a65770d2f91f3ceabe9b1ef3654b1e4d173635f"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K1/spectrum_K1_unit_tesseral.png",
+      "bytes": 129577,
+      "sha256": "b006352b6fc1fe29c1ed95a1c0c2da0b4e03ab8b28e714f28a0895909f5c8f55"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K1/summary.csv",
+      "bytes": 3276,
+      "sha256": "9ee409153f9e33641bae09376d8e3f6422413857211f6b580d30ec37445cf00d"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K1/time_signals.csv",
+      "bytes": 1842920,
+      "sha256": "8b6876257d3b451d0d94e6ce72d6fb58ffbe9fe0614dadc90883b97d9980b73e"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K2/metadata.json",
+      "bytes": 3079,
+      "sha256": "0833255936c8436ce247cdde4693c69d6bbdcf98db220b6047acf215033d3067"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K2/response.h5",
+      "bytes": 2675966,
+      "sha256": "912e48d5a938201ab90a2be1620d8cd6ab9ae2fbcfa65b77d626e7d2ba7254dc"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K2/spectra.csv",
+      "bytes": 829102,
+      "sha256": "cf0f65fc609c01dbd2cdb77c608d28d71e32598f55c056498ee49b62194d8ecc"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K2/spectra_overview.pdf",
+      "bytes": 39080,
+      "sha256": "7795364491795ff8b4e5809f43e3ada0f8d5a0515db18bd0414bc9503c0dcf39"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K2/spectra_overview.png",
+      "bytes": 150048,
+      "sha256": "9f56f9ac58d14a984ffbc1cc4e7a44bc62f5fafca954a9a47361faa21b51a05b"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K2/spectrum_K2_code_native.pdf",
+      "bytes": 38604,
+      "sha256": "270061af2675ea9223ed7f79279cabd0cd35f3036ab6b182233b826bbe38d485"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K2/spectrum_K2_code_native.png",
+      "bytes": 176861,
+      "sha256": "6ac7c63c3edbb87cf249012cf4cde7f2f60ad64080c9703f728552aaf52b657f"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K2/spectrum_K2_unit_tesseral.pdf",
+      "bytes": 37420,
+      "sha256": "34ceaf366d6bef2573205164680465a2a189162a8de4dca97840e5eb1479c361"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K2/spectrum_K2_unit_tesseral.png",
+      "bytes": 181391,
+      "sha256": "ac153a486c2b11fed0bdb5528affefd64a7288968829ba56079456ced9323446"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K2/summary.csv",
+      "bytes": 3629,
+      "sha256": "069ba389a904aeb42f51ff65c9ba72eaf8b2f26a2c2422da22271019f20cce4c"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/K2/time_signals.csv",
+      "bytes": 1912155,
+      "sha256": "24a2e22f48c6da558ffc0c1b5660a8fd41a0c19db4ee5d52e79820e6d4ae4a66"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/prefix_runs/K0/for005",
+      "bytes": 504,
+      "sha256": "094fb2944e5dbf0a963d1966355a5572cfe46ea640883dffe0bb558623db9afb"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/prefix_runs/K0/quadrupoles.res",
+      "bytes": 240127,
+      "sha256": "1727fec1d9a830984fbab7be47ad5d1a8bf2bc5d125bae059e16799158b8d8de"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/prefix_runs/K0_half/for005",
+      "bytes": 509,
+      "sha256": "4adbccd15612df45c9323a0327d231272a14cb8802ee37430bc00fee7089149c"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/prefix_runs/K0_half/quadrupoles.res",
+      "bytes": 240127,
+      "sha256": "590d453518e7cb8f4be99b32ff1f76538584e4ad221f12c299c75902bfb843c8"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/prefix_runs/K1/for005",
+      "bytes": 504,
+      "sha256": "c0a7cd31f64a78ffd81bb862be625a72d66e550ff1090ec143f8041605cc1998"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/prefix_runs/K1/quadrupoles.res",
+      "bytes": 240127,
+      "sha256": "4a9a14f8cd4bf7b0bfc171812ab57e5a900e339d7887107a00e5d241eecf4fd1"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/prefix_runs/K2/for005",
+      "bytes": 504,
+      "sha256": "fe71cfb35838b64ce557d5e78260e06cf9ee3d98adb18c9643a053ede0a41580"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/prefix_runs/K2/quadrupoles.res",
+      "bytes": 240127,
+      "sha256": "561a8dd5b4e1a77d64e92b6dad9190958ff79205812d70cb614b146b76ddd060"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/prefix_runs/manifest.json",
+      "bytes": 2670,
+      "sha256": "a9eda1d4596713810212d1f73e0861e1ae496220ee09c0f68abc10b1708476e8"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/prefix_runs/reference_K0/for005",
+      "bytes": 393,
+      "sha256": "da91433c93a8a9f50963ab664071bb0485b228204a7b2e9b3ac4d727ab71c645"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/response/prefix_runs/reference_K0/quadrupoles.res",
+      "bytes": 240127,
+      "sha256": "2045e905f28b17252c47e7fff657671a61be85bc1f072ed84516ebf314b0d591"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/scripts/__pycache__/prepare_analysis_prefixes.cpython-312.pyc",
+      "bytes": 3963,
+      "sha256": "5c39089f7d9aa2f81e626fc4cf95727deb34770aa5118b0c7be9927f74352b1e"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/scripts/__pycache__/summarize_results.cpython-312.pyc",
+      "bytes": 13162,
+      "sha256": "48bb69bfd5ad02585f2c0661e8961dea70631c025f9369cf7c4882eea0e2ac0a"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/static/000000.tdd",
+      "bytes": 111274,
+      "sha256": "2c4bb9c62a6b422ad484b679dd9dfad89e26f6eced2a2f140751f7f7271dba9f"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/static/20ne_sly5.tdhf",
+      "bytes": 8849388,
+      "sha256": "bfe5b99c5fb088845305bdf0c2b0bfd2f736b4370dd78ebd2734a34233c7b0c3"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/static/20ne_sly5_zaxis.tdhf",
+      "bytes": 8849388,
+      "sha256": "07353fe3a3fefd74db4a34a129da1f2f969267f9757472193eb6ea3ed5d236f3"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/static/conver.res",
+      "bytes": 51297,
+      "sha256": "a7ce353f8b062d3cab4b2bfe5679cffd16792dce76bd1537b487ad9012212006"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/static/dipoles.res",
+      "bytes": 27468,
+      "sha256": "db1a44dcf1db46cd4697dbe00d3a7f83e18cb518e565d6114dd8347833e98da8"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/static/for005",
+      "bytes": 367,
+      "sha256": "ec58ae41ad8a92a86979975d67199b0d06f0e00964945444b53426acaaae6c81"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/static/spin.res",
+      "bytes": 29292,
+      "sha256": "6e39c59af0585d4a0f93eba753ebf63f8f84b7abb7781d060fa06b97f53cd84e"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/000000.tdd",
+      "bytes": 111274,
+      "sha256": "3c86ae8546e3184b06864775cf8ec8822b756f4c0fef0c56cb051654837d6bc6"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/010000.tdd",
+      "bytes": 111274,
+      "sha256": "272abd85dbe2a0b54582a0178afe1943244f669861854bd260b11d9b1c0f01cf"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/020000.tdd",
+      "bytes": 111274,
+      "sha256": "9d2591113b1062d42dd8df6f10c10a069f57a738fff9d0a9c012cdc86e010186"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/030000.tdd",
+      "bytes": 111274,
+      "sha256": "4df180aa813c0d7219dd6d7adbecea13fa5ff8f6b527be41cce032f253576060"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/diatriacontapoles.res",
+      "bytes": 210127,
+      "sha256": "34586d12533b6b4944dde4795f279406afa86603fa9f5d550d24c9f2094ebf8a"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/dipoles.res",
+      "bytes": 240134,
+      "sha256": "04d1281deb84f3f9a7c1669d197f8f9052d89da52c0647d49ce95d97811acb15"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/energies.res",
+      "bytes": 288189,
+      "sha256": "fa964ccd5401465ca6014bcfeb4550357a89ebb1222f100c7398031994a5cd25"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/extfield.res",
+      "bytes": 162109,
+      "sha256": "ddc5642d7b7dbf6eea73a4016ad6827121b968d3a4ac4e3194913f5b51ee75e0"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/for005",
+      "bytes": 504,
+      "sha256": "094fb2944e5dbf0a963d1966355a5572cfe46ea640883dffe0bb558623db9afb"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/hexadecapoles.res",
+      "bytes": 240129,
+      "sha256": "1950ab83aebacb770eeb3ac1beb7020dba80bb97727d3ee6fd98daf6f3088923"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/k0_restart.tdhf",
+      "bytes": 8849388,
+      "sha256": "b27597737782e151e85f609e66c33349126f7fbbd9e3d89e93ae3affb0cd217c"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/momenta.res",
+      "bytes": 162101,
+      "sha256": "025153accfa11910296d6e8a7555c507ba8f0f155dde39e51d27f11f17184db8"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/monopoles.res",
+      "bytes": 240140,
+      "sha256": "d8909a8356c3229aac9db010ba9e1bcfb7424b231fb7f90dac0b3979b895677a"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/octupoles.res",
+      "bytes": 240124,
+      "sha256": "f4b45d66cc2eb65aa6995fac595a83f20b24519d2f73864ccbf1b2cf1384f152"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/quadrupoles.res",
+      "bytes": 240127,
+      "sha256": "1727fec1d9a830984fbab7be47ad5d1a8bf2bc5d125bae059e16799158b8d8de"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0/spin.res",
+      "bytes": 291192,
+      "sha256": "03e4fc4dfcd21e1a0d5f0301144d2b504ff41c63414016de1069cea2f2cbc237"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/000000.tdd",
+      "bytes": 111274,
+      "sha256": "ca1cd40122f70cd5419575cdecc536676b0ad6f50252f73a9c3c9f6c185ea3da"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/010000.tdd",
+      "bytes": 111274,
+      "sha256": "1e529937409acac5a3936eb43d15f31d24b8b984c37f6a47392b2fe475e6154d"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/020000.tdd",
+      "bytes": 111274,
+      "sha256": "222224117753411e27e57593c4206850b359b692fa9e7684e568bb2913ba2f0c"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/030000.tdd",
+      "bytes": 111274,
+      "sha256": "30829a7fb69a7e3daf3d2760c166de0093ffdb10aabcebd1068edc5a268711ef"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/diatriacontapoles.res",
+      "bytes": 210127,
+      "sha256": "a7ecba0868adea992a3cff32ad1dbf6c0896b07ade66b1638d69f9299a50be04"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/dipoles.res",
+      "bytes": 240134,
+      "sha256": "2e244463e219ccf09cfe6bfa4fba3441dc11f3da5f4aacab2fe99380148f0127"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/energies.res",
+      "bytes": 288189,
+      "sha256": "de4f0c39be31eb0e1ec3a881fda3c822cf19a57f65d4e9c06da4f04d80048d71"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/extfield.res",
+      "bytes": 162109,
+      "sha256": "b817a0448bc7119c206c21aa4d63e073c913e83554b5942b976f40e2c4603040"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/for005",
+      "bytes": 509,
+      "sha256": "4adbccd15612df45c9323a0327d231272a14cb8802ee37430bc00fee7089149c"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/hexadecapoles.res",
+      "bytes": 240129,
+      "sha256": "ba0f3695153cb4f183b559688969448ed190c787501667419656f056407fe4f5"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/k0_half_restart.tdhf",
+      "bytes": 8849388,
+      "sha256": "21dfb8a9ff9fb218da438fbb0e64b26ff7d7602e3ac78e972aae91c944b36899"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/momenta.res",
+      "bytes": 162101,
+      "sha256": "c72ec5b01ea92290b4bbb58e4da1db06d4af79dfdbf4d7a5771046d5e0b3963c"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/monopoles.res",
+      "bytes": 240140,
+      "sha256": "21a0bf7b8f384b3076f14043463606f04bdffbcd79b210f5f8e932dfd504aab0"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/octupoles.res",
+      "bytes": 240124,
+      "sha256": "8142464c44844b9bee240df4e146bde13a395514fa9143c6dc46e75e5318de35"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/quadrupoles.res",
+      "bytes": 240127,
+      "sha256": "590d453518e7cb8f4be99b32ff1f76538584e4ad221f12c299c75902bfb843c8"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K0_half/spin.res",
+      "bytes": 291192,
+      "sha256": "ca2cdf05cac7500b8325c392add771d26c9c8a97e41df37d77d30e2bce634ca3"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/000000.tdd",
+      "bytes": 111274,
+      "sha256": "d4e0673ddd5245850e7f3e4820254e66469039bfa7d451950e810b2d911cfbdf"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/010000.tdd",
+      "bytes": 111274,
+      "sha256": "655e96b8f442c9ab9ffc46314c0176b45cd680eff15e3922280468735ccdfa2d"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/020000.tdd",
+      "bytes": 111274,
+      "sha256": "eb4cc1f1f4399bb41d70dac18bd9e6d66fc10bd93b5715a966ee7eba08af46f3"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/030000.tdd",
+      "bytes": 111274,
+      "sha256": "3deffa283ef6ba082ddf7b3950059593089b5918e681ffd298aaae7d90578fb3"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/diatriacontapoles.res",
+      "bytes": 210127,
+      "sha256": "20f741b51b4bbbf6dfda5399763461f8f8295250d19ab74b56a316aceebc4aa0"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/dipoles.res",
+      "bytes": 240134,
+      "sha256": "1699354396464038f2995acd72e7fe16df9bebbf3b16fb567d4d80cc7f80f118"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/energies.res",
+      "bytes": 288189,
+      "sha256": "ff267f563923d889df7e6652069131d09e76b2c94d51ccdc49c7e6ed86373208"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/extfield.res",
+      "bytes": 162109,
+      "sha256": "c3831dadf387d9f153a5a98087e35d2feae1800d44915816a83acb850243d877"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/for005",
+      "bytes": 504,
+      "sha256": "c0a7cd31f64a78ffd81bb862be625a72d66e550ff1090ec143f8041605cc1998"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/hexadecapoles.res",
+      "bytes": 240129,
+      "sha256": "768317853629a95cebb20543babbc253c7c30f34a6f7e078e31f7cb0eaa033c4"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/k1_restart.tdhf",
+      "bytes": 8849388,
+      "sha256": "d8ccfeacfff645ad4d9245233c3e3e08f2cfdaa7a7af427c781bf289838dc454"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/momenta.res",
+      "bytes": 162101,
+      "sha256": "a397b1860fa73c4643a0567d7c971dee5c49323c39d1714f6bd6d1abcb524b7d"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/monopoles.res",
+      "bytes": 240140,
+      "sha256": "52f01d77225f7551346551955e49767318be2899a7e3e8e7d5fd61e390aa59d6"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/octupoles.res",
+      "bytes": 240124,
+      "sha256": "0d89250e8e521506341f23c764d80c89d267d0962db926f628e3b85b8015284f"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/quadrupoles.res",
+      "bytes": 240127,
+      "sha256": "4a9a14f8cd4bf7b0bfc171812ab57e5a900e339d7887107a00e5d241eecf4fd1"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K1/spin.res",
+      "bytes": 291192,
+      "sha256": "b917b1fd309acddd7b8cd669356284ab65b9b4f368dcc4451b81cb02853fb291"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/000000.tdd",
+      "bytes": 111274,
+      "sha256": "6b42b7d384c5356886382335e5400fdf43d390717ee70fa67a859e05724fc38d"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/010000.tdd",
+      "bytes": 111274,
+      "sha256": "257efaadde615304b967d536d10036f0b302d5b51716e1b050edfe191e86f540"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/020000.tdd",
+      "bytes": 111274,
+      "sha256": "9f3fa38a98934663233fd030297a7248f79e716a935f788010a481ff4f772676"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/030000.tdd",
+      "bytes": 111274,
+      "sha256": "0778056d61fb7e92bb809d8ff25ae7fbe0f5749038302daf4e846df8e5a5dc20"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/diatriacontapoles.res",
+      "bytes": 210127,
+      "sha256": "e8d2bdd005463bc63325b54ff82af09f4d811f2288bcb48cbb90102d67c822fa"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/dipoles.res",
+      "bytes": 240134,
+      "sha256": "299f98d4b384c76ab50a331aae504e350f4d66accaece0babacecff6e6328500"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/energies.res",
+      "bytes": 288189,
+      "sha256": "caf1851dc471ac05357258e560882ecc3f98ada43fd8436d60440ea51bd4d639"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/extfield.res",
+      "bytes": 162109,
+      "sha256": "5ed7192305799f24e87393f117b321d65e790ef9d8706eedca3db01b6967ff01"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/for005",
+      "bytes": 504,
+      "sha256": "fe71cfb35838b64ce557d5e78260e06cf9ee3d98adb18c9643a053ede0a41580"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/hexadecapoles.res",
+      "bytes": 240129,
+      "sha256": "7113167edf6fa06e80a9061e1a1af0d9e3687325ffeb9b0fb7b8dfc6c08cd3fe"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/k2_restart.tdhf",
+      "bytes": 8849388,
+      "sha256": "85b6eac1ea95241662fcf4f2603d879d62af38ad659954d7dd3a91825da04ca8"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/momenta.res",
+      "bytes": 162101,
+      "sha256": "b3fb302e50f74b680ca05c1e76dfb18740abb1308180280900a59799c08a6165"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/monopoles.res",
+      "bytes": 240140,
+      "sha256": "81028e4c1fd98fa43ce1038335e2c77b2a8fd122c369e84828d4a40936bd4304"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/octupoles.res",
+      "bytes": 240124,
+      "sha256": "36924d7d5a611665c0032895ecb3881dbab8cd85aa3fc3a1d1c21093611cad67"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/quadrupoles.res",
+      "bytes": 240127,
+      "sha256": "561a8dd5b4e1a77d64e92b6dad9190958ff79205812d70cb614b146b76ddd060"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/K2/spin.res",
+      "bytes": 291192,
+      "sha256": "59fbc628a154e7c058127d48d4b1b69f4f7d9359f4df3df85fb8f1629001370c"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/000000.tdd",
+      "bytes": 111274,
+      "sha256": "ec59f21692aada533db4083bf689298217787cae07314fc133ed22d67b3937ef"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/010000.tdd",
+      "bytes": 111274,
+      "sha256": "633a89f8f8423b8ba90bd7154889b478ee43f4c26691461cdc6f28d6b98c7a67"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/020000.tdd",
+      "bytes": 111274,
+      "sha256": "b1f721cbfa327b94329ec81becf135b4e4f01b5879b381dd2cb841d2e533f32d"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/030000.tdd",
+      "bytes": 111274,
+      "sha256": "9538051011af7491d254f77c37a54da53764e918bbd76e1f5edc1bbbed4d51d0"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/diatriacontapoles.res",
+      "bytes": 210127,
+      "sha256": "2994030fd609672b2a9a33948cf509f6abb3aa62e424c69ab5fd9562b3f02486"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/dipoles.res",
+      "bytes": 240134,
+      "sha256": "a3c6dd9d03010be10d876ff747ac6b9f5d43764253bf4721877631654b116a73"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/energies.res",
+      "bytes": 288189,
+      "sha256": "f97c9034dcd687adcc75616bdc2f4a6c9413dde64df5b64fe081e76f57b28f92"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/for005",
+      "bytes": 393,
+      "sha256": "da91433c93a8a9f50963ab664071bb0485b228204a7b2e9b3ac4d727ab71c645"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/hexadecapoles.res",
+      "bytes": 240129,
+      "sha256": "f00cbd25febeb88574958077b59daa5d02b24bc89c9b870f030d70dae121d053"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/momenta.res",
+      "bytes": 162101,
+      "sha256": "d27a0e400826aade3f3eea1ece83e513b8aac695981956a5e60ec26d1097a333"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/monopoles.res",
+      "bytes": 240140,
+      "sha256": "7551a9ced42e529df089357412be7db958ee6ef41d1f13c7574a9daab7395025"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/octupoles.res",
+      "bytes": 240124,
+      "sha256": "cfc0466add2ac7c1a94eb3ccf5f2d57b3cd9d5f9075f6b660b7c21a1349c286a"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/quadrupoles.res",
+      "bytes": 240127,
+      "sha256": "2045e905f28b17252c47e7fff657671a61be85bc1f072ed84516ebf314b0d591"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/reference_k0_restart.tdhf",
+      "bytes": 3868280,
+      "sha256": "cb13512ae41a6dc4a3a9234809d17290858a7fe4da8a299caa0c04530ca4436e"
+    },
+    {
+      "path": "projects/icnpa2026_20Ne_Kresolved_E2/td/reference_K0/spin.res",
+      "bytes": 291192,
+      "sha256": "b494da25df5f258039d0ac5aaf8a060a5f9ce8054ff53a3a25ad5f4832614232"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_baseline/response.h5",
+      "bytes": 1055645,
+      "sha256": "3dd5c7b4911f79c80f5be439d433ccd3509b593cb1f7f278573498d642baaa3b"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_baseline/spectra_overview.pdf",
+      "bytes": 32946,
+      "sha256": "42270ad0dfc8a77dd7e06b6a163c62d3b79330051e2492d6db16d364286884e7"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_baseline/spectra_overview.png",
+      "bytes": 206515,
+      "sha256": "b37ff44081037f56d6845575389dc61d009c96f49a89c9ba6d0382bc78573b95"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_baseline/spectrum_e0_diagonal.pdf",
+      "bytes": 30844,
+      "sha256": "b6ca33de2b5e67aedf19d6540b62d92d407764c6e49993377422ae6e7377d77f"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_baseline/spectrum_e0_diagonal.png",
+      "bytes": 174236,
+      "sha256": "66e7223d58269d5be9535e2a97d5d7af8208dc4f42d6e45b9fbc04460ecfb930"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_baseline/spectrum_q20_from_e0.pdf",
+      "bytes": 30411,
+      "sha256": "d1271255a0a7cc2e18d88b3a91cbc06f3a08988403f1efa0aa94b409361ec31d"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_baseline/spectrum_q20_from_e0.png",
+      "bytes": 166032,
+      "sha256": "81c606d186cb8972ae16ac7d02d33ed3914dc3af55b31eb603d950cf5da06e34"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_half/response.h5",
+      "bytes": 1055462,
+      "sha256": "ea7c251f4903fda8b358730d12f430a1c36d868c03f60e6ff095db7d978466cc"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_half/spectra_overview.pdf",
+      "bytes": 33168,
+      "sha256": "0a93668eddb699f017163dfed93d5026884524998940908bab7bc02eea63f7fe"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_half/spectra_overview.png",
+      "bytes": 215006,
+      "sha256": "bb82b77e0ddd69e4f5b7c9b34b926868b1075b9b054f544573572b5d8679e1ab"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_half/spectrum_e0_diagonal.pdf",
+      "bytes": 31032,
+      "sha256": "240dac890de3ff1355297c81d9d7370c378bd32d02d0ac8e1fabd65f152bad54"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_half/spectrum_e0_diagonal.png",
+      "bytes": 178577,
+      "sha256": "5bb78add91b8460242483fe9cd0f2d160709a564c66b4b2371c9e432eb634e5b"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_half/spectrum_q20_from_e0.pdf",
+      "bytes": 31005,
+      "sha256": "d62b085f6cb91c0a7e0eb24e66b87117460fed52db61ce4e2d13b67240f9faf7"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e0_half/spectrum_q20_from_e0.png",
+      "bytes": 170740,
+      "sha256": "0fe675329489773f4e038c83266c80ee8371984c52896387449387825671cd7a"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e2k0_baseline/response.h5",
+      "bytes": 1056950,
+      "sha256": "8dedb8684f20fd3012bc066d20d442e86330a5071de674a4f4fa78ec6d8c1f20"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e2k0_baseline/spectra_overview.pdf",
+      "bytes": 32654,
+      "sha256": "fd048d5db37885b62f08aeff026078f4d9a4718e93311af843eb57fd72c9845c"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e2k0_baseline/spectra_overview.png",
+      "bytes": 208505,
+      "sha256": "cd79701f5280bd012d6fb29f482cb1555e0aa2ace0a0f51f9a23b4113b04dde1"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e2k0_baseline/spectrum_e2k0_diagonal.pdf",
+      "bytes": 30839,
+      "sha256": "52039d0ee6447323c99aa9d72ced515872488ae808d4a7d016b16e254f81497f"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e2k0_baseline/spectrum_e2k0_diagonal.png",
+      "bytes": 169946,
+      "sha256": "bc2bb9272d290e8eef2b05a3407304dac01e82b3abe481056cdfac023f9b0201"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e2k0_baseline/spectrum_q00_from_e2k0.pdf",
+      "bytes": 31414,
+      "sha256": "5676b5d14141bcda603b8067bb063ea2f781352dc2d2504b23b903199cd15929"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/e2k0_baseline/spectrum_q00_from_e2k0.png",
+      "bytes": 169383,
+      "sha256": "36ada986c488cf481e4d28f1d65993218927f836fc9e75bfe88228b24c6b6454"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/highres/core_stage_go.flag",
+      "bytes": 3,
+      "sha256": "13763c7184f311500fa5b80d76abcca71e22d8c7928b9dc5ca6b8840a50a558d"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/highres/e0_stage_go.flag",
+      "bytes": 3,
+      "sha256": "13763c7184f311500fa5b80d76abcca71e22d8c7928b9dc5ca6b8840a50a558d"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/highres/response_convergence.h5",
+      "bytes": 215436493,
+      "sha256": "fb63e1fb50fe92ab3a26774bc0d752b1ccc02e61a3917b51aafe6441667c800d"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/data/processed/highres/spectra.csv",
+      "bytes": 53204951,
+      "sha256": "754657417f6ee7ad0734b437dc3642bb29e4a758fe79086939bf54fa2cb7183a"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/cross_response_reciprocity.pdf",
+      "bytes": 26036,
+      "sha256": "bbeb0bc01959e38a848a04593dbe473c2953c31acc537eed428e3e5d207aaab0"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/cross_response_reciprocity.png",
+      "bytes": 185500,
+      "sha256": "1d8452683a8292c48ea37966775094a3cb498c46040c5d770121770d56d3345a"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/e0_linearity.pdf",
+      "bytes": 24679,
+      "sha256": "130925214cda9730973f26d73d0502d6e94f711b105cd0cdf65284880e2d55e3"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/e0_linearity.png",
+      "bytes": 150643,
+      "sha256": "cce4e2f069ca592ab5e6af2e458cd5cc0b1b35a5ef4109dcf830979d9b45e323"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/e0_response_go_nogo.pdf",
+      "bytes": 22451,
+      "sha256": "ec3ab05fc1cf03e87fddd4acc28a355def2d6866bd059fee433aa334f96028e9"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/e0_response_go_nogo.png",
+      "bytes": 125306,
+      "sha256": "22ec412ba007cba8cc6e99b071dfa289401ba855f8ec1773cf211434a0bc9a5b"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/e0_time_traces.pdf",
+      "bytes": 28509,
+      "sha256": "0fd982a2846a66c3fb2360bf841e3c982b902772a66eb0dedba09ceef1ee67d0"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/e0_time_traces.png",
+      "bytes": 219641,
+      "sha256": "105f8b9acea0d4e25b909a49d5dfdc41b80dbba03012ff19ce821adc54462d34"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/fig1_e0_experiment_comparison.pdf",
+      "bytes": 25243,
+      "sha256": "658e24bf0b22e613a79a00a543e0b172cf2727260854e35e5bda0707e28967f0"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/fig1_e0_experiment_comparison.png",
+      "bytes": 124350,
+      "sha256": "6e7ed530edf0603dfbb0fce06c9268d806f47720e19735b88ed938a3b6566739"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/fig1_e0_experiment_two_edf.pdf",
+      "bytes": 17420,
+      "sha256": "be86cef7973e24189038abb98c60693b595416f2cbeab09d8e1b827c6101255a"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/fig1_e0_experiment_two_edf.png",
+      "bytes": 79718,
+      "sha256": "2703b0bfa138890884c995ac183dcc0f5fb2ae0f4021c1d2cdeb14981491a619"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/fig2_combined_mqc_two_edf.pdf",
+      "bytes": 38899,
+      "sha256": "9b2d246108016ed55fa6a174a39bdacc2ee5a32323f90479e156d5848c18c7d0"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/fig2_combined_mqc_two_edf.png",
+      "bytes": 224783,
+      "sha256": "c4acd73037b7741693b8a0ea69a8e135490662ef7f645789ff5cda50c1603dbd"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/fig2_dynamical_mixed_response.pdf",
+      "bytes": 34133,
+      "sha256": "215041da55de359c9ae1acf638cce9f267e4eb4a12c6fcf8a4b0ea06e59832df"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/fig2_dynamical_mixed_response.png",
+      "bytes": 339957,
+      "sha256": "e2468c41c00c38598c980078ab5a95518f7809eea818b48e8ca05a3d37c9514f"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/fig2_sly5_diagonal_cross.pdf",
+      "bytes": 32995,
+      "sha256": "cb946df42d52a4b3e3dded47aaeccb2aaf1f4f2ec543dbf4ff258bcd0e82e3f9"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/fig2_sly5_diagonal_cross.png",
+      "bytes": 179399,
+      "sha256": "d90ce64d12780452c9dc601ce2a67a85a9b6b8fe69cff931a1f2eb62c6c1f3a2"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/fig3_cross_response_two_edf.pdf",
+      "bytes": 28129,
+      "sha256": "aa357659b35ea72275383daaa5ecab4c51e74459d5c8fec485e138e719b1cf54"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/fig3_cross_response_two_edf.png",
+      "bytes": 116272,
+      "sha256": "04c2ae19c4ec5fd6f1651319f31b8ef07a846b5702fc589762a2696f43e3d3c0"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/highres_time_smoothing_two_edf.pdf",
+      "bytes": 79317,
+      "sha256": "65b9d721e291cde924c82c71a41198f43392c64d537011e645f2499792c34af3"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/highres_time_smoothing_two_edf.png",
+      "bytes": 276003,
+      "sha256": "a4524698bab363e00629a2f3b6dccb8e9cc0b8026e8c427a6e363f870286544b"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/stationarity_svbas.pdf",
+      "bytes": 21202,
+      "sha256": "e086143894b51797390a3bcc9833a0530a587a6d294142db054d3c8530301b6a"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/figures/stationarity_svbas.png",
+      "bytes": 109886,
+      "sha256": "4eafc6357ea49c9c399f27cb359bbe8522492501296169acbb7f23490456c586"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/paper/build/main.aux",
+      "bytes": 1735,
+      "sha256": "d6446c2b101d1f67d92c2c95a9cafb37aec29c9814294e1b98e8ada50152d0ae"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/paper/build/main.log",
+      "bytes": 13013,
+      "sha256": "5968121584939b084fa6a8e69a49ac98ae9be39b22923a7c0c98e298e8c8ae75"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/paper/build/main.pdf",
+      "bytes": 322354,
+      "sha256": "709e47ceda338c404c930ba3807ef8f01aea60da2b924354682db5ea4ff435bb"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/paper/output/pdf/mg24_mqc_snp2026.pdf",
+      "bytes": 322354,
+      "sha256": "709e47ceda338c404c930ba3807ef8f01aea60da2b924354682db5ea4ff435bb"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/paper/rendered/final-1.png",
+      "bytes": 495315,
+      "sha256": "cd2911d59afbd37937db209dd4b919f0f85e4f2e8be28e5071ae17463a82e9b6"
+    },
+    {
+      "path": "projects/mg24_mqc_snp2026/paper/rendered/final-2.png",
+      "bytes": 423962,
+      "sha256": "2af2bfc2c3d1e8bebabba409ec5a4c15cf90c7acd2d5966525f38081c5b733fd"
+    }
+  ]
+}

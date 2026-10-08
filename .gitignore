@@ -1,0 +1,30 @@
+# Local Fortran builds; keep source, makefiles and checked-in test fixtures.
+*.o
+*.mod
+*.smod
+*.tdd
+/Code/*.o
+/Code/*.mod
+/Code/*.smod
+/Code/sky3d.seq*
+/Code/sky3d.omp*
+/Code/sky3d.mpi*
+/Code/sky3d.ifort*
+
+# Python caches and local environments.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Outputs created by the supplied example runs.
+/Test/Static/*.tdd
+/Test/Static/*.res
+/Test/Static/for005
+/Test/Static/O16
+/Test/GR/*.tdd
+/Test/GR/*.res
+/Test/GR/*_Strength_*.out
+/Test/GR/*.png
+/Test/GR/for005
+/Test/GR/restart
