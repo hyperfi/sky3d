@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-08",
+  "gpu": "name, compute_cap, memory.total [MiB], driver_version\nNVIDIA GeForce RTX 5070, 12.0, 12227 MiB, 610.88",
+  "cuda_compiler": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+  "fortran_compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "cpu": [
+    "Architecture:                            x86_64",
+    "CPU op-mode(s):                          32-bit, 64-bit",
+    "Address sizes:                           46 bits physical, 48 bits virtual",
+    "Byte Order:                              Little Endian",
+    "CPU(s):                                  20",
+    "On-line CPU(s) list:                     0-19",
+    "Vendor ID:                               GenuineIntel",
+    "Model name:                              Intel(R) Core(TM) Ultra 7 265K",
+    "CPU family:                              6",
+    "Model:                                   198",
+    "Thread(s) per core:                      1",
+    "Core(s) per socket:                      20",
+    "Socket(s):                               1",
+    "Stepping:                                2",
+    "BogoMIPS:                                7756.79"
+  ],
+  "gpu_compile_flags": "-O3 -arch=sm_120 -Xcompiler=-fopenmp -lfftw3 -lcufft; rpath /usr/local/cuda/lib64",
+  "probe_source_sha256": "476a1cdcae274091dd6f39ec4c77b1ab1c60a6bec2ffeb0d673522f1b4066fe6",
+  "sanitizer": "CUDA 13.0 Compute Sanitizer memcheck, 24^3 / 20 states / one repetition: ERROR SUMMARY: 0 errors",
+  "cpu_gpu_benchmarks": "Final CPU and GPU evidence were measured sequentially; the earlier overlapping trials were discarded",
+  "nvcc_default": "WSL login and interactive shells now prefer /usr/local/cuda/bin; .bashrc and .profile backups retained"
+}

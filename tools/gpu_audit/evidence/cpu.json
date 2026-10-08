@@ -1,0 +1,203 @@
+{
+  "date": "2026-10-08",
+  "source_commit": "6e3ff97f75dda0a2c187a28df9fc198a81dba92c",
+  "root": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6",
+  "flags": "-O3 -msse4.2 -mfpmath=sse -ffast-math -finline-functions -funroll-loops",
+  "grid": [
+    24,
+    24,
+    24
+  ],
+  "nucleus": "20Ne",
+  "source_hashes": {
+    "Code/coulomb.f90": "8c8294cfe876731441ecf805f03e06aed31732bde443e754a11e1df5cd0fc8cb",
+    "Code/densities.f90": "4430ddd24940b67f564814a61dbcb68459c18528a9bc8935131bdf0253bfb9b1",
+    "Code/dynamic.f90": "401b8eca94310e07e1004770fac4c0fabbae0d8c607fe2e7035768626d0784f4",
+    "Code/energies.f90": "60d00ab2a55afa73525c175c09651d4d596d248ca8724f258d7c5487e73bb2cc",
+    "Code/external.f90": "4d911dd988e77d805fa49cbd93d6519dc9e8098ecc7f09cfc350613779e750a8",
+    "Code/forces.f90": "380153c21f072d8bc49a59619d9c0c3aa478bd8ebadf483b2c0b7a7e0126373e",
+    "Code/fourier.f90": "ff323a3c9c85aad2e85a01251c1db939c5cb882922330764c9ec0403552c6f40",
+    "Code/fragments.f90": "97d3b70a767ceccb83a8f4ac7142d7732e4a8ecd0fa8dd34f0ef7dc9ada46631",
+    "Code/grids.f90": "2899b53e968f968cd910d220ffa3200ce835b292f21f991aed549907b32226ba",
+    "Code/inout.f90": "d6c667a54e403894c5c505e2937466df3b0297d7d0e944953a4da76167103891",
+    "Code/levels.f90": "40a0cf9bc4ee7e4233766ea6fec057ae21f355a1686d1aa867c6d92f54161bc6",
+    "Code/main3d.f90": "06fc16477195b6eefc61276fec50bd27624937d855cef81ca540258d311bebc7",
+    "Code/meanfield.f90": "a1b1c495f5637655eff9bf1fc4695b31038ceb77cce2a05b52c20718fb8bc1a5",
+    "Code/moment.f90": "c5e1cce10d193aa81b2310ea7ad8d7bb52359c96d4a1b25f8bc0d5b4d28dbf66",
+    "Code/pairs.f90": "d872046715200166c9adab75b03d2db36936b5b1d65e9f818e22b734f64ae4a9",
+    "Code/parallel.f90": "e6d3e2e2543bedeb90575f859e26e990e2ff14a52f4cefd49d20a8f1c23ce2b8",
+    "Code/params.f90": "4a06e157c5da320a5e3009a0d8a8737de4c7bd239d0550420580a921e547c155",
+    "Code/sequential.f90": "89bd10da9abcbf7bf4fd482c72250e0f6ea23e0a45cc89fa324943273e18cecd",
+    "Code/static.f90": "c10bdc946b3ba52eb90ce17fb2d46cfe88b60c6c62b25f423669825742534ebe",
+    "Code/trivial.f90": "e44c37e3fc59391b4fe641d480e5154aa9c9e9bc48a71db8932e1b07b76a8708",
+    "Code/twobody.f90": "69ab4cb00f7c8d8cf13aa2e2f833a4ceff59a4035825670e1f231c88a218b5ab",
+    "Code/user.f90": "59adf01b45cd06afabb57b8a3e232f02605547993ecdbfe4a4717b8f97e74d89",
+    "Code/user_sample.f90": "788f06dcbd29a047ca218a21e73447bee3a7f47e00db5d1a86cbf8009fbabc7b",
+    "Code/ylm.f90": "58b3b7eb7190e8fee4e3e69b46282d75d7efd776445139dcc308c7418afff610"
+  },
+  "serial_profile": {
+    "label": "profile",
+    "threads": 1,
+    "steps": 100,
+    "total_wall_seconds": 11.710247978999973,
+    "final_energy_line": "     20.00  10.000  10.000   -141.9925488   -141.9959281   303.35      2.34108E-06  2.25711E-06",
+    "run_directory": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6/profile"
+  },
+  "inclusive_timings": [
+    {
+      "routine": "hpsi",
+      "calls": 12220,
+      "inclusive_seconds": 7.7421995070000005
+    },
+    {
+      "routine": "skyrme",
+      "calls": 201,
+      "inclusive_seconds": 0.994069595
+    },
+    {
+      "routine": "add_density",
+      "calls": 4020,
+      "inclusive_seconds": 1.167870356
+    },
+    {
+      "routine": "cdervx",
+      "calls": 28680,
+      "inclusive_seconds": 2.406170008
+    },
+    {
+      "routine": "cdervy",
+      "calls": 28680,
+      "inclusive_seconds": 1.6137171570000002
+    },
+    {
+      "routine": "cdervz",
+      "calls": 28680,
+      "inclusive_seconds": 1.706909698
+    },
+    {
+      "routine": "poisson",
+      "calls": 201,
+      "inclusive_seconds": 0.285599223
+    },
+    {
+      "routine": "moments",
+      "calls": 101,
+      "inclusive_seconds": 0.6877177040000001
+    },
+    {
+      "routine": "dynamichf",
+      "calls": 1,
+      "inclusive_seconds": 11.125358983
+    },
+    {
+      "routine": "tinfo",
+      "calls": 101,
+      "inclusive_seconds": 0.940636518
+    }
+  ],
+  "uninstrumented_runs": [
+    {
+      "label": "r0-t1",
+      "threads": 1,
+      "steps": 100,
+      "total_wall_seconds": 12.344645096999955,
+      "final_energy_line": "     20.00  10.000  10.000   -141.9925488   -141.9959281   303.35      2.34108E-06  2.25711E-06",
+      "run_directory": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6/r0-t1"
+    },
+    {
+      "label": "r0-t4",
+      "threads": 4,
+      "steps": 100,
+      "total_wall_seconds": 5.338317221000011,
+      "final_energy_line": "     20.00  10.000  10.000   -141.9925488   -141.9959281   303.35      2.34108E-06  2.25711E-06",
+      "run_directory": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6/r0-t4"
+    },
+    {
+      "label": "r0-t8",
+      "threads": 8,
+      "steps": 100,
+      "total_wall_seconds": 4.531991247999997,
+      "final_energy_line": "     20.00  10.000  10.000   -141.9925488   -141.9959281   303.35      2.34108E-06  2.25711E-06",
+      "run_directory": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6/r0-t8"
+    },
+    {
+      "label": "r0-t20",
+      "threads": 20,
+      "steps": 100,
+      "total_wall_seconds": 4.781608236000011,
+      "final_energy_line": "     20.00  10.000  10.000   -141.9925488   -141.9959281   303.35      2.34108E-06  2.25711E-06",
+      "run_directory": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6/r0-t20"
+    },
+    {
+      "label": "r1-t20",
+      "threads": 20,
+      "steps": 100,
+      "total_wall_seconds": 4.758256414000016,
+      "final_energy_line": "     20.00  10.000  10.000   -141.9925488   -141.9959281   303.35      2.34108E-06  2.25711E-06",
+      "run_directory": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6/r1-t20"
+    },
+    {
+      "label": "r1-t8",
+      "threads": 8,
+      "steps": 100,
+      "total_wall_seconds": 4.593614951999996,
+      "final_energy_line": "     20.00  10.000  10.000   -141.9925488   -141.9959281   303.35      2.34108E-06  2.25711E-06",
+      "run_directory": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6/r1-t8"
+    },
+    {
+      "label": "r1-t4",
+      "threads": 4,
+      "steps": 100,
+      "total_wall_seconds": 5.562667729999987,
+      "final_energy_line": "     20.00  10.000  10.000   -141.9925488   -141.9959281   303.35      2.34108E-06  2.25711E-06",
+      "run_directory": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6/r1-t4"
+    },
+    {
+      "label": "r1-t1",
+      "threads": 1,
+      "steps": 100,
+      "total_wall_seconds": 11.853768608999985,
+      "final_energy_line": "     20.00  10.000  10.000   -141.9925488   -141.9959281   303.35      2.34108E-06  2.25711E-06",
+      "run_directory": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6/r1-t1"
+    },
+    {
+      "label": "r2-t1",
+      "threads": 1,
+      "steps": 100,
+      "total_wall_seconds": 12.399191038999959,
+      "final_energy_line": "     20.00  10.000  10.000   -141.9925488   -141.9959281   303.35      2.34108E-06  2.25711E-06",
+      "run_directory": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6/r2-t1"
+    },
+    {
+      "label": "r2-t4",
+      "threads": 4,
+      "steps": 100,
+      "total_wall_seconds": 5.343163036999954,
+      "final_energy_line": "     20.00  10.000  10.000   -141.9925488   -141.9959281   303.35      2.34108E-06  2.25711E-06",
+      "run_directory": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6/r2-t4"
+    },
+    {
+      "label": "r2-t8",
+      "threads": 8,
+      "steps": 100,
+      "total_wall_seconds": 4.629935934000002,
+      "final_energy_line": "     20.00  10.000  10.000   -141.9925488   -141.9959281   303.35      2.34108E-06  2.25711E-06",
+      "run_directory": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6/r2-t8"
+    },
+    {
+      "label": "r2-t20",
+      "threads": 20,
+      "steps": 100,
+      "total_wall_seconds": 4.583101404999979,
+      "final_energy_line": "     20.00  10.000  10.000   -141.9925488   -141.9959281   303.35      2.34108E-06  2.25711E-06",
+      "run_directory": "/home/abhishek/.cache/sky3d-gpu-audit-hec0dnz6/r2-t20"
+    }
+  ],
+  "median_wall_by_threads": {
+    "1": 12.344645096999955,
+    "4": 5.343163036999954,
+    "8": 4.593614951999996,
+    "20": 4.758256414000016
+  },
+  "limits": "Short complete runs include FFT planning, initialization and output; serial inclusive timers overlap and cannot be added. No GPU TDHF run."
+}

@@ -1,0 +1,7 @@
+/evidence/*.log
+/evidence/*.csv
+/evidence/*.json
+!/evidence/cpu.json
+!/evidence/gpu.csv
+!/evidence/hardware.json
+!/evidence/controls.json
