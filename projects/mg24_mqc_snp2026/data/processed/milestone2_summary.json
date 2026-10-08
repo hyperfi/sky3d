@@ -1,0 +1,94 @@
+{
+  "static_hf": {
+    "beta2": 0.31196918,
+    "boundary": "nonperiodic",
+    "edf": "SV-bas",
+    "energy_mev": -183.8257,
+    "gamma_deg": 0.0,
+    "grid": {
+      "dx_fm": 1.0,
+      "dy_fm": 1.0,
+      "dz_fm": 1.0,
+      "nx": 24,
+      "ny": 24,
+      "nz": 24
+    },
+    "h2_fluctuation_floor_mev": 4.371e-05,
+    "hh_fluctuation_floor_mev": 4.768e-05,
+    "intrinsic_q20_fm2": 35.693,
+    "iterations": 3000,
+    "max_iteration_stop": true,
+    "mean_square_axes_fm2": {
+      "x": 4.6437,
+      "y": 2.286,
+      "z": 2.286
+    },
+    "pairing": "NONE",
+    "production_symmetry_axis": "z after exact R_y(-pi/2) grid/spinor rotation",
+    "raw_symmetry_axis": "x",
+    "requested_fluctuation_tolerance_mev": 1e-06,
+    "rms_neutron_fm": 3.0196,
+    "rms_proton_fm": 3.0518,
+    "rms_total_fm": 3.0357,
+    "seed_check": {
+      "beta2_difference": 0.0,
+      "energy_difference_at_printed_precision_mev": 0.0,
+      "rms_difference_fm": 0.0,
+      "second_seed_iterations": 3000
+    }
+  },
+  "stationarity": {
+    "center_of_mass_norm_max_fm": 4.7524308970624426e-14,
+    "dt_fm_over_c": 0.2,
+    "duration_fm_over_c": 50.0,
+    "energy_integrated_mev": {
+      "final": -183.8636091,
+      "final_minus_initial": 2.8999999983625457e-06,
+      "initial": -183.863612,
+      "max_abs_from_initial": 2.8999999983625457e-06,
+      "max_relative_from_initial": 1.577256079556702e-08,
+      "peak_to_peak": 2.8999999983625457e-06
+    },
+    "energy_sum_mev": {
+      "final": -183.8256602,
+      "final_minus_initial": -2.2999999771400326e-06,
+      "initial": -183.8256579,
+      "max_abs_from_initial": 3.800000001774606e-06,
+      "max_relative_from_initial": 2.067176065183339e-08,
+      "peak_to_peak": 3.800000001774606e-06
+    },
+    "monopole_is_fm2": {
+      "final": 62.39318124674468,
+      "final_minus_initial": -4.287620489407118e-05,
+      "initial": 62.393224122949576,
+      "max_abs_from_initial": 0.00010606173191263224,
+      "max_relative_from_initial": 1.6998918296581574e-06,
+      "peak_to_peak": 0.00010606173191263224
+    },
+    "neutron_number": {
+      "final": 12.0,
+      "final_minus_initial": 0.0,
+      "initial": 12.0,
+      "max_abs_from_initial": 0.0,
+      "max_relative_from_initial": 0.0,
+      "peak_to_peak": 0.0
+    },
+    "proton_number": {
+      "final": 12.0,
+      "final_minus_initial": 0.0,
+      "initial": 12.0,
+      "max_abs_from_initial": 0.0,
+      "max_relative_from_initial": 0.0,
+      "peak_to_peak": 0.0
+    },
+    "quadrupole_k0_is_code_units": {
+      "final": 79.81241455345219,
+      "final_minus_initial": -0.00017281043335515278,
+      "initial": 79.81258736388554,
+      "max_abs_from_initial": 0.000614061008036515,
+      "max_relative_from_initial": 7.69378651060211e-06,
+      "peak_to_peak": 0.000614061008036515
+    },
+    "samples": 26
+  }
+}

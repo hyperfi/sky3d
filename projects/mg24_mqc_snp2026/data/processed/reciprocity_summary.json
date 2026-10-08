@@ -1,0 +1,109 @@
+{
+  "boost_eta_both_runs": 5e-05,
+  "expected_relation": "chi_20,00(E) = chi_00,20(E) for two time-even Hermitian operators in a time-reversal-invariant reference, using identical operator and boost normalizations",
+  "time_domain": {
+    "best_real_scale_second_over_first": 0.9997865620792191,
+    "matched_no_boost_reference": "Each boosted DeltaQ(t) is corrected by the corresponding no-boost DeltaQ_0(t) before division by eta.",
+    "max_abs_difference": 2.206502285702072,
+    "relative_l2_after_best_real_scale": 0.01376868291959205,
+    "symmetric_relative_l2": 0.013769520520047129
+  },
+  "windows": {
+    "cosine_6": {
+      "experiment_range": {
+        "complex_response": {
+          "best_real_scale_second_over_first": 1.0000206045344795,
+          "max_abs_difference": 0.20321181654581827,
+          "relative_l2_after_best_real_scale": 0.0007246523593292489,
+          "symmetric_relative_l2": 0.000724952782986614
+        },
+        "signed_strength": {
+          "best_real_scale_second_over_first": 0.9999845545663469,
+          "max_abs_difference": 0.03907863830141167,
+          "pearson_correlation": 0.9999997180745586,
+          "relative_l2_after_best_real_scale": 0.0007175703628180929,
+          "symmetric_relative_l2": 0.0007177311266808494
+        }
+      },
+      "mqc": {
+        "complex_response": {
+          "best_real_scale_second_over_first": 1.0000462252622577,
+          "max_abs_difference": 0.20321181654581827,
+          "relative_l2_after_best_real_scale": 0.0007172403193006797,
+          "symmetric_relative_l2": 0.0007187449221128996
+        },
+        "signed_strength": {
+          "best_real_scale_second_over_first": 0.9999944468986817,
+          "max_abs_difference": 0.03907863830141167,
+          "pearson_correlation": 0.9999997927743167,
+          "relative_l2_after_best_real_scale": 0.0006768137930300574,
+          "symmetric_relative_l2": 0.0006768347720825968
+        }
+      }
+    },
+    "gamma_1": {
+      "experiment_range": {
+        "complex_response": {
+          "best_real_scale_second_over_first": 0.9999467541153726,
+          "max_abs_difference": 0.13537681429571968,
+          "relative_l2_after_best_real_scale": 0.0007753785093590321,
+          "symmetric_relative_l2": 0.0007771841965448739
+        },
+        "signed_strength": {
+          "best_real_scale_second_over_first": 0.9998906815498655,
+          "max_abs_difference": 0.024476510476983293,
+          "pearson_correlation": 0.9999996550244477,
+          "relative_l2_after_best_real_scale": 0.0007492326573420149,
+          "symmetric_relative_l2": 0.0007571262718586376
+        }
+      },
+      "mqc": {
+        "complex_response": {
+          "best_real_scale_second_over_first": 0.9999825757309997,
+          "max_abs_difference": 0.13537681429571968,
+          "relative_l2_after_best_real_scale": 0.00079086760742534,
+          "symmetric_relative_l2": 0.0007910527668831007
+        },
+        "signed_strength": {
+          "best_real_scale_second_over_first": 0.9998922561960206,
+          "max_abs_difference": 0.024476510476983293,
+          "pearson_correlation": 0.9999997819563715,
+          "relative_l2_after_best_real_scale": 0.0007046587973367761,
+          "symmetric_relative_l2": 0.0007128117691480723
+        }
+      }
+    },
+    "gamma_2": {
+      "experiment_range": {
+        "complex_response": {
+          "best_real_scale_second_over_first": 0.9998579259754499,
+          "max_abs_difference": 0.09200595785937571,
+          "relative_l2_after_best_real_scale": 0.0008257719212223511,
+          "symmetric_relative_l2": 0.0008378487359811254
+        },
+        "signed_strength": {
+          "best_real_scale_second_over_first": 0.9997827453130516,
+          "max_abs_difference": 0.018732398209792223,
+          "pearson_correlation": 0.9999995648984937,
+          "relative_l2_after_best_real_scale": 0.0007680736827757536,
+          "symmetric_relative_l2": 0.0007981347152392997
+        }
+      },
+      "mqc": {
+        "complex_response": {
+          "best_real_scale_second_over_first": 0.9998965502709436,
+          "max_abs_difference": 0.09200595785937571,
+          "relative_l2_after_best_real_scale": 0.000872720581541616,
+          "symmetric_relative_l2": 0.0008787864697527064
+        },
+        "signed_strength": {
+          "best_real_scale_second_over_first": 0.9997642628492559,
+          "max_abs_difference": 0.018732398209792223,
+          "pearson_correlation": 0.9999997759668903,
+          "relative_l2_after_best_real_scale": 0.0007179674322378998,
+          "symmetric_relative_l2": 0.0007556063359447866
+        }
+      }
+    }
+  }
+}

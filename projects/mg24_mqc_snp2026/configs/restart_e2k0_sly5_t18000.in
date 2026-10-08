@@ -1,0 +1,19 @@
+&files
+ wffile='restart.tdhf'
+/
+&force
+ name='Sly5', pairing='NONE'
+/
+&main
+ mprint=10, mplot=10000, mrest=2500,
+ trestart=T, writeselect='r', imode=2, tfft=T, nof=1
+/
+&grid
+ nx=24, ny=24, nz=24,
+ dx=1.0, dy=1.0, dz=1.0,
+ periodic=F
+/
+&dynamic
+ nt=90000, dt=0.2, mxpact=4,
+ texternal=F
+/

@@ -1,0 +1,24 @@
+&files
+ wffile='no_boost_sly5_n32_restart.tdhf'
+/
+&force
+ name='Sly5', pairing='NONE'
+/
+&main
+ mprint=10, mplot=10000, mrest=2500,
+ writeselect='r', imode=2, tfft=T, nof=1
+/
+&grid
+ nx=32, ny=32, nz=32,
+ dx=1.0, dy=1.0, dz=1.0,
+ periodic=F
+/
+&dynamic
+ nt=40000, dt=0.2, mxpact=4,
+ texternal=F
+/
+&fragments
+ filename=1*'../static_sly5_n32/mg24_sly5_zaxis_n32.tdhf',
+ fix_boost=T,
+ fcent(1,1)=0.0, 0.0, 0.0
+/

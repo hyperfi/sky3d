@@ -1,0 +1,36 @@
+{
+  "comparison_convention": "Sky3D F00=r^2/sqrt(4pi) strength is multiplied by 4pi to match the experimental O_IS0=sum_i r_i^2 convention; no fitted normalization or energy shift.",
+  "experimental": {
+    "largest_mqc_bin_energy_mev": 13.75,
+    "main_18_25": {
+      "centroid_mev": 21.305248514493936,
+      "m0_fm4": 188.76495011464334,
+      "m1_mev_fm4": 4021.684173018527
+    },
+    "mqc_10_18": {
+      "centroid_mev": 15.110025556904718,
+      "m0_fm4": 158.33689657309284,
+      "m1_mev_fm4": 2392.474553820412
+    }
+  },
+  "experimental_bin_width_mev": 0.5,
+  "experimental_data_classification": "digitized from author arXiv vector figure",
+  "experimental_resolution_fwhm_kev": 70.0,
+  "interpretation": "TDHF reproduces a separated low-energy component and a higher-energy main monopole structure, but the dominant TDHF MQC peak is about 2.43 MeV above the 13.75-MeV experimental maximum bin and its low-energy strength is too concentrated.",
+  "tdhf_artificial_smoothing_fwhm_mev": 1.0,
+  "tdhf_rayleigh_resolution_mev": 0.6199209919796971,
+  "tdhf_svbas": {
+    "main_18_25": {
+      "centroid_mev": 21.840222517612904,
+      "m0_fm4": 211.8509256486844,
+      "m1_mev_fm4": 4626.871356729534
+    },
+    "main_peak_energy_mev": 23.8431150761,
+    "mqc_10_18": {
+      "centroid_mev": 15.44150006433502,
+      "m0_fm4": 374.96264769792964,
+      "m1_mev_fm4": 5789.98574855081
+    },
+    "mqc_peak_energy_mev": 16.1792566588
+  }
+}

@@ -1,0 +1,23 @@
+&files
+ wffile='mg24_svbas_restart.tdhf'
+/
+&force
+ name='SV-bas', pairing='NONE'
+/
+&main
+ mprint=10, mplot=100000, mrest=200,
+ trestart=T, writeselect='r', imode=1, tfft=T, nof=0
+/
+&grid
+ nx=24, ny=24, nz=24,
+ dx=1.0, dy=1.0, dz=1.0,
+ periodic=F
+/
+&static
+ nprot=12, nneut=12,
+ radinx=2.7, radiny=2.7, radinz=4.1,
+ x0dmp=0.10, e0dmp=100.0,
+ tdiag=T, tlarge=F, tvaryx_0=F,
+ maxiter=5000, serr=1.0D-6
+/
+

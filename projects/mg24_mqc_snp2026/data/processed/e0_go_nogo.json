@@ -1,0 +1,26 @@
+{
+  "boost": {
+    "eta": 5e-05,
+    "operator": "Sky3D isoscalar L=0"
+  },
+  "dt_fm_over_c": 0.2,
+  "duration_fm_over_c": 2000.0,
+  "gamma_1_mev": {
+    "cross_main_isgmr_negative_area_fraction": 0.755452467696,
+    "cross_main_isgmr_signed_m0": -10.8185710111,
+    "cross_mqc_peak_mev": 16.1792566588,
+    "cross_mqc_signed_m0": 157.175649786,
+    "e0_mqc_centroid_m1_m0_mev": 15.2397334191,
+    "e0_mqc_m0": 31.018057139,
+    "e0_mqc_peak_mev": 16.1792566588,
+    "peak_separation_mev": 0.0
+  },
+  "go_no_go": "GO: E0 boost produces a resolved intrinsic-axis Q20 response at the dominant 16-MeV low-energy E0 structure",
+  "matched_no_boost_reference_subtracted": true,
+  "max_abs_delta_q00": 0.006266018534645923,
+  "max_abs_delta_q20": 0.01884045949385893,
+  "no_boost_max_abs_delta_q20": 0.002218503011363282,
+  "output_sample_spacing_fm_over_c": 2.0,
+  "q20_signal_to_no_boost_drift": 8.492420067656958,
+  "rayleigh_resolution_mev": 0.6199209919796971
+}

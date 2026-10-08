@@ -1,0 +1,10 @@
+metric,value,unit,source
+energy,-183.8257,MeV,static_svbas.log
+rms_total,3.0357,fm,static_svbas.log
+rms_neutron,3.0196,fm,static_svbas.log
+rms_proton,3.0518,fm,static_svbas.log
+intrinsic_q20,35.693,fm^2,static_svbas.log
+beta2,0.31196918,1,conver.res
+gamma,0.0,degree,conver.res
+h2_fluctuation_floor,4.371e-05,MeV,conver.res
+hh_fluctuation_floor,4.768e-05,MeV,conver.res

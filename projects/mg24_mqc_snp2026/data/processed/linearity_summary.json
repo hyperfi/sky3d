@@ -1,0 +1,227 @@
+{
+  "amplitude_ratio": 0.5,
+  "comparison": "all time signals and spectra are divided by their own boost eta",
+  "eta_baseline": 5e-05,
+  "eta_half": 2.5e-05,
+  "matched_no_boost_reference": {
+    "definition": "corrected DeltaQ_eta(t) = boosted DeltaQ_eta(t) - no-boost DeltaQ_0(t)",
+    "max_abs_q00_background": 0.0003165079201608023,
+    "max_abs_q00_nonlinear_residual": 3.8088335827524133e-06,
+    "max_abs_q20_background": 0.002218503011363282,
+    "max_abs_q20_nonlinear_residual": 2.4581596704820186e-06
+  },
+  "time_domain_delta_q_over_eta": {
+    "q00": {
+      "best_real_scale_half_over_baseline": 1.0000208586971062,
+      "max_abs_difference": 0.07617667165504827,
+      "relative_l2_after_best_real_scale": 0.0023940222463443937,
+      "symmetric_relative_l2": 0.002394141508558473
+    },
+    "q20": {
+      "best_real_scale_half_over_baseline": 1.0000155091086755,
+      "max_abs_difference": 0.04916319340964037,
+      "relative_l2_after_best_real_scale": 0.0001165987859435696,
+      "symmetric_relative_l2": 0.00011762659795142626
+    }
+  },
+  "windows": {
+    "cosine_6": {
+      "e0_diagonal": {
+        "experiment_range": {
+          "complex_response": {
+            "best_real_scale_half_over_baseline": 1.0000029442618286,
+            "max_abs_difference": 0.005408487972424947,
+            "relative_l2_after_best_real_scale": 9.570364840657286e-05,
+            "symmetric_relative_l2": 9.57490677732931e-05
+          },
+          "signed_strength": {
+            "best_real_scale_half_over_baseline": 1.0000164625879084,
+            "max_abs_difference": 0.0011095753283036913,
+            "pearson_correlation": 0.999999994542308,
+            "relative_l2_after_best_real_scale": 8.589344700121962e-05,
+            "symmetric_relative_l2": 8.745752145076392e-05
+          }
+        },
+        "mqc": {
+          "complex_response": {
+            "best_real_scale_half_over_baseline": 1.0000039848148445,
+            "max_abs_difference": 0.005408487972424947,
+            "relative_l2_after_best_real_scale": 9.618541420187297e-05,
+            "symmetric_relative_l2": 9.62681125814298e-05
+          },
+          "signed_strength": {
+            "best_real_scale_half_over_baseline": 1.0000206477776332,
+            "max_abs_difference": 0.0011095753283036913,
+            "pearson_correlation": 0.9999999952630284,
+            "relative_l2_after_best_real_scale": 8.941630250133477e-05,
+            "symmetric_relative_l2": 9.177015955983092e-05
+          }
+        }
+      },
+      "q20_from_e0": {
+        "experiment_range": {
+          "complex_response": {
+            "best_real_scale_half_over_baseline": 1.0000076451977697,
+            "max_abs_difference": 0.028530942794824477,
+            "relative_l2_after_best_real_scale": 8.850968635863418e-05,
+            "symmetric_relative_l2": 8.883959198433888e-05
+          },
+          "signed_strength": {
+            "best_real_scale_half_over_baseline": 1.0000095556551156,
+            "max_abs_difference": 0.005568971833447733,
+            "pearson_correlation": 0.9999999956093184,
+            "relative_l2_after_best_real_scale": 8.749236866096552e-05,
+            "symmetric_relative_l2": 8.80130525693842e-05
+          }
+        },
+        "mqc": {
+          "complex_response": {
+            "best_real_scale_half_over_baseline": 1.0000083732092078,
+            "max_abs_difference": 0.028530942794824477,
+            "relative_l2_after_best_real_scale": 8.883308628768314e-05,
+            "symmetric_relative_l2": 8.922720084795274e-05
+          },
+          "signed_strength": {
+            "best_real_scale_half_over_baseline": 1.0000083209133888,
+            "max_abs_difference": 0.005568971833447733,
+            "pearson_correlation": 0.9999999957627778,
+            "relative_l2_after_best_real_scale": 8.240579303401593e-05,
+            "symmetric_relative_l2": 8.282516692844932e-05
+          }
+        }
+      }
+    },
+    "gamma_1": {
+      "e0_diagonal": {
+        "experiment_range": {
+          "complex_response": {
+            "best_real_scale_half_over_baseline": 1.0000037688671903,
+            "max_abs_difference": 0.003598997362165395,
+            "relative_l2_after_best_real_scale": 9.586395569510335e-05,
+            "symmetric_relative_l2": 9.593819357019221e-05
+          },
+          "signed_strength": {
+            "best_real_scale_half_over_baseline": 1.0000246193799647,
+            "max_abs_difference": 0.0007337426121640789,
+            "pearson_correlation": 0.9999999935497215,
+            "relative_l2_after_best_real_scale": 7.958249189257988e-05,
+            "symmetric_relative_l2": 8.330442908209784e-05
+          }
+        },
+        "mqc": {
+          "complex_response": {
+            "best_real_scale_half_over_baseline": 1.000005368920873,
+            "max_abs_difference": 0.003598997362165395,
+            "relative_l2_after_best_real_scale": 9.665628085891598e-05,
+            "symmetric_relative_l2": 9.68055369713052e-05
+          },
+          "signed_strength": {
+            "best_real_scale_half_over_baseline": 1.0000337955591598,
+            "max_abs_difference": 0.0007337426121640789,
+            "pearson_correlation": 0.9999999954504708,
+            "relative_l2_after_best_real_scale": 8.400718005738843e-05,
+            "symmetric_relative_l2": 9.05513447880135e-05
+          }
+        }
+      },
+      "q20_from_e0": {
+        "experiment_range": {
+          "complex_response": {
+            "best_real_scale_half_over_baseline": 1.0000108954464815,
+            "max_abs_difference": 0.018514256694966806,
+            "relative_l2_after_best_real_scale": 8.881116611737128e-05,
+            "symmetric_relative_l2": 8.947747568614217e-05
+          },
+          "signed_strength": {
+            "best_real_scale_half_over_baseline": 1.0000137855660804,
+            "max_abs_difference": 0.0033947805702325695,
+            "pearson_correlation": 0.9999999951776005,
+            "relative_l2_after_best_real_scale": 8.654077832386542e-05,
+            "symmetric_relative_l2": 8.76324642843758e-05
+          }
+        },
+        "mqc": {
+          "complex_response": {
+            "best_real_scale_half_over_baseline": 1.0000126352032679,
+            "max_abs_difference": 0.018514256694966806,
+            "relative_l2_after_best_real_scale": 8.97263960925114e-05,
+            "symmetric_relative_l2": 9.061221912891668e-05
+          },
+          "signed_strength": {
+            "best_real_scale_half_over_baseline": 1.0000141213443374,
+            "max_abs_difference": 0.0033947805702325695,
+            "pearson_correlation": 0.9999999956231037,
+            "relative_l2_after_best_real_scale": 7.837072787483978e-05,
+            "symmetric_relative_l2": 7.96333302607143e-05
+          }
+        }
+      }
+    },
+    "gamma_2": {
+      "e0_diagonal": {
+        "experiment_range": {
+          "complex_response": {
+            "best_real_scale_half_over_baseline": 1.0000045711217815,
+            "max_abs_difference": 0.002427776364076888,
+            "relative_l2_after_best_real_scale": 9.608783889132249e-05,
+            "symmetric_relative_l2": 9.619672597701124e-05
+          },
+          "signed_strength": {
+            "best_real_scale_half_over_baseline": 1.0000322382223863,
+            "max_abs_difference": 0.0005156273516719878,
+            "pearson_correlation": 0.9999999916509563,
+            "relative_l2_after_best_real_scale": 7.307162936769161e-05,
+            "symmetric_relative_l2": 7.986804518397764e-05
+          }
+        },
+        "mqc": {
+          "complex_response": {
+            "best_real_scale_half_over_baseline": 1.000006723031499,
+            "max_abs_difference": 0.002427776364076888,
+            "relative_l2_after_best_real_scale": 9.743528626612431e-05,
+            "symmetric_relative_l2": 9.766728075038773e-05
+          },
+          "signed_strength": {
+            "best_real_scale_half_over_baseline": 1.0000486174752379,
+            "max_abs_difference": 0.0005156273516719878,
+            "pearson_correlation": 0.9999999959305103,
+            "relative_l2_after_best_real_scale": 7.679406607875485e-05,
+            "symmetric_relative_l2": 9.089091974795955e-05
+          }
+        }
+      },
+      "q20_from_e0": {
+        "experiment_range": {
+          "complex_response": {
+            "best_real_scale_half_over_baseline": 1.0000145673985756,
+            "max_abs_difference": 0.011268557335133393,
+            "relative_l2_after_best_real_scale": 8.79797513962587e-05,
+            "symmetric_relative_l2": 8.917822297209865e-05
+          },
+          "signed_strength": {
+            "best_real_scale_half_over_baseline": 1.0000183578214263,
+            "max_abs_difference": 0.002058397734220563,
+            "pearson_correlation": 0.999999994659503,
+            "relative_l2_after_best_real_scale": 8.3842273173192e-05,
+            "symmetric_relative_l2": 8.582924479114442e-05
+          }
+        },
+        "mqc": {
+          "complex_response": {
+            "best_real_scale_half_over_baseline": 1.0000181306128781,
+            "max_abs_difference": 0.011268557335133393,
+            "relative_l2_after_best_real_scale": 8.959342022754755e-05,
+            "symmetric_relative_l2": 9.141028211277157e-05
+          },
+          "signed_strength": {
+            "best_real_scale_half_over_baseline": 1.0000218631550313,
+            "max_abs_difference": 0.002058397734220563,
+            "pearson_correlation": 0.9999999955967444,
+            "relative_l2_after_best_real_scale": 7.223856398895056e-05,
+            "symmetric_relative_l2": 7.547523651762794e-05
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "interpretation": "SLy5 and SkM* differ in nuclear-matter incompressibility and isoscalar effective mass, so detailed giant-resonance energies and fragmentation may differ. Robustness is assessed only across these two EDFs.",
+  "properties": [
+    {
+      "K_infinity_mev": 229.9,
+      "edf": "SLy5",
+      "isoscalar_effective_mass_ratio": 0.697,
+      "parameterization_source": "E. Chabanat et al., Nucl. Phys. A 635, 231 (1998), https://doi.org/10.1016/S0375-9474(98)00180-8",
+      "property_source": "P. Papakonstantinou et al., PTEP 2021, 023D05, Table 1, https://doi.org/10.1093/ptep/ptab001",
+      "sky3d_identifier": "Sly5"
+    },
+    {
+      "K_infinity_mev": 216.6,
+      "edf": "SkM*",
+      "isoscalar_effective_mass_ratio": 0.789,
+      "parameterization_source": "J. Bartel et al., Nucl. Phys. A 386, 79 (1982), https://doi.org/10.1016/0375-9474(82)90403-1",
+      "property_source": "P. Papakonstantinou et al., PTEP 2021, 023D05, Table 1, https://doi.org/10.1093/ptep/ptab001",
+      "sky3d_identifier": "SkMs"
+    }
+  ],
+  "schema": "sky3d-two-edf-properties-v1"
+}

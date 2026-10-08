@@ -1,0 +1,8 @@
+energy_mev,energy_uncertainty_mev,ewsr_percent,ewsr_uncertainty_percent,is0_strength_fm4,is0_strength_uncertainty_fm4,source_kind,source_table
+9.31,0.01,1.0,0.1,19.9,2.0,author_supplied_numerical_table,"Bahini et al. PRC 105 (2022), Table III"
+10.68,0.01,0.31,0.05,5.32,0.61,author_supplied_numerical_table,"Bahini et al. PRC 105 (2022), Table III"
+11.73,0.01,0.77,0.11,12.1,1.6,author_supplied_numerical_table,"Bahini et al. PRC 105 (2022), Table III"
+13.36,0.02,0.40,0.05,4.32,0.71,author_supplied_numerical_table,"Bahini et al. PRC 105 (2022), Table III"
+13.87,0.02,2.8,0.3,37.7,3.8,author_supplied_numerical_table,"Bahini et al. PRC 105 (2022), Table III"
+15.32,0.02,1.7,0.2,20.7,2.5,author_supplied_numerical_table,"Bahini et al. PRC 105 (2022), Table III"
+15.78,0.02,0.40,0.05,4.6,1.0,author_supplied_numerical_table,"Bahini et al. PRC 105 (2022), Table III"

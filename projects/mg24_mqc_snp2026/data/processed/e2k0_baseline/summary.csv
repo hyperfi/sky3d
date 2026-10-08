@@ -1,0 +1,19 @@
+channel,window,region,energy_min_mev,energy_max_mev,m_minus1,m0,m1,centroid_m1_m0_mev,peak_energy_mev,observed_fwhm_mev,artificial_smoothing_fwhm_mev,intrinsic_fwhm_lorentzian_estimate_mev,alpha_d_fm3,ewsr_reference,ewsr_exhaustion_percent,negative_area_fraction,diagonal,strength_units,ewsr_label
+e2k0_diagonal,gamma_1,mqc,9,18,64.9629134949,964.530007385,14701.8696651,15.2425218008,16.2566693701,1.46851097338,1,0.46851097338,nan,22916.827718,64.1531622352,0,true,fm^4 / MeV,IS E2(K=0) double-commutator EWSR in Sky3D F20 convention
+e2k0_diagonal,gamma_1,main_isgmr,18,25,10.7133163309,216.525087828,4409.45934219,20.3646579083,18,nan,1,nan,nan,22916.827718,19.2411419087,0,true,fm^4 / MeV,IS E2(K=0) double-commutator EWSR in Sky3D F20 convention
+e2k0_diagonal,gamma_1,experiment_range,9,25,75.6762462824,1181.05509521,19111.323937,16.1815685097,16.2566693701,1.46851097338,1,0.46851097338,nan,22916.827718,83.3942820189,0,true,fm^4 / MeV,IS E2(K=0) double-commutator EWSR in Sky3D F20 convention
+e2k0_diagonal,gamma_2,mqc,9,18,60.2015495413,877.801480554,13168.6505906,15.0018550689,16.1792566588,2.69373400403,2,0.693734004032,nan,22916.827718,57.4627987459,0,true,fm^4 / MeV,IS E2(K=0) double-commutator EWSR in Sky3D F20 convention
+e2k0_diagonal,gamma_2,main_isgmr,18,25,12.7233931716,256.875187007,5227.06896714,20.3486721627,18,nan,2,nan,nan,22916.827718,22.8088679265,0,true,fm^4 / MeV,IS E2(K=0) double-commutator EWSR in Sky3D F20 convention
+e2k0_diagonal,gamma_2,experiment_range,9,25,72.9249545934,1134.67666756,18395.7160302,16.2122977903,16.1792566588,2.69373400403,2,0.693734004032,nan,22916.827718,80.2716512798,0,true,fm^4 / MeV,IS E2(K=0) double-commutator EWSR in Sky3D F20 convention
+e2k0_diagonal,cosine_6,mqc,9,18,70.484255837,1064.64384728,16470.3573416,15.4702977748,16.1792566588,1.1964179338,nan,nan,nan,22916.827718,71.8701451362,0,true,fm^4 / MeV,IS E2(K=0) double-commutator EWSR in Sky3D F20 convention
+e2k0_diagonal,cosine_6,main_isgmr,18,25,8.11078153708,164.924845707,3377.13505397,20.4768119654,18,nan,nan,nan,nan,22916.827718,14.7364857629,0,true,fm^4 / MeV,IS E2(K=0) double-commutator EWSR in Sky3D F20 convention
+e2k0_diagonal,cosine_6,experiment_range,9,25,78.5950594066,1229.56869299,19847.4854366,16.1418272519,16.1792566588,1.1964179338,nan,nan,nan,22916.827718,86.6066005328,0,true,fm^4 / MeV,IS E2(K=0) double-commutator EWSR in Sky3D F20 convention
+q00_from_e2k0,gamma_1,mqc,9,18,10.5435910328,157.071791118,2392.81601093,nan,16.1792566588,nan,1,nan,nan,nan,nan,0,false,fm^4 / MeV,
+q00_from_e2k0,gamma_1,main_isgmr,18,25,-0.417398200312,-10.7746145738,-270.285123188,nan,18,nan,1,nan,nan,nan,nan,0.754585555749,false,fm^4 / MeV,
+q00_from_e2k0,gamma_1,experiment_range,9,25,10.1261949876,146.297176545,2122.530215,nan,16.1792566588,nan,1,nan,nan,nan,nan,0.0895898179181,false,fm^4 / MeV,
+q00_from_e2k0,gamma_2,mqc,9,18,9.62002664023,140.775870733,2112.38216031,nan,16.1018439475,nan,2,nan,nan,nan,nan,0,false,fm^4 / MeV,
+q00_from_e2k0,gamma_2,main_isgmr,18,25,0.0912857096339,-0.385364629382,-56.1652580159,nan,18,nan,2,nan,nan,nan,nan,0.509084137445,false,fm^4 / MeV,
+q00_from_e2k0,gamma_2,experiment_range,9,25,9.71131431816,140.390506104,2056.21630136,nan,16.1018439475,nan,2,nan,nan,nan,nan,0.0666604588142,false,fm^4 / MeV,
+q00_from_e2k0,cosine_6,mqc,9,18,11.5843828745,175.47758866,2710.22579334,nan,16.1792566588,nan,nan,nan,nan,nan,nan,0,false,fm^4 / MeV,
+q00_from_e2k0,cosine_6,main_isgmr,18,25,-1.02727886417,-23.1129816184,-522.160217047,nan,23.7657023649,nan,nan,nan,nan,nan,nan,0.975753228247,false,fm^4 / MeV,
+q00_from_e2k0,cosine_6,experiment_range,9,25,10.5571057813,152.364607041,2188.06501228,nan,16.1792566588,nan,nan,nan,nan,nan,nan,0.118647111806,false,fm^4 / MeV,

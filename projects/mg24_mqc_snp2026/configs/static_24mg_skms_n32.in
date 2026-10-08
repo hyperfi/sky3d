@@ -1,0 +1,27 @@
+&files
+ wffile='mg24_skms_zaxis_n32.tdhf'
+/
+&force
+ name='SkMs', pairing='NONE'
+/
+&main
+ mprint=10, mplot=1000, mrest=200,
+ writeselect='r', imode=1, tfft=T, nof=1
+/
+&grid
+ nx=32, ny=32, nz=32,
+ dx=1.0, dy=1.0, dz=1.0,
+ periodic=F
+/
+&static
+ nprot=12, nneut=12,
+ radinx=2.4, radiny=2.4, radinz=5.4,
+ x0dmp=0.10, e0dmp=100.0,
+ tdiag=T, tlarge=F, tvaryx_0=F,
+ maxiter=1000, serr=1.0D-6
+/
+&fragments
+ filename=1*'../static_skms_rotated/mg24_skms_zaxis.tdhf',
+ fix_boost=T,
+ fcent(1,1)=0.0, 0.0, 0.0
+/

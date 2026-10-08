@@ -1,0 +1,75 @@
+[run]
+directory = "../runs/e0_baseline"
+input = "for005"
+
+[output]
+directory = "../data/processed/e0_baseline"
+formats = ["csv", "hdf5", "pdf", "png"]
+
+[analysis]
+energy_min_mev = 0.0
+energy_max_mev = 30.0
+zero_padding_factor = 8
+baseline_points = 1
+
+[nucleus]
+A = 24
+Z = 12
+
+[[windows]]
+name = "gamma_1"
+kind = "exponential"
+gamma_mev = 1.0
+
+[[windows]]
+name = "gamma_2"
+kind = "exponential"
+gamma_mev = 2.0
+
+[[windows]]
+name = "cosine_6"
+kind = "cosine"
+power = 6
+
+[[regions]]
+name = "mqc"
+min_mev = 9.0
+max_mev = 18.0
+
+[[regions]]
+name = "main_isgmr"
+min_mev = 18.0
+max_mev = 25.0
+
+[[regions]]
+name = "experiment_range"
+min_mev = 9.0
+max_mev = 25.0
+
+[[channels]]
+name = "e0_diagonal"
+file = "monopoles.res"
+column = 1
+reference_file = "../no_boost_long/monopoles.res"
+reference_column = 1
+multipolarity = 0
+projection = 0
+type = "isoscalar"
+diagonal = true
+label = "24Mg isoscalar E0 response"
+strength_units = "fm^4 / MeV"
+ewsr_reference = 1459.8593156322906
+ewsr_label = "IS E0 double-commutator EWSR in Sky3D F00 convention"
+
+[[channels]]
+name = "q20_from_e0"
+file = "quadrupoles.res"
+column = 1
+reference_file = "../no_boost_long/quadrupoles.res"
+reference_column = 1
+multipolarity = 2
+projection = 0
+type = "cross"
+diagonal = false
+label = "24Mg signed Q20 readout after E0 boost"
+strength_units = "fm^4 / MeV"

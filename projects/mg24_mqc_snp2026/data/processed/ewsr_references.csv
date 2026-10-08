@@ -1,0 +1,3 @@
+channel,m1_reference,unit,operator
+e0,1459.85931563,MeV fm^4,F00 = sum_i r_i^2/sqrt(4 pi)
+e2k0,22916.827718,MeV fm^4,F20 = sum_i sqrt(5) r_i^2 Y20 = 5/(4sqrt(pi))(2z^2-x^2-y^2)

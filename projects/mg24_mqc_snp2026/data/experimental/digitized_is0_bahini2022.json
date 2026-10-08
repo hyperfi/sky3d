@@ -1,0 +1,27 @@
+{
+  "axis_calibration": {
+    "x_at_10_mev": 91.363,
+    "x_at_15_mev": 196.492,
+    "y_at_20_fm4_per_mev": 354.907,
+    "y_at_zero_strength": 419.455
+  },
+  "binning_mev": 0.5,
+  "classification": "digitized experimental data; not publisher-supplied numerical data",
+  "digitization_coordinate_uncertainty_fm4_per_mev": 0.2,
+  "method": "Filled-circle centers and vertical error-bar endpoints are parsed directly from the author-supplied Cairo EPS; axis calibration uses its major-tick coordinates.",
+  "reported_experimental_resolution_fwhm_kev": 70.0,
+  "source": {
+    "article_doi": "10.1103/PhysRevC.105.024311",
+    "arxiv": "2111.07105",
+    "arxiv_eprint_url": "https://export.arxiv.org/e-print/2111.07105",
+    "figure_in_article": "Fig. 6",
+    "file": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/data/experimental/source/fig5_bahini2022_arxiv.eps",
+    "sha256": "92009487c140d8b8169de8fe3810f281619df0dfc014f021bb6dab77ae3fdba3"
+  },
+  "validation": {
+    "description": "The 13.75-MeV bin area is compared with the independently tabulated 13.87-MeV state strength of 37.7(3.8) fm^4.",
+    "digitized_13p75_bin_area_fm4": 37.24003842102001,
+    "tabulated_13p87_state_strength_fm4": 37.7,
+    "tabulated_13p87_state_uncertainty_fm4": 3.8
+  }
+}

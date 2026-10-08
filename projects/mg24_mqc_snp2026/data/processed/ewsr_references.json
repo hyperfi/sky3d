@@ -1,0 +1,26 @@
+{
+  "e0": {
+    "formula": "m1 = sum_q hbar^2/(2m_q) integral rho_q |grad f00|^2",
+    "operator": "F00 = sum_i r_i^2/sqrt(4 pi)",
+    "reference_m1_mev_fm4": 1459.8593156322906
+  },
+  "e2k0": {
+    "formula": "m1 = sum_q hbar^2/(2m_q) integral rho_q |grad f20|^2",
+    "operator": "F20 = sum_i sqrt(5) r_i^2 Y20 = 5/(4sqrt(pi))(2z^2-x^2-y^2)",
+    "reference_m1_mev_fm4": 22916.827718041597
+  },
+  "source": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/no_boost_long",
+  "species_integrated_r2_fm2": {
+    "neutron": 109.41760823726364,
+    "proton": 111.76061249700217
+  },
+  "species_q20_code_fm2": {
+    "neutron": 39.4285045707328,
+    "proton": 40.384082793152714
+  },
+  "sv_bas_hbar2_over_2m_mev_fm2": {
+    "neutron": 20.72126,
+    "proton": 20.74982
+  },
+  "time_fm_over_c": 0.0
+}

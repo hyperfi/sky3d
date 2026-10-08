@@ -1,0 +1,99 @@
+{
+  "config_file": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/configs/response_e0_half.toml",
+  "config_sha256": "311e567c0afae837bfa342e699fa22edce12ca7a58b17f86924a25d17f777d8a",
+  "constants": {
+    "e1_photoabsorption_coefficient_mb": 4.022466360842889,
+    "e_squared_mev_fm": 1.4399645474141507,
+    "hbar_c_mev_fm": 197.3269804
+  },
+  "conventions": {
+    "dipole_polarizability": "alpha_D[fm^3] = (8*pi/9)*e^2*m_-1",
+    "exponential_window": "exp[-Gamma_sm t/(2 hbar)]; Gamma_sm is Lorentzian FWHM",
+    "intrinsic_width": "observed FWHM - Gamma_sm, reported only as a Lorentzian-convolution estimate",
+    "photoabsorption_e1": "sigma_gamma[mb] = coefficient * E * dB(E1)/dE",
+    "rayleigh_resolution": "2*pi*hbar/T; zero padding does not change it",
+    "response": "-s * transform/(eta*hbar), where boost=exp(i*s*eta*F)",
+    "signed_strength": "Im(response)/pi; never absolute-valued for cross channels",
+    "sky3d_boost": "psi(0+) = exp(-i eta F) psi(0)",
+    "transform": "integral_0^T dt exp(-i E t / hbar) delta<A>(t)"
+  },
+  "git_commit": "be42efc7fba93aeb3a18ed0b5155b5f6bc9c6c1b",
+  "input_file": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/e0_half/for005",
+  "input_sha256": "f93f6af95abc54f2f06018500373c7329de5dd505d13a671e738ef2d66f4b1f2",
+  "run_directory": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/e0_half",
+  "schema": "sky3d-response-v1",
+  "sky3d_checkout": "v1.2 response implementation",
+  "sky3d_input": {
+    "dynamic": {
+      "dt": 0.2,
+      "mxpact": 4,
+      "nt": 10000,
+      "texternal": true
+    },
+    "extern": {
+      "ampl_ext": 2.5e-05,
+      "ipulse": 0,
+      "isoext": 0,
+      "l_val": 0,
+      "m_val": 0,
+      "radext": 200.0,
+      "textfield_periodic": false,
+      "widext": 1.0
+    },
+    "files": {
+      "wffile": "e0_half_restart.tdhf"
+    },
+    "force": {
+      "name": "SV-bas",
+      "pairing": "NONE"
+    },
+    "fragments": {
+      "filename": "1*'../static_svbas_rotated/mg24_svbas_zaxis.tdhf'",
+      "fix_boost": true
+    },
+    "grid": {
+      "dx": 1.0,
+      "dy": 1.0,
+      "dz": 1.0,
+      "nx": 24,
+      "ny": 24,
+      "nz": 24,
+      "periodic": false
+    },
+    "main": {
+      "imode": 2,
+      "mplot": 100000,
+      "mprint": 10,
+      "mrest": 2500,
+      "nof": 1,
+      "tfft": true,
+      "writeselect": "r"
+    }
+  },
+  "software": {
+    "h5py": "3.16.0",
+    "matplotlib": "3.6.3",
+    "numpy": "1.26.4",
+    "python": "3.12.3"
+  },
+  "source_files": {
+    "e0_diagonal": {
+      "header": "Time      Monopole(n+p) (IS)        Monopole(n+p) (IV)",
+      "path": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/e0_half/monopoles.res",
+      "reference_column": "1",
+      "reference_header": "Time      Monopole(n+p) (IS)        Monopole(n+p) (IV)",
+      "reference_path": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/no_boost_long/monopoles.res",
+      "reference_sha256": "42650ac76a4f8f201acb70e014671309b0b5072513a2f9557a0a4b2397354602",
+      "sha256": "6bf9d739d0fd64babf8f262c1c51f21efe11819d19732f7ce1a6f8f8c51d43c9"
+    },
+    "q20_from_e0": {
+      "header": "Time       Q(n+p)(IS)        Q(n+p) (IV)",
+      "path": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/e0_half/quadrupoles.res",
+      "reference_column": "1",
+      "reference_header": "Time       Q(n+p)(IS)        Q(n+p) (IV)",
+      "reference_path": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/no_boost_long/quadrupoles.res",
+      "reference_sha256": "44599ea356485f2163a25bc8d7ec543324b2cdeab89ad695c0ab200eb0e1702d",
+      "sha256": "da8ac70a2edfad7fd01e1d86f4c1764eaf5574453b56f616209565f86fbd4f5a"
+    }
+  }
+}

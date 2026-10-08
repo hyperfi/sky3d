@@ -1,0 +1,42 @@
+{
+  "artificial_smoothing_fwhm_mev": 0.2,
+  "edfs": {
+    "SLy5": {
+      "boosted_energy_max_abs_drift_mev": 0.0009306000000037784,
+      "cross_T12000_vs_T18000_relative_l2_9_25": 0.002291051350790731,
+      "main_isgmr_centroid_mev": 21.993933715185758,
+      "main_isgmr_peak_mev": 21.63456078275995,
+      "mqc_cross_characteristic_energy_mev": 16.85653402811142,
+      "mqc_cross_signed_m0_fm4": 167.66778572730533,
+      "mqc_e0_centroid_mev": 15.829740078512213,
+      "mqc_e0_ewsr_percent": 39.23283273286366,
+      "mqc_e0_m0_fm4": 36.95087246362732,
+      "mqc_e0_peak_mev": 16.85653402811142,
+      "reference_boundary_shell_particles_max": 1.8267643492305156e-05,
+      "reference_energy_max_abs_drift_mev": 0.0009266000000138774,
+      "reference_outermost_max_density_fm3": 4.529081479125814e-08,
+      "reference_q00_max_abs_change_fm2": 0.0007038718520959719,
+      "reference_q20_max_abs_change_fm2": 0.0036290495421553715
+    },
+    "SkM*": {
+      "boosted_energy_max_abs_drift_mev": 0.0005439999999907741,
+      "cross_T12000_vs_T18000_relative_l2_9_25": 0.0018690801700193562,
+      "main_isgmr_centroid_mev": 22.035230389561505,
+      "main_isgmr_peak_mev": 24.311977576806253,
+      "mqc_cross_characteristic_energy_mev": 16.59826231164393,
+      "mqc_cross_signed_m0_fm4": 174.79523037834218,
+      "mqc_e0_centroid_mev": 15.550437637903178,
+      "mqc_e0_ewsr_percent": 39.509484973324554,
+      "mqc_e0_m0_fm4": 37.758450050294556,
+      "mqc_e0_peak_mev": 16.589653254428345,
+      "reference_boundary_shell_particles_max": 1.95548050728072e-05,
+      "reference_energy_max_abs_drift_mev": 0.0005451000000107342,
+      "reference_outermost_max_density_fm3": 4.9132869197982366e-08,
+      "reference_q00_max_abs_change_fm2": 0.003118062885477002,
+      "reference_q20_max_abs_change_fm2": 0.01230575351405605
+    }
+  },
+  "propagation_time_fm_c": 18000.0,
+  "rayleigh_resolution_mev": 0.06888011021996635,
+  "review_status": "requires scientific review before writing e0_stage_go.flag"
+}

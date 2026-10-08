@@ -1,0 +1,15 @@
+{
+  "grid": {
+    "nx": 24,
+    "ny": 24,
+    "nz": 24
+  },
+  "input": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/static_skms_zseed/mg24_skms_zaxis.tdhf",
+  "input_sha256": "aa910a338cb88f0e6934cd0f889590ea138c26fcde0f80dd1e765cbc4c2af03b",
+  "interpolation": false,
+  "max_relative_discrete_norm_error": 4.440892098500624e-16,
+  "output": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/static_skms_rotated/mg24_skms_zaxis.tdhf",
+  "output_sha256": "4b2604c240237ba4bcb0ebb1e98c5eb6fda9c71c14bc59fd94b5d6aa3297ce4a",
+  "rotation": "active R_y(-pi/2): x -> z",
+  "wavefunctions_rotated": 24
+}

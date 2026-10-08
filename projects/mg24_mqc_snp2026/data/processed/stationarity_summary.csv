@@ -1,0 +1,8 @@
+metric,value,unit,source
+duration,50.0,fm/c,energies.res
+energy_max_abs_drift,3.800000001774606e-06,MeV,energies.res
+neutron_number_max_abs_drift,0.0,1,energies.res
+proton_number_max_abs_drift,0.0,1,energies.res
+monopole_max_relative_drift,1.6998918296581574e-06,1,monopoles.res
+quadrupole_max_relative_drift,7.69378651060211e-06,1,quadrupoles.res
+center_of_mass_norm_max,4.7524308970624426e-14,fm,stationarity_zaxis.log

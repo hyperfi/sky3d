@@ -1,0 +1,3 @@
+edf,sky3d_identifier,hf_energy_mev,intrinsic_q20_fm2,beta2,rms_total_fm,rms_neutron_fm,rms_proton_fm,raw_long_axis,production_axis,h2_fluctuation_floor_mev,K_infinity_mev,isoscalar_effective_mass_ratio,mqc_e0_centroid_mev,mqc_e2k0_centroid_mev,cross_characteristic_energy_mev,main_isgmr_centroid_mev,mqc_e0_m0_fm4,mqc_e0_ewsr_percent,response_status
+SLy5,Sly5,-179.8536,36.532,0.31929960,3.0679,3.0502,3.0854,x,z,9.427e-5,229.9,0.697,,,,,,,pending matched E0/reference production
+SkM*,SkMs,-180.3716,35.568,0.31087704,3.0617,3.0438,3.0794,x,z,7.645e-5,216.6,0.789,,,,,,,pending matched E0/reference production

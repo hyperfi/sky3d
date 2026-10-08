@@ -1,0 +1,19 @@
+/build/*
+!/build/Makefile
+/runs/*
+!/runs/README.md
+/logs/*
+!/logs/README.md
+
+# Regenerable exports and large local datasets; retain summary CSV/JSON evidence.
+/figures/
+/tmp/
+/paper/build/
+/paper/output/
+/paper/rendered/
+/data/processed/**/*.h5
+/data/processed/**/*.pdf
+/data/processed/**/*.png
+/data/processed/highres/spectra.csv
+/data/processed/highres/*.flag
+

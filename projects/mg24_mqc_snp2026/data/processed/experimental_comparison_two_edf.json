@@ -1,0 +1,49 @@
+{
+  "SLy5": {
+    "main_18_25": {
+      "centroid_mev": 21.60927714234221,
+      "m0_fm4": 247.2879740046713,
+      "m1_mev_fm4": 5343.7143642352585,
+      "peak_energy_mev": 18.00153863778395
+    },
+    "mqc_10_18": {
+      "centroid_mev": 15.737169694745186,
+      "m0_fm4": 410.23993436813146,
+      "m1_mev_fm4": 6456.015462712412,
+      "peak_energy_mev": 16.847924970895832
+    }
+  },
+  "SkM*": {
+    "main_18_25": {
+      "centroid_mev": 21.7573296332011,
+      "m0_fm4": 254.55574856273722,
+      "m1_mev_fm4": 5538.453331505731,
+      "peak_energy_mev": 23.87291565881152
+    },
+    "mqc_10_18": {
+      "centroid_mev": 15.526191531312517,
+      "m0_fm4": 424.8957408803742,
+      "m1_mev_fm4": 6597.0126537476235,
+      "peak_energy_mev": 16.529389853919266
+    }
+  },
+  "duration_fm_c": 18000.0,
+  "experiment": {
+    "main_18_25": {
+      "centroid_mev": 21.305248514493936,
+      "m0_fm4": 188.76495011464334,
+      "m1_mev_fm4": 4021.684173018527,
+      "maximum_bin_energy_mev": 18.75
+    },
+    "mqc_10_18": {
+      "centroid_mev": 15.110025556904718,
+      "m0_fm4": 158.33689657309284,
+      "m1_mev_fm4": 2392.474553820412,
+      "maximum_bin_energy_mev": 13.75
+    }
+  },
+  "experiment_figure_artificial_smoothing_fwhm_mev": 1.0,
+  "rayleigh_resolution_mev": 0.06888011021996635,
+  "response_figure_artificial_smoothing_fwhm_mev": 0.2,
+  "theory_convention": "Sky3D F00 strength multiplied by 4*pi to match experimental sum_i r_i^2; no fitted normalization or energy shift."
+}

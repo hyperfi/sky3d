@@ -1,0 +1,133 @@
+{
+  "durations_fm_c": [
+    2000.0,
+    4000.0,
+    8000.0,
+    12000.0,
+    18000.0
+  ],
+  "exponential_window": "exp[-Gamma_sm t/(2 hbar)]; Gamma_sm is imposed Lorentzian FWHM",
+  "families": [
+    {
+      "boost_amplitude": 5e-05,
+      "durations": [
+        2000.0,
+        4000.0,
+        8000.0,
+        12000.0,
+        18000.0
+      ],
+      "edf": "SLy5",
+      "mode": "e0",
+      "name": "sly5_n24_e0",
+      "reference": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/no_boost_sly5_t18000",
+      "run": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/e0_sly5_t18000"
+    },
+    {
+      "boost_amplitude": 5e-05,
+      "durations": [
+        2000.0,
+        4000.0,
+        8000.0,
+        12000.0,
+        18000.0
+      ],
+      "edf": "SkM*",
+      "mode": "e0",
+      "name": "skms_n24_e0",
+      "reference": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/no_boost_skms_t18000",
+      "run": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/e0_skms_t18000"
+    },
+    {
+      "boost_amplitude": 5e-05,
+      "durations": [
+        2000.0,
+        4000.0,
+        8000.0,
+        12000.0,
+        18000.0
+      ],
+      "edf": "SLy5",
+      "mode": "e2",
+      "name": "sly5_n24_e2",
+      "reference": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/no_boost_sly5_t18000",
+      "run": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/e2k0_sly5_t18000_recovery2"
+    },
+    {
+      "boost_amplitude": 5e-05,
+      "durations": [
+        2000.0,
+        4000.0,
+        8000.0,
+        12000.0,
+        18000.0
+      ],
+      "edf": "SkM*",
+      "mode": "e2",
+      "name": "skms_n24_e2",
+      "reference": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/no_boost_skms_t18000",
+      "run": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/e2k0_skms_t18000"
+    },
+    {
+      "boost_amplitude": 2.5e-05,
+      "durations": [
+        2000.0,
+        4000.0,
+        8000.0,
+        12000.0,
+        18000.0
+      ],
+      "edf": "SLy5",
+      "mode": "e0",
+      "name": "sly5_n24_e0_half",
+      "reference": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/no_boost_sly5_t18000",
+      "run": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/e0_half_sly5_t18000"
+    },
+    {
+      "boost_amplitude": 2.5e-05,
+      "durations": [
+        2000.0,
+        4000.0,
+        8000.0,
+        12000.0,
+        18000.0
+      ],
+      "edf": "SkM*",
+      "mode": "e0",
+      "name": "skms_n24_e0_half",
+      "reference": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/no_boost_skms_t18000",
+      "run": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/e0_half_skms_t18000"
+    },
+    {
+      "boost_amplitude": 5e-05,
+      "durations": [
+        2000.0,
+        4000.0,
+        8000.0
+      ],
+      "edf": "SLy5",
+      "mode": "e0",
+      "name": "sly5_n32_e0",
+      "reference": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/no_boost_sly5_n32_t8000",
+      "run": "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/runs/e0_sly5_n32_t8000"
+    }
+  ],
+  "gamma_sm_mev": [
+    1.0,
+    0.5,
+    0.2,
+    0.1,
+    0.07
+  ],
+  "rayleigh_resolution_mev": {
+    "T12000": 0.10332016532994952,
+    "T18000": 0.06888011021996635,
+    "T2000": 0.6199209919796971,
+    "T4000": 0.30996049598984854,
+    "T8000": 0.15498024799492427
+  },
+  "schema": "sky3d-two-edf-highres-response-v2",
+  "window_end_acceptance_threshold": 0.05,
+  "zero_padding_factor": 8,
+  "zero_padding_statement": "The zero-padded energy bin is a plotting/interpolation grid and is not spectral resolution."
+}
