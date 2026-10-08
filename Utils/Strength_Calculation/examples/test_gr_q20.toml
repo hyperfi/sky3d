@@ -1,0 +1,52 @@
+# Requires a completed Test/GR dynamic run. This checkout does not track the
+# large *.res products, so the example is intentionally separate from tests.
+[run]
+directory = "../../../Test/GR"
+input = "for005"
+
+[output]
+directory = "test_gr_q20_output"
+formats = ["csv", "hdf5", "pdf", "png"]
+
+[analysis]
+energy_min_mev = 0.0
+energy_max_mev = 40.0
+zero_padding_factor = 8
+baseline_points = 1
+
+[[windows]]
+name = "gamma_1"
+kind = "exponential"
+gamma_mev = 1.0
+
+[[windows]]
+name = "cosine_6"
+kind = "cosine"
+power = 6
+
+[[regions]]
+name = "giant_resonance"
+min_mev = 5.0
+max_mev = 35.0
+
+[[channels]]
+name = "q20_diagonal"
+file = "quadrupoles.res"
+column = 1
+multipolarity = 2
+projection = 0
+type = "isoscalar"
+diagonal = true
+label = "16O isoscalar Q20 response to Q20 boost"
+strength_units = "fm^4 / MeV"
+
+[[channels]]
+name = "q00_from_q20"
+file = "monopoles.res"
+column = 1
+multipolarity = 0
+projection = 0
+type = "cross"
+diagonal = false
+label = "16O signed Q00 readout after Q20 boost"
+strength_units = "fm^4 / MeV"

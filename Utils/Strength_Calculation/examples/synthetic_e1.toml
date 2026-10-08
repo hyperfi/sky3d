@@ -1,0 +1,57 @@
+[run]
+directory = "synthetic_e1_run"
+input = "for005"
+
+[output]
+directory = "synthetic_e1_output"
+formats = ["csv", "hdf5", "pdf", "png"]
+
+[analysis]
+energy_min_mev = 0.0
+energy_max_mev = 30.0
+zero_padding_factor = 8
+baseline_points = 1
+
+[nucleus]
+A = 16
+Z = 8
+trk_enhancement = 0.0
+
+[[windows]]
+name = "gamma_1"
+kind = "exponential"
+gamma_mev = 1.0
+
+[[windows]]
+name = "gamma_2"
+kind = "exponential"
+gamma_mev = 2.0
+
+[[regions]]
+name = "full_e1"
+min_mev = 1.0
+max_mev = 30.0
+
+[[regions]]
+name = "lower_mode"
+min_mev = 8.0
+max_mev = 15.0
+
+[[regions]]
+name = "upper_mode"
+min_mev = 15.0
+max_mev = 23.0
+
+[[channels]]
+name = "synthetic_e1"
+file = "extfield.res"
+column = 1
+multipolarity = 1
+projection = 0
+type = "electric"
+diagonal = true
+b_elambda = true
+label = "Synthetic electric dipole response (validation only)"
+strength_units = "e^2 fm^2 / MeV"
+boost_phase_sign = -1
+use_trk_ewsr = true
