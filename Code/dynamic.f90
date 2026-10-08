@@ -282,6 +282,12 @@ CONTAINS
        IF(mrescm/=0) THEN  
           IF(MOD(iter,mrescm)==0) THEN  
              CALL resetcm
+             ! Rebuild corrected densities, rather than adding them a second time.
+             rho=0.0D0
+             tau=0.0D0
+             current=0.0D0
+             sdens=0.0D0
+             sodens=0.0D0
              !$OMP PARALLEL DO DEFAULT(SHARED) PRIVATE(nst) SCHEDULE(STATIC) &
              !$OMP REDUCTION(+:rho,tau,current,sdens,sodens)
              DO nst=1,nstloc
@@ -300,7 +306,7 @@ CONTAINS
        ! compute densities, currents, potentials etc.                  *
        CALL skyrme  
        IF(text_timedep) CALL extfld(time+dt)
-       IF(MOD(iter,mrest)==0) THEN  
+       IF(output_due(iter,mrest)) THEN
           CALL write_wavefunctions
           IF(wflag) WRITE(*,*) ' Wrote restart file at end of  iter=',iter
        ENDIF
@@ -440,7 +446,7 @@ CONTAINS
     LOGICAL,SAVE :: initialcall=.TRUE.
     ALLOCATE(ps1(nx,ny,nz,2))
     ! Step 1
-    printnow=mprint>0.AND.MOD(iter,mprint)==0
+    printnow=output_due(iter,mprint)
     ! Step 2: twobody analysis
     IF(nof/=2) THEN  
       istwobody=.FALSE.

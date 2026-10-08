@@ -313,7 +313,7 @@ CONTAINS
        ENDIF
        CALL skyrme
        ! calculate and print information
-       IF(mprint>0.AND.MOD(iter,mprint)==0) THEN
+       IF(output_due(iter,mprint)) THEN
           CALL sp_properties
           CALL sinfo
        ELSEIF(tvaryx_0) THEN
@@ -325,7 +325,7 @@ CONTAINS
           CALL write_wavefunctions
           EXIT Iteration  
        END IF
-       IF(MOD(iter,mrest)==0) THEN  
+       IF(output_due(iter,mrest)) THEN
           CALL write_wavefunctions
        ENDIF
        ! Step 10: update step size for the next iteration
@@ -440,7 +440,7 @@ CONTAINS
     ENDDO
     IF(tdiag) hmatr(nst,nst)=hmatr(nst,nst)+spe
     ! Step 3: calculate fluctuation, i.e. <h*h> and |h|**2
-    IF((mprint>0.AND.MOD(iter,mprint)==0).OR.tvaryx_0) THEN  
+    IF(output_due(iter,mprint).OR.tvaryx_0) THEN
        CALL hpsi(iq,esf,ps1,ps2)
        exph2=overlap(psin,ps2)
        varh2=rpsnorm(ps1)

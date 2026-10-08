@@ -45,7 +45,7 @@ MODULE Fragments
   !!initial conditions.
   REAL(db) :: ecm                      !< The kinetic energy of relative motion in MeV.
   REAL(db) :: b                        !< The impact parameter in fm.
-  CHARACTER(64) :: filename(mnof)      !<for each fragment this indicates the
+  CHARACTER(1024) :: filename(mnof)    !<for each fragment this indicates the
   !!name of the file with the associated wave functions. One file can be
   !!used several times in the case of identical fragments, abut the code
   !!does not treat that as a special case.

@@ -124,4 +124,11 @@ MODULE Params
   !!\f$ R=r_0A^{1/3} \f$ is used to compute the \f$ \beta \f$ and \f$ \gamma \f$ deformation parameters 
   !!in subroutine \c moments. Units: fm.
   !>@}
+CONTAINS
+  ! Fortran does not guarantee short-circuit evaluation of logical expressions.
+  PURE LOGICAL FUNCTION output_due(step,interval)
+    INTEGER,INTENT(IN) :: step,interval
+    output_due=.FALSE.
+    IF(interval>0) output_due=MOD(step,interval)==0
+  END FUNCTION output_due
 END MODULE Params
