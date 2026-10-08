@@ -1,0 +1,6 @@
+2026-09-09T22:06:13+00:00 case=K0 endpoint=6000 pid=445 action=TERM
+2026-09-09T22:06:44+00:00 case=K0_half endpoint=6000 pid=448 action=TERM
+2026-09-09T22:06:49+00:00 case=K1 endpoint=6000 pid=444 action=TERM
+2026-09-09T22:07:08+00:00 case=reference_K0 endpoint=6000 pid=446 action=TERM
+2026-09-09T22:08:42+00:00 case=K2 endpoint=6000 pid=447 action=TERM
+2026-09-09T22:08:42+00:00 all cases reached 6000 fm/c

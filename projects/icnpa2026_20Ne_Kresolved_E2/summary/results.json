@@ -1,0 +1,82 @@
+{
+  "schema": "icnpa2026-20ne-kresolved-e2-v1",
+  "static": {
+    "energy_mev": -141.9926,
+    "particle_number": 20.0,
+    "rms_radius_fm": 2.9692,
+    "q20_principal_fm2": 28.146,
+    "beta": 0.3333578794369831,
+    "gamma_deg": 0.0,
+    "unrotated_second_moments_fm2": {
+      "x": 4.426,
+      "y": 2.195,
+      "z": 2.195
+    },
+    "shape": "prolate",
+    "production_axis": "z",
+    "rotation": {
+      "grid": {
+        "nx": 24,
+        "ny": 24,
+        "nz": 24
+      },
+      "input": "/mnt/d/Coding/sky3d/projects/icnpa2026_20Ne_Kresolved_E2/static/20ne_sly5.tdhf",
+      "input_sha256": "bfe5b99c5fb088845305bdf0c2b0bfd2f736b4370dd78ebd2734a34233c7b0c3",
+      "interpolation": false,
+      "max_relative_discrete_norm_error": 3.330669073875472e-16,
+      "output": "/mnt/d/Coding/sky3d/projects/icnpa2026_20Ne_Kresolved_E2/static/20ne_sly5_zaxis.tdhf",
+      "output_sha256": "07353fe3a3fefd74db4a34a129da1f2f969267f9757472193eb6ea3ed5d236f3",
+      "rotation": "active R_y(-pi/2): x -> z",
+      "wavefunctions_rotated": 20
+    }
+  },
+  "components": [
+    {
+      "K": 0,
+      "operator_normalization": "code native",
+      "dominant_peak_mev": 16.5515393144,
+      "secondary_peaks_mev": "17.6360;19.0046;15.2088",
+      "centroid_10_35_mev": 17.8523448461,
+      "m0_10_35_fm4": 911.23791021,
+      "m1_10_35_mev_fm4": 16267.73341,
+      "negative_area_fraction_10_35": 0.0,
+      "rayleigh_resolution_mev": 0.20664033065989904,
+      "artificial_smoothing_fwhm_mev": 0.5
+    },
+    {
+      "K": 1,
+      "operator_normalization": "unit real tesseral (2x code-native strength)",
+      "dominant_peak_mev": 19.9341471929,
+      "secondary_peaks_mev": "18.7722;19.3144;18.2299",
+      "centroid_10_35_mev": 19.5481285021,
+      "m0_10_35_fm4": 719.684113668,
+      "m1_10_35_mev_fm4": 14068.4775349,
+      "negative_area_fraction_10_35": 0.0,
+      "rayleigh_resolution_mev": 0.20664033065989904,
+      "artificial_smoothing_fwhm_mev": 0.5
+    },
+    {
+      "K": 2,
+      "operator_normalization": "unit real tesseral (2x code-native strength)",
+      "dominant_peak_mev": 21.6641832835,
+      "secondary_peaks_mev": "22.2323;23.3426;20.2698",
+      "centroid_10_35_mev": 22.5361985736,
+      "m0_10_35_fm4": 467.621292251,
+      "m1_10_35_mev_fm4": 10538.4062994,
+      "negative_area_fraction_10_35": 0.0,
+      "rayleigh_resolution_mev": 0.20664033065989904,
+      "artificial_smoothing_fwhm_mev": 0.5
+    }
+  ],
+  "linearity": {
+    "energy_interval_mev": [
+      0.5,
+      35.0
+    ],
+    "relative_l2": 0.0005404393218484285,
+    "max_abs_difference_over_peak": 0.0005032755163372428,
+    "eta_baseline": 5e-05,
+    "eta_half": 2.5e-05
+  },
+  "operator_note": "K=0 is code native. For K=1,2, each positive-M code operator is Re(Y_lm) without sqrt(2); reported comparative strengths multiply the diagonal code response by 2."
+}

@@ -1,0 +1,31 @@
+&files
+ wffile='k0_restart.tdhf'
+/
+&force
+ name='Sly5', pairing='NONE'
+/
+&main
+ mprint=10, mplot=10000, mrest=10000,
+ writeselect='r', imode=2, tfft=T, nof=1
+/
+&grid
+ nx=24, ny=24, nz=24,
+ dx=1.0, dy=1.0, dz=1.0,
+ periodic=F
+/
+&dynamic
+ nt=30000, dt=0.2, mxpact=4,
+ texternal=T
+/
+&extern
+ ipulse=0, isoext=0,
+ ampl_ext=5.0D-5,
+ L_val=2, M_val=0,
+ radext=200.0D0, widext=1.0D0,
+ textfield_periodic=F
+/
+&fragments
+ filename=1*'../../static/20ne_sly5_zaxis.tdhf',
+ fix_boost=T,
+ fcent(1,1)=0.0, 0.0, 0.0
+/

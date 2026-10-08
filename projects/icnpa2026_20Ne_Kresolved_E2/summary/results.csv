@@ -1,0 +1,4 @@
+K,operator_normalization,dominant_peak_mev,secondary_peaks_mev,centroid_10_35_mev,m0_10_35_fm4,m1_10_35_mev_fm4,negative_area_fraction_10_35,rayleigh_resolution_mev,artificial_smoothing_fwhm_mev
+0,code native,16.5515393144,17.6360;19.0046;15.2088,17.8523448461,911.23791021,16267.73341,0.0,0.20664033065989904,0.5
+1,unit real tesseral (2x code-native strength),19.9341471929,18.7722;19.3144;18.2299,19.5481285021,719.684113668,14068.4775349,0.0,0.20664033065989904,0.5
+2,unit real tesseral (2x code-native strength),21.6641832835,22.2323;23.3426;20.2698,22.5361985736,467.621292251,10538.4062994,0.0,0.20664033065989904,0.5

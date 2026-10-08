@@ -1,0 +1,15 @@
+{
+  "grid": {
+    "nx": 24,
+    "ny": 24,
+    "nz": 24
+  },
+  "input": "/mnt/d/Coding/sky3d/projects/icnpa2026_20Ne_Kresolved_E2/static/20ne_sly5.tdhf",
+  "input_sha256": "bfe5b99c5fb088845305bdf0c2b0bfd2f736b4370dd78ebd2734a34233c7b0c3",
+  "interpolation": false,
+  "max_relative_discrete_norm_error": 3.330669073875472e-16,
+  "output": "/mnt/d/Coding/sky3d/projects/icnpa2026_20Ne_Kresolved_E2/static/20ne_sly5_zaxis.tdhf",
+  "output_sha256": "07353fe3a3fefd74db4a34a129da1f2f969267f9757472193eb6ea3ed5d236f3",
+  "rotation": "active R_y(-pi/2): x -> z",
+  "wavefunctions_rotated": 20
+}

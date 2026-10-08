@@ -1,0 +1,9 @@
+# Raw trajectories, checkpoints and regenerated response exports stay local.
+/static/
+/td/
+/response/
+/figures/
+/logs/*
+!/logs/provenance.txt
+!/logs/*.time
+!/logs/stop_at_6000.log

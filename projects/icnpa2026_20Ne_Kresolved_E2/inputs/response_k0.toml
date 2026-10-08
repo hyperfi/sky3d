@@ -1,0 +1,60 @@
+[run]
+directory = "../response/prefix_runs/K0"
+input = "for005"
+
+[output]
+directory = "../response/K0"
+formats = ["csv", "hdf5", "pdf", "png"]
+
+[analysis]
+energy_min_mev = 0.0
+energy_max_mev = 35.0
+zero_padding_factor = 8
+baseline_points = 1
+
+[nucleus]
+A = 20
+Z = 10
+
+[[windows]]
+name = "gamma_1p0"
+kind = "exponential"
+gamma_mev = 1.0
+
+[[windows]]
+name = "gamma_0p5"
+kind = "exponential"
+gamma_mev = 0.5
+
+[[windows]]
+name = "gamma_0p2"
+kind = "exponential"
+gamma_mev = 0.2
+
+[[regions]]
+name = "low_energy"
+min_mev = 0.5
+max_mev = 10.0
+
+[[regions]]
+name = "giant_quadrupole"
+min_mev = 10.0
+max_mev = 35.0
+
+[[regions]]
+name = "reported_full"
+min_mev = 0.5
+max_mev = 35.0
+
+[[channels]]
+name = "K0_code_native"
+file = "quadrupoles.res"
+column = 1
+reference_file = "../reference_K0/quadrupoles.res"
+reference_column = 1
+multipolarity = 2
+projection = 0
+type = "isoscalar"
+diagonal = true
+label = "20Ne isoscalar E2 K=0"
+strength_units = "fm^4 / MeV"
