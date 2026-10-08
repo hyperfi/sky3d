@@ -1,0 +1,286 @@
+{
+  "run_directory": "/home/abhishek/.cache/sky3d-stage-profile-xxal54qx",
+  "state_sha256": "ea7ec8de58dcbe1d37a3c003cffa263b1a58542af27d3abc9f99078c5cea5abc",
+  "grid": [
+    40,
+    40,
+    40
+  ],
+  "spacing_fm": [
+    0.6,
+    0.6,
+    0.6
+  ],
+  "steps": 100,
+  "dt_fm_c": 0.1,
+  "mxpact": 4,
+  "flags": "-O3 -march=native -ffast-math -fopenmp",
+  "runs": [
+    {
+      "directory": "/home/abhishek/.cache/sky3d-stage-profile-xxal54qx/cpu",
+      "seconds": 34.829889957999995,
+      "threads": 8,
+      "backend": "cpu",
+      "input_sha256": "404c1b64eb6f357b7814a04674176a13942dd0bcb6ac22f3cccf73208b518f11",
+      "final_time": 9.99999999999998,
+      "final_energy_mev": -141.9803352,
+      "final_checkpoint_particles": [
+        9.999999999858694,
+        9.99999999994971
+      ],
+      "stages": [
+        {
+          "stage": "initialization",
+          "calls": 1,
+          "wall_seconds": 0.260990789,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "predictor",
+          "calls": 100,
+          "wall_seconds": 7.142454229,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "midpoint_fields_and_upload",
+          "calls": 100,
+          "wall_seconds": 4.038522954,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "corrector",
+          "calls": 100,
+          "wall_seconds": 12.552970025,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "center_of_mass",
+          "calls": 100,
+          "wall_seconds": 2.1667e-05,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "diagnostics",
+          "calls": 100,
+          "wall_seconds": 5.154842508000001,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "final_fields_and_upload",
+          "calls": 100,
+          "wall_seconds": 3.9981934870000004,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "restart_io",
+          "calls": 100,
+          "wall_seconds": 0.010525365,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "cleanup",
+          "calls": 1,
+          "wall_seconds": 4.970000000000001e-07,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "skyrme_inclusive",
+          "calls": 201,
+          "wall_seconds": 8.076634021,
+          "nested_in_other_stages": true
+        },
+        {
+          "stage": "poisson_inclusive",
+          "calls": 201,
+          "wall_seconds": 1.862741369,
+          "nested_in_other_stages": true
+        },
+        {
+          "stage": "tinfo_inclusive",
+          "calls": 101,
+          "wall_seconds": 5.337473,
+          "nested_in_other_stages": true
+        }
+      ],
+      "wavefunction_vs_uninstrumented": {
+        "relative_l2": 1.1731721084060339e-15,
+        "max_abs": 2.0630814761166827e-16
+      },
+      "executable_sha256": "044e74d2c3ad3cfe212bef1eb28e514c6c5622f90e3b0332ee79ba928084f931"
+    },
+    {
+      "directory": "/home/abhishek/.cache/sky3d-stage-profile-xxal54qx/gpu",
+      "seconds": 22.748998329000017,
+      "threads": 8,
+      "backend": "gpu",
+      "input_sha256": "404c1b64eb6f357b7814a04674176a13942dd0bcb6ac22f3cccf73208b518f11",
+      "final_time": 9.99999999999998,
+      "final_energy_mev": -141.9803352,
+      "final_checkpoint_particles": [
+        9.999999999858694,
+        9.99999999994971
+      ],
+      "stages": [
+        {
+          "stage": "initialization",
+          "calls": 1,
+          "wall_seconds": 0.46945884800000004,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "predictor",
+          "calls": 100,
+          "wall_seconds": 3.182162178,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "midpoint_fields_and_upload",
+          "calls": 100,
+          "wall_seconds": 3.4722150320000003,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "corrector",
+          "calls": 100,
+          "wall_seconds": 5.670085943,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "center_of_mass",
+          "calls": 100,
+          "wall_seconds": 2.2314e-05,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "diagnostics",
+          "calls": 100,
+          "wall_seconds": 4.726886504,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "final_fields_and_upload",
+          "calls": 100,
+          "wall_seconds": 3.476223903,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "restart_io",
+          "calls": 100,
+          "wall_seconds": 0.013031522,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "cleanup",
+          "calls": 1,
+          "wall_seconds": 0.007512975000000001,
+          "nested_in_other_stages": false
+        },
+        {
+          "stage": "skyrme_inclusive",
+          "calls": 201,
+          "wall_seconds": 6.762483927000001,
+          "nested_in_other_stages": true
+        },
+        {
+          "stage": "poisson_inclusive",
+          "calls": 201,
+          "wall_seconds": 1.2420330210000001,
+          "nested_in_other_stages": true
+        },
+        {
+          "stage": "tinfo_inclusive",
+          "calls": 101,
+          "wall_seconds": 4.911391061000001,
+          "nested_in_other_stages": true
+        }
+      ],
+      "wavefunction_vs_uninstrumented": {
+        "relative_l2": 1.151067687556106e-15,
+        "max_abs": 1.6199010924212651e-16
+      },
+      "executable_sha256": "54fedf982ba6ba05c356a40e681cdfa3850b363dfbf493d7a94ea7ade2acd203"
+    }
+  ],
+  "build": {
+    "arch": "native",
+    "cuda_home": "/usr/local/cuda",
+    "variants": {
+      "reference": "-O3 -march=native -ffp-contract=off -fopenmp",
+      "cpu": "-O3 -march=native -ffast-math -fopenmp",
+      "gpu": "-O3 -march=native -ffast-math -fopenmp"
+    },
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+    "gfortran": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "source_commit": "226a61ae8844c1a4d45c33d969bc682a359423a1",
+    "source_dirty": true,
+    "executable_sha256": {
+      "reference": "38a7e6055d1711a1701e0d0c995dac1e2e71a1bc3ac3bf074bc493a14a220b52",
+      "cpu": "c1355680c47624ad4850ac668bc9784aacaf3e45485c4dc25c83370c0538bc1d",
+      "gpu": "c38ec4c6f4312e9f56d0f8a55cef242c169b53777b343bbe5616d806e7ff9fd1"
+    },
+    "library_sha256": "b0dd28f80adb9c890669752083e81a84c893a9e1bbdc51940c583a990825c441",
+    "source_sha256": {
+      "Code/coulomb.f90": "8c8294cfe876731441ecf805f03e06aed31732bde443e754a11e1df5cd0fc8cb",
+      "Code/densities.f90": "4430ddd24940b67f564814a61dbcb68459c18528a9bc8935131bdf0253bfb9b1",
+      "Code/dynamic.f90": "a1d7c2161d509e5ce4b11feb79da495cd807d9d5dde7f14c9214935e294e002b",
+      "Code/energies.f90": "60d00ab2a55afa73525c175c09651d4d596d248ca8724f258d7c5487e73bb2cc",
+      "Code/external.f90": "4d911dd988e77d805fa49cbd93d6519dc9e8098ecc7f09cfc350613779e750a8",
+      "Code/fftw3.f": "8bdbee5f7a7a28762abd79f536aaf28deaca0197cc0e931b1cb9364f43b2a314",
+      "Code/forces.data": "2c5712b83aed67d310abc50590a3078a8d0e5d8e16b46315d92ba6dfe76f4728",
+      "Code/forces.f90": "380153c21f072d8bc49a59619d9c0c3aa478bd8ebadf483b2c0b7a7e0126373e",
+      "Code/fourier.f90": "ff323a3c9c85aad2e85a01251c1db939c5cb882922330764c9ec0403552c6f40",
+      "Code/fragments.f90": "47aead4560e57fee09dd3012cb79539381dddfa7196b07b58425e092df5f937c",
+      "Code/gpu_runtime.f90": "c8d1824cdec1c645626d4efbb13c2fe9331bfc7bdcb44ae62a79b540887bb1a5",
+      "Code/grids.f90": "2899b53e968f968cd910d220ffa3200ce835b292f21f991aed549907b32226ba",
+      "Code/inout.f90": "d6c667a54e403894c5c505e2937466df3b0297d7d0e944953a4da76167103891",
+      "Code/levels.f90": "40a0cf9bc4ee7e4233766ea6fec057ae21f355a1686d1aa867c6d92f54161bc6",
+      "Code/main3d.f90": "06fc16477195b6eefc61276fec50bd27624937d855cef81ca540258d311bebc7",
+      "Code/Makefile": "1bd1efbc20e0f79ef0ac48c1e73f72add757a1742a11d7e732ea5ae3f5b1ea05",
+      "Code/meanfield.f90": "5350c557ce765810563f2df9f36102ba7f486935918df132e0078bf592431fda",
+      "Code/moment.f90": "c5e1cce10d193aa81b2310ea7ad8d7bb52359c96d4a1b25f8bc0d5b4d28dbf66",
+      "Code/pairs.f90": "d872046715200166c9adab75b03d2db36936b5b1d65e9f818e22b734f64ae4a9",
+      "Code/parallel.f90": "e6d3e2e2543bedeb90575f859e26e990e2ff14a52f4cefd49d20a8f1c23ce2b8",
+      "Code/params.f90": "975aec6ec0ad3d11d07c3ac763ec2a1fa7543bf82079ade6ac986cad259dc074",
+      "Code/sequential.f90": "89bd10da9abcbf7bf4fd482c72250e0f6ea23e0a45cc89fa324943273e18cecd",
+      "Code/static.f90": "f9038cc0019df21ccc572e567af8511c486c7e16cbf77692a9cc4b399ac634b3",
+      "Code/trivial.f90": "e44c37e3fc59391b4fe641d480e5154aa9c9e9bc48a71db8932e1b07b76a8708",
+      "Code/twobody.f90": "69ab4cb00f7c8d8cf13aa2e2f833a4ceff59a4035825670e1f231c88a218b5ab",
+      "Code/user.f90": "59adf01b45cd06afabb57b8a3e232f02605547993ecdbfe4a4717b8f97e74d89",
+      "Code/user_sample.f90": "788f06dcbd29a047ca218a21e73447bee3a7f47e00db5d1a86cbf8009fbabc7b",
+      "Code/ylm.f90": "58b3b7eb7190e8fee4e3e69b46282d75d7efd776445139dcc308c7418afff610",
+      "CUDA/gpu_runtime.f90": "dd56f6bd8e093ae6182814f88195bab171846e2df4e294732abdcb0d0b2cd41c",
+      "CUDA/sky_gpu.cu": "dcb591a54fa3f9cdf6ddf7250e2b8f6c3210f25c728ead3d7a8658c3640097fd",
+      "CUDA/build.py": "b23a08f7827705f275d0b2b5bded438e2c6d2eba4a4a7135d6c999e8e536948d"
+    }
+  },
+  "profiler_sha256": "02ed3d1b34abdcceada0dda1c0f7aa7a1c02824aaa56a52a91f26e602a8fb28e",
+  "validation_sha256": "d44609502d57363652d00328ace6ec11fb52ff8c0c8017d284f0ca549327120b",
+  "source_sha256": {
+    "Code/coulomb.f90": "8c8294cfe876731441ecf805f03e06aed31732bde443e754a11e1df5cd0fc8cb",
+    "Code/densities.f90": "4430ddd24940b67f564814a61dbcb68459c18528a9bc8935131bdf0253bfb9b1",
+    "Code/dynamic.f90": "a1d7c2161d509e5ce4b11feb79da495cd807d9d5dde7f14c9214935e294e002b",
+    "Code/energies.f90": "60d00ab2a55afa73525c175c09651d4d596d248ca8724f258d7c5487e73bb2cc",
+    "Code/external.f90": "4d911dd988e77d805fa49cbd93d6519dc9e8098ecc7f09cfc350613779e750a8",
+    "Code/forces.f90": "380153c21f072d8bc49a59619d9c0c3aa478bd8ebadf483b2c0b7a7e0126373e",
+    "Code/fourier.f90": "ff323a3c9c85aad2e85a01251c1db939c5cb882922330764c9ec0403552c6f40",
+    "Code/fragments.f90": "47aead4560e57fee09dd3012cb79539381dddfa7196b07b58425e092df5f937c",
+    "Code/gpu_runtime.f90": "c8d1824cdec1c645626d4efbb13c2fe9331bfc7bdcb44ae62a79b540887bb1a5",
+    "Code/grids.f90": "2899b53e968f968cd910d220ffa3200ce835b292f21f991aed549907b32226ba",
+    "Code/inout.f90": "d6c667a54e403894c5c505e2937466df3b0297d7d0e944953a4da76167103891",
+    "Code/levels.f90": "40a0cf9bc4ee7e4233766ea6fec057ae21f355a1686d1aa867c6d92f54161bc6",
+    "Code/main3d.f90": "06fc16477195b6eefc61276fec50bd27624937d855cef81ca540258d311bebc7",
+    "Code/meanfield.f90": "5350c557ce765810563f2df9f36102ba7f486935918df132e0078bf592431fda",
+    "Code/moment.f90": "c5e1cce10d193aa81b2310ea7ad8d7bb52359c96d4a1b25f8bc0d5b4d28dbf66",
+    "Code/pairs.f90": "d872046715200166c9adab75b03d2db36936b5b1d65e9f818e22b734f64ae4a9",
+    "Code/parallel.f90": "e6d3e2e2543bedeb90575f859e26e990e2ff14a52f4cefd49d20a8f1c23ce2b8",
+    "Code/params.f90": "975aec6ec0ad3d11d07c3ac763ec2a1fa7543bf82079ade6ac986cad259dc074",
+    "Code/sequential.f90": "89bd10da9abcbf7bf4fd482c72250e0f6ea23e0a45cc89fa324943273e18cecd",
+    "Code/static.f90": "f9038cc0019df21ccc572e567af8511c486c7e16cbf77692a9cc4b399ac634b3",
+    "Code/trivial.f90": "e44c37e3fc59391b4fe641d480e5154aa9c9e9bc48a71db8932e1b07b76a8708",
+    "Code/twobody.f90": "69ab4cb00f7c8d8cf13aa2e2f833a4ceff59a4035825670e1f231c88a218b5ab",
+    "Code/user.f90": "59adf01b45cd06afabb57b8a3e232f02605547993ecdbfe4a4717b8f97e74d89",
+    "Code/user_sample.f90": "788f06dcbd29a047ca218a21e73447bee3a7f47e00db5d1a86cbf8009fbabc7b",
+    "Code/ylm.f90": "58b3b7eb7190e8fee4e3e69b46282d75d7efd776445139dcc308c7418afff610"
+  },
+  "limits": "Instrumented wall times locate costs, not speedup evidence. Stages 1-9 do not overlap; the last three inclusive timers overlap those stages and must not be added. GPU stage times include synchronization and density download; fields stages include upload. Program setup before dynamichf and loop stdout writes are outside the stage totals. Timers are called only on the serial coordinator, including OpenMP runs."
+}

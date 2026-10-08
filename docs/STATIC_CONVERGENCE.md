@@ -116,9 +116,10 @@ logs remain outside Git. The local settled checkpoint is:
 
 The actual CUDA workspace query estimates **0.367 GiB** for 40³/20 states,
 comfortably within this GPU's queried 10.75 GiB free memory. That query does
-not demonstrate GPU correctness or speed on the finer grid. The existing
-`benchmark.py` remains specific to the 24³ input and should not be given
-this checkpoint until its grid/spacing handling and validation are extended.
+not demonstrate GPU correctness or speed on the finer grid. The subsequent
+benchmark extension reads this state's grid and spacing and uses an explicitly
+smaller timestep. Its validation and timing results are recorded separately
+under `CUDA/results/20ne-40x40x40/`; see the CUDA README for reproduction.
 
 ## Static exit diagnostics
 

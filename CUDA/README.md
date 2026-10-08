@@ -173,5 +173,44 @@ The follow-up [static convergence study](../docs/STATIC_CONVERGENCE.md)
 explains the coarse-grid plateau and provides a settled 40³/0.6 fm CPU state
 meeting the original `1e-6` threshold in fresh fields. Reproduce it with
 `static_convergence.py`; its diagnostic builds and raw output stay in WSL's
-cache. This finer checkpoint needs its own GPU validation and matched timing;
-the current `benchmark.py` accepts only the original 24³ case.
+cache. This finer checkpoint has separate GPU validation and matched timing;
+`benchmark.py` now reads grid dimensions and spacing from the checkpoint.
+For a non-24³ grid, results default to a separate directory such as
+`results/20ne-40x40x40/`, preserving the earlier 24³ evidence.
+
+The 40³ mesh requires a smaller tested timestep: `dt=0.2` became unstable
+even on the strict CPU reference. The finer-grid comparisons use an explicit
+`dt=0.1`, with Taylor order 4. The time-zero near-vacuum flow diagnostic also
+needs an explicit `1e-5 MeV` tolerance: CPU fast-math versus strict CPU differed
+by `7.9e-6 MeV` in rectangular padding. Later flow values retain `5e-6 MeV`,
+and wavefunctions, fields and total energies keep their existing tolerances.
+
+```bash
+python3 CUDA/benchmark.py --state /path/to/fine_20ne.tdhf \
+  --dt 0.1 --initial-flow-atol 1e-5 --mode validate
+python3 CUDA/benchmark.py --state /path/to/fine_20ne.tdhf \
+  --dt 0.1 --initial-flow-atol 1e-5 --mode benchmark \
+  --steps 200 --repetitions 3
+python3 CUDA/benchmark.py --state /path/to/fine_20ne.tdhf \
+  --dt 0.1 --initial-flow-atol 1e-5 --mode sanitizer
+python3 CUDA/benchmark.py --state /path/to/fine_20ne.tdhf \
+  --dt 0.1 --initial-flow-atol 1e-5 --mode restart
+python3 CUDA/profile_stages.py --state /path/to/fine_20ne.tdhf \
+  --dt 0.1 --steps 100 \
+  --validation CUDA/results/20ne-40x40x40/validation.json \
+  --output CUDA/results/20ne-40x40x40/profile.json
+```
+
+The stage profiler builds instrumented copies in WSL's cache, verifies their
+wavefunctions and observables against passed uninstrumented validation jobs,
+and times the serialized coordinator around OpenMP/CUDA work. Its GPU stage
+times include synchronization and density download; field stages include
+upload. Nested Skyrme, Coulomb and diagnostic timings must not be added to
+the non-overlapping stage totals. Use separate uninstrumented jobs for speedup.
+
+The [fine-grid checkpoint report](../docs/FINE_GRID_GPU_RESULTS.md) records
+passed validation, memory checking and restart comparisons, followed by three
+200-step timing repetitions. The local medians are 62.60 seconds for the best
+CPU configuration and 43.45 seconds for GPU (1.441×, 30.6% less wall time).
+CPU field construction and diagnostics account for about half the instrumented
+GPU job and are the next measured optimization targets.

@@ -1,0 +1,32 @@
+{
+  "state_sha256": "ea7ec8de58dcbe1d37a3c003cffa263b1a58542af27d3abc9f99078c5cea5abc",
+  "second_moment_tensor_fm2": [
+    [
+      4.429492675271776,
+      -5.3459190199607775e-17,
+      4.0028328857085824e-16
+    ],
+    [
+      -4.383846801194974e-17,
+      2.1950896567293348,
+      -6.476678829554107e-16
+    ],
+    [
+      4.0586848038002305e-16,
+      -6.380654481032047e-16,
+      2.1950896614075086
+    ]
+  ],
+  "long_axis_unit_vector_xyz": [
+    1.0,
+    -1.961976762837829e-17,
+    1.816451539905193e-16
+  ],
+  "external_pulse": {
+    "L": 2,
+    "M": 0,
+    "amplitude": 5e-05,
+    "coordinate_frame": "laboratory"
+  },
+  "note": "The finer state is elongated along x. The td_k0.in template supplies a lab-frame M=0 pulse; these performance runs do not establish an intrinsic K=0 response spectrum."
+}

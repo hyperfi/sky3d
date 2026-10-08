@@ -19,3 +19,12 @@
 !/results/static-convergence-40-polished.json
 !/results/static-status.json
 !/results/static-state-preflight.json
+/results/20ne-40x40x40/*
+!/results/20ne-40x40x40/validation.json
+!/results/20ne-40x40x40/benchmark.json
+!/results/20ne-40x40x40/profile.json
+!/results/20ne-40x40x40/sanitizer.json
+!/results/20ne-40x40x40/restart.json
+!/results/20ne-40x40x40/unstable-dt02.json
+!/results/20ne-40x40x40/initial-flow-roundoff.json
+!/results/20ne-40x40x40/state-geometry.json

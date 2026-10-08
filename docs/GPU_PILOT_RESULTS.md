@@ -84,7 +84,11 @@ about 7.56e-5. A subsequent [static study](STATIC_CONVERGENCE.md) identifies
 an effective-mass discretization contribution and prepares a settled
 40³/0.6 fm candidate that meets the original threshold in fresh fields.
 The GPU timings above still concern the original 24³ performance case; the
-finer state has not been benchmarked on the GPU. The
+finer state is now covered by a separate
+[fine-grid GPU checkpoint](FINE_GRID_GPU_RESULTS.md): 200 matched steps at
+`dt=0.1`, three repetitions, 1.441× speedup against the best measured CPU.
+That result uses different grid/timestep settings and does not replace the
+24³ timings above. The
 script rejects an unmet criterion and never lowers it automatically. This
 benchmark does not certify a production ground state. See `static-strict.json`
 and [CPU_FIXES.md](CPU_FIXES.md) for the separate CPU corrections.

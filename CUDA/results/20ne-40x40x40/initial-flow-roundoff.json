@@ -1,0 +1,27 @@
+{
+  "grid": [
+    44,
+    42,
+    40
+  ],
+  "spacing_fm": [
+    0.6,
+    0.6,
+    0.6
+  ],
+  "dt_fm_c": 0.1,
+  "initial_cpu_fast_minus_strict_mev": [
+    -7.8928e-06,
+    -6.052000000000002e-06
+  ],
+  "later_flow_max_abs_mev": 0.0,
+  "total_integrated_energy_max_abs_mev": 0.0,
+  "wavefunction": {
+    "relative_l2": 9.551266218468053e-14,
+    "max_abs": 2.8253847638070125e-14
+  },
+  "explicit_initial_flow_atol_mev": 1e-05,
+  "later_flow_atol_mev": 5e-06,
+  "reason": "Time-zero j^2/rho in padded near-vacuum cells; CPU fast-math calibration independent of CUDA",
+  "run_directory": "/home/abhishek/.cache/sky3d-benchmark-jg04tzco"
+}
