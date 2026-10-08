@@ -8,7 +8,7 @@ FFLAGS := -O3 -fopenmp -msse4.2 -mfpmath=sse -ffast-math \
 	-finline-functions -funroll-loops
 LDLIBS := -lfftw3 -llapack -lopenblas
 
-OBJS := params.o grids.o levels.o fourier.o forces.o sequential.o \
+OBJS := params.o gpu_runtime.o grids.o levels.o fourier.o forces.o sequential.o \
 	inout.o coulomb.o trivial.o densities.o fragments.o twobody.o \
 	energies.o static.o meanfield.o dynamic.o pairs.o moment.o \
 	main3d.o user.o external.o ylm.o
@@ -29,6 +29,7 @@ trivial.o: $(SRC)/trivial.f90 params.o grids.o
 forces.o: $(SRC)/forces.f90 $(SRC)/forces.data params.o
 fourier.o: $(SRC)/fourier.f90 params.o grids.o
 params.o: $(SRC)/params.f90
+gpu_runtime.o: $(SRC)/gpu_runtime.f90 params.o
 moment.o: $(SRC)/moment.f90 params.o grids.o densities.o ylm.o
 sequential.o: $(SRC)/sequential.f90 levels.o params.o grids.o densities.o
 levels.o: $(SRC)/levels.f90 params.o grids.o forces.o fourier.o trivial.o
@@ -37,7 +38,7 @@ densities.o: $(SRC)/densities.f90 params.o grids.o levels.o trivial.o
 fragments.o: $(SRC)/fragments.f90 params.o grids.o forces.o levels.o sequential.o
 twobody.o: $(SRC)/twobody.f90 params.o grids.o densities.o moment.o forces.o
 energies.o: $(SRC)/energies.f90 params.o forces.o densities.o levels.o grids.o trivial.o pairs.o
-meanfield.o: $(SRC)/meanfield.f90 params.o densities.o forces.o grids.o coulomb.o trivial.o levels.o
+meanfield.o: $(SRC)/meanfield.f90 params.o densities.o forces.o grids.o coulomb.o trivial.o levels.o gpu_runtime.o
 pairs.o: $(SRC)/pairs.f90 forces.o grids.o levels.o densities.o
 static.o: $(SRC)/static.f90 params.o densities.o grids.o levels.o moment.o energies.o inout.o pairs.o meanfield.o
 dynamic.o: $(SRC)/dynamic.f90 params.o densities.o grids.o trivial.o levels.o moment.o energies.o inout.o meanfield.o sequential.o twobody.o external.o

@@ -28,7 +28,7 @@ copying the full basis or defeating `tlarge`'s memory-saving transformation.
 The dynamic propagation path is unchanged by this fix. A 120-iteration static
 check compares all seven density/potential outputs across one thread, repeated
 eight-thread reference runs and the optimized CPU build. Maximum field
-differences are below `3e-13`; see `CUDA/results/static.json`.
+differences are below `4e-13`; see `CUDA/results/static.json`.
 
 Static convergence fluctuations are also updated every iteration, independently
 of `mprint`. Otherwise disabling prints leaves the initially zero fluctuation

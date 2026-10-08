@@ -1,0 +1,29 @@
+{
+  "cases": [
+    {
+      "variant": "code",
+      "build_directory": "/home/abhishek/.cache/sky3d-cpu-code-25m4p_qs",
+      "executable": "/home/abhishek/.cache/sky3d-cpu-code-25m4p_qs/sky3d.omp",
+      "command": [
+        "make",
+        "-j2",
+        "omp"
+      ],
+      "passed": true
+    },
+    {
+      "variant": "project",
+      "build_directory": "/home/abhishek/.cache/sky3d-cpu-project-jdndzlfo",
+      "executable": "/home/abhishek/.cache/sky3d-cpu-project-jdndzlfo/sky3d.omp",
+      "command": [
+        "make",
+        "-j2",
+        "-f",
+        "/mnt/d/Coding/sky3d/projects/mg24_mqc_snp2026/build/Makefile",
+        "SRC=/mnt/d/Coding/sky3d/Code"
+      ],
+      "passed": true
+    }
+  ],
+  "passed": true
+}

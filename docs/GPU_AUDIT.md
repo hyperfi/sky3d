@@ -1,5 +1,9 @@
 # Sky3D GPU feasibility and code audit
 
+Historical audit of the original source. CPU repairs and an integrated CUDA
+pilot have since been implemented on `gpu`; see [CPU fixes](CPU_FIXES.md) and
+[integrated pilot results](GPU_PILOT_RESULTS.md) for current behavior and timings.
+
 Audit date: 2026-10-08. Physics source: `be42efc`; recorded research workflows:
 `6e3ff97`. The Fortran source and production data were not modified.
 

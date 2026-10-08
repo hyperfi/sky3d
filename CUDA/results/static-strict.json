@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-08",
+  "nucleus": "20Ne",
+  "grid": [24, 24, 24],
+  "states": 20,
+  "force": "Sly5",
+  "requested_serr": 0.000001,
+  "iteration_limit": 3000,
+  "before_basis_fix": {
+    "run_directory": "/home/abhishek/.cache/sky3d-benchmark-6h0dsdwy/static",
+    "weighted_fluctuation_per_state": 0.00007558680985284648,
+    "criterion_met": false
+  },
+  "after_basis_fix": {
+    "run_directory": "/home/abhishek/.cache/sky3d-benchmark-8oilthcj/static",
+    "weighted_fluctuation_per_state": 0.00007558657473892121,
+    "criterion_met": false
+  },
+  "note": "The matrix-read race is repaired; the stricter static convergence plateau remains unresolved. Performance-state preparation requires an explicit tolerance override and makes no production ground-state claim."
+}

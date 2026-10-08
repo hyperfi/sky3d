@@ -57,10 +57,10 @@ clean-exec:
 #
 # ----- object files---------------------------------------------------------
 #
-OBJS   = params.o grids.o levels.o fourier.o forces.o $(PARALLEL_SKY) \
+OBJS   = params.o gpu_runtime.o grids.o levels.o fourier.o forces.o $(PARALLEL_SKY) \
 	inout.o coulomb.o trivial.o densities.o fragments.o twobody.o \
 	energies.o static.o meanfield.o dynamic.o pairs.o moment.o \
-	main3d.o user.o external.o ylm.o
+	main3d.o user.o external.o ylm.o $(EXTRA_OBJS)
 #
 LINKERFLAGS_SKY    =  $(COMPILERFLAGS_SKY)
 #
@@ -94,6 +94,8 @@ fourier.o : fourier.f90 params.o grids.o Makefile
 
 params.o : params.f90 Makefile
 
+gpu_runtime.o : gpu_runtime.f90 params.o Makefile
+
 moment.o : moment.f90 params.o grids.o densities.o ylm.o Makefile 
 
 sequential.o: sequential.f90 levels.o params.o grids.o densities.o Makefile
@@ -115,7 +117,7 @@ energies.o :   energies.f90 params.o forces.o densities.o levels.o grids.o \
 	trivial.o pairs.o Makefile
 
 meanfield.o : meanfield.f90 params.o densities.o forces.o grids.o coulomb.o \
-	trivial.o levels.o Makefile
+	trivial.o levels.o gpu_runtime.o Makefile
 
 pairs.o : pairs.f90 forces.o grids.o levels.o densities.o Makefile
 
@@ -124,7 +126,7 @@ static.o : static.f90 params.o densities.o grids.o \
 
 dynamic.o : dynamic.f90 params.o densities.o grids.o trivial.o \
 	levels.o moment.o energies.o inout.o meanfield.o $(PARALLEL_SKY) \
-	twobody.o external.o Makefile
+	twobody.o external.o gpu_runtime.o Makefile
 
 main3d.o : main3d.f90 params.o fourier.o forces.o densities.o meanfield.o \
     levels.o grids.o fragments.o $(PARALLEL_SKY) dynamic.o static.o coulomb.o user.o \

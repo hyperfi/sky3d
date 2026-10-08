@@ -1,0 +1,221 @@
+{
+  "run_directory": "/home/abhishek/.cache/sky3d-benchmark-zmaoe_qf",
+  "state_sha256": "07353fe3a3fefd74db4a34a129da1f2f969267f9757472193eb6ea3ed5d236f3",
+  "build": {
+    "arch": "native",
+    "cuda_home": "/usr/local/cuda",
+    "variants": {
+      "reference": "-O3 -march=native -ffp-contract=off -fopenmp",
+      "cpu": "-O3 -march=native -ffast-math -fopenmp",
+      "gpu": "-O3 -march=native -ffast-math -fopenmp"
+    },
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+    "gfortran": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "source_commit": "6917231ec35957ff048c55de184cde9af590b99c",
+    "source_dirty": true,
+    "executable_sha256": {
+      "reference": "9f2d05df2e6b1d10f6087af745e872063c879a41cc05ce8d91277e5c8e9dd007",
+      "cpu": "a61553e7987be2317fd957bb6e0f954dca2017a573a49e30713308d3d3b46c65",
+      "gpu": "c9708bcd857177a96b06e93ce8a6baa8bfe67106123113d9f97b174b5d784f1a"
+    },
+    "library_sha256": "86d70aabdaf54f4b2d56dd4404b5e09184a5d6d54aed25f3d7599b628d8e5238",
+    "source_sha256": {
+      "Code/coulomb.f90": "8c8294cfe876731441ecf805f03e06aed31732bde443e754a11e1df5cd0fc8cb",
+      "Code/densities.f90": "4430ddd24940b67f564814a61dbcb68459c18528a9bc8935131bdf0253bfb9b1",
+      "Code/dynamic.f90": "a1d7c2161d509e5ce4b11feb79da495cd807d9d5dde7f14c9214935e294e002b",
+      "Code/energies.f90": "60d00ab2a55afa73525c175c09651d4d596d248ca8724f258d7c5487e73bb2cc",
+      "Code/external.f90": "4d911dd988e77d805fa49cbd93d6519dc9e8098ecc7f09cfc350613779e750a8",
+      "Code/fftw3.f": "8bdbee5f7a7a28762abd79f536aaf28deaca0197cc0e931b1cb9364f43b2a314",
+      "Code/forces.data": "2c5712b83aed67d310abc50590a3078a8d0e5d8e16b46315d92ba6dfe76f4728",
+      "Code/forces.f90": "380153c21f072d8bc49a59619d9c0c3aa478bd8ebadf483b2c0b7a7e0126373e",
+      "Code/fourier.f90": "ff323a3c9c85aad2e85a01251c1db939c5cb882922330764c9ec0403552c6f40",
+      "Code/fragments.f90": "47aead4560e57fee09dd3012cb79539381dddfa7196b07b58425e092df5f937c",
+      "Code/gpu_runtime.f90": "c8d1824cdec1c645626d4efbb13c2fe9331bfc7bdcb44ae62a79b540887bb1a5",
+      "Code/grids.f90": "2899b53e968f968cd910d220ffa3200ce835b292f21f991aed549907b32226ba",
+      "Code/inout.f90": "d6c667a54e403894c5c505e2937466df3b0297d7d0e944953a4da76167103891",
+      "Code/levels.f90": "40a0cf9bc4ee7e4233766ea6fec057ae21f355a1686d1aa867c6d92f54161bc6",
+      "Code/main3d.f90": "06fc16477195b6eefc61276fec50bd27624937d855cef81ca540258d311bebc7",
+      "Code/Makefile": "1bd1efbc20e0f79ef0ac48c1e73f72add757a1742a11d7e732ea5ae3f5b1ea05",
+      "Code/meanfield.f90": "5350c557ce765810563f2df9f36102ba7f486935918df132e0078bf592431fda",
+      "Code/moment.f90": "c5e1cce10d193aa81b2310ea7ad8d7bb52359c96d4a1b25f8bc0d5b4d28dbf66",
+      "Code/pairs.f90": "d872046715200166c9adab75b03d2db36936b5b1d65e9f818e22b734f64ae4a9",
+      "Code/parallel.f90": "e6d3e2e2543bedeb90575f859e26e990e2ff14a52f4cefd49d20a8f1c23ce2b8",
+      "Code/params.f90": "975aec6ec0ad3d11d07c3ac763ec2a1fa7543bf82079ade6ac986cad259dc074",
+      "Code/sequential.f90": "89bd10da9abcbf7bf4fd482c72250e0f6ea23e0a45cc89fa324943273e18cecd",
+      "Code/static.f90": "a724a6692b3b9f96f40718525366fd8f758c92090edbd4a5306c70b9f35aec7e",
+      "Code/trivial.f90": "e44c37e3fc59391b4fe641d480e5154aa9c9e9bc48a71db8932e1b07b76a8708",
+      "Code/twobody.f90": "69ab4cb00f7c8d8cf13aa2e2f833a4ceff59a4035825670e1f231c88a218b5ab",
+      "Code/user.f90": "59adf01b45cd06afabb57b8a3e232f02605547993ecdbfe4a4717b8f97e74d89",
+      "Code/user_sample.f90": "788f06dcbd29a047ca218a21e73447bee3a7f47e00db5d1a86cbf8009fbabc7b",
+      "Code/ylm.f90": "58b3b7eb7190e8fee4e3e69b46282d75d7efd776445139dcc308c7418afff610",
+      "CUDA/gpu_runtime.f90": "dd56f6bd8e093ae6182814f88195bab171846e2df4e294732abdcb0d0b2cd41c",
+      "CUDA/sky_gpu.cu": "dcb591a54fa3f9cdf6ddf7250e2b8f6c3210f25c728ead3d7a8658c3640097fd",
+      "CUDA/build.py": "b23a08f7827705f275d0b2b5bded438e2c6d2eba4a4a7135d6c999e8e536948d"
+    }
+  },
+  "nucleus": "20Ne",
+  "grid": [
+    24,
+    24,
+    24
+  ],
+  "states": 20,
+  "date": "2026-10-08",
+  "gpu_graphs_enabled": true,
+  "input_template_sha256": "ce4e89d246d895c58abfb59f4124d713b03419a6df54e210c38a4e1de57f9ea4",
+  "gpu": "NVIDIA GeForce RTX 5070, 610.88, 12227 MiB",
+  "cpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  20\nOn-line CPU(s) list:                     0-19\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Core(TM) Ultra 7 265K\nCPU family:                              6\nModel:                                   198\nThread(s) per core:                      1\nCore(s) per socket:                      20\nSocket(s):                               1\nStepping:                                2\nBogoMIPS:                                7756.79\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology tsc_reliable nonstop_tsc cpuid tsc_known_freq pni pclmulqdq vmx ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves avx_vnni vnmi umip waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm md_clear serialize ibt flush_l1d arch_capabilities\nVirtualization:                          VT-x\nHypervisor vendor:                       Microsoft\nVirtualization type:                     full\nL1d cache:                               960 KiB (20 instances)\nL1i cache:                               1.3 MiB (20 instances)\nL2 cache:                                60 MiB (20 instances)\nL3 cache:                                30 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-19\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Mitigation; Enhanced IBRS\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS SW sequence; BHI BHI_DIS_S\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n",
+  "steps": 500,
+  "dt_fm_c": 0.2,
+  "repetitions": 3,
+  "mprint": 10,
+  "mplot": 0,
+  "mrest": 500,
+  "complete_job_startup_and_final_checkpoint_included": true,
+  "runs": [
+    {
+      "repetition": 0,
+      "directory": "/home/abhishek/.cache/sky3d-benchmark-zmaoe_qf/timing-0-cpu-4",
+      "seconds": 25.33840766099999,
+      "threads": 4,
+      "backend": "cpu",
+      "final_time": 100.00000000000088,
+      "final_energy_mev": -141.9926068
+    },
+    {
+      "repetition": 0,
+      "directory": "/home/abhishek/.cache/sky3d-benchmark-zmaoe_qf/timing-0-cpu-8",
+      "seconds": 20.351486230999996,
+      "threads": 8,
+      "backend": "cpu",
+      "final_time": 100.00000000000088,
+      "final_energy_mev": -141.9926068
+    },
+    {
+      "repetition": 0,
+      "directory": "/home/abhishek/.cache/sky3d-benchmark-zmaoe_qf/timing-0-cpu-20",
+      "seconds": 21.377708547999987,
+      "threads": 20,
+      "backend": "cpu",
+      "final_time": 100.00000000000088,
+      "final_energy_mev": -141.9926068
+    },
+    {
+      "repetition": 0,
+      "directory": "/home/abhishek/.cache/sky3d-benchmark-zmaoe_qf/timing-0-gpu-8",
+      "seconds": 18.748750432999998,
+      "threads": 8,
+      "backend": "gpu",
+      "final_time": 100.00000000000088,
+      "final_energy_mev": -141.9926068
+    },
+    {
+      "repetition": 1,
+      "directory": "/home/abhishek/.cache/sky3d-benchmark-zmaoe_qf/timing-1-cpu-4",
+      "seconds": 25.073580397,
+      "threads": 4,
+      "backend": "cpu",
+      "final_time": 100.00000000000088,
+      "final_energy_mev": -141.9926068
+    },
+    {
+      "repetition": 1,
+      "directory": "/home/abhishek/.cache/sky3d-benchmark-zmaoe_qf/timing-1-gpu-8",
+      "seconds": 18.731125195000004,
+      "threads": 8,
+      "backend": "gpu",
+      "final_time": 100.00000000000088,
+      "final_energy_mev": -141.9926068
+    },
+    {
+      "repetition": 1,
+      "directory": "/home/abhishek/.cache/sky3d-benchmark-zmaoe_qf/timing-1-cpu-20",
+      "seconds": 20.686561282000014,
+      "threads": 20,
+      "backend": "cpu",
+      "final_time": 100.00000000000088,
+      "final_energy_mev": -141.9926068
+    },
+    {
+      "repetition": 1,
+      "directory": "/home/abhishek/.cache/sky3d-benchmark-zmaoe_qf/timing-1-cpu-8",
+      "seconds": 20.926451224000004,
+      "threads": 8,
+      "backend": "cpu",
+      "final_time": 100.00000000000088,
+      "final_energy_mev": -141.9926068
+    },
+    {
+      "repetition": 2,
+      "directory": "/home/abhishek/.cache/sky3d-benchmark-zmaoe_qf/timing-2-cpu-20",
+      "seconds": 20.90578841200005,
+      "threads": 20,
+      "backend": "cpu",
+      "final_time": 100.00000000000088,
+      "final_energy_mev": -141.9926068
+    },
+    {
+      "repetition": 2,
+      "directory": "/home/abhishek/.cache/sky3d-benchmark-zmaoe_qf/timing-2-gpu-8",
+      "seconds": 18.572015566000005,
+      "threads": 8,
+      "backend": "gpu",
+      "final_time": 100.00000000000088,
+      "final_energy_mev": -141.9926068
+    },
+    {
+      "repetition": 2,
+      "directory": "/home/abhishek/.cache/sky3d-benchmark-zmaoe_qf/timing-2-cpu-4",
+      "seconds": 25.055168212000012,
+      "threads": 4,
+      "backend": "cpu",
+      "final_time": 100.00000000000088,
+      "final_energy_mev": -141.9926068
+    },
+    {
+      "repetition": 2,
+      "directory": "/home/abhishek/.cache/sky3d-benchmark-zmaoe_qf/timing-2-cpu-8",
+      "seconds": 20.506723336999983,
+      "threads": 8,
+      "backend": "cpu",
+      "final_time": 100.00000000000088,
+      "final_energy_mev": -141.9926068
+    }
+  ],
+  "median_seconds": {
+    "cpu-4": 25.073580397,
+    "cpu-8": 20.506723336999983,
+    "cpu-20": 20.90578841200005,
+    "gpu-8": 18.731125195000004
+  },
+  "speedup_against_best_measured_cpu": 1.0947939925399648,
+  "final_trajectory_checks": [
+    {
+      "repetition": 0,
+      "cpu_threads": 8,
+      "wavefunction": {
+        "relative_l2": 3.1605577152773152e-15,
+        "max_abs": 4.046035655711835e-16
+      },
+      "printed_observables_passed": true
+    },
+    {
+      "repetition": 1,
+      "cpu_threads": 8,
+      "wavefunction": {
+        "relative_l2": 3.709920210842067e-15,
+        "max_abs": 5.4869936992522115e-16
+      },
+      "printed_observables_passed": true
+    },
+    {
+      "repetition": 2,
+      "cpu_threads": 8,
+      "wavefunction": {
+        "relative_l2": 3.249011054854178e-15,
+        "max_abs": 5.076786136992792e-16
+      },
+      "printed_observables_passed": true
+    }
+  ]
+}

@@ -10,14 +10,15 @@
 !------------------------------------------------------------------------------
 MODULE DYNAMIC
   USE Params
-  USE Grids, ONLY: nx,ny,nz,wxyz
+  USE Grids, ONLY: nx,ny,nz,wxyz,dx,dy,dz
   USE Densities
   USE Levels
   USE Energies
   USE Moment
   USE Twobody, ONLY: twobody_analysis,istwobody,roft,roft_old
   USE Parallel
-  USE Meanfield, ONLY: skyrme, hpsi, spot
+  USE Meanfield, ONLY: skyrme, hpsi, spot,upload_gpu_fields
+  USE GPU_Runtime, ONLY: gpu_enabled,gpu_initialize,gpu_stage,gpu_pull,gpu_push,gpu_probe,gpu_finish
   USE Trivial, ONLY: overlap
   USE Inout, ONLY: write_wavefunctions,write_densities, plot_density, &
        sp_properties,start_protocol
@@ -224,6 +225,11 @@ CONTAINS
     CALL skyrme
     IF(text_timedep) CALL extfld(0.D0)
     CALL tinfo
+    CALL gpu_initialize(psi,wocc(globalindex),isospin(globalindex),(/dx,dy,dz/),tfft,tmpi)
+    IF(gpu_enabled) THEN
+       CALL upload_gpu_fields
+       CALL validate_gpu_initial
+    ENDIF
     !***********************************************************************
     istart=iter+1
     ! Step 2: start loop and do half-time step
@@ -239,6 +245,9 @@ CONTAINS
           sdens=sdens/mpi_nprocs
        ENDIF
        ! propagate to end of time step and add to densities
+       IF(gpu_enabled) THEN
+          CALL gpu_stage(mxpact/2,dt,hbc,.FALSE.,rho,tau,current,sdens,sodens)
+       ELSE
        !$OMP PARALLEL DO DEFAULT(SHARED) PRIVATE(nst,ps4) SCHEDULE(STATIC) &
        !$OMP REDUCTION(+:rho,tau,current,sdens,sodens)
        DO nst=1,nstloc
@@ -248,6 +257,7 @@ CONTAINS
                ps4,rho,tau,current,sdens,sodens)  
        ENDDO
        !$OMP END PARALLEL DO
+       ENDIF
        IF(tmpi) CALL collect_densities
        ! average over time step
        rho=0.5D0*rho
@@ -258,6 +268,7 @@ CONTAINS
        ! compute mean field and add external field
        CALL skyrme  
        IF(text_timedep) CALL extfld(time+dt/2.0D0)
+       IF(gpu_enabled) CALL upload_gpu_fields
        ! Step 3: full time step
        ! reset densities
        rho=0.0D0
@@ -266,6 +277,9 @@ CONTAINS
        sdens=0.0D0
        sodens=0.0D0
        ! propagate to end of step, accumulate densities
+       IF(gpu_enabled) THEN
+          CALL gpu_stage(mxpact,dt,hbc,.TRUE.,rho,tau,current,sdens,sodens)
+       ELSE
        !$OMP PARALLEL DO DEFAULT(SHARED) PRIVATE(nst,ps4) SCHEDULE(STATIC) &
        !$OMP REDUCTION(+:rho,tau,current,sdens,sodens)
        DO nst=1,nstloc
@@ -276,12 +290,15 @@ CONTAINS
           psi(:,:,:,:,nst)=ps4
        ENDDO
        !$OMP END PARALLEL DO
+       ENDIF
        ! sum up over nodes
        IF(tmpi) CALL collect_densities
        ! Step 4: eliminate center-of-mass motion if desired
        IF(mrescm/=0) THEN  
           IF(MOD(iter,mrescm)==0) THEN  
+             CALL gpu_pull(psi)
              CALL resetcm
+             CALL gpu_push(psi)
              ! Rebuild corrected densities, rather than adding them a second time.
              rho=0.0D0
              tau=0.0D0
@@ -306,11 +323,15 @@ CONTAINS
        ! compute densities, currents, potentials etc.                  *
        CALL skyrme  
        IF(text_timedep) CALL extfld(time+dt)
+       IF(gpu_enabled) CALL upload_gpu_fields
        IF(output_due(iter,mrest)) THEN
+          CALL gpu_pull(psi)
           CALL write_wavefunctions
           IF(wflag) WRITE(*,*) ' Wrote restart file at end of  iter=',iter
        ENDIF
     END DO Timestepping
+    CALL gpu_pull(psi)
+    CALL gpu_finish
     DEALLOCATE(ps4)
   END SUBROUTINE dynamichf
 !---------------------------------------------------------------------------  
@@ -447,6 +468,7 @@ CONTAINS
     ALLOCATE(ps1(nx,ny,nz,2))
     ! Step 1
     printnow=output_due(iter,mprint)
+    IF(printnow) CALL gpu_pull(psi)
     ! Step 2: twobody analysis
     IF(nof/=2) THEN  
       istwobody=.FALSE.
@@ -532,6 +554,7 @@ CONTAINS
     ! Step 8: check whether final distance is reached and it is
     ! increasing in the twobody case
     IF(istwobody.AND.roft>rsep.AND.roft>roft_old) THEN  
+       CALL gpu_pull(psi)
        CALL twobody_analysis(.TRUE.) ! do complete version
        CALL write_wavefunctions
        CALL write_densities
@@ -573,4 +596,42 @@ CONTAINS
        END FORALL
     ENDDO
   END SUBROUTINE resetcm
+
+  SUBROUTINE validate_gpu_initial
+    COMPLEX(db),ALLOCATABLE :: gh(:,:,:,:,:),ch(:,:,:,:)
+    REAL(db),ALLOCATABLE :: gd(:,:,:,:,:),cd(:,:,:,:,:)
+    REAL(db) :: hdifference,hnorm,difference,dnorm,hrel,drel,hmax,dmax
+    INTEGER :: nst,unit,status
+    CHARACTER(8) :: requested
+    CALL get_environment_variable('SKY3D_GPU_VALIDATE',requested,STATUS=status)
+    IF(TRIM(requested)/='1') RETURN
+    ALLOCATE(gh(nx,ny,nz,2,nstloc),ch(nx,ny,nz,2),gd(nx,ny,nz,11,2),cd(nx,ny,nz,11,2))
+    CALL gpu_probe(gh,gd)
+    hdifference=0D0
+    hnorm=0D0
+    hmax=0D0
+    DO nst=1,nstloc
+       CALL hpsi(isospin(globalindex(nst)),esf,psi(:,:,:,:,nst),ch)
+       hdifference=hdifference+SUM(ABS(ch-gh(:,:,:,:,nst))**2)
+       hnorm=hnorm+SUM(ABS(ch)**2)
+       hmax=MAX(hmax,MAXVAL(ABS(ch-gh(:,:,:,:,nst))))
+    ENDDO
+    cd(:,:,:,1,:)=rho
+    cd(:,:,:,2,:)=tau
+    cd(:,:,:,3:5,:)=current
+    cd(:,:,:,6:8,:)=sdens
+    cd(:,:,:,9:11,:)=sodens
+    difference=SUM((cd-gd)**2)
+    dnorm=SUM(cd**2)
+    dmax=MAXVAL(ABS(cd-gd))
+    hrel=SQRT(hdifference/MAX(hnorm,TINY(1D0)))
+    drel=SQRT(difference/MAX(dnorm,TINY(1D0)))
+    WRITE(*,'(A,4ES14.6)') 'GPU primitive validation (hpsi L2/max, density L2/max): ',hrel,hmax,drel,dmax
+    OPEN(NEWUNIT=unit,FILE='gpu_validation.csv',STATUS='replace')
+    WRITE(unit,'(A)') 'hpsi_relative_l2,hpsi_max_abs,density_relative_l2,density_max_abs'
+    WRITE(unit,'(ES24.16,3(A,ES24.16))') hrel,',',hmax,',',drel,',',dmax
+    CLOSE(unit)
+    IF(hrel>1D-11.OR.drel>1D-11.OR.dmax>1D-11) ERROR STOP 'GPU primitive validation failed'
+    DEALLOCATE(gh,ch,gd,cd)
+  END SUBROUTINE validate_gpu_initial
 END MODULE DYNAMIC

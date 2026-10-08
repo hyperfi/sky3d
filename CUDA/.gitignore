@@ -1,0 +1,15 @@
+/build/
+/*.log
+/results/*.log
+/results/*.json
+!/results/benchmark.json
+!/results/benchmark-launches.json
+!/results/validation.json
+!/results/preflight.json
+!/results/sanitizer.json
+!/results/restart.json
+!/results/preparation.json
+!/results/static.json
+!/results/static-strict.json
+!/results/benchmark-screening.json
+!/results/cpu-builds.json
