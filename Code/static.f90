@@ -379,7 +379,8 @@ CONTAINS
 !!     similarly for the second fluctuation measure
 !!     \f[ {\tt sp\_efluct2}=\sqrt{\|\hat h\,{\tt psin}\|^2/\|{\tt psin}\|^2-\|\hat
 !!     h\|^2}. \f]
-!!     They are calculated only for time steps with output turned on.
+!!     They are calculated every iteration because convergence must be
+!!     independent of the print interval.
 !!  -# now the damping is performed. We first compute
 !!     \f[ |{\tt ps1}\rangle-{\tt xnormb}\,|{\tt psin}\rangle=\left(\hat h
 !!     -\langle {\tt psin}|\hat h|{\tt psin}\rangle\right)\,|{\tt
@@ -435,13 +436,11 @@ CONTAINS
     xnorm=rpsnorm(psin)
     xnormb=overlap(psin,ps1)
     ! Step 3: calculate fluctuation, i.e. <h*h> and |h|**2
-    IF(output_due(iter,mprint).OR.tvaryx_0) THEN
-       CALL hpsi(iq,esf,ps1,ps2)
-       exph2=overlap(psin,ps2)
-       varh2=rpsnorm(ps1)
-       sp_efluct1(nst)=SQRT(ABS(exph2/xnorm-(xnormb/xnorm)**2))  
-       sp_efluct2(nst)=SQRT(ABS(varh2/xnorm-(xnormb/xnorm)**2))  
-    ENDIF
+    CALL hpsi(iq,esf,ps1,ps2)
+    exph2=overlap(psin,ps2)
+    varh2=rpsnorm(ps1)
+    sp_efluct1(nst)=SQRT(ABS(exph2/xnorm-(xnormb/xnorm)**2))  
+    sp_efluct2(nst)=SQRT(ABS(varh2/xnorm-(xnormb/xnorm)**2))  
     ! Step 4: the damping step
     IF(e0dmp>0.0D0) THEN  
        ps1=ps1 - xnormb*psin

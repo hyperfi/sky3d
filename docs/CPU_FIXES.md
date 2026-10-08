@@ -30,6 +30,13 @@ check compares all seven density/potential outputs across one thread, repeated
 eight-thread reference runs and the optimized CPU build. Maximum field
 differences are below `3e-13`; see `CUDA/results/static.json`.
 
+Static convergence fluctuations are also updated every iteration, independently
+of `mprint`. Otherwise disabling prints leaves the initially zero fluctuation
+unchanged and falsely stops at iteration two. The zero-output control test now
+checks that a three-iteration run actually reaches iteration three. Computing
+the existing fluctuation measure every iteration adds static work; the TDHF
+timing path and the definition of the convergence measure are unchanged.
+
 The static race fix does **not** establish that the supplied 24³ 20Ne input
 meets its requested `serr=1e-6`. Both the earlier build and the repaired build
 reached 3000 iterations at a weighted fluctuation of about `7.56e-5`. The

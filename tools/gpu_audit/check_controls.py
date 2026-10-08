@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import subprocess
 import struct
+import re
 import tempfile
 
 REPO = Path(__file__).resolve().parents[2]
@@ -70,6 +71,7 @@ def main():
         result = subprocess.run([str(exe)], cwd=path, stdout=log, stderr=subprocess.STDOUT,
                                 env=dict(os.environ, OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1'))
     assert result.returncode == 0
+    assert re.search(r'Static Iteration No\.\s+3\b', (path / 'stdout.log').read_text()), 'mprint=0 must not falsely converge at iteration 2'
     rows.append(dict(case='static_zero_intervals', returncode=result.returncode, run_directory=str(path)))
     # mplot is correctly protected by its outer nonzero-interval check.
     assert zero_plot['returncode'] == 0
