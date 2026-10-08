@@ -216,10 +216,12 @@ CONTAINS
 !--------------------------------------------------------------------------- 
   SUBROUTINE statichf
     LOGICAL, PARAMETER :: taddnew=.TRUE. ! mix old and new densities
+    LOGICAL :: converged
     INTEGER :: iq,nst,firstiter
     REAL(db) :: sumflu,denerg
     REAL(db),PARAMETER :: addnew=0.2D0,addco=1.0D0-addnew      
     ! Step 1: initialization
+    converged=.FALSE.
     IF(tdiag) ALLOCATE(hmatr(nstmax,nstmax))
     IF(trestart) THEN
        firstiter=iter+1
@@ -324,6 +326,7 @@ CONTAINS
        ENDIF
        ! Step 9: check for convergence, saving wave functions
        IF(sumflu/nstmax<serr.AND.iter>1) THEN
+          converged=.TRUE.
           CALL write_wavefunctions
           EXIT Iteration  
        END IF
@@ -344,6 +347,17 @@ CONTAINS
           ehfprev=ehf
        END IF
     END DO Iteration
+    IF(wflag) THEN
+       IF(converged) THEN
+          WRITE(*,'(A,I0,A)') ' Static convergence criterion met at iteration ',iter,'.'
+       ELSE
+          WRITE(*,'(A,I0,A)') ' WARNING: static iteration limit ',maxiter, &
+               ' reached without meeting serr.'
+       ENDIF
+       WRITE(*,'(A,ES16.8,A,ES16.8,A,ES16.8)') &
+            ' Final pre-gradient fluctuations (MeV): h**2=',sumflu/nstmax, &
+            ', h*h=',SUM(wocc*sp_efluct2)/nstmax,', serr=',serr
+    ENDIF
     IF(tdiag) DEALLOCATE(hmatr)
   END SUBROUTINE statichf
 !---------------------------------------------------------------------------  

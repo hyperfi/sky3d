@@ -45,6 +45,14 @@ rejects unmet convergence criteria; an explicit `--static-serr 1e-4` generates
 a performance-test state and records that tolerance. It does not certify a
 production ground state or silently relax a physics criterion.
 
+The subsequent [static convergence study](STATIC_CONVERGENCE.md) attributes
+this state's plateau to the expanded effective-mass term on the coarse mesh.
+A settled 40³/0.6 fm candidate meets the original criterion in saved and
+fresh fields. Static exit now reports success or an iteration-limit warning
+and both fluctuation measures. Four success/exhaustion checks with printing
+enabled/disabled preserve the pre-change wavefunctions; see
+`CUDA/results/static-status.json`. The stopping definition is unchanged.
+
 These are control and accumulation fixes, not a change to the Skyrme force,
 spectral derivative rules or propagator. Existing production files are kept
 unchanged. The historical GPU audit describes the original source and should

@@ -1,0 +1,17 @@
+{
+  "required_bytes": 394240240,
+  "cufft_workspace_bytes": 0,
+  "free_bytes": 11543773184,
+  "total_bytes": 12820480000,
+  "grid": [
+    40,
+    40,
+    40
+  ],
+  "states": 20,
+  "status": "fits",
+  "message": "Memory fits with headroom. Only a matched complete-job benchmark can establish GPU speedup.",
+  "assessed_free_bytes": 11543773184,
+  "safety_fraction": 0.8,
+  "simulated": false
+}

@@ -168,3 +168,10 @@ The local result and numerical limits are summarized in
 [GPU_PILOT_RESULTS.md](../docs/GPU_PILOT_RESULTS.md). Larger nuclei, long physical
 trajectories, other forces/pairing options, longer restart histories and different
 machines need their own comparisons before production use.
+
+The follow-up [static convergence study](../docs/STATIC_CONVERGENCE.md)
+explains the coarse-grid plateau and provides a settled 40³/0.6 fm CPU state
+meeting the original `1e-6` threshold in fresh fields. Reproduce it with
+`static_convergence.py`; its diagnostic builds and raw output stay in WSL's
+cache. This finer checkpoint needs its own GPU validation and matched timing;
+the current `benchmark.py` accepts only the original 24³ case.

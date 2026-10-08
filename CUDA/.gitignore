@@ -13,3 +13,9 @@
 !/results/static-strict.json
 !/results/benchmark-screening.json
 !/results/cpu-builds.json
+!/results/static-convergence-24.json
+!/results/static-convergence-32.json
+!/results/static-convergence-40-first-stop.json
+!/results/static-convergence-40-polished.json
+!/results/static-status.json
+!/results/static-state-preflight.json

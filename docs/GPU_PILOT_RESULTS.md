@@ -80,7 +80,11 @@ fresh-case validation and timing evidence. The production input remains unchange
 
 The original `serr=1e-6` criterion was not met after 3000 iterations, either
 before or after repairing the static matrix-read race; fluctuations were
-about 7.56e-5. The reason for that stricter plateau remains unresolved. The
+about 7.56e-5. A subsequent [static study](STATIC_CONVERGENCE.md) identifies
+an effective-mass discretization contribution and prepares a settled
+40³/0.6 fm candidate that meets the original threshold in fresh fields.
+The GPU timings above still concern the original 24³ performance case; the
+finer state has not been benchmarked on the GPU. The
 script rejects an unmet criterion and never lowers it automatically. This
 benchmark does not certify a production ground state. See `static-strict.json`
 and [CPU_FIXES.md](CPU_FIXES.md) for the separate CPU corrections.
