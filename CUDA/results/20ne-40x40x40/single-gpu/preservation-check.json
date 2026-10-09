@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "manifest_sha256": "973f83bdfcddf5f01b961dc642c2e523136603e881eea943c42ada6c662e557b",
+  "protected_files": 337,
+  "protected_bytes": 455929148,
+  "all_original_sizes_and_sha256_match": true,
+  "branch": "gpu",
+  "protected_refs": {
+    "main": "be42efc7fba93aeb3a18ed0b5155b5f6bc9c6c1b",
+    "origin/main": "be42efc7fba93aeb3a18ed0b5155b5f6bc9c6c1b"
+  },
+  "source_commit": "c939eb50c7f9196ce76fe63669f0d617c1401da6",
+  "note": "Read-only verification of all 337 recorded local artifacts. Source and small reports are committed separately; no original raw scientific files or compiler products are deleted, committed or uploaded."
+}

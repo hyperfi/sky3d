@@ -163,8 +163,11 @@ actual speedups are documented. A source build alone does not satisfy this gate.
   static speedups are 1.6243x for 16O and 1.7948x for paired 20Ne, one pair
   each. Static fallbacks pass with small diagonalization both on and off.
 - Stage 5: backend comparisons, profiling, static/dynamic memory checking,
-  refusal checks and 19 unit tests are complete. Clean-clone validation is
-  pending. The 6000 fm/c K=0 replay matches CPU and the existing local spectrum,
+  refusal checks and 19 unit tests are complete. A clean local clone of
+  `c939eb5` rebuilds all variants and passes 10-step standard/rectangular/reset
+  strict-CPU comparisons. All 337 protected local artifacts retain their
+  original hashes; `main` and `origin/main` are unchanged. Implementation and
+  reproducibility work is complete. The 6000 fm/c K=0 replay matches CPU and the existing local spectrum,
   but its archived coarse CPU and GPU trajectories both fail the unchanged
   physical Gram gate (6.4175e-5 versus 1e-6). This remains a failed scientific
   qualification gate; refined long-response convergence is future physics

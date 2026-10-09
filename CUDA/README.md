@@ -244,7 +244,9 @@ excluded. Adjust `--cpu-threads` and `--gpu-threads` for another machine.
 Raw inputs, logs, checkpoints and density files stay in a fresh directory
 under `~/.cache/sky3d-benchmark-*`. Only small JSON summaries are versioned.
 `results/benchmark-launches.json` preserves the pre-graph integrated benchmark;
-`results/benchmark.json` contains the final implementation's timings.
+`results/benchmark.json` contains the earlier coarse CUDA-graph milestone.
+Current repaired-build timings are in
+`results/20ne-40x40x40/single-gpu/benchmark-final4.json`.
 
 The local result and numerical limits are summarized in
 [GPU_PILOT_RESULTS.md](../docs/GPU_PILOT_RESULTS.md). Larger nuclei, long physical

@@ -210,6 +210,22 @@ component controls. Native binaries must be rebuilt on the destination host.
 The branch is kept local until publication is requested. Static checkpoints
 must be prepared locally or transferred separately, not committed to Git.
 
+A clean local clone of checkpoint `c939eb5` rebuilds the reference, CPU and
+GPU executables and passes the standard, rectangular and center-of-mass-reset
+strict-reference comparisons for 10 steps. The clone remains Git-clean. All
+compiled sources match the tested repaired build after LF normalization;
+binary equality across different build paths is not claimed. See
+`single-gpu/clone-validation.json`. Independent static generation is provided
+by the included preparation runner; these clone replay checks deliberately
+use the external validated fine seed.
+
+All 337 original local artifacts match their recorded sizes and SHA-256 hashes,
+and both protected main refs retain `be42efc7`. See
+`single-gpu/preservation-check.json`. The implementation and reproducibility
+work is complete. Scientific qualification of the archived coarse long
+response remains failed as documented above; it is not promoted to a
+production result by these software checks.
+
 ## Static alignment and the response frame
 
 TDHF boosts the supplied static state. Alignment names its orientation in
