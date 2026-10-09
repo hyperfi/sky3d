@@ -1,0 +1,1643 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=23mm,headheight=16pt]{geometry}
+\usepackage{amsmath,amssymb,graphicx,booktabs,longtable,array,listings,xcolor}
+\usepackage{hyperref,fancyhdr}
+\usepackage{placeins}
+\definecolor{navy}{HTML}{205593}
+\definecolor{orange}{HTML}{C05E1C}
+\definecolor{pale}{HTML}{F3F5F7}
+\hypersetup{colorlinks=true,linkcolor=navy,citecolor=navy,urlcolor=navy,
+ pdftitle={Sky3D Single-GPU Implementation: Changes, Validation and Benchmarks},
+ pdfauthor={Sky3D GPU branch technical documentation},
+ pdfsubject={FP64 CUDA implementation, numerical controls and reproducible performance evidence}}
+\urlstyle{tt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Sky3D single-GPU implementation}
+\fancyhead[R]{\small Technical report}
+\fancyfoot[C]{\thepage}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 1pt}
+\setlength{\emergencystretch}{2em}
+\setcounter{tocdepth}{2}
+\renewcommand{\arraystretch}{1.16}
+\lstset{basicstyle=\ttfamily\footnotesize,backgroundcolor=\color{pale},
+ frame=single,rulecolor=\color{black!15},framesep=5pt,
+ breaklines=true,breakatwhitespace=false,columns=fullflexible,
+ keepspaces=true,showstringspaces=false,aboveskip=10pt,belowskip=10pt}
+\newcommand{\Ne}{\texorpdfstring{\ensuremath{^{20}\mathrm{Ne}}}{20Ne}}
+\newcommand{\Ox}{\texorpdfstring{\ensuremath{^{16}\mathrm{O}}}{16O}}
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\ev}[1]{\path{#1.json}}
+\newcommand{\fig}[4]{\begin{figure}[htbp]\centering
+ \includegraphics[width=\linewidth,height=#4\textheight,keepaspectratio]{assets/#1.pdf}
+ \caption{#2}\label{#3}\end{figure}}
+\newcommand{\sepsection}[1]{\FloatBarrier\section{#1}}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+\vspace*{15mm}
+{\color{navy}\rule{\linewidth}{1.2pt}}\par
+\vspace{8mm}
+{\Large TECHNICAL IMPLEMENTATION REPORT}\par
+\vspace{8mm}
+{\Huge\bfseries Sky3D on a Single GPU}\par
+\vspace{5mm}
+{\LARGE Code changes, numerical validation,\par benchmarks and quadrupole response}\par
+\vspace{12mm}
+{\large FP64 CUDA C++ / cuFFT backend with a GNU Fortran frontend}\par
+\vspace{8mm}
+\begin{tabular}{@{}ll@{}}
+Repository & \href{https://github.com/hyperfi/sky3d/tree/gpu}{hyperfi/sky3d}\quad branch \code{gpu}\\
+Documentation snapshot & \code{9576125}\quad 9 October 2026\\
+Core implementation checkpoint & \code{c939eb5}\\
+Tested accelerator & NVIDIA GeForce RTX 5070, 12,227 MiB VRAM\\
+Tested host & Intel Core Ultra 7 265K; Ubuntu 24.04 in WSL2\\
+\end{tabular}\par
+\vspace{13mm}
+\textbf{Scope.} This report describes the implemented single-process GPU backend,
+the CPU corrections required for a trustworthy comparison, the retained CPU
+operations, and the evidence supporting the measured performance. It provides
+build and execution instructions for a new checkout and separates software
+equivalence from scientific qualification.
+
+\textbf{Principal result.} A repeated, complete-job \Ne{} benchmark on a
+$40^3$ mesh is $3.1879\times$ faster than the best measured parallel CPU
+configuration. The long archived $K=0$ response replay agrees closely between
+CPU and GPU, but fails the physical orthogonality gate on both backends.
+
+\vfill
+{\small Measurements are specific to the recorded inputs, binaries and hardware.
+No multi-GPU, out-of-core, experimental-spectrum or universal-speedup claim is made.}
+\end{titlepage}
+\hypersetup{pageanchor=true}
+\pagenumbering{roman}
+
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+Sky3D's three-dimensional Skyrme time-dependent Hartree--Fock implementation
+has been extended with a double-precision CUDA C++ backend, accessed from
+Fortran through C-compatible interfaces. Batched cuFFT derivatives,
+Hamiltonian applications, Taylor propagation, five density families, Skyrme
+fields, isolated and periodic Coulomb, native $M=0$ moments, single-particle
+properties and damped static gradients execute on one NVIDIA GPU. Persistent
+device densities and CUDA graph replay reduce transfers and repeated launches.
+Pairing, ordered orthogonalization, small eigensystems, integrated-energy output
+and file I/O retain their CPU implementations.
+
+The branch also fixes density reaccumulation after center-of-mass correction,
+zero output intervals, truncated fragment paths, a static OpenMP basis-update
+race, output-dependent convergence tests, inconsistent diagnostic field time
+levels and a static CPU-field fallback's moment selection. Validation includes
+strict CPU controls, rectangular meshes, restart/pulse checks, component
+fallbacks, nonzero-$M$ controls, independent \Ox{} and paired \Ne{}
+preparations, CUDA memory checking and clean-clone execution.
+
+For 200 steps of SLy5 \Ne{} on $40^3/0.6$ fm, three complete jobs per
+configuration yield median times of 63.1325 s for CPU8 and 19.8037 s for
+GPU with eight host threads, a $3.1879\times$ ratio and 68.6316\% wall-time
+reduction. The separate $6000$ fm/$c$, $24^3/1$ fm archived response replay
+takes 1206.8849 s on CPU8 and 499.0433 s on GPU8, a $2.4184\times$ single-pair
+result. At smoothing width $0.5$ MeV, the strength differs by
+$5.11\times10^{-12}$ relative $L_2$, with the same selected GQR peak at
+16.5515393 MeV. Nevertheless, both long trajectories have occupied Gram
+errors of $6.42\times10^{-5}$ against a $10^{-6}$ limit. This remains a failed
+physical qualification. The report documents all such distinctions and the
+VRAM refusal policy required for reliable use on a 12 GB device.
+
+\clearpage
+{\small\setlength{\parskip}{0pt}\tableofcontents}
+\clearpage
+\listoffigures
+\listoftables
+
+\clearpage\pagenumbering{arabic}
+\sepsection{Version, evidence and interpretation}
+\label{sec:scope}
+\subsection{Repository boundary}
+The implementation is developed on the \code{gpu} branch of
+\href{https://github.com/hyperfi/sky3d}{hyperfi/sky3d}, a fork of
+\href{https://github.com/manybody/sky3d}{manybody/sky3d}. The starting physics
+source is \code{be42efc7fba93aeb3a18ed0b5155b5f6bc9c6c1b}. The protected
+\code{main} and recorded \code{origin/main} refs remain at that commit in the
+preservation audit. Research workflow and response-analysis files were first
+organized separately; the GPU branch starts from the resulting
+\code{6e3ff97} checkpoint. Consequently, the entire Git diff against the
+physics baseline also contains previously organized research workflows. It
+must not be interpreted as a list of CUDA algorithm changes.
+
+This report describes source at
+\code{9576125da0372c5cb3092032fafad32a50339bd2}. The final core repair and
+validation checkpoint is \code{c939eb5}; \code{6784452} records clean-clone
+and artifact-preservation checks, and \code{9576125} adds the verified
+first-use guide and \Ox{} TDHF example. The report itself is a subsequent
+documentation artifact, rather than part of the benchmarked numerical binary.
+
+\subsection{Evidence categories}
+\begin{enumerate}
+\item \textbf{Implementation equivalence:} the same input, state, force,
+mesh, integration parameters and output settings produce matching CPU/GPU
+wavefunctions, fields and observables within explicit limits.
+\item \textbf{Numerical qualification:} the requested endpoint is reached;
+particle numbers, occupied-state orthogonality, static residuals and
+Hamiltonian symmetry satisfy the specified checks.
+\item \textbf{Scientific convergence:} the desired response is stable under
+appropriate mesh, box, timestep, propagation-length, boost and smoothing
+studies. A CPU/GPU match alone does not establish this.
+\item \textbf{Performance:} complete matched jobs run faster under measured
+conditions. A kernel timing, capacity estimate or instrumented stage timer
+does not substitute for an uninstrumented complete-job benchmark.
+\end{enumerate}
+The long coarse-grid response passes the first category and fails an explicit
+check in the second. The repeated fine-grid timing establishes a local
+performance result; it is not a production-length response calculation.
+
+\subsection{Evidence locations and provenance}
+Unless a longer path is shown, final implementation evidence filenames in this
+report are relative to
+\path{CUDA/results/20ne-40x40x40/single-gpu/}. Long-response evidence is in
+\path{CUDA/results/20ne-k0-final/}. Historical milestones remain in their
+original result directories. Appendix~\ref{app:evidence} records the full
+SHA-256 identities of the reports used to prepare the figures and tables.
+The companion \path{evidence_manifest.json} additionally records relevant
+source and raw response-input hashes.
+
+Some numerical measurements were made while the working tree contained changes
+that were subsequently committed. Their JSON records truthfully retain
+\code{source_dirty=true}, the then-current commit, each source hash, compiler
+flags and executable/library hashes. They are not relabelled as measurements
+of a later clean commit. The extended and long-response checks precede the
+final static CPU-field moment-selection repair. That repair affects the
+static fallback diagnostic route, while the default dynamic route and CUDA
+numerical source remain unchanged. Default/fallback static controls and the
+primary repeated benchmark were rerun on the repaired build.
+
+Raw checkpoints, density dumps, inputs and logs remain in isolated Linux/WSL
+cache directories identified by the JSON. These local paths establish
+provenance; they are not files that a new clone is expected to contain. No new
+Sky3D calculation or timing was performed to generate this report. The
+quadrupole figures were regenerated from the preserved time histories using
+the same analysis routine, and the reproduced spectral error was checked
+against the saved comparison.
+
+\sepsection{Numerical model and conventions}
+\label{sec:model}
+\subsection{Unchanged physical approximation}
+Sky3D solves static and dynamic Skyrme mean-field equations on a Cartesian
+mesh without imposed spatial symmetry. Its established formulation and
+linear-response extensions are documented in the original code publications
+\cite{sky3d,sky3d12}. The GPU branch changes where supported operations
+execute; it does not introduce a new energy-density functional, a new pairing
+theory, a different external operator or a lower-precision approximation.
+
+The TDHF equation and discretized inner product are
+\begin{align}
+ i\hbar c\,\partial_t\psi_i(\mathbf r,t)
+ &=h[\rho,\tau,\mathbf j,\mathbf s,\mathbf J](t)\psi_i(\mathbf r,t),\\
+ \langle u|v\rangle_h
+ &=\Delta V\sum_{\mathbf r,\sigma}u^*(\mathbf r,\sigma)v(\mathbf r,\sigma),
+ \qquad \Delta V=\Delta x\Delta y\Delta z.
+\end{align}
+Here time is in fm/$c$, energies are in MeV, and each orbital has two spin
+components and one neutron/proton species assignment. Static BCS pairing
+remains on the CPU. In the tested paired TDHF cases the occupations are frozen,
+as in the native code. These runs are not TDHFB calculations.
+
+The backend uses complex128 wavefunctions and FP64 real fields. CUDA
+compilation does not enable \code{--use_fast_math}. The optimized Fortran
+CPU and GPU-linked frontends use the same native CPU fast-math flags; a
+separate strict CPU executable disables fast-math and floating-point
+contraction for numerical controls. Differences from that reference are
+measured, rather than assumed to vanish.
+
+\subsection{Spectral derivatives and layout}
+Let $N_a$ be the even number of points along direction $a$ and $\Delta a$ the
+spacing. With the native Fourier convention,
+\begin{equation}
+ k_{a,m}=\frac{2\pi m}{N_a\Delta a},\qquad
+ D_a\psi=\mathcal F_a^{-1}[ik_{a,m}\mathcal F_a\psi],\qquad
+ D_a^2\psi=\mathcal F_a^{-1}[-k_{a,m}^2\mathcal F_a\psi].
+\end{equation}
+The first-derivative Nyquist multiplier is zero; the second-derivative
+Nyquist term is retained. cuFFT inverse transforms are unnormalized, so the
+kernel includes the appropriate $1/N_a$ factor. The source constant
+$\pi=3.14159265358979$ is retained for parity with the native derivative
+rules. A change to this constant is not mixed into the port.
+
+Fortran storage orders $x$ fastest, followed by $y$, $z$, spin and orbital.
+The CUDA physical index is
+\begin{equation}
+ \ell=x+N_x\bigl[y+N_y(z+N_z(\sigma+2i))\bigr]
+\end{equation}
+for zero-based indices. Axis pack/unpack kernels collect contiguous transform
+lines while batching all spin/orbital combinations. Rectangular controls are
+necessary because equal-sided meshes alone can conceal stride errors.
+Density/field derivatives batch both species, preserving the native
+spectral operator used by the CPU field-derivative matrices.
+
+\subsection{Hamiltonian and effective-mass term}
+The Hamiltonian includes scalar and spin fields, position-dependent effective
+mass, current-dependent terms and spin-orbit couplings. Local terms are
+applied to both spin components; axis kernels use first and second
+derivatives and the spin-coupled companion component. Coefficients and signs
+are transferred from the native force implementation through the runtime
+interface, rather than maintained as an independent force table.
+
+One particularly important unchanged term is the expanded effective-mass
+operator,
+\begin{equation}
+ T_B\psi=-\sum_{a=x,y,z}\bigl[(D_a B)(D_a\psi)+B D_a^2\psi\bigr].
+ \label{eq:mass}
+\end{equation}
+In the continuum this is related by the product rule to a divergence-form
+operator. Discrete derivatives do not obey that product rule exactly.
+The branch does not replace Equation~\eqref{eq:mass} with a symmetrized or
+divergence-form stencil to make a validation metric pass. The measured
+coarse-mesh anti-Hermiticity and its refinement behavior are discussed in
+Section~\ref{sec:static}.
+
+\subsection{Five density families}
+The native densities are reconstructed with occupations $w_i$ and species
+assignments. Representative definitions are
+\begin{align}
+ \rho_q&=\sum_{i\in q}w_i\,\psi_i^\dagger\psi_i,\\
+ \tau_q&=\sum_{i\in q}w_i\sum_a(D_a\psi_i)^\dagger(D_a\psi_i),\\
+ j_{q,a}&=\sum_{i\in q}w_i\,\operatorname{Im}
+               [\psi_i^\dagger D_a\psi_i],\\
+ s_{q,a}&=\sum_{i\in q}w_i\,\psi_i^\dagger\sigma_a\psi_i.
+\end{align}
+The fifth family is the native three-component spin-orbit density $\mathbf J_q$,
+formed from the same spinors and gradients with the source's sign convention.
+There are 11 real components per species: one number density, one kinetic
+density, three currents, three spin densities and three spin-orbit densities.
+Thus a density bank occupies $22G$ doubles for $G=N_xN_yN_z$ cells.
+
+Each CUDA density thread handles one cell/species and accumulates orbitals
+in their stored order, skipping nonpositive occupations. No floating-point
+global atomics are used in this accumulation. Empty propagated orbitals still
+consume wavefunction memory and must be counted in capacity estimates.
+
+\subsection{Native predictor/corrector propagation}
+For a fixed field, the truncated exponential is evaluated through
+\begin{equation}
+ \psi^{(0)}=\psi(t),\qquad
+ \psi^{(n)}=\frac{-i\Delta t}{n\hbar c}\,h\psi^{(n-1)},\qquad
+ \psi(t+\Delta t)\simeq\sum_{n=0}^{p}\psi^{(n)}.
+ \label{eq:taylor}
+\end{equation}
+The native driver first predicts the endpoint with order $p/2$, forms
+the average of old and predicted densities, reconstructs midpoint fields,
+and then applies the order-$p$ correction to the original orbitals. The
+predictor's lower polynomial order is not a claim that the physical interval
+is $\Delta t/2$: the existing driver passes the full $\Delta t$ to that stage.
+Corrected densities then determine endpoint fields and diagnostics.
+
+The same stage order, boost and external-field times are retained. GPU
+residency changes data movement, not this integration scheme. Accuracy and
+stability depend on mesh, spectral content, timestep and Taylor order; a
+parameter combination stable on a coarse mesh need not remain stable after
+refinement.
+
+\sepsection{GPU architecture and data movement}
+\label{sec:architecture}
+\subsection{Frontend, runtime and backend}
+The Fortran frontend retains namelists, force setup, static/dynamic control,
+protocol output and checkpoint formats. \path{Code/gpu_runtime.f90} supplies
+the CPU-only runtime interface. The GPU build substitutes
+\path{CUDA/gpu_runtime.f90}, whose \code{ISO_C_BINDING} interfaces call the
+C ABI exported by \path{CUDA/sky_gpu.cu}. The reduction kernels are in
+\path{CUDA/reductions.cuh}. The ordinary CPU executable has no CUDA library
+dependency.
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{@{}p{.32\linewidth}p{.59\linewidth}@{}}\toprule
+Operation & Execution in the implemented branch\\\midrule
+Wavefunction derivatives and Hamiltonians & FP64 CUDA kernels and batched cuFFT\\
+Prediction, correction and five densities & CUDA; persistent dynamic density banks\\
+Skyrme field derivatives and pointwise fields & CUDA, with force couplings supplied by Fortran\\
+Isolated / periodic Coulomb & CUDA 3D FFT convolution; native kernel conventions\\
+Native $M=0$ moments and orbital properties & GPU block reductions; small ordered host sums\\
+Static Hamiltonians and damped gradients & CUDA; full 3D batched preconditioner\\
+Pairing, Gram--Schmidt, overlaps and small eigensystems & Native CPU operations and LAPACK\\
+Integrated-energy output, files and other $M$ diagnostics & Native CPU consumers with synchronized data\\\bottomrule
+\end{tabular}
+\caption{Implemented operation boundary. Retained CPU work is included in complete-job timings.}
+\label{tab:boundary}\end{table}
+
+The GPU-linked executable selects GPU by default;
+\code{SKY3D_BACKEND=cpu} selects the CPU route. A CPU-only executable rejects
+a request for GPU execution. The supported GPU path requires one process,
+\code{tfft=T}, even mesh dimensions and complex128 orbitals. GPU MPI,
+non-FFT propagation and complex64 configurations are rejected. Device zero
+is used after CUDA's visibility mapping; \code{CUDA_VISIBLE_DEVICES} can
+select which physical device becomes visible zero.
+
+\subsection{Persistent arrays and explicit synchronization}
+The backend allocates wavefunction banks, gradients, Fourier scratch,
+density banks, fields and reductions once. Dynamic fields and densities remain
+on device across prediction, averaging and correction. A saved old-density
+bank is combined with the predicted density by a pointwise average. CPU
+consumers explicitly pull current data before using it; host arrays are not
+assumed current merely because the Fortran driver contains them.
+
+CPU consumers include integrated energies and protocol output, center-of-mass
+phase correction, restart writes, pairing and basis operations. After a
+center-of-mass phase correction, the altered host orbitals are pushed back,
+and all density families are rebuilt. Static steps push the current
+orthogonalized/rotated orbitals before properties use them. The initial
+device density bank is populated before diagnostics even in CPU-field
+comparison mode.
+
+This explicit ownership avoids stale diagnostics and unnecessary full-array
+round trips. The backend uses device allocations; it does not use managed
+memory to page oversized orbital banks to system RAM.
+
+\subsection{Skyrme and Coulomb fields}
+Field construction forms $\nabla\rho$, $\nabla^2\rho$, the divergence of the
+spin-orbit density, and curls of spin/current densities on device. A local
+kernel builds scalar potential $U_q$, effective-mass field $B_q$ and the
+spin/current/spin-orbit vector fields. Gradients of $B_q$ are then formed for
+Equation~\eqref{eq:mass}. All 15 supplied coupling entries, nonlinear density
+powers, species combinations and the native small-density regularization are
+used consistently with the CPU formulation.
+
+The existing CPU Coulomb kernel is uploaded once. Isolated boundaries use
+the doubled grid in each direction, with eight times the physical volume,
+the original origin regularization $2.84\,3/(\Delta x+\Delta y+\Delta z)$,
+and the source charge coupling $e^2=1.43989$ MeV fm. Periodic Coulomb retains
+the native zero-mode treatment. The local proton field includes the native
+exchange term when enabled. Disabled-Coulomb controls accept genuinely
+empty Coulomb output arrays only after checking shape compatibility.
+
+The backend reserves doubled-volume Coulomb buffers and creates plans for
+both isolated and periodic modes. Capacity therefore includes this worst
+array requirement even when a particular run uses periodic or no Coulomb.
+This is an allocation policy, not an assumption that all modes perform the
+isolated transform every step.
+
+\subsection{FFT planning, ordering and graph replay}
+Wavefunction derivative plans batch all transform lines and orbitals. Real
+density/field derivative plans use complex-double transforms with both
+species. Coulomb uses 3D plans; the static preconditioner uses a full 3D
+complex-double plan batched over $2S$ spin/orbital fields.
+
+Automatic cuFFT workspace allocation is disabled. Actual plan workspace is
+queried and a single buffer of the maximum required size is allocated, then
+assigned to all plans. One nonblocking CUDA stream orders transforms, kernels
+and buffer reuse; shared scratch is not used by simultaneous transforms.
+cuFFT plan/work-area conventions are described in NVIDIA's documentation
+\cite{cufft}. Planning and initial allocations are included in the measured
+complete jobs.
+
+CUDA graphs cache fixed propagation sequences. A graph key distinguishes
+Taylor order, timestep and the alternating wavefunction pointer. Uploaded
+field contents can change in place while the sequence remains valid. The
+field graph uses a separate cache entry and a coupling snapshot; changed
+couplings invalidate the cached field graph. Explicit graph disabling remains
+available for comparison. Graph replay reduces repeated host submissions;
+it does not alter the arithmetic recurrence.
+
+\subsection{Reductions and diagnostic scope}
+Reductions use 256-thread CUB block operations and per-block result arrays.
+The small results are copied to the host and summed in block order. The
+moment implementation first obtains seven quantities per species, then
+19 centered quantities per species. Single-particle properties use ten
+quantities per orbital: norm, energy, kinetic energy, parity, three orbital
+angular-momentum components and three spin components. Static statistics use
+four quantities per orbital. The largest required reduction buffer is
+included in preflight.
+
+Native $M=0$ definitions, coordinate centering, species weights and the
+dipole volume correction are preserved. Other $M$ projections use the
+existing CPU diagnostic formulas. The short $M=1,2,-2$ controls validate this
+implemented route; they do not establish full long-duration intrinsic
+$K=1$ or $K=2$ response spectra. Unrelated multipole convention changes are
+not mixed into the acceleration work.
+
+\subsection{Static preparation}
+CUDA applies Hamiltonians to the basis and calculates gradient statistics.
+For positive damping parameter $e_0$, the residual is preconditioned in
+Fourier space using the native denominator
+\begin{equation}
+ e_0+\frac{\hbar^2}{2m}(k_x^2+k_y^2+k_z^2).
+\end{equation}
+The inverse FFT normalization is included. The CPU retains ordered
+orthogonalization, pairing, overlaps and small \code{ZHEEVD} eigensystems.
+The Hamiltonian matrix is built from an immutable pre-update basis before
+gradient updates. Pre-gradient single-particle energies, norms and
+fluctuations retain their native bookkeeping.
+
+The static density mixing applies 0.2 new plus 0.8 old to $\rho$ and $\tau$,
+matching the CPU solver. It does not impose that mixing rule on the other
+density families. This distinction is also why a static CPU-field fallback
+must consume CPU moments of the relaxed density, as detailed below.
+
+\subsection{Component controls}
+\begin{table}[htbp]\centering\small
+\begin{tabular}{@{}p{.45\linewidth}p{.46\linewidth}@{}}\toprule
+Environment setting & Meaning of setting to zero\\\midrule
+\path{SKY3D_GPU_FIELDS} & Use native CPU field construction; also disable residency\\
+\path{SKY3D_GPU_RESIDENT} & Use explicit density transfer comparison route\\
+\path{SKY3D_GPU_DIAGNOSTICS} & Use native CPU diagnostic operations\\
+\path{SKY3D_GPU_GRAPHS} & Submit operations without graph replay\\\bottomrule
+\end{tabular}
+\caption{Component comparison controls. The supported defaults are all one.}
+\label{tab:controls}\end{table}
+These settings are explicit diagnostic/fallback paths. They are tested
+separately, because correct default GPU output does not prove that a mixed
+CPU/GPU consumer sees the correct density or field bank.
+
+\sepsection{CPU and diagnostic correctness repairs}
+\label{sec:fixes}
+\subsection{Center-of-mass density reaccumulation}
+The native driver optionally removes center-of-mass velocity by changing
+orbital phases. Before the repair, the subsequent density accumulation
+added corrected densities to existing densities. All five families now
+clear before reaccumulation. A two-step \Ne{} control with
+\code{mrescm=1} retains ten neutrons and ten protons instead of doubling
+the particle numbers. GPU pulls/pushes around this CPU phase operation
+ensure both wavefunctions and density ownership remain consistent.
+
+\subsection{Zero output intervals and long fragment paths}
+Fortran logical expressions do not guarantee short-circuit evaluation.
+Testing a positive interval alongside \code{MOD(iter,interval)} in the
+same logical expression could still evaluate a zero divisor. A guarded
+\code{output_due} predicate first checks the interval and then evaluates
+the remainder. Zero disables periodic output safely. Initialization can
+still write the initial state; \code{mrest=0} disables later periodic
+restart writes rather than removing initialization behavior.
+
+Fragment filename storage increases from 64 to 1024 characters so deeply
+nested cache paths are not silently truncated. This changes namelist
+storage, not the binary wavefunction format. Regression controls include
+zero print/plot/restart intervals, paths longer than 64 characters,
+restart output every step and short static runs with output disabled.
+
+\subsection{Static OpenMP basis-update race}
+The original static gradient loop formed Hamiltonian matrix entries while
+other threads could update basis orbitals in place. Different columns could
+therefore read different stages of the basis. The matrix construction now
+runs in a separate read-only pass before the gradient loop, so every column
+uses the same pre-update basis. Diagonalizing iterations incur an additional
+Hamiltonian application. The repair avoids copying the full basis and
+preserves the native memory-saving large-basis transformation.
+
+Fixed 120-iteration static controls compare strict one-thread, repeated
+strict eight-thread, optimized CPU and GPU cases. Saved density/potential
+differences are below approximately $4\times10^{-13}$. This establishes
+implementation agreement for those iterations, rather than convergence of
+the original coarse input.
+
+\subsection{Convergence bookkeeping independent of printing}
+Static fluctuation values were previously updated with diagnostic printing.
+Disabling printing could leave the initially zero measure unchanged and
+falsely stop at iteration two. The existing convergence quantity is now
+updated every iteration. The zero-output regression checks that a requested
+three-iteration run reaches iteration three.
+
+Static exit reports whether the requested criterion was met or the iteration
+ceiling was exhausted, and prints both historical $H^2$ and $H^\dagger H$
+fluctuation measures. The stopping definition itself is unchanged. Explicitly
+tighter study targets are recorded as such; an exhausted run is not converted
+to success by its finite output or process exit code.
+
+\subsection{Endpoint fields before energy diagnostics}
+The dynamic driver formerly called diagnostic \code{tinfo} before the final
+\code{skyrme} refresh. Wavefunctions and densities belonged to the endpoint,
+whereas fields, including Coulomb used in integrated energy, could still
+belong to the midpoint. The existing final field reconstruction now precedes
+\code{tinfo}. This reorders the existing evaluation and does not add another
+Skyrme call per step.
+
+For a time-dependent external pulse, the internal scalar potential is saved
+separately. Diagnostics add the external field evaluated at the current
+endpoint time $t$. The saved internal potential is then restored and the
+next predictor's original external evaluation at $t+\Delta t$ is added.
+The midpoint still uses $t_{\mathrm{old}}+\Delta t/2$. Restarts at nonzero
+time reconstruct the same next-predictor field. This separation avoids
+subtracting two large nearly equal scalar fields and keeps the original
+propagation convention. An instantaneous kick needs no extra scalar buffer.
+
+The energy-fix matrix contains seven groups and 21 jobs: instantaneous and
+time-dependent excitation, different print intervals, and segmented
+continuation/restart from step 20 and step 30 to step 40. Direct Coulomb
+checks and independent point-source controls support the field refresh.
+Matched pre/post-fix wavefunctions differ by at most about
+$1.76\times10^{-16}$ relative $L_2$, while the formerly misleading printed
+energy drift is corrected. A deliberately invalid initial pulse fixture was
+rejected and preserved before using a valid fixture. See
+\ev{energy-fix-validation} and the earlier
+\path{CUDA/results/20ne-40x40x40/energy-timing.json}.
+
+\subsection{Static CPU-field fallback moments}
+Static CPU fields use relaxed host $\rho$, while the GPU density bank can
+contain the unrelaxed density. Using GPU moments in that combination produced
+incorrect printed geometry despite matching wavefunctions and potentials.
+The repaired selection is equivalent to
+\begin{lstlisting}
+device_moments = gpu_enabled .AND. gpu_diagnostics_enabled &
+  .AND. M_val == 0 .AND. (tdynamic .OR. gpu_fields_enabled)
+\end{lstlisting}
+Thus static CPU-field fallback uses native CPU moments. Dynamic comparison
+paths still have their current device density and retain the supported GPU
+moment route. The preserved failing control had a maximum $r^4$ diagnostic
+difference of about 44.2049 and relative error 0.0786; it is retained in
+\ev{static-fallback-before-fix}. The repaired static matrices with
+diagonalization enabled and disabled each cover ten configurations.
+
+\subsection{Runner, provenance and comparison safeguards}
+The comparison code checks array shapes before allowing an empty
+disabled-Coulomb result; a genuinely empty matched array contributes zero
+error rather than causing a reduction exception. Build hashes include
+\code{.cuh} reduction headers. The runners inspect final checkpoint step,
+time, particles and finite values. This is necessary because a legacy
+Fortran \code{STOP} can return process status zero before the requested
+endpoint. The preserved paired instability demonstrates this behavior.
+
+Numerical failures are written to partial JSON reports together with the
+raw directory and remain failures. Resume logic verifies static stopping,
+fresh-field gates, build identity and checkpoint hashes before reusing a
+prepared state with an explicitly different timestep.
+
+\sepsection{Static convergence and independent preparation}
+\label{sec:static}
+\subsection{Fresh-field measures}
+A saved static stopping quantity is evaluated before a gradient update and
+can differ from a measure rebuilt from the final checkpoint. The diagnostic
+probe reconstructs all densities and fields, applies the actual Fortran
+Hamiltonian before another update, and measures both residual and projected
+matrix properties. For a normalized orbital and its fresh expectation value
+$\epsilon_i$, define
+\begin{align}
+ r_i&=\|(H-\epsilon_i)\psi_i\|_h,\\
+ f_i&=\sqrt{\left|\operatorname{Re}
+       \langle\psi_i|(H-\epsilon_i)^2|\psi_i\rangle_h\right|},\\
+ \overline r&=\frac{1}{S}\sum_i w_i r_i,
+ \qquad \overline f=\frac{1}{S}\sum_i w_i f_i.
+\end{align}
+The denominator is the number of propagated states $S$, as in the recorded
+native weighted-per-state statistic, not the sum of occupations. In a paired
+case this matters: a small weighted mean is not a bound on the residual of
+every weakly occupied orbital. For a non-Hermitian discrete operator,
+$f_i$ and $r_i$ need not coincide.
+
+The probe builds both triangles of the projected matrix
+$H_{ij}=\langle\psi_i|H|\psi_j\rangle_h$, and records
+$\max_{ij}|H_{ij}-H_{ji}^*|$. It also checks
+$G_{ij}=\langle\psi_i|\psi_j\rangle_h$ and residual components outside the
+projected subspace. Projected anti-Hermiticity is a measured property of that
+basis; it is not a bound on the full mesh Hamiltonian's operator norm.
+
+\subsection{Initial SLy5 mesh study}
+The original $24^3/1$ fm \Ne{} static input exhausted 3000 iterations at a
+weighted fluctuation near $7.56\times10^{-5}$ MeV, failing its requested
+$10^{-6}$ MeV criterion. Repairing the static race did not remove this
+plateau. An explicit $10^{-4}$ preparation override can generate a performance
+fixture, but does not qualify that state as a production ground state.
+
+The separate CPU refinement study keeps the box at $N\Delta x=24$ fm,
+the force, particle numbers, initial oscillator radii and damping parameters
+fixed. Its key results are shown in Table~\ref{tab:static-refine} and
+Figure~\ref{fig:static-refine}. The $24^3$ state came from an earlier optimized
+CPU run; fresh probes and the $32^3/40^3$ iterations use strict CPU arithmetic.
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Mesh / spacing & Iteration & Fresh $\overline f$ & Fresh $\overline r$ & $E_{\rm integ}$ (MeV)\\\midrule
+$24^3$/1 fm & 3000 & $7.559\!\times\!10^{-5}$ & $1.223\!\times\!10^{-4}$ & $-141.995969$\\
+$32^3$/0.75 fm & 3000 & $2.629\!\times\!10^{-6}$ & $2.157\!\times\!10^{-6}$ & $-141.979175$\\
+$40^3$/0.6 fm, settled & 1200 & $1.101\!\times\!10^{-7}$ & $1.598\!\times\!10^{-8}$ & $-141.980365$\\\bottomrule
+\end{tabular}
+\caption{Earlier matched-box CPU static study. Fluctuation and residual columns are in MeV. These are not GPU timing measurements.}
+\label{tab:static-refine}\end{table}
+
+The effective-mass contribution in Equation~\eqref{eq:mass} independently
+reproduces the coarse projected anti-Hermitian component; the remaining
+terms contribute below $2\times10^{-14}$ MeV in that study. Derivative
+matrices and independently reconstructed Fourier field derivatives agree
+to about $2\times10^{-13}$. Projected anti-Hermiticity decreases from roughly
+$4.4\times10^{-4}$ MeV at $24^3$ to $5.1\times10^{-6}$ at $32^3$ and
+$4.55\times10^{-8}$ at $40^3$. These measurements support a discretization
+explanation for the plateau without changing the operator.
+
+\fig{static-refinement}{Fresh residual and historical fluctuation in the earlier fixed-24-fm-box SLy5 CPU study. Plotted values are rounded as reported in \texttt{docs/STATIC\_CONVERGENCE.md}; the source JSON records retain the detailed probes.}{fig:static-refine}{.44}
+
+The $40^3$ run first met its pre-gradient criterion at iteration 878,
+with $9.986\times10^{-7}$ MeV, but fresh $H^2$ was
+$1.459\times10^{-6}$ MeV. A restart with the original criterion stopped
+at 881. A separate copied state was continued to 1200 with an explicitly
+tighter study target of $10^{-8}$ MeV. That tighter target was not met
+(saved measure $8.863\times10^{-8}$ MeV), although the original $10^{-6}$
+target is met in both saved and fresh measures. It must not be described
+as convergence to $10^{-8}$.
+
+The settled state's largest individual direct residual is
+$5.183\times10^{-8}$ MeV, occupied Gram error is below $3\times10^{-13}$,
+and rebuilt particles differ from ten by less than $8\times10^{-13}$.
+The integrated energy changes by approximately 1.19 keV between $32^3$
+and $40^3$. Further box and dynamical convergence are still needed for
+a production response. A first-stop cache checkpoint was overwritten by
+a restart symlink in that historical study; its logs and probe vectors
+survive, and the report records this retention limit. Later reusable
+scripts copy checkpoints before continuation and verify input hashes.
+
+\subsection{Independent \Ox{} preparation}
+The final independent \Ox{}/SLy5 case uses $40^3/0.6$ fm and 16 propagated
+orbitals. CPU and GPU independently reach the original $10^{-6}$ MeV
+static stopping criterion at iteration 261. Fresh weighted residuals are
+$1.5131873\times10^{-7}$ MeV on both, and maximum projected
+anti-Hermiticity is below $10^{-14}$ MeV. The static times are 37.424954 s
+on CPU and 23.041118 s on GPU, a $1.6243\times$ single-pair result.
+
+Matched 100-step TDHF evolution at $\Delta t=0.1$ fm/$c$ reaches 10 fm/$c$
+in 27.954896 s versus 8.968677 s, a $3.1169\times$ single-pair ratio.
+An additional run starts from the GPU's own independently prepared
+checkpoint and compares densities, potentials and printed observables
+with the CPU preparation/evolution. Its occupied Gram error is
+$4.5232\times10^{-11}$ and frozen occupations are unchanged. This check
+avoids relying exclusively on GPU propagation of a CPU-supplied seed.
+
+\subsection{Paired \Ne{}/SLy4 VDI refinement and failed controls}
+The paired case propagates 36 orbitals with nontrivial fractional occupations.
+The refinement sequence preserves failures rather than loosening GPU-specific
+limits:
+\begin{enumerate}
+\item At $32^3/0.8$ fm, the CPU preparation exhausts 4000 iterations.
+The native weighted fluctuation is about $4.46\times10^{-6}$ MeV,
+fresh direct residual $2.52\times10^{-6}$ MeV and projected symmetry
+error roughly $2.7\times10^{-5}$ MeV. This is a failed CPU convergence
+control in \ev{independent-nuclei-coarse}.
+\item At $40^3/0.6$ fm, both preparations reach their native $10^{-6}$
+criterion at 660 iterations, but fresh projected anti-Hermiticity
+($3.759\times10^{-7}$ and $2.901\times10^{-7}$ MeV) exceeds the separate
+$10^{-8}$ MeV gate. The paired row fails in \ev{independent-nuclei-40};
+its \Ox{} row passes and supplies the independent \Ox{} summary.
+\item At $48^3/0.5$ fm, the fresh residual is about
+$1.2843\times10^{-6}$ MeV, and symmetry errors remain
+$4.369\times10^{-8}$ and $3.467\times10^{-8}$ MeV. The failure is
+retained in \ev{paired48}.
+\item At $56^3/0.428571428571$ fm, the static stopping target is explicitly
+tightened to $10^{-7}$ MeV and the ceiling set to 6000 iterations. Both
+backends reach it at iteration 772. Fresh weighted direct residuals are
+approximately $1.2495\times10^{-7}$ MeV, passing the separate
+$10^{-6}$ fresh-residual gate. Maximum projected anti-Hermiticity is
+below $10^{-9}$ MeV, passing the $10^{-8}$ gate. Static orthogonality and
+species subspace singular-value checks also pass.
+\end{enumerate}
+The initial $32^3/0.8$ fm box is 25.6 fm; the later $40^3$, $48^3$ and
+$56^3$ boxes are 24 fm. This sequence is a qualification/refinement history,
+not a rigorously uniform fixed-box extrapolation across all four points.
+
+On the qualified $56^3$ state, $\Delta t=0.1$ with Taylor order four becomes
+unstable on CPU near 4 fm/$c$. A legacy \code{STOP} returns zero while the
+saved checkpoint remains at step zero; endpoint checks correctly reject it.
+\ev{paired56-dt01-failure} preserves the failed trajectory. The validated
+states are then reused on the exact frozen build with an explicit
+$\Delta t=0.05$, 200-step comparison to 10 fm/$c$.
+
+This smaller-step comparison passes. CPU/GPU TDHF times are 417.643249 s
+and 85.573948 s, a $4.8805\times$ single-pair result. Occupied Gram errors
+are approximately $4.29\times10^{-11}$, occupations do not drift, and
+particle changes remain below $10^{-6}$. The independent static times
+are 1044.354815 s and 581.882674 s, a $1.7948\times$ ratio. These static
+times are carried forward from their actual preparation record; resuming
+dynamics does not create new static timing samples.
+
+Fresh CPU/GPU integrated energies differ by about $7.1\times10^{-13}$ MeV.
+An additional own-GPU-preparation TDHF check also passes, with occupied Gram
+error $4.18\times10^{-11}$. Independently prepared orbitals may differ by
+phase or rotations inside a degenerate subspace, so these checks compare
+physical densities/fields and subspace overlaps rather than requiring raw
+orbital equality. They remain short dynamical qualification controls.
+
+\begin{table}[htbp]\centering\small
+\input{tables/independent.tex}
+\caption{Independent-state complete-job timings. Each row is one CPU/GPU pair, not a repeated median. \Ox{} TDHF uses 100 steps at 0.1 fm/$c$; paired \Ne{} TDHF uses 200 steps at 0.05 fm/$c$.}
+\label{tab:independent}\end{table}
+\fig{independent}{Static time-to-solution and short TDHF times for independently qualified states. Ratios compare the two bars in that case only; mesh, occupations and timestep differ between nuclei.}{fig:independent}{.44}
+
+\sepsection{Validation matrix and acceptance limits}
+\label{sec:validation}
+\subsection{Strict and optimized CPU controls}
+The isolated builder produces a strict one-thread CPU reference, an optimized
+parallel CPU executable and a GPU-linked executable with the same optimized
+Fortran flags. Validation checks the GPU against both relevant CPU paths.
+This distinguishes a GPU discrepancy from an existing optimized/strict CPU
+arithmetic difference. All variants within a matched case start from the
+same recorded checkpoint and use the same force, occupations, mesh,
+timestep, polynomial order, excitation and output schedule.
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{@{}p{.48\linewidth}p{.43\linewidth}@{}}\toprule
+Quantity / control & Acceptance rule\\\midrule
+Dynamic wavefunction relative $L_2$ & $\leq10^{-9}$ in standard short controls\\
+Dynamic maximum complex absolute error & $\leq10^{-9}$\\
+Density / field maximum absolute error & $10^{-9}+10^{-10}\max|\text{reference}|$\\
+Printed total and integrated energy & Absolute $2\times10^{-7}$ MeV, no relative allowance\\
+Other printed observables & Relative $10^{-5}$ plus absolute $10^{-7}$\\
+Time and particle comparison & Absolute $10^{-6}$; actual endpoint also checked\\
+Fine/default absolute particle drift & $10^{-6}$\\
+Long archived replay particle drift & Explicit replay-only $5\times10^{-6}$\\
+Long-response Gram error and drift & $10^{-6}$, unchanged even when failed\\
+Additional-state fresh residual & Weighted per-state value $\leq10^{-6}$ MeV\\
+Additional-state projected symmetry & Maximum $|H-H^\dagger|\leq10^{-8}$ MeV\\
+Additional-state static orthogonality & Maximum $|G-I|\leq10^{-10}$\\\bottomrule
+\end{tabular}
+\caption{Principal numerical limits. Individual JSON records retain the exact rule applied in their case. Comparison errors and physical drift are different quantities.}
+\label{tab:limits}\end{table}
+
+Near-zero vector densities are judged with absolute limits rather than a
+relative error divided by a near-zero norm. The collective flow diagnostic
+$j^2/\rho$ in near-vacuum padding is especially roundoff-sensitive. A
+rectangular initial-state control differs by $1.1948\times10^{-5}$ MeV
+between optimized and strict CPU before GPU evaluation. Its explicit
+initial-only flow allowance is $2\times10^{-5}$ MeV; later flow samples
+retain $5\times10^{-6}$ MeV. This does not relax wavefunction, density,
+field, total-energy or integrated-energy limits. See
+\ev{initial-flow-cpu-control} for the CPU-only evidence. Such a padded-tail
+diagnostic is not a precisely resolved physical observable.
+
+\subsection{Core dynamic and restart coverage}
+\ev{validation} contains 100-step strict-reference comparisons for the
+standard $40^3$ mesh, a rectangular $44\times42\times40$ mesh, and a
+center-of-mass-reset case. Initial Hamiltonian/density checks and final
+complex wavefunctions, five density families, potentials, energies and
+moments are included. Shape/spacing follow the checkpoint and padded
+rectangular geometry rather than a hard-coded cubic seed.
+
+The restart and pulse controls compare continuation and segmented runs,
+including different diagnostic intervals. Both instantaneous boosts and
+time-dependent pulses are exercised. Diagnostic timing changes preserve
+the evolved wavefunctions. Checkpoints are parsed for exact expected
+step and physical time; finite files or successful shell status alone
+are insufficient.
+
+\subsection{Extended dynamics}
+\ev{extended-validation} records 17 jobs. Five controls to 10 fm/$c$ run
+on strict CPU1, optimized CPU8 and GPU8: boosted combinations of
+$\Delta t=0.1/0.05$ and Taylor order four/six, plus an unboosted
+$\Delta t=0.1$, order-four control. Two additional matched CPU/GPU
+jobs reach 100 fm/$c$.
+
+At 100 fm/$c$, the wavefunction relative $L_2$ difference is
+$1.9093\times10^{-14}$, occupied Gram drift is below
+$4.96\times10^{-9}$, particle losses below $1.7\times10^{-9}$,
+and native printed integrated-energy drift is $10^{-7}$ MeV on both
+backends after the diagnostic time-level repair. Energy values have the
+native output precision; these measurements do not assert machine-precision
+physical energy conservation.
+
+At the common 10 fm/$c$ endpoint, strict CPU order-four $\Delta t=0.1$
+differs from order-six $\Delta t=0.05$ by $5.6321\times10^{-9}$ relative
+wavefunction $L_2$. Order-four $\Delta t=0.05$ differs by
+$3.277\times10^{-10}$ and order-six $\Delta t=0.1$ by
+$4.209\times10^{-9}$. These quantify short-run integration sensitivity.
+They are not a timestep-convergence study to 6000 fm/$c$.
+
+\subsection{Mode and static comparison coverage}
+\ev{mode-controls} contains 11 groups: \Ox{}/SLy5, paired \Ne{}/SLy4 VDI,
+periodic Coulomb, no Coulomb, graphs disabled, CPU fields, CPU diagnostics,
+residency disabled, positive $M=1$, positive $M=2$ and negative $M=-2$.
+The paired fixture is checked for fractional occupations so it cannot
+silently become an unpaired control.
+
+\ev{static-controls} and \ev{static-diagonalization-off} each cover
+ten configurations, including strict CPU1, repeated strict CPU8,
+optimized CPU8, zero printing, GPU8 and mixed component fallbacks.
+Both use fixed iterations to test arithmetic/control consistency; independent
+preparations in Section~\ref{sec:static} supply separate convergence evidence.
+The final field differences are approximately $3.7\times10^{-13}$ or
+smaller, and the formerly incorrect fallback geometry agrees after the repair.
+
+\subsection{Memory checking and script tests}
+All 19 CUDA runner/script unit tests pass in the recorded final-source
+checks. They exercise such contracts as geometry, preflight decisions,
+comparison validity and diagnostic timing; they do not replace numerical
+trajectories. Dynamic Compute Sanitizer memcheck runs two integrated steps
+and reports zero errors. A separate 25-iteration paired static
+\Ne{}/SLy4 VDI, 36-state memcheck includes diagonalization and diagnostics
+after iteration 20, with zero errors. Sanitizer runs are excluded from
+performance statistics.
+
+\subsection{What passes and what remains failed}
+The core dynamic, component/fallback, static implementation,
+independent-preparation, own-GPU-state, restart, memory and script checks
+pass within their recorded scope. The original coarse static preparation,
+several paired refinement attempts, large-timestep trajectories and the
+long coarse response's physical orthogonality gate remain failed.
+These failures are not contradictory: an implementation can accurately
+reproduce a CPU discretization that is inadequate for a particular physical
+calculation. The branch records both kinds of evidence.
+
+\sepsection{Complete-job performance}
+\label{sec:performance}
+\subsection{Hardware and build configuration}
+The recorded hardware is a NVIDIA GeForce RTX 5070 with 12,227 MiB
+reported VRAM, compute capability 12.0, and driver 610.88. The host is an
+Intel Core Ultra 7 265K with 20 cores visible to WSL, running Ubuntu 24.04.
+The numerical toolchain is CUDA 13.0.88 and GNU Fortran 13.3.0 with FFTW,
+LAPACK and OpenBLAS. This describes the saved measurements, not a fresh
+hardware survey at report-generation time.
+
+\begin{lstlisting}
+reference: -O3 -march=native -ffp-contract=off -fopenmp
+cpu:       -O3 -march=native -ffast-math -fopenmp
+gpu host:  -O3 -march=native -ffast-math -fopenmp
+CUDA:      -O3 -std=c++17 -arch=sm_120 -shared -Xcompiler=-fPIC
+\end{lstlisting}
+OpenBLAS is restricted to one thread; OpenMP uses close core binding and
+core places. GPU runs use eight CPU-side threads for retained host work.
+The CPU comparison is an optimized native build, rather than the older
+SSE-targeted build alone. CPU4, CPU8 and CPU20 are measured; the best
+measured configuration is not a claim that every possible affinity/thread
+choice has been globally optimized.
+
+\subsection{Primary repeated fine-grid benchmark}
+\ev{benchmark-final4} is the current primary timing record. Its workload is
+SLy5 \Ne{}, 20 propagated orbitals, $40^3/0.6$ fm in a 24 fm box,
+$\Delta t=0.1$ fm/$c$, Taylor order four, 200 steps to 20 fm/$c$,
+and an isoscalar $L=2,M=0$ kick with $\eta=5\times10^{-5}$.
+The original fine state is elongated along $x$; it is not the archived
+$z$-aligned coarse $K=0$ response seed.
+
+Each configuration has three complete sequential jobs, following warmup
+runs of 20 steps. Configuration order rotates/reverses between repetitions.
+\code{mprint=10}, \code{mplot=0} and \code{mrest=200} are identical.
+Elapsed time includes initialization, FFT planning, initial diagnostics,
+protocol work and final checkpoint writing. Static preparation,
+post-run comparison, profiling and sanitizer overhead are excluded.
+Final trajectories and printed observables are checked against the matched
+best measured CPU configuration in each repetition.
+
+\begin{table}[htbp]\centering\small
+\input{tables/benchmark.tex}
+\caption{All uninstrumented complete-job samples in the current fine-grid benchmark. CPU numbers denote OpenMP threads; GPU8 uses one GPU plus eight host threads.}
+\label{tab:benchmark}\end{table}
+\fig{benchmark}{Complete-job timings for the primary fine-grid \Ne{} case. Bars show medians and black dots show the three trials. The GPU is compared with the lowest measured CPU median.}{fig:benchmark}{.43}
+
+Using medians, the measured ratio and reduction are
+\begin{align}
+ R&=\frac{63.132517462}{19.803681846}=3.1879182,\\
+ 100\left(1-\frac{19.803681846}{63.132517462}\right)&=68.6315664\%.
+\end{align}
+Twenty CPU threads are slower than eight for this workload. The result is
+specific to the source, state, diagnostics and host conditions; three trials
+do not characterize every thermal or scheduling condition and do not
+provide a universal confidence interval. The raw samples are retained so
+the variation is visible.
+
+\subsection{Performance progression and initial transfer evidence}
+The initial isolated first-derivative harness demonstrated why residency
+matters. It batched all first derivatives in complex FP64 with reusable
+plans and included axis packing, transforms, spectral multiplication and
+synchronization. Planning was excluded. For $24^3/20$ states, CPU8 took
+1.300 ms, resident GPU 0.650 ms, and GPU with full transfers 3.569 ms.
+For $32^3/48$ the values were 8.154, 3.434 and 19.484 ms; for
+$48^3/48$ they were 32.459, 12.641 and 60.258 ms. Resident ratios were
+2.00--2.57, whereas transfer-heavy ratios were 0.36--0.54.
+Derivative errors were below $4\times10^{-16}$ relative $L_2$ and
+$3\times10^{-15}$ maximum complex absolute error. This was a kernel
+feasibility result, not an integrated Sky3D speedup.
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{@{}p{.47\linewidth}rrr@{}}\toprule
+Fine-grid milestone & CPU (s) & GPU (s) & Ratio\\\midrule
+Propagation/density backend with CPU fields & 62.597 & 43.454 & 1.441\\
+Endpoint diagnostic time-level repair & 61.788 & 42.610 & 1.450\\
+GPU field/Coulomb construction & 62.2160 & 30.1976 & 2.0603\\
+Resident densities and GPU diagnostics & 63.1591 & 20.0501 & 3.1501\\
+Repaired-build repeated final benchmark & 63.1325 & 19.8037 & 3.1879\\\bottomrule
+\end{tabular}
+\caption{Recorded development milestones on the fine-grid workload. These separate timing campaigns show the progression; they are not a controlled one-change-at-a-time causal decomposition.}
+\label{tab:milestones}\end{table}
+The historical coarse integrated pilot measured approximately $1.076\times$
+for 500 steps at $\Delta t=0.2$ on $24^3$ (20.193 s CPU and 18.774 s GPU).
+It is a different workload and is not interchangeable with the final
+fine-grid statistic. Historical reports remain alongside final reports;
+in particular \ev{benchmark} is the preceding $3.1501\times$ snapshot,
+while \ev{benchmark-final4} contains the current repaired-build result.
+
+\subsection{Final stage attribution}
+\ev{profile} is a separate instrumented 100-step run. CPU and GPU complete
+times are 36.5357 and 10.8534 s, but these values are not used as the primary
+speedup statistic. Table~\ref{tab:stages} contains exclusive stage timers;
+Figure~\ref{fig:stages} highlights the main loop costs.
+
+\begin{table}[htbp]\centering\small
+\input{tables/stages.tex}
+\caption[Exclusive stage timings for the 100-step profile]{Exclusive accumulated stage timings for the instrumented 100-step case. Setup/output outside the labelled blocks also contributes to total job time.}
+\label{tab:stages}\end{table}
+\fig{stages}{Principal exclusive stage times. Predictor plus corrector now dominate GPU time; midpoint fields and endpoint fields/diagnostics are substantially smaller.}{fig:stages}{.42}
+
+Nested inclusive timers report CPU/GPU Skyrme times 8.3636/0.4637 s and
+\code{tinfo} 5.2543/0.4617 s. The CPU Poisson timer is 1.8871 s; the
+GPU CPU-side Poisson timer has zero calls because Coulomb is embedded
+in GPU field construction. This does not mean GPU Coulomb costs zero.
+Inclusive timers overlap the exclusive stages and must not be added to
+them. Instrumented and uninstrumented final wavefunctions agree below
+$1.2\times10^{-15}$ relative $L_2$.
+
+The GPU predictor and corrector together account for approximately 8.0872 s
+of labelled work, versus 0.8867 s for midpoint fields plus endpoint
+fields/diagnostics. Further single-GPU speed work should therefore measure
+Hamiltonian/FFT packing, bandwidth, transform choices and launch overhead
+on the complete workload. More CPU-field optimization alone cannot be
+assumed to reproduce the earlier large gain. These are prospective
+profiling targets, not demonstrated additional speedups.
+
+\subsection{Separate workloads and bounded claims}
+The independent-state timings in Table~\ref{tab:independent} are single-pair
+results and include retained CPU static operations. The long response
+timing in Section~\ref{sec:response} is also one CPU/GPU pair. They show
+that the gain depends on workload and that static speedups are smaller
+than some dynamical speedups. None is substituted for the three-repetition
+fine-grid median, and no larger nucleus or more capable GPU has yet been
+timed in this evidence set.
+
+\sepsection{\Ne{} quadrupole response and archived-plot comparison}
+\label{sec:response}
+\subsection{Exact replay definition}
+The full response replay uses the archived $z$-aligned SLy5 \Ne{}
+checkpoint with SHA-256 beginning \code{07353fe3a3fefd74} (full identity
+in Appendix~\ref{app:hashes}). It has 20 orbitals on $24^3/1$ fm,
+30000 steps at $\Delta t=0.2$ fm/$c$, Taylor order four, and endpoint
+6000 fm/$c$. The isoscalar kick is $L=2,M=0$ with
+$\eta=5\times10^{-5}$, with diagnostics sampled every 2 fm/$c$.
+CPU8 and GPU8 use the same checkpoint and input.
+
+The reference is the existing local CPU calculation in
+\path{projects/icnpa2026_20Ne_Kresolved_E2/}, including its saved $K=0$
+time history, unboosted reference and analysed CSV. The comparison is
+against that archived local plot. It is not a new comparison with published
+experimental data or an independent external \Ne{} spectrum.
+
+\subsection{Operator and transform conventions}
+The source applies a kick $\exp(-i\eta F)$ and the response package uses
+NumPy's negative-exponent Fourier transform. For a diagonal channel with
+the same boost/readout operator,
+\begin{align}
+ \delta Q(t)&=[Q_{\rm boosted}(t)-Q_{\rm boosted}(0)]
+             -[Q_{\rm unboosted}(t)-Q_{\rm unboosted}(0)],\\
+ W_\Gamma(t)&=\exp\left(-\frac{\Gamma_{\rm sm}t}{2\hbar c}\right),\\
+ S(E)&=\frac{1}{\pi\eta\hbar c}\operatorname{Im}
+       \int_0^T dt\,e^{-iEt/(\hbar c)}W_\Gamma(t)\delta Q(t).
+ \label{eq:strength}
+\end{align}
+The discrete transform includes the physical sample interval explicitly.
+Zero-padding factor eight interpolates the energy grid; it does not improve
+the finite-time Rayleigh resolution
+\begin{equation}
+ \Delta E_{\rm Rayleigh}=\frac{2\pi\hbar c}{T}
+ =0.2066403\ \mathrm{MeV}\quad(T=6000\ \mathrm{fm}/c).
+\end{equation}
+The package can retain the full complex response and signed cross channels.
+Cross responses are not forced positive or automatically interpreted as
+transition probabilities. Electromagnetic $B(E\lambda)$ conversion requires
+an explicitly compatible channel/operator convention.
+
+For $L=2,M=0$ the native undamped operator is
+$F_{20}=\sqrt{5}\,r^2Y_{20}=5(2z^2-x^2-y^2)/(4\sqrt{\pi})$.
+The source also supplies the configured radial cutoff and species factors.
+This replay uses the code-native normalization on both axes of the response,
+with strength units fm$^4$/MeV. No tesseral or electromagnetic normalization
+is silently applied to make curves coincide. Positive-$M$ code-native
+components require explicit convention checks when converting to a
+different tesseral basis or combining intrinsic channels.
+
+All three replay spectra use the archived full CPU unboosted history.
+Fresh CPU and GPU unboosted controls cover 200 fm/$c$ and reproduce its
+prefix, with raw quadrupole differences below approximately
+$10^{-12}$ fm$^2$. There is no fresh full-duration GPU unboosted trajectory
+in this evidence set. Using the same archived reference makes the backend
+comparison controlled, but does not supply that missing independent run.
+
+\subsection{Measured agreement and timing}
+The CPU complete replay takes 1206.884946 s and GPU 499.043311 s,
+a $2.4184\times$ single-pair ratio. These jobs include matched diagnostics
+and final checkpoint output. The response comparison record is
+\path{CUDA/results/20ne-k0-final/quadrupole-comparison.json}.
+
+At $\Gamma_{\rm sm}=0.5$ MeV, GPU/current-CPU strength has relative
+$L_2$ error $5.11079\times10^{-12}$ over 0.5--35 MeV and maximum
+error divided by the reference peak $4.37736\times10^{-12}$.
+The largest raw $Q$ difference is $1.39266\times10^{-12}$ fm$^2$.
+Final complex wavefunctions differ by $2.69124\times10^{-12}$ relative
+$L_2$. Current CPU versus archived raw quadrupole differs by at most
+$2.84217\times10^{-13}$ fm$^2$; reanalysis of the archived signal
+reproduces its saved CSV to approximately $10^{-12}$ relative $L_2$.
+
+\begin{table}[htbp]\centering\small
+\input{tables/smoothing.tex}
+\caption{Relative $L_2$ strength differences for every smoothing width used in the archived plot. GPU comparisons use 0.5--35 MeV; archived reanalysis checks the saved CSV energy range. No fit, energy shift or amplitude rescaling is applied.}
+\label{tab:smoothing}\end{table}
+
+CPU, GPU and archived curves select the same GQR peak at
+16.551539314 MeV when the search is restricted to 10--35 MeV.
+The strong low-energy peak near 6 MeV is outside this selected giant-resonance
+window. The peak location is an analysed grid value, not a precision claim
+beyond the propagation/smoothing resolution. Matching many displayed digits
+indicates a common discrete analysis grid, not experimentally determined
+energy accuracy.
+
+\fig{quadrupole-overlay}{Archived $z$-aligned \Ne{} $K=0$ replay: baseline/reference-subtracted time history and code-native strength at $\Gamma_{\rm sm}=0.5$ MeV. Curves overlap closely. This coarse-grid calculation fails the independent orthogonality gate and is shown as a reproduction test.}{fig:quad-overlay}{.70}
+\fig{quadrupole-differences}{Differences between current GPU, current CPU and archived CPU response, with no fitting. The lower panel divides strength differences by the archived reference peak. Small backend differences do not resolve the common physical qualification failure.}{fig:quad-diff}{.62}
+\fig{quadrupole-smoothing-overlay}{CPU/GPU/archived comparison at all three saved smoothing widths. The same baseline subtraction, code-native normalization and zero-padding are applied. These are three analyses of the same trajectory, not three independent physical calculations.}{fig:quad-smooth}{.74}
+
+\subsection{Physical endpoint audit: retained failure}
+The separate \ev{response-endpoint} audit intentionally records
+\code{passed=false} and exits two. Its CPU/GPU-equivalence flag is true.
+At 6000 fm/$c$ the occupied Gram errors are
+\begin{equation}
+ \max|G-I|_{\rm CPU}=6.4174654\times10^{-5},\qquad
+ \max|G-I|_{\rm GPU}=6.4174654\times10^{-5},
+\end{equation}
+both above the unchanged $10^{-6}$ error/drift gate. Their Gram matrices
+differ by only $1.93179\times10^{-14}$. Both have maximum native printed
+integrated-energy drift $1.6880\times10^{-4}$ MeV. Energy drift is recorded
+without promoting it to a production-accuracy pass.
+
+Maximum particle drift is $3.2592\times10^{-6}$. An explicit replay-only
+$5\times10^{-6}$ particle budget is used to reproduce the already archived
+coarse trajectory. The fine/default $10^{-6}$ budget is retained, and the
+orthogonality limit is not raised. A relaxed replay particle budget does
+not qualify the long calculation physically.
+
+A fresh strict CPU-field probe of the archived initial state finds weighted
+direct residual $1.22313\times10^{-4}$ MeV and full projected symmetry
+errors $4.33886\times10^{-4}$ MeV for neutrons and
+$3.61694\times10^{-4}$ MeV for protons. A probe of the fine benchmark
+state finds weighted residual $1.59823\times10^{-8}$ MeV and symmetry
+errors $4.54675\times10^{-8}$ and $3.55370\times10^{-8}$ MeV. These two
+seed probes are in \ev{response-reference-grid-audit}; because they are
+different prepared states/orientations, they are not by themselves a
+controlled long-response mesh-convergence sequence.
+
+The matching response plot establishes faithful reproduction of that CPU
+calculation. A refined, reconverged long response with timestep, box, mesh,
+baseline and physical-conservation studies is still required before a
+production claim. There is no operator symmetrization, spectrum alignment
+or discarded failed audit that turns this result into a qualified spectrum.
+
+\sepsection{Orientation, laboratory \texorpdfstring{$M$}{M} and intrinsic \texorpdfstring{$K$}{K}}
+\label{sec:orientation}
+\subsection{What alignment describes}
+TDHF boosts the supplied static state. An alignment label describes that
+state's orientation relative to the Cartesian coordinates; it is not a
+separate physical choice imposed after boosting, nor a new static solution.
+The inspection tool reconstructs the density tensor
+\begin{equation}
+ C_{ab}=\frac{1}{A}\int d^3r\,\rho(\mathbf r)
+ (r_a-R_a)(r_b-R_b),
+\end{equation}
+whose eigenvectors give principal density axes. Eigenvector signs are
+conventional; nearly degenerate transverse eigenvectors are not individually
+robust. A spherical density has no preferred intrinsic axis, while a
+triaxial density does not have a single axial-symmetry $K$ label.
+
+For the fine SLy5 checkpoint, mean-square coordinates are
+\begin{equation}
+ (\langle x^2\rangle,\langle y^2\rangle,\langle z^2\rangle)
+ =(4.4294926753,\,2.1950896567,\,2.1950896614)\ \mathrm{fm}^2.
+\end{equation}
+The long axis is $x$, and the transverse relative splitting is
+$2.13\times10^{-9}$. Native laboratory $M=0$ is about $z$, through
+$2z^2-x^2-y^2$. For an axial nucleus it corresponds to intrinsic $K=0$
+when the symmetry axis is $z$. Applied to the $x$-aligned state it is
+a valid laboratory boost but excites a mixture of intrinsic channels.
+
+The fine timing benchmark retains that original $x$ orientation and
+does not claim to compute the archived $K=0$ spectrum. The response
+replay uses the archived $z$-aligned coarse state, so its boost/readout
+frame matches the saved local plot. Their spectra and timings cannot
+be substituted for one another.
+
+\subsection{Rotation of the complete state}
+One way to define an intrinsic-axis response is to use a correspondingly
+rotated boost/readout operator. The included input does not provide a
+generic invented ``alignment flag'' that performs this transformation.
+Another way is to rotate the full static state, including its spinors,
+before applying the native $z$-axis operator.
+
+The existing
+\path{projects/mg24_mqc_snp2026/scripts/rotate_wf_axis.py} performs active
+$R_y(-\pi/2)$, taking the long $x$ axis to $z$. In spin space this includes
+$\exp[-i\theta\sigma_y/2]$. Rotating only scalar density coordinates
+would not rotate the full spin-dependent Slater determinant. Rotation
+of deformed TDDFT states is discussed in Ref.~\cite{rotation}.
+
+Equal $x/z$ grid dimensions and spacings allow this quarter-turn to use
+an exact index permutation rather than interpolation. The fine-state
+rotation changes discrete norms by at most $8.1\times10^{-15}$ and
+interchanges the $x/z$ mean squares. \ev{orientation} and \ev{rotation}
+record the original and rotated checkpoint identities. Arbitrary angles
+or unequal grids require additional interpolation and grid-level checks;
+the exact-permutation result does not qualify every possible rotation.
+
+\fig{orientation}{Mean-square coordinates of the original fine \Ne{} state and its exact quarter-turn rotation. The long axis changes from $x$ to $z$ while transverse values and norms are preserved within roundoff.}{fig:orientation}{.43}
+
+\sepsection{Device memory and the 12 GB operating policy}
+\label{sec:memory}
+\subsection{Allocation model}
+For $G$ physical cells and $S$ propagated orbitals, the required device bytes
+are
+\begin{align}
+ M_{\rm arrays}&=G(288S+1016)+52S
+     +8\left\lceil\frac{G}{256}\right\rceil\max(10S,38),\\
+ M_{\rm required}&=M_{\rm arrays}+M_{\rm FFT,max}.
+ \label{eq:memory}
+\end{align}
+Nine complex-double orbital banks each contain $2GS$ values, giving
+$9\times16\times2GS=288GS$ bytes. The grid-only term includes potentials,
+field derivatives, current and old $22G$ density banks, scalar Coulomb,
+and two doubled-volume complex Coulomb banks. Per-orbital weights,
+isospin, static statistics and saved energies give $52S$ bytes. The
+remaining term reserves the largest block-reduction output.
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{@{}p{.64\linewidth}r@{}}\toprule
+Grid-only allocation group & Bytes per cell\\\midrule
+$U_q,B_q$ and four three-component species fields & 224\\
+Current density bank (11 components/species) & 176\\
+Field derivative helpers: divergence, Laplacian, gradient and two curls & 176\\
+Scalar Coulomb potential & 8\\
+Two complex-double Coulomb banks of $8G$ values each & 256\\
+Old predictor density bank & 176\\\midrule
+Total & 1016\\\bottomrule
+\end{tabular}
+\caption{Audit of the grid-only term in Equation~\eqref{eq:memory}. Both species and vector components are included.}
+\label{tab:memory-components}\end{table}
+
+$M_{\rm FFT,max}$ is queried from actual plans, including the static
+preconditioner, rather than inferred from a generic FFT estimate. For the
+recorded queried shapes the returned workspace is zero, but this is not
+assumed for other sizes/toolkits. cuFFT plan metadata, CUDA context, graph
+objects, host RAM and competing applications are outside the array formula
+and require headroom. Single-batch integer indexing is also checked before
+allocation; memory fit alone does not waive those implementation limits.
+
+\subsection{Warning, refusal and exit status}
+Preflight queries currently free VRAM and classifies the requirement as
+fitting, pressure or insufficient. The default safety fraction is 0.80.
+Above 60\% of free VRAM it warns about limited headroom and recommends a
+matched parallel-CPU comparison. Above the safety budget it refuses GPU
+allocation and recommends the CPU backend. A fraction override must be
+finite and between 0.05 and 0.95; the CLI and runtime should use matching
+fractions. Other applications may still allocate between the check and
+allocation, so the check does not guarantee a later allocation succeeds.
+
+\begin{table}[htbp]\centering\small
+\input{tables/memory.tex}
+\caption{Actual array/workspace queries in \texttt{preflight.json}. The 208-orbital rows are capacity fixtures, not prepared nuclei or measured nuclear workloads.}
+\label{tab:memory}\end{table}
+\fig{memory}{Queried single-GPU requirements and the 80\% budget of the free VRAM in the saved query. GiB means $2^{30}$ bytes; the device's marketed 12 GB and reported MiB are distinct unit conventions.}{fig:memory}{.43}
+
+CLI status zero means fit or pressure, two means insufficient memory and
+one means unavailable/invalid query. A CUDA runtime failure prints an error
+and exits three. A deliberate runtime control uses a 5\% safety fraction
+with a $64^3/20$-state case and exits three before allocating large banks.
+Simulated available-memory cases verify pressure/refusal boundaries; the
+simulation is labelled and does not run a nucleus.
+
+\subsection{Why the warning cannot predict speed}
+Nuclear mass number alone does not determine memory: empty orbitals,
+pairing spaces and mesh resolution affect $S$ and $G$. The same number of
+particles can have different propagated-state counts and costs. A case
+that fits can still run slower because of small batches, setup, retained
+CPU work, diagnostic I/O or hardware FP64/FFT characteristics.
+
+Conversely, a case that exceeds capacity is not transparently paged by
+this backend. Repeated chunk transfers or managed-memory paging in a
+different implementation could erase a speed benefit; those schemes
+are not implemented or benchmarked here. The present tool therefore
+provides a capacity warning/refusal, not a promise that it can infer a
+particular nucleus's GPU/CPU runtime from VRAM alone. Larger hardware
+requires rebuilding, numerical checks and measured complete jobs.
+
+\sepsection{Build and first calculation from a new clone}
+\label{sec:reproduce}
+\subsection{Host prerequisites and toolkit selection}
+The supported workflow is Linux or WSL2 with one NVIDIA GPU, GNU Fortran,
+make, FFTW3, LAPACK/OpenBLAS, a compatible CUDA toolkit and Python 3.11 or
+newer. NumPy is required by validators; Matplotlib is required for response
+plots. Python version matters because the scripts use
+\code{hashlib.file_digest} and the response package uses \code{tomllib}.
+
+In WSL, install the NVIDIA Windows driver and CUDA toolkit according to the
+official WSL guide \cite{wsl}. Do not install a Linux display driver inside
+WSL. For native Linux use NVIDIA's Linux toolkit installation guide. RTX
+5070/SM120 requires a toolkit supporting that architecture; CUDA 12.8
+introduced native Blackwell support \cite{blackwell}, and CUDA 13.0 is the
+tested version here. A toolkit upgrade should be followed by a clean local
+rebuild and matched numerical checks.
+
+The original environment contained an older \path{/usr/bin/nvcc} from CUDA
+12.0 and an already installed CUDA 13.0 toolkit. Shell initialization was
+adjusted, with backups, to prefer \path{/usr/local/cuda/bin}; the work did
+not require claiming a new compiler installation. Check the compiler
+actually used. The ``CUDA Version'' displayed by \code{nvidia-smi}
+describes driver capability and does not prove that \code{nvcc} exists.
+
+The following commands run in a Linux/WSL Bash terminal. Dependency
+installation requires the normal operating-system administrative rights:
+\begin{lstlisting}
+sudo apt-get update
+sudo apt-get install git build-essential gfortran make \
+  libfftw3-dev liblapack-dev libopenblas-dev \
+  python3 python3-numpy python3-matplotlib
+export CUDA_HOME=/usr/local/cuda
+export PATH="$CUDA_HOME/bin:$PATH"
+nvidia-smi
+nvcc --version
+gfortran --version
+python3 --version
+\end{lstlisting}
+These commands do not install the CUDA toolkit itself; select the current
+official procedure for the target host. On WSL, \code{nvidia-smi} is also
+available under \path{/usr/lib/wsl/lib/} if absent from \code{PATH}.
+
+\subsection{Clone and build in an isolated directory}
+Clone on the Linux filesystem for the recommended WSL build workflow, and
+retain the environment variables in the same terminal:
+\begin{lstlisting}
+mkdir -p "$HOME/src"
+cd "$HOME/src"
+git clone --branch gpu --single-branch \
+  https://github.com/hyperfi/sky3d.git
+cd sky3d
+export SKY3D_REPO="$PWD"
+export SKY3D_BUILD="$HOME/.cache/sky3d-gpu-build"
+export SKY3D_RESULTS="$HOME/.cache/sky3d-first-run"
+mkdir -p "$SKY3D_RESULTS"
+python3 CUDA/build.py --build-dir "$SKY3D_BUILD" --arch native
+\end{lstlisting}
+\code{native} targets the visible local GPU. \code{--arch sm_120} explicitly
+targets the tested RTX 5070; use an architecture supported by the destination
+toolkit/device. The builder copies source into isolated variant directories,
+clears only their enumerated generated objects/modules, and leaves original
+\path{Code/} objects and scientific files alone.
+
+\begin{table}[htbp]\centering\small
+\begin{tabular}{@{}p{.43\linewidth}p{.48\linewidth}@{}}\toprule
+Output below build directory & Purpose\\\midrule
+\path{gpu/sky3d.gpu} & GPU-linked static and TDHF executable\\
+\path{cpu/sky3d.cpu} & Optimized parallel CPU executable\\
+\path{reference/sky3d.reference} & CPU numerical reference without fast-math/FP contraction\\
+\path{libsky3d_gpu.so} & FP64 CUDA backend\\
+\path{build.json} & Compiler, flags, source and binary identities\\
+\path{cuda-build.log}; variant \path{build.log} & Compilation diagnostics\\\bottomrule
+\end{tabular}
+\caption{Isolated build products. Binaries use host-specific native instructions and library paths; rebuild after moving machines.}
+\label{tab:build-products}\end{table}
+
+\subsection{Prepare and qualify a self-contained \Ox{} case}
+This first calculation requires no external checkpoint download. It generates
+CPU and GPU static states independently, applies the fresh-state gates, and
+compares short TDHF evolution:
+\begin{lstlisting}
+python3 CUDA/preflight.py \
+  --library "$SKY3D_BUILD/libsky3d_gpu.so" \
+  --grid 40 40 40 --states 16
+python3 -m unittest discover -s CUDA/tests -v
+python3 CUDA/validate_single_gpu.py --build-dir "$SKY3D_BUILD" \
+  --mode prepare --prepare-case 16o-sly5 \
+  --prepare-mesh 40 --prepare-spacing 0.6 --maxiter 6000 \
+  --output "$SKY3D_RESULTS/16o.json"
+python3 CUDA/validate_prepared_tdhf.py --build-dir "$SKY3D_BUILD" \
+  --preparation "$SKY3D_RESULTS/16o.json" --case 16o-sly5 \
+  --output "$SKY3D_RESULTS/16o-own-gpu.json"
+\end{lstlisting}
+Successful reports contain \code{"passed": true}. Raw files remain in newly
+created cache directories recorded in those reports. A failed preparation
+preserves its partial result; inspect its stdout and static/fresh-field gates
+before using the checkpoint. This fixture is a first execution/implementation
+check, not a response spectrum or repeated speed benchmark.
+
+\subsection{Launch the included TDHF input}
+The example \path{CUDA/examples/16o-tdhf.in} sets SLy5, no pairing,
+$40^3/0.6$ fm, 100 steps at 0.1 fm/$c$, Taylor order four,
+$L=2,M=0,\eta=5\times10^{-5}$, \code{mprint=10}, \code{mplot=0},
+and \code{mrest=100}. Sky3D reads \code{for005} in its working
+directory, and fragment paths are relative to that directory.
+Copy the independently qualified GPU static state into a fresh calculation:
+\begin{lstlisting}
+cd "$SKY3D_REPO"
+export SKY3D_RUN="$(mktemp -d "$HOME/.cache/sky3d-16o-run.XXXXXX")"
+cp CUDA/examples/16o-tdhf.in "$SKY3D_RUN/for005"
+python3 - <<'PY'
+import json, os, shutil
+from pathlib import Path
+report = json.loads((Path(os.environ['SKY3D_RESULTS']) / '16o.json').read_text())
+if not report['passed']:
+    raise SystemExit('Preparation/TDHF gates failed')
+case = next(c for c in report['cases'] if c['case'] == '16o-sly5')
+seed = Path(case['runs']['static-gpu']['directory']) / 'static.tdhf'
+shutil.copy2(seed, Path(os.environ['SKY3D_RUN']) / 'initial.tdhf')
+PY
+python3 CUDA/preflight.py \
+  --library "$SKY3D_BUILD/libsky3d_gpu.so" \
+  --input "$SKY3D_RUN/for005"
+export OMP_NUM_THREADS=8 OPENBLAS_NUM_THREADS=1
+export OMP_PROC_BIND=close OMP_PLACES=cores
+cd "$SKY3D_RUN"
+SKY3D_BACKEND=gpu "$SKY3D_BUILD/gpu/sky3d.gpu" > stdout.log 2>&1
+\end{lstlisting}
+Verify the saved endpoint and particles explicitly:
+\begin{lstlisting}
+python3 - <<'PY'
+import os, sys
+from pathlib import Path
+sys.path.insert(0, str(Path(os.environ['SKY3D_REPO']) / 'CUDA'))
+from benchmark import checkpoint
+s = checkpoint(Path(os.environ['SKY3D_RUN']) / 'dynamic.tdhf')
+if s['step'] != 100 or abs(s['time'] - 10.) > 1e-8:
+    raise SystemExit('Incomplete endpoint: inspect stdout.log')
+if max(abs(p - 8.) for p in s['particles']) > 1e-6:
+    raise SystemExit('Particle conservation failed')
+print(s['step'], s['time'], s['particles'])
+PY
+\end{lstlisting}
+The protocol outputs include \path{stdout.log}, \path{energies.res},
+\path{quadrupoles.res} and \path{monopoles.res}. The final checkpoint
+is \path{dynamic.tdhf}.
+The example disables density snapshots. For a CPU comparison, create another
+fresh directory with identical \code{for005} and \code{initial.tdhf}; use
+\code{SKY3D_BACKEND=cpu} and \path{cpu/sky3d.cpu}. Do not reuse an output
+directory in a way that overwrites the GPU evidence.
+
+\subsection{Additional validation and matched benchmarking}
+The specialized benchmark runner expects SLy5 \Ne{} with 20 states; it is
+not a generic \Ox{} benchmark. A qualified fine \Ne{} checkpoint can be
+supplied separately. The following commands record matched checks and
+complete-job timing on the destination host:
+\begin{lstlisting}
+cd "$SKY3D_REPO"
+python3 CUDA/benchmark.py --build-dir "$SKY3D_BUILD" \
+  --state /path/to/validated-fine-20ne.tdhf --mode benchmark \
+  --steps 200 --dt 0.1 --repetitions 3 \
+  --cpu-threads 4 8 20 --gpu-threads 8
+python3 CUDA/validate_extended.py --build-dir "$SKY3D_BUILD" \
+  --state /path/to/validated-fine-20ne.tdhf \
+  --output "$SKY3D_RESULTS/extended.json"
+python3 CUDA/validate_single_gpu.py --build-dir "$SKY3D_BUILD" \
+  --mode prepare --prepare-case 20ne-sly4-vdi \
+  --prepare-mesh 56 --prepare-spacing 0.42857142857142855 \
+  --prepare-serr 1e-7 --dynamic-dt 0.05 --maxiter 6000 \
+  --output "$SKY3D_RESULTS/paired.json"
+python3 CUDA/validate_prepared_tdhf.py --build-dir "$SKY3D_BUILD" \
+  --preparation "$SKY3D_RESULTS/paired.json" --case 20ne-sly4-vdi \
+  --output "$SKY3D_RESULTS/paired-own-gpu.json"
+python3 CUDA/validate_memory.py --build-dir "$SKY3D_BUILD" \
+  --output "$SKY3D_RESULTS/memory.json"
+\end{lstlisting}
+Rectangular strict-reference controls need the explicitly justified
+initial-flow comparison allowance described in Section~\ref{sec:validation};
+do not generalize it to other fields or later times. General preflight accepts
+explicit \code{--grid} and \code{--states}, or can inspect one-fragment
+inputs/checkpoints. Multiple fragments and manual capacity cases should
+supply the total propagated-state count explicitly.
+
+The response-analysis workflow is configuration driven. The entry point
+\path{Utils/Strength_Calculation/Fourier.py} now invokes the configuration-driven
+package in place of the earlier interactive one-off script:
+\begin{lstlisting}
+python3 Utils/Strength_Calculation/Fourier.py analyze \
+  --config /path/to/response-config.toml
+\end{lstlisting}
+Inspect the included response configurations for channel columns, boost
+sign/normalization, baseline/reference, smoothing and regions. The package
+can write CSV, HDF5 and PDF/PNG outputs with provenance. It does not infer
+that every isoscalar signal is electromagnetic $B(E\lambda)$ or that a
+cross response should be positive.
+HDF5 export additionally requires \code{h5py>=3.8}; the package declares
+NumPy, Matplotlib and h5py in its requirements. Use a virtual environment
+for package installation, or the host's supported packages. The full
+installation examples are in \path{Utils/Strength_Calculation/README.md}.
+
+\subsection{Clean-clone execution evidence}
+\ev{clone-validation} records a clean local checkout of \code{c939eb5}
+that builds all three executables and passes ten-step standard,
+rectangular and center-of-mass-reset strict-reference comparisons. The
+compiled sources match the tested repaired source after LF normalization;
+different build paths and line endings do not imply byte-identical binaries.
+That clone replay uses the separately preserved fine seed.
+
+\ev{onboarding-validation} additionally records a fresh public HTTPS
+clone of published \code{6784452} on the configured host, with the new
+first-use guide/example overlaid and a native-architecture build. It runs
+all 19 script tests, independent \Ox{} preparation, own-GPU-state TDHF,
+preflight and the manual 100-step example. The manual checkpoint reaches
+10 fm/$c$ with eight neutrons and eight protons; preflight reports about
+0.336 GiB. Cold first-use timings are retained as execution evidence, not
+substituted for repeated benchmark statistics. Operating-system/toolkit
+installation was not repeated on a fresh OS.
+
+\subsection{Troubleshooting by observable failure}
+\begin{longtable}{@{}p{.33\linewidth}p{.58\linewidth}@{}}
+\caption{First-use diagnostics. Preserve the failing calculation and report before changing parameters.}\label{tab:troubleshooting}\\
+\toprule Symptom & Check / action\\\midrule\endfirsthead
+\toprule Symptom & Check / action\\\midrule\endhead
+Missing \code{nvcc} & Check \code{CUDA_HOME}, toolkit installation and compiler \code{PATH}; driver capability is insufficient.\\
+Unsupported architecture & Select a compatible toolkit/architecture and inspect \code{cuda-build.log}.\\
+Missing FFTW/LAPACK/OpenBLAS & Install the development packages and inspect the variant's \code{build.log}.\\
+Missing Python APIs & Use Python 3.11 or newer in the actual invoking shell.\\
+GPU unavailable in WSL & Check Windows driver and WSL2 integration; run \code{nvidia-smi} inside WSL.\\
+Missing shared library after moving a build & Rebuild on the destination host; absolute rpaths and native CPU instructions are host-specific.\\
+VRAM refusal & Count all orbitals, close competing jobs if appropriate, or select parallel CPU; do not assume mass number equals $S$.\\
+Zero status but incomplete output & Check the checkpoint step/time and \code{stdout.log}; legacy \code{STOP} may return zero.\\
+Static or fresh-state gate failure & Preserve evidence, assess mesh/convergence and explicitly selected parameters; do not automatically loosen limits.\\
+Numerical difference on another host & Run matched strict/optimized CPU and GPU controls for that host and case.\\
+\bottomrule
+\end{longtable}
+
+\sepsection{Repository hygiene and reproducibility limits}
+\label{sec:hygiene}
+The branch versions source, scripts, small numerical evidence reports,
+documentation and selected plots. Build products and large scientific
+states/densities are excluded by scoped ignore rules. Excluded local files
+include objects/modules, executables/shared libraries, \code{.tdhf} restart
+states, \code{.tdd} density dumps, large HDF5 outputs and generated caches.
+Static states can be prepared locally or transferred separately rather than
+committed as large binary inputs. Useful inputs, tests, scripts and
+scientific evidence are retained.
+
+The original local inventory contains 337 artifacts, with size and SHA-256
+identities in \path{docs/LOCAL_ARTIFACTS.json}. The recorded
+\ev{preservation-check} confirms all 337 still match and the protected main
+refs remain unchanged. This report makes no claim to have repeated that
+full raw-data hash scan during document generation. Source and figure
+preparation is read-only with respect to those preserved numerical outputs.
+
+\subsection{Completed implementation scope}
+The implemented single-GPU work covers fields/Coulomb, persistent dynamic
+densities, diagnostics, static acceleration, component controls, VRAM
+protection, repeatable complete-job measurement and clone/run documentation.
+It retains CPU fallbacks and the scientific file formats. The current
+evidence supports the qualified small cases and the explicitly bounded
+archived replay comparison.
+
+\subsection{Outstanding scientific and hardware qualification}
+\begin{enumerate}
+\item A refined and reconverged production-length \Ne{} response must pass
+physical orthogonality/conservation and mesh, box and timestep studies.
+The current coarse long replay remains failed.
+\item A full-duration independent GPU unboosted baseline and extended
+intrinsic-channel studies would strengthen response-specific qualification.
+Short nonzero-$M$ controls do not supply those spectra.
+\item Larger nuclei, different orbital spaces, other functionals/pairing
+choices and destination hardware require independent static preparation,
+matched CPU/GPU controls and complete-job measurements.
+\item Further single-GPU optimization should follow measured propagation/FFT
+costs while preserving FP64 and the native operator. Additional speedups
+are not yet quantified.
+\item Multi-GPU/MPI offload and out-of-core execution are outside the
+implemented scope. Their capacity/communication tradeoffs are unmeasured.
+\end{enumerate}
+Software equivalence and reproducibility are established for the recorded
+tests. Scientific production qualification remains a property of each
+calculation, rather than a property conferred by the branch name.
+
+\clearpage
+\appendix
+\section{Source and workflow inventory}
+\label{app:source}
+\begin{longtable}{@{}p{.40\linewidth}p{.51\linewidth}@{}}
+\caption{Principal implementation and verification files at the report snapshot.}\\
+\toprule File & Responsibility\\\midrule\endfirsthead
+\toprule File & Responsibility\\\midrule\endhead
+\path{CUDA/sky_gpu.cu} & Device state, FP64 Hamiltonian/densities, spectral helpers, field/Coulomb kernels, graph cache, static gradients, capacity query and C ABI.\\
+\path{CUDA/reductions.cuh} & Block-reduction definitions for moments, orbital properties and static statistics.\\
+\path{CUDA/gpu_runtime.f90} & Fortran/C binding, runtime selection, residency and component controls, transfers and diagnostics.\\
+\path{Code/gpu_runtime.f90} & CPU-only runtime interface, preserving a CUDA-independent executable.\\
+\path{Code/Makefile} & Runtime object and configurable isolated build/compiler/link settings.\\
+\path{Code/dynamic.f90} & GPU prediction/correction hooks, density reset, field/diagnostic time-level repair and synchronized consumers.\\
+\path{Code/static.f90} & Read-only Hamiltonian matrix pass, convergence bookkeeping/status and GPU gradient/field hooks.\\
+\path{Code/meanfield.f90} & Device field construction and native CPU fallback.\\
+\path{Code/coulomb.f90} & Native kernel configuration exposed to backend.\\
+\path{Code/moment.f90} & Native $M=0$ reduction routing and repaired static CPU-field selection.\\
+\path{Code/params.f90}, \path{Code/inout.f90} & Guarded output scheduling and synchronized density output.\\
+\path{Code/fragments.f90} & Longer namelist fragment filename storage.\\
+\path{CUDA/build.py} & Isolated three-variant builder and source/compiler/binary hashes.\\
+\path{CUDA/benchmark.py} & Checkpoint parser, geometry-aware inputs, strict controls, repeated timing, restart and dynamic sanitizer modes.\\
+\path{CUDA/validate_extended.py} & Boost/timestep/order matrix and longer matched endpoint checks.\\
+\path{CUDA/validate_energy_fix.py} & Energy refresh, pulse and restart comparisons.\\
+\path{CUDA/validate_single_gpu.py} & Component/mode coverage and independent static/fresh-field/TDHF preparation.\\
+\path{CUDA/validate_prepared_tdhf.py} & Evolution of independently prepared GPU state; physical output comparison.\\
+\path{CUDA/resume_prepared_dynamics.py} & Hash/gate-checked reuse of static states on frozen build with explicit new timestep.\\
+\path{CUDA/static_convergence.py} & Fresh CPU-field probes, projected symmetry and residual/refinement studies.\\
+\path{CUDA/preflight.py} & Actual-plan memory query, input/state inspection and simulated-memory policy.\\
+\path{CUDA/validate_memory.py} & Pressure/refusal and runtime guard tests; paired static memcheck.\\
+\path{CUDA/profile_stages.py} & Isolated instrumentation with exclusive and nested timers and trajectory comparison.\\
+\path{CUDA/compare_quadrupole.py} & Exact archived K=0 replay, baseline/FFT checks and smoothing plots.\\
+\path{CUDA/audit_response_endpoint.py} & Separate physical endpoint audit with explicit failed status.\\
+\path{CUDA/inspect_orientation.py} & Density principal-axis tensor and checkpoint orientation.\\
+\path{CUDA/check_*.py} & Focused energy, preflight, static and status control checks.\\
+\path{CUDA/tests/} & Nineteen runner/contract regression tests in recorded final checks.\\
+\path{CUDA/examples/16o-tdhf.in} & Self-contained first-use TDHF input after local state generation.\\
+\path{Utils/Strength_Calculation/sky3d_response/} & Configuration, signed complex transforms, reference subtraction, strength summaries, exports and plots.\\
+\path{Utils/Strength_Calculation/Fourier.py} & Familiar filename now routed to the configuration-driven package CLI.\\
+\path{docs/GPU_QUICKSTART.md}, \path{CUDA/README.md} & New-clone workflow and detailed controls/reproduction.\\
+\path{docs/SINGLE_GPU_RESULTS.md} & Current measured outcomes and explicit limitations.\\
+\path{docs/GPU_AUDIT.md}, \path{docs/CPU_FIXES.md} & Historical feasibility evidence and control repairs.\\
+\bottomrule
+\end{longtable}
+
+\subsection{Exported backend interface}
+The C-compatible functions are listed below by responsibility:
+\begin{lstlisting}
+Capacity/lifetime: sky_gpu_memory, sky_gpu_create, sky_gpu_destroy
+Fields: sky_gpu_fields, sky_gpu_coulomb_config, sky_gpu_skyrme,
+        sky_gpu_coulomb_pull, sky_gpu_fields_pull
+Evolution: sky_gpu_stage, sky_gpu_pull, sky_gpu_push
+Densities: sky_gpu_density_pull, sky_gpu_density_refresh
+Diagnostics: sky_gpu_properties, sky_gpu_moments_first,
+             sky_gpu_moments_second
+Static/probe: sky_gpu_static_step, sky_gpu_hamiltonian, sky_gpu_probe
+\end{lstlisting}
+Allocation/query errors and runtime errors are translated to explicit
+diagnostics. The Fortran interface is the normal integration surface;
+users do not need to call these functions directly to run Sky3D.
+
+\subsection{Other organized research material}
+The branch also carries response-analysis tests/configurations and organized
+\path{projects/icnpa2026_20Ne_Kresolved_E2/} and
+\path{projects/mg24_mqc_snp2026/} workflows inherited from the research
+checkpoint. The former supplies the archived local response comparator;
+the latter supplies the existing spinor quarter-turn utility. The \Ox{}/
+\Ne{} GPU checks do not validate every other research calculation or
+manuscript present in the repository. Those files are not additional CUDA
+physics implementations or GPU benchmark cases.
+
+\section{Key state and binary identities}
+\label{app:hashes}
+Full SHA-256 identities identify the exact two distinct \Ne{} seeds and
+the recorded numerical binaries. Their parent commit labels can differ
+from later documentation commits; source manifests in the reports supply
+the actual compiled contents.
+\input{tables/key_hashes.tex}
+
+\section{Evidence file identities}
+\label{app:evidence}
+The following records were read when creating the report assets, tables
+and provenance manifest. Each digest hashes the saved file bytes. The
+companion manifest additionally lists the current relevant source files
+and exact raw time-history inputs. Failed reports appear alongside passing
+reports intentionally. The path convention is repository relative.
+{\small\setlength{\parskip}{3pt}\input{tables/evidence_hashes.tex}}
+
+\section{Rebuild this report}
+\label{app:report}
+The editable source is \path{docs/report/sky3d_single_gpu_report.tex};
+figures and small generated tables are under \path{docs/report/assets/}
+and \path{docs/report/tables/}. Saved vector figures make ordinary report
+compilation independent of the large scientific checkpoints or local cache.
+The original raw response histories are needed only to regenerate those
+figures from data with \path{make_assets.py}.
+
+Run the report builder from Linux/WSL with an existing PDFLaTeX installation:
+\begin{lstlisting}
+python3 docs/report/build_report.py
+\end{lstlisting}
+It runs enough compilation passes for contents, figure/table lists and
+references, keeps intermediate files under the ignored \path{docs/report/build/}
+directory, and exports \path{output/pdf/sky3d_single_gpu_report.pdf}.
+On the report-generation host an existing MiKTeX PDFLaTeX is invoked through
+WSL interop. No numerical simulation is rerun and no toolkit or TeX
+installation is changed by this builder.
+
+For asset regeneration on the original evidence host:
+\begin{lstlisting}
+python3 docs/report/make_assets.py
+\end{lstlisting}
+The script reads immutable saved reports and time histories, uses FP64 NumPy
+analysis and Matplotlib, verifies the spectral comparison, then writes
+figures/tables and a hash manifest. It does not run Sky3D, rewrite evidence
+JSON or recompute benchmark timings. A new clone can compile the retained
+figures without possessing the original private cache paths.
+
+\clearpage
+\begin{thebibliography}{9}
+\addcontentsline{toc}{section}{References}
+\bibitem{sky3d} J. A. Maruhn, P.-G. Reinhard, P. D. Stevenson and A. S. Umar,
+\emph{The TDHF Code Sky3D}, Computer Physics Communications (2014),
+\href{https://doi.org/10.1016/j.cpc.2014.04.008}{doi:10.1016/j.cpc.2014.04.008};
+\href{https://arxiv.org/abs/1310.5946}{arXiv:1310.5946}.
+\bibitem{sky3d12} Abhishek, P. Stevenson, Y. Shi, E. Y\"uksel and S. Umar,
+\emph{The TDHF code Sky3D version 1.2} (2024),
+\href{https://doi.org/10.1016/j.cpc.2024.109239}{doi:10.1016/j.cpc.2024.109239};
+\href{https://arxiv.org/abs/2405.08531}{arXiv:2405.08531}.
+\bibitem{rotation} D. A. Pigg, A. S. Umar and V. E. Oberacker,
+\emph{Eulerian Rotations of Deformed Nuclei for TDDFT Calculations},
+Computer Physics Communications 185, 1410 (2014),
+\href{https://doi.org/10.1016/j.cpc.2014.02.004}{doi:10.1016/j.cpc.2014.02.004};
+\href{https://arxiv.org/abs/0904.0598}{arXiv:0904.0598}.
+\bibitem{cufft} NVIDIA, \emph{cuFFT, CUDA Toolkit 13.0 documentation},
+\url{https://docs.nvidia.com/cuda/archive/13.0.0/cufft/index.html}.
+\bibitem{wsl} NVIDIA, \emph{CUDA on WSL User Guide},
+\url{https://docs.nvidia.com/cuda/wsl-user-guide/index.html}.
+\bibitem{blackwell} NVIDIA, \emph{CUDA Toolkit Now Available for NVIDIA Blackwell},
+\url{https://developer.nvidia.com/blog/cuda-toolkit-12-8-delivers-nvidia-blackwell-support}.
+\end{thebibliography}
+\end{document}

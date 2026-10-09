@@ -28,3 +28,7 @@ __pycache__/
 /Test/GR/*.png
 /Test/GR/for005
 /Test/GR/restart
+
+# Generated report exports; retain editable source and vector figure assets.
+/output/pdf/sky3d_single_gpu_report.pdf
+/output/pdf/sky3d_single_gpu_report_sources.zip
