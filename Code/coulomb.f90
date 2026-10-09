@@ -125,11 +125,15 @@ MODULE Coulomb
   INTEGER(C_LONG),PRIVATE,SAVE :: coulplan1,coulplan2
   !>@}  
   REAL(db),ALLOCATABLE,SAVE :: wcoul(:,:,:)  !< the Coulomb potential as a three-dimensional array. Units: MeV.
-  COMPLEX(db),PRIVATE,ALLOCATABLE,SAVE :: q(:,:,:) !<array for the complex Green’s function (isolated) or array
+  COMPLEX(db),PRIVATE,ALLOCATABLE,TARGET,SAVE :: q(:,:,:) !<array for the complex Green’s function (isolated) or array
   !!of 1/r values. Its dimension also depends on the boundary condition.
   PUBLIC :: poisson,coulinit,wcoul
   PRIVATE :: initiq
 CONTAINS
+  SUBROUTINE get_coulomb_kernel(kernel)
+    COMPLEX(db),POINTER,INTENT(OUT) :: kernel(:,:,:)
+    kernel=>q
+  END SUBROUTINE get_coulomb_kernel
 !---------------------------------------------------------------------------  
 ! DESCRIPTION: poisson
 !> @brief

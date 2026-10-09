@@ -223,6 +223,7 @@ CONTAINS
     !$OMP END PARALLEL DO
     IF(tmpi) CALL collect_densities
     ! calculate mean fields and external fields
+    CALL gpu_initialize(psi,wocc(globalindex),isospin(globalindex),(/dx,dy,dz/),tfft,tmpi)
     IF(text_timedep) ALLOCATE(bare_upot(nx,ny,nz,2))
     CALL skyrme
     IF(text_timedep) THEN
@@ -235,7 +236,6 @@ CONTAINS
        upot=bare_upot
        CALL extfld(time+dt)
     ENDIF
-    CALL gpu_initialize(psi,wocc(globalindex),isospin(globalindex),(/dx,dy,dz/),tfft,tmpi)
     IF(gpu_enabled) THEN
        CALL upload_gpu_fields
        CALL validate_gpu_initial

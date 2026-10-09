@@ -17,8 +17,9 @@ def allocation_bytes(grid, states):
     cells = math.prod(grid)
     if cells > (2**31 - 1)//22 or cells * 2 * states > 2**31 - 1:
         raise ValueError('Case exceeds current single-batch indexing limits')
-    # Nine complex128 banks, 50 real64 fields, one weight/isospin per state.
-    return cells * (2 * states * 16 * 9 + 50 * 8) + states * 12
+    # Nine wavefunction banks; density/field helpers; worst-case isolated
+    # Coulomb work/kernel on the doubled box. Periodic runs reserve this too.
+    return cells * (2 * states * 16 * 9 + 840) + states * 12
 
 
 def assess(required, free, fraction=0.8):

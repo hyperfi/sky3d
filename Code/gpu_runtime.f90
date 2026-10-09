@@ -3,7 +3,23 @@ MODULE GPU_Runtime
   USE Params, ONLY: db
   IMPLICIT NONE
   LOGICAL :: gpu_enabled=.FALSE.
+  LOGICAL :: gpu_fields_enabled=.FALSE.
 CONTAINS
+  SUBROUTINE gpu_coulomb_config(q,periodic,scale)
+    COMPLEX(db),INTENT(IN) :: q(:,:,:)
+    LOGICAL,INTENT(IN) :: periodic
+    REAL(db),INTENT(IN) :: scale
+  END SUBROUTINE
+  SUBROUTINE gpu_coulomb_pull(wc)
+    REAL(db),INTENT(OUT) :: wc(:,:,:)
+  END SUBROUTINE
+  SUBROUTINE gpu_skyrme(f,r,t,c,sd,j,u,b,s,dbm,a,w)
+    REAL(db),INTENT(IN) :: f(:),r(:,:,:,:),t(:,:,:,:)
+    REAL(db),INTENT(IN) :: c(:,:,:,:,:),sd(:,:,:,:,:),j(:,:,:,:,:)
+    REAL(db),INTENT(OUT) :: u(:,:,:,:),b(:,:,:,:)
+    REAL(db),INTENT(OUT) :: s(:,:,:,:,:),dbm(:,:,:,:,:),a(:,:,:,:,:),w(:,:,:,:,:)
+    ERROR STOP 'GPU fields called in CPU build'
+  END SUBROUTINE
   SUBROUTINE gpu_initialize(ps,weights,iq,spacing,tfft,tmpi)
     COMPLEX(db),INTENT(INOUT) :: ps(:,:,:,:,:)
     REAL(db),INTENT(IN) :: weights(:),spacing(3)

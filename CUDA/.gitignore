@@ -35,6 +35,12 @@
 /results/20ne-40x40x40/energy-fixed/*
 !/results/20ne-40x40x40/energy-fixed/benchmark.json
 !/results/20ne-40x40x40/energy-fixed/validation.json
+!/results/20ne-40x40x40/field-port/
+/results/20ne-40x40x40/field-port/*
+!/results/20ne-40x40x40/field-port/validation.json
+!/results/20ne-40x40x40/field-port/benchmark.json
+!/results/20ne-40x40x40/field-port/sanitizer.json
+!/results/20ne-40x40x40/field-port/preflight.json
 /results/20ne-k0-response/*
 !/results/20ne-k0-response/quadrupole-comparison.json
 !/results/20ne-k0-response/quadrupole-overlay.png

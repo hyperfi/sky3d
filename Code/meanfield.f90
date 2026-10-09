@@ -23,12 +23,12 @@
 !!not need access to the wave functions.
 !------------------------------------------------------------------------------
 Module Meanfield
-  USE Params, ONLY: db,tcoul
+  USE Params, ONLY: db,tcoul,pi,e2
   USE Densities
   USE Forces 
-  USE Grids, ONLY: nx,ny,nz,der1x,der2x,der1y,der2y,der1z,der2z
-  USE Coulomb, ONLY: poisson,wcoul
-  USE GPU_Runtime, ONLY: gpu_fields
+  USE Grids, ONLY: nx,ny,nz,der1x,der2x,der1y,der2y,der1z,der2z,periodic,wxyz
+  USE Coulomb, ONLY: poisson,wcoul,get_coulomb_kernel
+  USE GPU_Runtime, ONLY: gpu_fields,gpu_enabled,gpu_fields_enabled,gpu_skyrme,gpu_coulomb_config,gpu_coulomb_pull
   IMPLICIT NONE
   REAL(db),ALLOCATABLE,DIMENSION(:,:,:,:)   :: upot   !<this is the local part of the mean field 
   !!\f$ U_q \f$. It is a scalar field with isospin index.
@@ -131,6 +131,19 @@ CONTAINS
     REAL(db) :: rotspp,rotspn
     REAL(db),ALLOCATABLE :: workden(:,:,:,:),workvec(:,:,:,:,:)
     INTEGER :: ix,iy,iz,ic,iq,icomp
+    REAL(db) :: coeff(15)
+    COMPLEX(db),POINTER :: coul_kernel(:,:,:)
+    IF(gpu_enabled.AND.gpu_fields_enabled) THEN
+       coeff=(/b0,b0p,b1,b1p,b2,b2p,b3,b3p,b4,b4p,f%power,slate, &
+                f%h2m(1),f%h2m(2),MERGE(1.D0,0.D0,f%ex/=0)/)
+       IF(tcoul) THEN
+          CALL get_coulomb_kernel(coul_kernel)
+          CALL gpu_coulomb_config(coul_kernel,periodic,MERGE(4.D0*pi*e2,e2*wxyz,periodic))
+       ENDIF
+       CALL gpu_skyrme(coeff,rho,tau,current,sdens,sodens,upot,bmass,spot,dbmass,aq,wlspot)
+       IF(tcoul) CALL gpu_coulomb_pull(wcoul)
+       RETURN
+    ENDIF
     ALLOCATE(workden(nx,ny,nz,2),workvec(nx,ny,nz,3,2))
     !  Step 1: 3-body contribution to upot.
     DO iq=1,2  

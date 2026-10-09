@@ -110,8 +110,67 @@ __global__ void density_kernel(const Z* p,const Z* gx,const Z* gy,const Z* gz,
   for(int component=0;component<11;component++)den[cell+g*(component+11*q)]=v[component];
 }
 
+// Real density derivatives use the same Fourier collocation convention as
+// Grids.sder/sder2: first-derivative Nyquist zero, second derivative retained.
+__global__ void pack_real(const double* src,Z* dst,int count,int nx,int ny,int nz,
+                          int axis,int channels,int component){
+  int t=blockIdx.x*blockDim.x+threadIdx.x;if(t>=count)return;
+  int g=nx*ny*nz,index=physical_index(t,nx,ny,nz,axis);
+  dst[t]={src[index%g+g*(component+channels*(index/g))],0};
+}
+__global__ void unpack_real(const Z* src,double* dst,int count,int nx,int ny,int nz,
+                            int axis,int channels,int component,double factor,bool add){
+  int t=blockIdx.x*blockDim.x+threadIdx.x;if(t>=count)return;
+  int g=nx*ny*nz,index=physical_index(t,nx,ny,nz,axis);
+  int out=index%g+g*(component+channels*(index/g));
+  double value=factor*src[t].x;dst[out]=add?dst[out]+value:value;
+}
+__global__ void real_scale(Z* v,int count,int n,double spacing,int order){
+  int t=blockIdx.x*blockDim.x+threadIdx.x;if(t>=count)return;
+  int k=t%n,mode=k<n/2?k:k-n;double wave=mode*(2*PI)/(n*spacing);
+  v[t]=order==2?(-wave*wave/n)*v[t]:(k==n/2?0.0:wave/n)*Z{-v[t].y,v[t].x};
+}
+struct Couplings{double c[15];};
+__global__ void skyrme_local(const double* den,const double* divj,const double* lap,
+  const double* grad,const double* curls,const double* curlc,const double* wc,
+  double* u,double* b,double* s,double* a,double* w,int g,Couplings f,bool coul){
+  int t=blockIdx.x*blockDim.x+threadIdx.x;if(t>=2*g)return;
+  int cell=t%g,q=t/g,other=1-q;const double* c=f.c;
+  double rq=den[cell+g*(11*q)],rc=den[cell+g*(11*other)],total=rq+rc;
+  double nonlinear=pow(total,c[10])*((c[6]*(c[10]+2)/3-2*c[7]/3)*rq
+    +c[6]*(c[10]+2)/3*rc-(c[7]*c[10]/3)*(rq*rq+rc*rc)/(total+1e-25));
+  u[t]=nonlinear-(c[8]+c[9])*divj[t]-c[8]*divj[cell+g*other]
+    +(c[0]-c[1])*rq+c[0]*rc+(c[2]-c[3])*den[cell+g*(1+11*q)]
+    +c[2]*den[cell+g*(1+11*other)]-(c[4]-c[5])*lap[t]-c[4]*lap[cell+g*other];
+  if(coul&&q==1){u[t]+=wc[cell];if(c[14]!=0)u[t]-=c[11]*pow(rq,1.0/3.0);}
+  b[t]=c[12+q]+(c[2]-c[3])*rq+c[2]*rc;
+  for(int k=0;k<3;k++){
+    int i=cell+g*(k+3*q),j=cell+g*(k+3*other);
+    w[i]=(c[8]+c[9])*grad[i]+c[8]*grad[j];
+    a[i]=-2*(c[2]-c[3])*den[cell+g*(2+k+11*q)]-2*c[2]*den[cell+g*(2+k+11*other)]
+      -(c[8]+c[9])*curls[i]-c[8]*curls[j];
+    s[i]=-(c[8]+c[9])*curlc[i]-c[8]*curlc[j];
+  }
+}
+__global__ void coulomb_pad(const double* den,Z* out,int nx,int ny,int nz,int factor){
+  int t=blockIdx.x*blockDim.x+threadIdx.x,g=nx*ny*nz;
+  int xdim=nx*factor,ydim=ny*factor,zdim=nz*factor;
+  if(t>=xdim*ydim*zdim)return;
+  int x=t%xdim,y=(t/xdim)%ydim,z=t/(xdim*ydim);
+  out[t]=(x<nx&&y<ny&&z<nz)?Z{den[x+nx*(y+ny*z)+11*g],0}:Z{0,0};
+}
+__global__ void coulomb_product(Z* data,const Z* kernel,int count,double scale){
+  int t=blockIdx.x*blockDim.x+threadIdx.x;if(t<count)data[t]=scale*(kernel[t]*data[t]);
+}
+__global__ void coulomb_extract(const Z* data,double* wc,int nx,int ny,int nz,int factor){
+  int t=blockIdx.x*blockDim.x+threadIdx.x,g=nx*ny*nz;if(t>=g)return;
+  int x=t%nx,y=(t/nx)%ny,z=t/(nx*ny);
+  wc[t]=data[x+nx*factor*(y+ny*factor*z)].x/(g*factor*factor*factor);
+}
+
 struct PlanSet{
   cufftHandle plans[3]={0,0,0};
+  cufftHandle realplans[3]={0,0,0},coulplans[2]={0,0};
   size_t workspace=0;int nx,ny,nz,states,g,count;
   PlanSet(int x,int y,int z,int ns):nx(x),ny(y),nz(z),states(ns){
     if(x<2||y<2||z<2||x%2||y%2||z%2||ns<1)throw std::runtime_error("Grid dimensions must be positive even integers and states positive");
@@ -122,10 +181,24 @@ struct PlanSet{
       int n=axis==0?x:(axis==1?y:z);size_t bytes=0;
       FFT(cufftCreate(&plans[axis]));FFT(cufftSetAutoAllocation(plans[axis],0));
       FFT(cufftMakePlan1d(plans[axis],n,CUFFT_Z2Z,count/n,&bytes));workspace=std::max(workspace,bytes);
-    }}catch(...){for(auto p:plans)if(p)cufftDestroy(p);throw;}
+    }
+    for(int axis=0;axis<3;axis++){
+      int n=axis==0?x:(axis==1?y:z);size_t bytes=0;
+      FFT(cufftCreate(&realplans[axis]));FFT(cufftSetAutoAllocation(realplans[axis],0));
+      FFT(cufftMakePlan1d(realplans[axis],n,CUFFT_Z2Z,2*g/n,&bytes));workspace=std::max(workspace,bytes);
+    }
+    for(int mode=0;mode<2;mode++){
+      int factor=mode+1;size_t bytes=0;
+      FFT(cufftCreate(&coulplans[mode]));FFT(cufftSetAutoAllocation(coulplans[mode],0));
+      FFT(cufftMakePlan3d(coulplans[mode],factor*z,factor*y,factor*x,CUFFT_Z2Z,&bytes));
+      workspace=std::max(workspace,bytes);
+    }
+    }catch(...){for(auto p:plans)if(p)cufftDestroy(p);for(auto p:realplans)if(p)cufftDestroy(p);
+      for(auto p:coulplans)if(p)cufftDestroy(p);throw;}
   }
-  ~PlanSet(){for(auto p:plans)if(p)cufftDestroy(p);}
-  uint64_t required()const{return uint64_t(count)*sizeof(Z)*9+uint64_t(g)*sizeof(double)*50+uint64_t(states)*12+workspace;}
+  ~PlanSet(){for(auto p:plans)if(p)cufftDestroy(p);for(auto p:realplans)if(p)cufftDestroy(p);
+    for(auto p:coulplans)if(p)cufftDestroy(p);}
+  uint64_t required()const{return uint64_t(count)*sizeof(Z)*9+uint64_t(g)*840+uint64_t(states)*12+workspace;}
 };
 struct DeviceMemory{
   std::vector<void*> pointers;
@@ -148,6 +221,10 @@ struct State:PlanSet{
   GraphCache graphs;
   Z *psi,*result,*term,*h,*d1,*d2,*coupled,*frequency,*second;
   double *u,*b,*s,*dbm,*a,*w,*den,*weights,spacing[3];int* iq;
+  double *divj,*laprho,*gradrho,*curls,*curlc,*wc;
+  Z *coulwork,*coulkernel;
+  bool coul_enabled=false,periodic=false,device_fields=false;
+  double coul_scale=0;
   void* work;
   template<class T>void alloc(T*& p,size_t bytes){CUDA(cudaMalloc(&p,bytes));
     try{allocations.pointers.push_back(p);}catch(...){cudaFree(p);throw;}}
@@ -166,13 +243,53 @@ struct State:PlanSet{
     alloc(u,size_t(g)*2*8);alloc(b,size_t(g)*2*8);
     for(double** p:{&s,&dbm,&a,&w})alloc(*p,size_t(g)*6*8);
     alloc(den,size_t(g)*22*8);alloc(weights,size_t(states)*8);alloc(iq,size_t(states)*4);
+    alloc(divj,size_t(g)*2*8);alloc(laprho,size_t(g)*2*8);
+    for(double** p:{&gradrho,&curls,&curlc})alloc(*p,size_t(g)*6*8);
+    alloc(wc,size_t(g)*8);alloc(coulwork,size_t(g)*8*sizeof(Z));alloc(coulkernel,size_t(g)*8*sizeof(Z));
     work=nullptr;if(workspace)alloc(work,workspace);
     for(auto plan:plans){FFT(cufftSetWorkArea(plan,work));FFT(cufftSetStream(plan,stream));}
+    for(auto plan:realplans){FFT(cufftSetWorkArea(plan,work));FFT(cufftSetStream(plan,stream));}
+    for(auto plan:coulplans){FFT(cufftSetWorkArea(plan,work));FFT(cufftSetStream(plan,stream));}
     CUDA(cudaMemcpy(psi,p,bytes,cudaMemcpyHostToDevice));CUDA(cudaMemcpy(weights,occ,size_t(states)*8,cudaMemcpyHostToDevice));
     CUDA(cudaMemcpy(iq,isospin,size_t(states)*4,cudaMemcpyHostToDevice));
     std::fflush(stdout);
   }
   int blocks()const{return (count-1)/256+1;}
+  void real_derivative(const double* src,int channels,int component,int axis,int order,
+                       double* dst,int outchannels,int outcomponent,double factor=1,bool add=false){
+    int n=axis==0?nx:(axis==1?ny:nz),blocks=(2*g-1)/256+1;
+    pack_real<<<blocks,256,0,stream>>>(src,frequency,2*g,nx,ny,nz,axis,channels,component);
+    FFT(cufftExecZ2Z(realplans[axis],frequency,frequency,CUFFT_FORWARD));
+    real_scale<<<blocks,256,0,stream>>>(frequency,2*g,n,spacing[axis],order);
+    FFT(cufftExecZ2Z(realplans[axis],frequency,frequency,CUFFT_INVERSE));
+    unpack_real<<<blocks,256,0,stream>>>(frequency,dst,2*g,nx,ny,nz,axis,outchannels,outcomponent,factor,add);
+  }
+  void curl(int component,double* output){
+    for(int axis=0;axis<3;axis++){
+      int j=(axis+1)%3,k=(axis+2)%3;
+      real_derivative(den,11,component+k,j,1,output,3,axis);
+      real_derivative(den,11,component+j,k,1,output,3,axis,-1,true);
+    }
+  }
+  void skyrme(Couplings f){
+    for(int axis=0;axis<3;axis++){
+      real_derivative(den,11,8+axis,axis,1,divj,1,0,1,axis!=0);
+      real_derivative(den,11,0,axis,2,laprho,1,0,1,axis!=0);
+      real_derivative(den,11,0,axis,1,gradrho,3,axis);
+    }
+    curl(5,curls);curl(2,curlc);
+    if(coul_enabled){
+      int factor=periodic?1:2,n=g*factor*factor*factor;
+      coulomb_pad<<<(n-1)/256+1,256,0,stream>>>(den,coulwork,nx,ny,nz,factor);
+      FFT(cufftExecZ2Z(coulplans[factor-1],coulwork,coulwork,CUFFT_FORWARD));
+      coulomb_product<<<(n-1)/256+1,256,0,stream>>>(coulwork,coulkernel,n,coul_scale);
+      FFT(cufftExecZ2Z(coulplans[factor-1],coulwork,coulwork,CUFFT_INVERSE));
+      coulomb_extract<<<(g-1)/256+1,256,0,stream>>>(coulwork,wc,nx,ny,nz,factor);
+    }
+    skyrme_local<<<(2*g-1)/256+1,256,0,stream>>>(den,divj,laprho,gradrho,curls,curlc,wc,u,b,s,a,w,g,f,coul_enabled);
+    for(int axis=0;axis<3;axis++)real_derivative(b,1,0,axis,1,dbm,3,axis);
+    CUDA(cudaGetLastError());
+  }
   void derivative(const Z* input,int axis,Z* first,Z* second_output=nullptr){
     int n=axis==0?nx:(axis==1?ny:nz);
     pack_axis<<<blocks(),256,0,stream>>>(input,frequency,count,nx,ny,nz,axis);
@@ -245,6 +362,36 @@ extern "C" void sky_gpu_fields(void* pointer,const double* u,const double* b,con
     for(auto pair:{std::pair<double*,const double*>{p.s,s},{p.dbm,dbm},{p.a,a},{p.w,w}})
       CUDA(cudaMemcpy(pair.first,pair.second,size_t(p.g)*6*8,cudaMemcpyHostToDevice));
   }catch(const std::exception& e){failure(e);}
+}
+extern "C" void sky_gpu_coulomb_config(void* pointer,const Z* kernel,int periodic,double scale){
+  try{State& p=*(State*)pointer;if(p.coul_enabled)return;
+    p.periodic=periodic!=0;p.coul_scale=scale;
+    CUDA(cudaMemcpy(p.coulkernel,kernel,size_t(p.g)*(p.periodic?1:8)*sizeof(Z),cudaMemcpyHostToDevice));
+    p.coul_enabled=true;
+  }catch(const std::exception& e){failure(e);}
+}
+extern "C" void sky_gpu_skyrme(void* pointer,const double* coeff,const double* rho,const double* tau,
+  const double* current,const double* spin,const double* so,double* u,double* b,double* s,double* dbm,double* a,double* w){
+  try{State& p=*(State*)pointer;Couplings f;std::copy(coeff,coeff+15,f.c);
+    for(int q=0;q<2;q++){
+      size_t scalar=size_t(p.g)*8,vector=3*scalar;
+      CUDA(cudaMemcpyAsync(p.den+p.g*(11*q),rho+p.g*q,scalar,cudaMemcpyHostToDevice,p.stream));
+      CUDA(cudaMemcpyAsync(p.den+p.g*(1+11*q),tau+p.g*q,scalar,cudaMemcpyHostToDevice,p.stream));
+      CUDA(cudaMemcpyAsync(p.den+p.g*(2+11*q),current+3*p.g*q,vector,cudaMemcpyHostToDevice,p.stream));
+      CUDA(cudaMemcpyAsync(p.den+p.g*(5+11*q),spin+3*p.g*q,vector,cudaMemcpyHostToDevice,p.stream));
+      CUDA(cudaMemcpyAsync(p.den+p.g*(8+11*q),so+3*p.g*q,vector,cudaMemcpyHostToDevice,p.stream));
+    }
+    p.skyrme(f);CUDA(cudaStreamSynchronize(p.stream));
+    CUDA(cudaMemcpy(u,p.u,size_t(p.g)*2*8,cudaMemcpyDeviceToHost));
+    CUDA(cudaMemcpy(b,p.b,size_t(p.g)*2*8,cudaMemcpyDeviceToHost));
+    for(auto pair:{std::pair<double*,double*>{s,p.s},{dbm,p.dbm},{a,p.a},{w,p.w}})
+      CUDA(cudaMemcpy(pair.first,pair.second,size_t(p.g)*6*8,cudaMemcpyDeviceToHost));
+    p.device_fields=true;
+  }catch(const std::exception& e){failure(e);}
+}
+extern "C" void sky_gpu_coulomb_pull(void* pointer,double* wc){
+  try{State& p=*(State*)pointer;CUDA(cudaMemcpy(wc,p.wc,size_t(p.g)*8,cudaMemcpyDeviceToHost));}
+  catch(const std::exception& e){failure(e);}
 }
 extern "C" void sky_gpu_stage(void* pointer,int order,double dt_hbc,int commit,double* density){
   try{State& p=*(State*)pointer;

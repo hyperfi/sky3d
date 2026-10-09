@@ -1,0 +1,88 @@
+{
+  "cases": [
+    {
+      "grid": [
+        24,
+        24,
+        24
+      ],
+      "states": 20,
+      "required_bytes": 91238640,
+      "cufft_workspace_bytes": 0,
+      "free_bytes": 11543773184,
+      "total_bytes": 12820480000,
+      "status": "fits",
+      "message": "Memory fits with headroom. Only a matched complete-job benchmark can establish GPU speedup.",
+      "simulated": false
+    },
+    {
+      "grid": [
+        48,
+        48,
+        48
+      ],
+      "states": 208,
+      "required_bytes": 6717802944,
+      "cufft_workspace_bytes": 0,
+      "free_bytes": 11543773184,
+      "total_bytes": 12820480000,
+      "status": "fits",
+      "message": "Memory fits with headroom. Only a matched complete-job benchmark can establish GPU speedup.",
+      "simulated": false
+    },
+    {
+      "grid": [
+        64,
+        64,
+        64
+      ],
+      "states": 208,
+      "required_bytes": 15923677632,
+      "cufft_workspace_bytes": 0,
+      "free_bytes": 11543773184,
+      "total_bytes": 12820480000,
+      "status": "insufficient",
+      "message": "GPU case exceeds the free-VRAM safety budget. Use the parallel CPU backend. Paging or repeated chunk transfers in an alternative GPU implementation may be slower than CPU; this backend refuses oversubscription instead of paging.",
+      "simulated": false
+    },
+    {
+      "grid": [
+        48,
+        48,
+        48
+      ],
+      "states": 208,
+      "required_bytes": 6717802944,
+      "assessed_free_bytes": 8589934592,
+      "status": "pressure",
+      "message": "Limited free-VRAM headroom. Close other GPU workloads and benchmark against parallel CPU. Memory pressure may cause allocation failure; fitting in VRAM does not predict a speedup.",
+      "simulated": true
+    },
+    {
+      "grid": [
+        48,
+        48,
+        48
+      ],
+      "states": 208,
+      "required_bytes": 6717802944,
+      "assessed_free_bytes": 6442450944,
+      "status": "insufficient",
+      "message": "GPU case exceeds the free-VRAM safety budget. Use the parallel CPU backend. Paging or repeated chunk transfers in an alternative GPU implementation may be slower than CPU; this backend refuses oversubscription instead of paging.",
+      "simulated": true
+    }
+  ],
+  "runtime_refusal": {
+    "grid": [
+      64,
+      64,
+      64
+    ],
+    "states": 208,
+    "returncode": 3,
+    "stdout": "GPU memory: required 15186.0 MiB incl cuFFT workspace; free 11009.0 MiB, total 12226.6 MiB",
+    "stderr": "Sky3D GPU: Insufficient free VRAM with safety headroom. Use SKY3D_BACKEND=cpu. Oversubscription/extra transfers can be slower than parallel CPU; this backend does not page GPU arrays to system RAM.",
+    "note": "Guard test only: array allocation and null host-pointer reads were never reached"
+  },
+  "passed": true
+}
