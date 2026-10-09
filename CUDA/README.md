@@ -214,3 +214,44 @@ passed validation, memory checking and restart comparisons, followed by three
 CPU configuration and 43.45 seconds for GPU (1.441×, 30.6% less wall time).
 CPU field construction and diagnostics account for about half the instrumented
 GPU job and are the next measured optimization targets.
+
+The [single-GPU plan](../docs/SINGLE_GPU_PLAN.md) sets the order and numerical
+gates for further work; multi-GPU is deferred. Its first validation block uses
+the settled Sly5 20Ne state, runs 10 fm/c boosted/unboosted controls against
+strict CPU, exercises dt=0.1/0.05 and Taylor orders 4/6, and extends the matched
+parallel CPU/GPU trajectory to 100 fm/c:
+
+```bash
+OPENBLAS_NUM_THREADS=1 python3 CUDA/validate_extended.py \
+  --state /path/to/fine_20ne.tdhf --initial-flow-atol 1e-5 \
+  --output CUDA/results/20ne-40x40x40/extended-validation.json
+```
+
+The runner verifies source/executable/library hashes against the build
+manifest. It checks endpoint, particle count, occupied-state overlaps and
+fixed-setting CPU/GPU equivalence, with raw output in a fresh WSL cache
+directory. The longer run compares optimized parallel CPU with GPU; strict CPU
+comparisons are the short controls. Timestep/order sensitivity and integrated
+energy drift are recorded separately, without assigning them a production
+accuracy pass. The JSON preserves partial evidence on a failure. This block
+does not complete the wider validation matrix or establish a response spectrum.
+
+Audit the direct Coulomb term's diagnostic time level after that report passes:
+
+```bash
+OPENBLAS_NUM_THREADS=1 python3 CUDA/check_energy_timing.py \
+  --validation CUDA/results/20ne-40x40x40/extended-validation.json \
+  --output CUDA/results/20ne-40x40x40/energy-timing.json
+```
+
+The current `tinfo` call precedes the final `skyrme` field refresh. The audit
+recomputes isolated Coulomb from each saved endpoint density using the existing
+solver's kernel, verifies its time-zero potential against Sky3D, and measures
+the direct Coulomb energy correction. It changes no evolution or output files.
+Printed energies are rounded to `1e-7 MeV`; this check does not assign a physical
+convergence pass or correct the single-particle diagnostic energy.
+
+The [first validation milestone](../docs/EXTENDED_GPU_VALIDATION.md) records
+17 passed numerical jobs and the measured diagnostic timing issue. Stage 1 is
+still in progress; the next correctness task is to resolve that time level
+before adding the field acceleration.

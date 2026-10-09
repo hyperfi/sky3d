@@ -1,0 +1,255 @@
+{
+  "validation_sha256": "ea1671598a6483477207f437bf0343a5581994957bf9c6259555c7676fda7d5f",
+  "state_sha256": "ea7ec8de58dcbe1d37a3c003cffa263b1a58542af27d3abc9f99078c5cea5abc",
+  "analysis_sha256": "68eb68c959015a432fcd14f7761a8d0bdaa3f4e84ea0294602914fce91efa395",
+  "source_sha256": {
+    "Code/coulomb.f90": "8c8294cfe876731441ecf805f03e06aed31732bde443e754a11e1df5cd0fc8cb",
+    "Code/params.f90": "975aec6ec0ad3d11d07c3ac763ec2a1fa7543bf82079ade6ac986cad259dc074",
+    "Code/dynamic.f90": "a1d7c2161d509e5ce4b11feb79da495cd807d9d5dde7f14c9214935e294e002b",
+    "Code/energies.f90": "60d00ab2a55afa73525c175c09651d4d596d248ca8724f258d7c5487e73bb2cc"
+  },
+  "interpretation": "tinfo precedes the end-of-step skyrme refresh; its direct Coulomb term uses the preceding field",
+  "limits": "Only the direct Coulomb contribution is corrected; printed energies are rounded to 1e-7 MeV. This does not change the propagator, correct the single-particle energy or establish production accuracy.",
+  "initial_solver_equivalence_atol_mev": 1e-12,
+  "cases": [
+    {
+      "case": "boost-dt01-order4",
+      "backend": "reference",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 1.7341469968384259e-15
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 1.0887025529981997e-06,
+        "direct_coulomb_energy_correction_mev": -1.532286442745507e-06
+      },
+      "printed_endpoint_energy_drift_mev": 1.499999996212864e-06,
+      "corrected_endpoint_energy_drift_mev": -3.228644826678996e-08
+    },
+    {
+      "case": "boost-dt01-order4",
+      "backend": "cpu",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 7.04302338813825e-16
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 1.0887025547745566e-06,
+        "direct_coulomb_energy_correction_mev": -1.53228644460051e-06
+      },
+      "printed_endpoint_energy_drift_mev": 1.499999996212864e-06,
+      "corrected_endpoint_energy_drift_mev": -3.22864490919483e-08
+    },
+    {
+      "case": "boost-dt01-order4",
+      "backend": "gpu",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 3.946786882030981e-16
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 1.0887025547745566e-06,
+        "direct_coulomb_energy_correction_mev": -1.5322864430869077e-06
+      },
+      "printed_endpoint_energy_drift_mev": 1.499999996212864e-06,
+      "corrected_endpoint_energy_drift_mev": -3.22864472687223e-08
+    },
+    {
+      "case": "boost-dt005-order4",
+      "backend": "reference",
+      "initial": {
+        "potential_max_abs_difference_mev": 3.552713678800501e-15,
+        "direct_coulomb_energy_correction_mev": 2.20126302213171e-15
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 5.353270307040248e-07,
+        "direct_coulomb_energy_correction_mev": -7.367283414564578e-07
+      },
+      "printed_endpoint_energy_drift_mev": 6.999999868639861e-07,
+      "corrected_endpoint_energy_drift_mev": -3.672835679373467e-08
+    },
+    {
+      "case": "boost-dt005-order4",
+      "backend": "cpu",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 1.1280463985388335e-15
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 5.353270307040248e-07,
+        "direct_coulomb_energy_correction_mev": -7.367283407654063e-07
+      },
+      "printed_endpoint_energy_drift_mev": 6.999999868639861e-07,
+      "corrected_endpoint_energy_drift_mev": -3.672835502946653e-08
+    },
+    {
+      "case": "boost-dt005-order4",
+      "backend": "gpu",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 1.1372302513357818e-15
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 5.353270307040248e-07,
+        "direct_coulomb_energy_correction_mev": -7.36728340919701e-07
+      },
+      "printed_endpoint_energy_drift_mev": 6.999999868639861e-07,
+      "corrected_endpoint_energy_drift_mev": -3.6728355192945166e-08
+    },
+    {
+      "case": "boost-dt01-order6",
+      "backend": "reference",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 1.7341469968384259e-15
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 1.0712490325914814e-06,
+        "direct_coulomb_energy_correction_mev": -1.4397175422847789e-06
+      },
+      "printed_endpoint_energy_drift_mev": 1.4000000021496817e-06,
+      "corrected_endpoint_energy_drift_mev": -3.971754186924421e-08
+    },
+    {
+      "case": "boost-dt01-order6",
+      "backend": "cpu",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 5.866854664623887e-16
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 1.071249031703303e-06,
+        "direct_coulomb_energy_correction_mev": -1.4397175427494408e-06
+      },
+      "printed_endpoint_energy_drift_mev": 1.4000000021496817e-06,
+      "corrected_endpoint_energy_drift_mev": -3.9717541186444625e-08
+    },
+    {
+      "case": "boost-dt01-order6",
+      "backend": "gpu",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": -1.2495359806268867e-16
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 1.071249031703303e-06,
+        "direct_coulomb_energy_correction_mev": -1.4397175426398189e-06
+      },
+      "printed_endpoint_energy_drift_mev": 1.4000000021496817e-06,
+      "corrected_endpoint_energy_drift_mev": -3.9717540365183615e-08
+    },
+    {
+      "case": "boost-dt005-order6",
+      "backend": "reference",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 1.7341469968384259e-15
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 5.342362943139278e-07,
+        "direct_coulomb_energy_correction_mev": -7.309423589777742e-07
+      },
+      "printed_endpoint_energy_drift_mev": 6.999999868639861e-07,
+      "corrected_endpoint_energy_drift_mev": -3.0942373847935034e-08
+    },
+    {
+      "case": "boost-dt005-order6",
+      "backend": "cpu",
+      "initial": {
+        "potential_max_abs_difference_mev": 3.552713678800501e-15,
+        "direct_coulomb_energy_correction_mev": 2.040304241114541e-15
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 5.342362952021062e-07,
+        "direct_coulomb_energy_correction_mev": -7.309423593995776e-07
+      },
+      "printed_endpoint_energy_drift_mev": 6.999999868639861e-07,
+      "corrected_endpoint_energy_drift_mev": -3.0942374575895736e-08
+    },
+    {
+      "case": "boost-dt005-order6",
+      "backend": "gpu",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 4.652882068219834e-16
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 5.342362952021062e-07,
+        "direct_coulomb_energy_correction_mev": -7.309423590260875e-07
+      },
+      "printed_endpoint_energy_drift_mev": 6.999999868639861e-07,
+      "corrected_endpoint_energy_drift_mev": -3.094237262738963e-08
+    },
+    {
+      "case": "unboosted-dt01-order4",
+      "backend": "reference",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 1.8505902462094412e-15
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 2.1918073578319763e-08,
+        "direct_coulomb_energy_correction_mev": -6.944212292720529e-08
+      },
+      "printed_endpoint_energy_drift_mev": 9.999999406318238e-08,
+      "corrected_endpoint_energy_drift_mev": 3.055786928538685e-08
+    },
+    {
+      "case": "unboosted-dt01-order4",
+      "backend": "cpu",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 4.626636355925103e-16
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 2.1918074466498183e-08,
+        "direct_coulomb_energy_correction_mev": -6.94421230231734e-08
+      },
+      "printed_endpoint_energy_drift_mev": 9.999999406318238e-08,
+      "corrected_endpoint_energy_drift_mev": 3.055787057734535e-08
+    },
+    {
+      "case": "unboosted-dt01-order4",
+      "backend": "gpu",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 9.028382822710424e-16
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 2.1918074466498183e-08,
+        "direct_coulomb_energy_correction_mev": -6.944212344484195e-08
+      },
+      "printed_endpoint_energy_drift_mev": 9.999999406318238e-08,
+      "corrected_endpoint_energy_drift_mev": 3.0557869715502153e-08
+    },
+    {
+      "case": "long-boost-dt01-order4",
+      "backend": "cpu",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 3.0186241866355295e-17
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 9.476452280665626e-07,
+        "direct_coulomb_energy_correction_mev": 1.354288603803667e-06
+      },
+      "printed_endpoint_energy_drift_mev": -1.3000000080864993e-06,
+      "corrected_endpoint_energy_drift_mev": 5.428859568698139e-08
+    },
+    {
+      "case": "long-boost-dt01-order4",
+      "backend": "gpu",
+      "initial": {
+        "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+        "direct_coulomb_energy_correction_mev": 8.216518653281862e-16
+      },
+      "final": {
+        "potential_max_abs_difference_mev": 9.476452280665626e-07,
+        "direct_coulomb_energy_correction_mev": 1.3542886051403262e-06
+      },
+      "printed_endpoint_energy_drift_mev": -1.3000000080864993e-06,
+      "corrected_endpoint_energy_drift_mev": 5.4288596232175054e-08
+    }
+  ],
+  "passed": true
+}
