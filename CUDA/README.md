@@ -244,7 +244,7 @@ OPENBLAS_NUM_THREADS=1 python3 CUDA/check_energy_timing.py \
   --output CUDA/results/20ne-40x40x40/energy-timing.json
 ```
 
-The current `tinfo` call precedes the final `skyrme` field refresh. The audit
+At the first validation milestone, `tinfo` preceded the final `skyrme` field refresh. The audit
 recomputes isolated Coulomb from each saved endpoint density using the existing
 solver's kernel, verifies its time-zero potential against Sky3D, and measures
 the direct Coulomb energy correction. It changes no evolution or output files.
@@ -252,6 +252,36 @@ Printed energies are rounded to `1e-7 MeV`; this check does not assign a physica
 convergence pass or correct the single-particle diagnostic energy.
 
 The [first validation milestone](../docs/EXTENDED_GPU_VALIDATION.md) records
-17 passed numerical jobs and the measured diagnostic timing issue. Stage 1 is
-still in progress; the next correctness task is to resolve that time level
-before adding the field acceleration.
+17 passed numerical jobs and the measured diagnostic timing issue.
+
+The subsequent [energy correction and response report](../docs/ENERGY_FIX_AND_QUADRUPOLE.md)
+records the fix: endpoint fields are refreshed before diagnostics, while
+external-pulse propagation timing is preserved. Kick/pulse trajectories,
+diagnostic intervals and two restart boundaries pass the new regression
+checks. Fresh matched 40³ timings are 61.79 seconds for CPU and 42.61 seconds
+for GPU: 1.450× speedup, or 31.04% less wall time, for 200 steps at dt=0.1.
+The CPU fields, diagnostics and static preparation remain the next acceleration
+targets in the single-GPU plan.
+
+The response replay uses the original local z-aligned 24³ state and archived
+6000 fm/c K=0 data, which are excluded from Git. It compares both backends
+with the saved time signal and all three smoothing widths without fitting or
+shifting the curves:
+
+```bash
+OPENBLAS_NUM_THREADS=1 python3 CUDA/compare_quadrupole.py \
+  --build-dir /path/to/current/build --particle-atol 5e-6 \
+  --output CUDA/results/20ne-k0-response
+```
+
+The local full replay passed: spectrum relative L2 differences are below
+8.4e-13 against current CPU and 1.3e-12 against the saved calculation for all
+three widths. All three Gamma_sm=0.5 MeV curves give the giant-quadrupole peak
+at 16.55 MeV. The long coarse-grid pair took 19.46 minutes on CPU and 17.84
+minutes on GPU (1.091×); this one matched pair is separate from the repeated
+fine-grid benchmark. Plots and a small JSON are in `results/20ne-k0-response`.
+
+The explicit replay particle budget reflects the measured 3.26e-6 neutron
+drift already present in the archived coarse-grid calculation. Other checks
+retain their default 1e-6 limit. Reproducing that saved case does not establish
+fine-grid convergence, K=1/2 agreement or agreement with experimental data.

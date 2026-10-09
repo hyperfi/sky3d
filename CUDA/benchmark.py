@@ -104,7 +104,9 @@ def input_text(steps, grid=(24, 24, 24), validate=False, resetcm=False, amplitud
     return text
 
 
-def run(exe, path, text, threads, backend, validate=False, prefix=(), restart=None):
+def run(exe, path, text, threads, backend, validate=False, prefix=(), restart=None, particle_atol=1e-6):
+    if not np.isfinite(particle_atol) or particle_atol <= 0:
+        raise ValueError('Checkpoint particle tolerance must be finite and positive')
     path.mkdir()
     if restart:
         shutil.copy2(restart, path / 'k0_restart.tdhf')
@@ -127,7 +129,7 @@ def run(exe, path, text, threads, backend, validate=False, prefix=(), restart=No
                            'A legacy Fortran STOP can return exit code zero.\n' + (path/'stdout.log').read_text()[-2000:])
     dt = float(re.search(r'\bdt=([\d.eEdD+-]+)', text).group(1).replace('D', 'E').replace('d', 'e'))
     assert abs(state['time'] - requested_steps*dt) < 1e-8
-    assert np.max(np.abs(np.array(state['particles'])-10)) < 1e-6, 'Checkpoint particle number drift'
+    assert np.max(np.abs(np.array(state['particles'])-10)) < particle_atol, 'Checkpoint particle number drift'
     energy = np.loadtxt(path / 'energies.res', comments='#', ndmin=2)
     assert np.isfinite(energy).all()
     assert np.max(np.abs(energy[:, 1:3] - 10)) < 1e-5, 'Particle number drift'
@@ -136,6 +138,7 @@ def run(exe, path, text, threads, backend, validate=False, prefix=(), restart=No
                input_sha256=hashlib.sha256(text.encode()).hexdigest(),
                final_time=state['time'], final_energy_mev=float(energy[-1, 3]),
                final_checkpoint_particles=state['particles'])
+    row['checkpoint_particle_atol'] = particle_atol
     if validate:
         csv = (path / 'gpu_validation.csv').read_text().splitlines()
         row['primitive_validation'] = dict(zip(csv[0].split(','), map(float, csv[1].split(','))))

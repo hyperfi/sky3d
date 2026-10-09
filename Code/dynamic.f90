@@ -17,7 +17,7 @@ MODULE DYNAMIC
   USE Moment
   USE Twobody, ONLY: twobody_analysis,istwobody,roft,roft_old
   USE Parallel
-  USE Meanfield, ONLY: skyrme, hpsi, spot,upload_gpu_fields
+  USE Meanfield, ONLY: skyrme, hpsi, spot,upot,upload_gpu_fields
   USE GPU_Runtime, ONLY: gpu_enabled,gpu_initialize,gpu_stage,gpu_pull,gpu_push,gpu_probe,gpu_finish
   USE Trivial, ONLY: overlap
   USE Inout, ONLY: write_wavefunctions,write_densities, plot_density, &
@@ -35,7 +35,7 @@ MODULE DYNAMIC
   !! is stopped if there has been a reseparation into two fragments and their distance exceeds \c rsep. 
   LOGICAL            :: texternal=.FALSE. !< this logical variable indicates that an
   !! external field is present. See module \c External.
-  LOGICAL            :: text_timedep      !< this logical variable indicates that the
+  LOGICAL            :: text_timedep=.FALSE. !< this logical variable indicates that the
   !! external field is time-dependent and does not describe an instantaneous boost.
   REAL(db),PARAMETER :: esf=0.0D0         !< this is the energy shift for the call to \c hpsi. 
   !! Since it is not used in the dynamics part of the code, it
@@ -150,20 +150,21 @@ CONTAINS
 !!  - <b> Step 5: generating some output </b> At this point the time is
 !!    advanced by \c dt because the physical time is now the end of
 !!    the time step, and this must be printed out correctly by the
-!!    following output routines. \c tinfo is called to calculate
-!!    single-particle properties, total energies, and so on.
+!!    following output routines. The fields are refreshed from the final
+!!    densities before \c tinfo calculates single-particle properties and
+!!    total energies. A time-dependent external field is evaluated at the
+!!    diagnostic time, separately from the next predictor's field.
 !!
-!!  - <b> Step 6: finishing up the time step:</b> \c tinfo is called
-!!  to output the calculated data, then \c skyrme and \c extfld
-!!  calculate the mean field and the external field, respectively, for the
-!!  end of the time step, after which the wave functions are written
-!!  onto \c wffile depending on \c mrest.
+!!  - <b> Step 6: finishing up the time step:</b> the existing external-field
+!!  time for the next predictor is restored, then GPU fields are uploaded and
+!!  wave functions are written onto \c wffile depending on \c mrest.
 !!
 !!This ends the time loop and subroutine \c dynamichf itself.
 !--------------------------------------------------------------------------- 
   SUBROUTINE dynamichf
     INTEGER :: nst,istart
     COMPLEX(db),ALLOCATABLE :: ps4(:,:,:,:)
+    REAL(db),ALLOCATABLE :: bare_upot(:,:,:,:)
     ALLOCATE(ps4(nx,ny,nz,2))
     ! Step 1: Preparation phase
     IF(.NOT.trestart) THEN
@@ -222,9 +223,18 @@ CONTAINS
     !$OMP END PARALLEL DO
     IF(tmpi) CALL collect_densities
     ! calculate mean fields and external fields
+    IF(text_timedep) ALLOCATE(bare_upot(nx,ny,nz,2))
     CALL skyrme
-    IF(text_timedep) CALL extfld(0.D0)
+    IF(text_timedep) THEN
+       bare_upot=upot
+       CALL extfld(time)
+    ENDIF
     CALL tinfo
+    ! A restart must reconstruct the same next-predictor field as continuation.
+    IF(text_timedep.AND.trestart) THEN
+       upot=bare_upot
+       CALL extfld(time+dt)
+    ENDIF
     CALL gpu_initialize(psi,wocc(globalindex),isospin(globalindex),(/dx,dy,dz/),tfft,tmpi)
     IF(gpu_enabled) THEN
        CALL upload_gpu_fields
@@ -316,13 +326,21 @@ CONTAINS
              IF(tmpi) CALL collect_densities
           ENDIF
        ENDIF
-       ! Step 5: generating some output
+       ! Step 5: output uses fields and wavefunctions at the same time.
        time=time+dt
+       CALL skyrme
+       IF(text_timedep) THEN
+          bare_upot=upot
+          CALL extfld(time)
+       ENDIF
        CALL tinfo
        ! Step 6: finishing up
-       ! compute densities, currents, potentials etc.                  *
-       CALL skyrme  
-       IF(text_timedep) CALL extfld(time+dt)
+       ! Preserve the original next-predictor external time without an extra
+       ! Skyrme evaluation or subtracting fields with cancellation error.
+       IF(text_timedep) THEN
+          upot=bare_upot
+          CALL extfld(time+dt)
+       ENDIF
        IF(gpu_enabled) CALL upload_gpu_fields
        IF(output_due(iter,mrest)) THEN
           CALL gpu_pull(psi)
@@ -333,6 +351,7 @@ CONTAINS
     CALL gpu_pull(psi)
     CALL gpu_finish
     DEALLOCATE(ps4)
+    IF(ALLOCATED(bare_upot)) DEALLOCATE(bare_upot)
   END SUBROUTINE dynamichf
 !---------------------------------------------------------------------------  
 ! DESCRIPTION: tstep

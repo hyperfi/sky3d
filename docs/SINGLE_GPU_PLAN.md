@@ -144,10 +144,16 @@ actual speedups are documented. A source build alone does not satisfy this gate.
 - Baseline hybrid implementation and fine-grid checkpoint: complete.
 - Stage 1: in progress. The initial 20Ne block passed all 17 numerical jobs,
   including the 100 fm/c CPU/GPU endpoint and 15 script tests. See
-  [the milestone report](EXTENDED_GPU_VALIDATION.md). A measured diagnostic
-  Coulomb time-level issue is the next correctness task, followed by broader
-  nuclei/forces/occupations and restart/diagnostic controls. Physical production
-  accuracy remains pending.
+  [the milestone report](EXTENDED_GPU_VALIDATION.md). The diagnostic Coulomb
+  time-level fix now passes legacy-trajectory, external-pulse, output-interval
+  and two-boundary restart checks; the standard, rectangular and reset-CM
+  comparisons pass again. Fresh timing gives 1.450× speedup. The matched
+  6000 fm/c K=0 response replay passes against current CPU and the saved local
+  calculation at all three smoothing widths; the matched long pair measures
+  1.091× speedup on that separate coarse grid. See
+  [the correction and response report](ENERGY_FIX_AND_QUADRUPOLE.md).
+  Broader nuclei/forces/occupations and physical production accuracy remain
+  pending.
 - Stages 2–5: pending, in the order above.
 - Multi-GPU: deferred until the single-GPU work is complete.
 
