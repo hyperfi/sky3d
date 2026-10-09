@@ -11,13 +11,30 @@ The static solver also uses GPU Hamiltonians, damped gradients, densities and
 fields. Pairing, ordered Gram-Schmidt, basis overlaps, small LAPACK
 diagonalizations, integrated energy output and file I/O retain the CPU paths.
 M=0 geometry/multipoles use GPU reductions; other projections explicitly use
-the native CPU diagnostic formulas. These retained CPU components are part of
+the native CPU diagnostic formulas. Static CPU-field fallback also retains
+CPU moments, so they use the same relaxed density as the CPU solver.
+These retained CPU components are part of
 the measured complete jobs. Multi-GPU/MPI and out-of-core execution are deferred.
 
 The CPU control fixes are described in [CPU_FIXES.md](../docs/CPU_FIXES.md).
 The historical [GPU audit](../docs/GPU_AUDIT.md) contains measurements of the
 earlier source and standalone derivative probe; use the results here for this
 integrated implementation.
+
+## Current measured results
+
+The completed 40³/0.6 fm 20Ne benchmark takes **19.8037 s on GPU versus
+63.1325 s on the best measured parallel CPU: 3.1879x faster**. These are
+three-repetition medians of complete 200-step jobs, with identical output and
+final checkpoint writing. CPU4, CPU8 and CPU20 were measured separately.
+The independent coarse-grid 6000 fm/c response replay takes **499.0433 s
+versus 1206.8849 s: 2.4184x** in one pair of full jobs. CPU, GPU and the saved
+local quadrupole spectra agree across all three smoothing widths.
+The archived coarse response nevertheless fails the physical orthogonality
+gate on both CPU and GPU; matching its plot does not qualify it for production.
+See [SINGLE_GPU_RESULTS.md](../docs/SINGLE_GPU_RESULTS.md) for exact workloads,
+validation evidence, orientation conventions and limits. Speed is case- and
+hardware-dependent; memory fit alone cannot predict it.
 
 ## Build in WSL or Linux
 
@@ -108,6 +125,64 @@ stages. `SKY3D_GPU_GRAPHS=0` disables replay for diagnosis or comparison.
 The implementation uses one nonblocking stream and shared workspace, so FFTs
 and buffer reuse remain ordered. See NVIDIA's [cuFFT graph support](https://docs.nvidia.com/cuda/cufft/index.html#cuda-graphs-support)
 and [CUDA graphs guide](https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/cuda-graphs.html).
+
+## Reproduce final implementation checks
+
+For the final implementation, use a validated checkpoint and an isolated build
+directory. All numerical commands below run in WSL/Linux; substitute the
+checkpoint path, GPU architecture and thread counts for the destination host.
+
+```bash
+python3 CUDA/build.py --build-dir "$HOME/.cache/sky3d-build" --arch native
+python3 CUDA/benchmark.py --build-dir "$HOME/.cache/sky3d-build" \
+  --state /path/to/validated-20ne.tdhf --mode benchmark \
+  --steps 200 --dt 0.1 --repetitions 3 --cpu-threads 4 8 20 --gpu-threads 8
+python3 CUDA/validate_extended.py --build-dir "$HOME/.cache/sky3d-build" \
+  --state /path/to/validated-20ne.tdhf --output /path/to/extended.json
+python3 CUDA/validate_single_gpu.py --build-dir "$HOME/.cache/sky3d-build" \
+  --state /path/to/validated-20ne.tdhf --mode controls --output /path/to/controls.json
+python3 CUDA/validate_single_gpu.py --build-dir "$HOME/.cache/sky3d-build" \
+  --mode prepare --prepare-case 16o-sly5 \
+  --prepare-mesh 40 --prepare-spacing 0.6 --maxiter 6000 --output /path/to/16o.json
+python3 CUDA/validate_single_gpu.py --build-dir "$HOME/.cache/sky3d-build" \
+  --mode prepare --prepare-case 20ne-sly4-vdi --prepare-serr 1e-7 \
+  --prepare-mesh 56 --prepare-spacing 0.42857142857142855 --dynamic-dt 0.05 \
+  --maxiter 6000 --output /path/to/paired.json
+python3 CUDA/validate_prepared_tdhf.py --build-dir "$HOME/.cache/sky3d-build" \
+  --preparation /path/to/paired.json --case 20ne-sly4-vdi \
+  --output /path/to/paired-own-gpu.json
+python3 CUDA/validate_memory.py --build-dir "$HOME/.cache/sky3d-build" \
+  --output /path/to/memory.json
+```
+
+The memory runner queries actual plans, checks pressure/refusal boundaries,
+forces runtime refusal before device-bank allocation with an explicitly small
+safety fraction, and runs a paired static calculation under CUDA memcheck.
+It complements `benchmark.py --mode sanitizer`, which checks the dynamic path.
+`audit_response_endpoint.py` audits a saved response comparison and exits 2
+when its physical endpoint gates fail, preserving both backends' measurements
+and the original limits in the JSON report.
+The longer and independent-state runners preserve partial reports and raw
+calculations if a convergence or comparison gate fails.
+Static preparation needs no external checkpoint. Mesh and timestep choices
+are explicit: the paired fixture required refinement and a smaller timestep
+after strict CPU controls failed. The runner cannot relax its original static
+stopping limit; it accepts an explicitly stricter criterion. See the result
+report for the failed controls and the final validated settings.
+`validate_prepared_tdhf.py` additionally evolves the GPU's own converged state
+and compares physical fields and observables with the CPU workflow. For
+`16o.json`, select `--case 16o-sly5`. Independently prepared orbitals can differ
+by phase or by rotations within degenerate subspaces.
+
+If a timestep fails after static validation, `resume_prepared_dynamics.py`
+can reuse those states on the exact frozen build with an explicit new `--dt`.
+It verifies the original stopping, fresh-field and checkpoint-hash gates first:
+
+```bash
+python3 CUDA/resume_prepared_dynamics.py --build-dir "$HOME/.cache/sky3d-build" \
+  --preparation /path/to/failed-paired.json --case 20ne-sly4-vdi \
+  --dt 0.05 --output /path/to/paired-resumed.json
+```
 
 ## Earlier milestones and reproducibility inputs
 

@@ -27,7 +27,7 @@
 MODULE Moment
   USE Params
   USE Grids, ONLY: nx,ny,nz,x,y,z,wxyz
-  USE GPU_Runtime, ONLY: gpu_enabled,gpu_diagnostics_enabled,gpu_moments_first,gpu_moments_second
+  USE GPU_Runtime, ONLY: gpu_enabled,gpu_diagnostics_enabled,gpu_fields_enabled,gpu_moments_first,gpu_moments_second
   USE Spherical_Harmonics
 
   IMPLICIT NONE
@@ -130,7 +130,9 @@ CONTAINS
     REAL(db) :: Mono(2),Quad(2),Oct(2),HexaDeca(2),DiaTriaConta(2),tmp,facn,facp
     REAL(db) :: Di_is(2),Di_iv(2),first(7,2),second(19,2)
     LOGICAL :: device_moments
-    device_moments=gpu_enabled.AND.gpu_diagnostics_enabled.AND.M_val==0
+    ! Static CPU fields consume the relaxed rho, which is not uploaded to
+    ! the device density bank. Preserve that density's native CPU moments.
+    device_moments=gpu_enabled.AND.gpu_diagnostics_enabled.AND.M_val==0.AND.(tdynamic.OR.gpu_fields_enabled)
     pnr=0.D0
     cm=0.D0
     pcm=0.D0

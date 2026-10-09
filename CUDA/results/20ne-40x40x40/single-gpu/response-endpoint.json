@@ -1,0 +1,74 @@
+{
+  "comparison_sha256": "3ac3960922e723765ab52f80f1094e6e084520bd9aee161cad19597a1e55374c",
+  "runner_sha256": "f9fad842e405cc522cd60afe7c6b00c65c87073701b592bd15dfd0c080203418",
+  "initial_state_sha256": "07353fe3a3fefd74db4a34a129da1f2f969267f9757472193eb6ea3ed5d236f3",
+  "physics": {
+    "nucleus": "20Ne",
+    "force": "Sly5",
+    "grid": [
+      24,
+      24,
+      24
+    ],
+    "spacing_fm": [
+      1,
+      1,
+      1
+    ],
+    "dt_fm_c": 0.2,
+    "steps": 30000,
+    "endpoint_fm_c": 6000,
+    "amplitude": 5e-05,
+    "L": 2,
+    "M": 0,
+    "intrinsic_axis": "z",
+    "gamma_sm_mev": 0.5
+  },
+  "runs": {
+    "cpu": {
+      "gram_max_abs_error": 6.417465404603657e-05,
+      "gram_max_abs_drift": 6.41746540462425e-05,
+      "integrated_energy_initial_mev": -141.9959239,
+      "integrated_energy_final_mev": -141.9957552,
+      "integrated_energy_max_drift_mev": 0.0001688000000115153,
+      "final_particles": [
+        9.999996740798842,
+        9.999998461853291
+      ],
+      "dt_fm_c": 0.2,
+      "taylor_order": 4,
+      "endpoint_complete": true,
+      "finite": true,
+      "particle_max_drift": 3.2592011525167663e-06,
+      "checkpoint_sha256": "7d7d1e0c8f229997ed8c5602e88173936d1581b22794fc99df531e95b775087d",
+      "passed": false
+    },
+    "gpu": {
+      "gram_max_abs_error": 6.417465404581397e-05,
+      "gram_max_abs_drift": 6.417465404602533e-05,
+      "integrated_energy_initial_mev": -141.9959239,
+      "integrated_energy_final_mev": -141.9957552,
+      "integrated_energy_max_drift_mev": 0.0001688000000115153,
+      "final_particles": [
+        9.99999674079877,
+        9.999998461853217
+      ],
+      "dt_fm_c": 0.2,
+      "taylor_order": 4,
+      "endpoint_complete": true,
+      "finite": true,
+      "particle_max_drift": 3.2592012253473968e-06,
+      "checkpoint_sha256": "06a48bef675dffece80410c6fedae0e7a59584d8b09b5b51ae46d720f9579c41",
+      "passed": false
+    }
+  },
+  "passed": false,
+  "cpu_gpu_equivalence_passed": true,
+  "limits": {
+    "gram_max_abs_error_and_drift": 1e-06,
+    "particle_atol": 5e-06,
+    "physical_energy_drift": "recorded at native printed precision; no production accuracy pass"
+  },
+  "cpu_gpu_gram_max_abs_difference": 1.931788070373531e-14,
+  "note": "Physical gates are separate from CPU/GPU equivalence. Failed gates remain failures; both backend endpoints and original limits are recorded."
+}

@@ -1,5 +1,5 @@
 {
-  "run_directory": "/home/abhishek/.cache/sky3d-benchmark-r1m_aytw",
+  "run_directory": "/home/abhishek/.cache/sky3d-benchmark-jtpr2jk4",
   "state_sha256": "ea7ec8de58dcbe1d37a3c003cffa263b1a58542af27d3abc9f99078c5cea5abc",
   "build": {
     "arch": "sm_120",
@@ -11,14 +11,14 @@
     },
     "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
     "gfortran": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
-    "source_commit": "70971055a9f8931c20eb4e6a9cc8fbe433265f29",
+    "source_commit": "a701ad38f23f4e7d0c95417fcc394c75f3da0422",
     "source_dirty": true,
     "executable_sha256": {
-      "reference": "7f77bbe30be33fb12c88eff4c1d432257fbf584dfad0221e37eaabb6c2b723a4",
-      "cpu": "9b4355e0e234103d0cb2290015183dc4a06ef0e5d1ab9e8631dd474ab03adf25",
-      "gpu": "6a8221e849529ff3c43bbf0e671abe018ad88d326b2677637ed327c752e27e1c"
+      "reference": "bf8ba655e2ae506646540b1f64dee88790390efa529fee9cef9e5c131de9e9d4",
+      "cpu": "6d0849613841bcef980b9e9b553c639fd1b10ff3a0ae4027bcbc22af552a319e",
+      "gpu": "5c37f36412d9df90704d320ba56ab9390a25924f3d78c49c8a4024f49d0fc5df"
     },
-    "library_sha256": "30cd193543683c044591ac4a6743c721a6b77995f381c273f731e43e6a56ec1a",
+    "library_sha256": "ae27606c48c218fff9b621e11113e3e1184d245e49d2131486b87fc3c6dc7331",
     "source_sha256": {
       "Code/coulomb.f90": "5d9011974a3ec788b109455033e79d4e7fe3962421e1adc649e23a071690a31d",
       "Code/densities.f90": "4430ddd24940b67f564814a61dbcb68459c18528a9bc8935131bdf0253bfb9b1",
@@ -37,7 +37,7 @@
       "Code/main3d.f90": "06fc16477195b6eefc61276fec50bd27624937d855cef81ca540258d311bebc7",
       "Code/Makefile": "9a23610ad88afabf2103e31532d56ccbcb07c55d47b2b4c55833e0c66731fb2c",
       "Code/meanfield.f90": "59846be7a8b959eca5e1d4007a39538018d5bb4d77f67d0437f6864e34a9972d",
-      "Code/moment.f90": "301231a4975eb2a9e03cd3739a56dca2b681b5ea4383120c7c6145d4d6120677",
+      "Code/moment.f90": "db336897cd25969b51cb81dad618790a57f74934ce24761ba92861891321a29f",
       "Code/pairs.f90": "d872046715200166c9adab75b03d2db36936b5b1d65e9f818e22b734f64ae4a9",
       "Code/parallel.f90": "e6d3e2e2543bedeb90575f859e26e990e2ff14a52f4cefd49d20a8f1c23ce2b8",
       "Code/params.f90": "975aec6ec0ad3d11d07c3ac763ec2a1fa7543bf82079ade6ac986cad259dc074",
@@ -81,52 +81,52 @@
       "case": "standard",
       "variant": "cpu",
       "run": {
-        "directory": "/home/abhishek/.cache/sky3d-benchmark-r1m_aytw/standard-cpu",
-        "seconds": 31.949661045000084,
+        "directory": "/home/abhishek/.cache/sky3d-benchmark-jtpr2jk4/standard-cpu",
+        "seconds": 31.368551131000004,
         "threads": 8,
         "backend": "cpu",
         "input_sha256": "97b30294c1432d44c83728998387da3c7344b7a99352b8b64f67112f0be59761",
         "final_time": 9.99999999999998,
         "final_energy_mev": -141.9803304,
         "final_checkpoint_particles": [
-          9.999999999858696,
+          9.999999999858694,
           9.99999999994971
         ],
         "checkpoint_particle_atol": 1e-06
       },
       "comparison": {
         "wavefunction": {
-          "relative_l2": 9.151427334234719e-14,
-          "max_abs": 2.7979495999526475e-14
+          "relative_l2": 9.154634038181751e-14,
+          "max_abs": 2.79935035761492e-14
         },
         "fields": {
           "Rho": {
-            "relative_l2": 9.186443928815838e-14,
-            "max_abs": 9.83935155574045e-15
+            "relative_l2": 9.187676727923801e-14,
+            "max_abs": 9.853229343548264e-15
           },
           "Tau": {
-            "relative_l2": 7.614689570193146e-14,
+            "relative_l2": 7.613708426393218e-14,
             "max_abs": 7.93809462606987e-15
           },
           "Current": {
-            "relative_l2": 1.2497990004144455e-10,
-            "max_abs": 1.6475536213089725e-15
+            "relative_l2": 1.2507996253221725e-10,
+            "max_abs": 1.6202317265623378e-15
           },
           "Spindens": {
-            "relative_l2": 2.0493341412728753e-09,
-            "max_abs": 6.762006319466218e-15
+            "relative_l2": 2.0510896481725546e-09,
+            "max_abs": 6.765421556309548e-15
           },
           "s-o-Dens": {
-            "relative_l2": 1.8677766201288927e-13,
-            "max_abs": 1.91253263226443e-15
+            "relative_l2": 1.8584720273570614e-13,
+            "max_abs": 1.9116652705264414e-15
           },
           "Upot": {
-            "relative_l2": 4.730772116715971e-14,
-            "max_abs": 3.495870259939693e-12
+            "relative_l2": 4.733363594058619e-14,
+            "max_abs": 3.652189661806915e-12
           },
           "Wcoul": {
-            "relative_l2": 7.033225772850964e-14,
-            "max_abs": 5.071498776487715e-13
+            "relative_l2": 7.040270448266535e-14,
+            "max_abs": 5.080380560684716e-13
           }
         },
         "printed_observables": {
@@ -136,12 +136,12 @@
             "total_integrated_energy_max_abs_mev": 0.0
           },
           "quadrupoles.res": {
-            "relative_l2": 5.748012433784701e-14,
-            "max_abs": 2.0179413695586845e-12
+            "relative_l2": 5.724998737070586e-14,
+            "max_abs": 2.0321522242738865e-12
           },
           "monopoles.res": {
-            "relative_l2": 5.724353589525384e-14,
-            "max_abs": 3.140598892059643e-12
+            "relative_l2": 5.729044123198621e-14,
+            "max_abs": 3.147704319417244e-12
           }
         },
         "tolerances": {
@@ -164,57 +164,57 @@
       "case": "standard",
       "variant": "gpu",
       "run": {
-        "directory": "/home/abhishek/.cache/sky3d-benchmark-r1m_aytw/standard-gpu",
-        "seconds": 11.033337056000164,
+        "directory": "/home/abhishek/.cache/sky3d-benchmark-jtpr2jk4/standard-gpu",
+        "seconds": 10.937973809000027,
         "threads": 8,
         "backend": "gpu",
         "input_sha256": "97b30294c1432d44c83728998387da3c7344b7a99352b8b64f67112f0be59761",
         "final_time": 9.99999999999998,
         "final_energy_mev": -141.9803304,
         "final_checkpoint_particles": [
-          9.999999999858694,
+          9.999999999858696,
           9.99999999994971
         ],
         "checkpoint_particle_atol": 1e-06,
         "primitive_validation": {
-          "hpsi_relative_l2": 4.1590922566182116e-15,
-          "hpsi_max_abs": 2.170592489720835e-14,
-          "density_relative_l2": 3.0985812084013333e-16,
-          "density_max_abs": 5.551115123125783e-17
+          "hpsi_relative_l2": 4.161756299332543e-15,
+          "hpsi_max_abs": 2.2275401441590598e-14,
+          "density_relative_l2": 3.168171102672743e-16,
+          "density_max_abs": 6.938893903907228e-17
         }
       },
       "comparison": {
         "wavefunction": {
-          "relative_l2": 9.135962397404952e-14,
-          "max_abs": 2.7052763827679204e-14
+          "relative_l2": 9.133907358881263e-14,
+          "max_abs": 2.7047961527011434e-14
         },
         "fields": {
           "Rho": {
-            "relative_l2": 8.847605280671845e-14,
+            "relative_l2": 8.846407331231597e-14,
             "max_abs": 9.3119956190435e-15
           },
           "Tau": {
-            "relative_l2": 6.960045741238719e-14,
-            "max_abs": 6.855627177060342e-15
+            "relative_l2": 6.956500189331091e-14,
+            "max_abs": 6.8833827526759706e-15
           },
           "Current": {
-            "relative_l2": 1.05524697787279e-10,
-            "max_abs": 1.4840559336981585e-15
+            "relative_l2": 1.0539971292617531e-10,
+            "max_abs": 1.4558666772135354e-15
           },
           "Spindens": {
-            "relative_l2": 2.0511677321228193e-09,
-            "max_abs": 6.74579749698756e-15
+            "relative_l2": 2.0496817988488157e-09,
+            "max_abs": 6.741623318623491e-15
           },
           "s-o-Dens": {
-            "relative_l2": 1.805516753542635e-13,
-            "max_abs": 1.835337437583462e-15
+            "relative_l2": 1.8070330390783635e-13,
+            "max_abs": 1.837939522797427e-15
           },
           "Upot": {
-            "relative_l2": 4.8937086813498645e-14,
-            "max_abs": 3.382183422218077e-12
+            "relative_l2": 4.891398617239243e-14,
+            "max_abs": 3.424815986363683e-12
           },
           "Wcoul": {
-            "relative_l2": 7.012543803092554e-14,
+            "relative_l2": 7.00767537138392e-14,
             "max_abs": 4.947153797729698e-13
           }
         },
@@ -225,12 +225,12 @@
             "total_integrated_energy_max_abs_mev": 0.0
           },
           "quadrupoles.res": {
-            "relative_l2": 5.984805056053924e-14,
-            "max_abs": 2.6432189770275727e-12
+            "relative_l2": 5.966108649604812e-14,
+            "max_abs": 2.6290081223123707e-12
           },
           "monopoles.res": {
-            "relative_l2": 5.873688561144004e-14,
-            "max_abs": 3.559819106158102e-12
+            "relative_l2": 5.869040696634982e-14,
+            "max_abs": 3.552713678800501e-12
           }
         },
         "tolerances": {
@@ -253,8 +253,8 @@
       "case": "rectangular",
       "variant": "cpu",
       "run": {
-        "directory": "/home/abhishek/.cache/sky3d-benchmark-r1m_aytw/rectangular-cpu",
-        "seconds": 38.99387297600015,
+        "directory": "/home/abhishek/.cache/sky3d-benchmark-jtpr2jk4/rectangular-cpu",
+        "seconds": 38.32545292299994,
         "threads": 8,
         "backend": "cpu",
         "input_sha256": "9a1c3c5308e3416046599e6d2b75e2bd170ffe53d4a272cc3e74f9caaf7f09ef",
@@ -268,37 +268,37 @@
       },
       "comparison": {
         "wavefunction": {
-          "relative_l2": 9.558375538008258e-14,
-          "max_abs": 2.8334515092188663e-14
+          "relative_l2": 9.557675155008312e-14,
+          "max_abs": 2.8276721445739465e-14
         },
         "fields": {
           "Rho": {
-            "relative_l2": 9.074331868026872e-14,
-            "max_abs": 9.686695889854491e-15
+            "relative_l2": 9.076099258174814e-14,
+            "max_abs": 9.645062526431047e-15
           },
           "Tau": {
-            "relative_l2": 7.361599060859181e-14,
-            "max_abs": 7.438494264988549e-15
+            "relative_l2": 7.362153637473226e-14,
+            "max_abs": 7.480127628411992e-15
           },
           "Current": {
-            "relative_l2": 5.6387656590467735e-11,
-            "max_abs": 1.4341826337638253e-15
+            "relative_l2": 5.63336961360296e-11,
+            "max_abs": 1.4298458250738832e-15
           },
           "Spindens": {
-            "relative_l2": 1.5051486338879635e-09,
-            "max_abs": 6.734738634828208e-15
+            "relative_l2": 1.50627057672542e-09,
+            "max_abs": 6.741785948949364e-15
           },
           "s-o-Dens": {
-            "relative_l2": 1.8325874539603585e-13,
-            "max_abs": 1.8604909279851256e-15
+            "relative_l2": 1.8305391668093627e-13,
+            "max_abs": 1.8474805019152996e-15
           },
           "Upot": {
-            "relative_l2": 4.860451132335653e-14,
-            "max_abs": 3.808509063674137e-12
+            "relative_l2": 4.858843387714228e-14,
+            "max_abs": 3.652189661806915e-12
           },
           "Wcoul": {
-            "relative_l2": 7.007445239341491e-14,
-            "max_abs": 5.000444502911705e-13
+            "relative_l2": 7.008466390797312e-14,
+            "max_abs": 4.991562718714704e-13
           }
         },
         "printed_observables": {
@@ -308,11 +308,11 @@
             "total_integrated_energy_max_abs_mev": 0.0
           },
           "quadrupoles.res": {
-            "relative_l2": 6.09581709723334e-14,
-            "max_abs": 2.0605739337042905e-12
+            "relative_l2": 6.093704364261733e-14,
+            "max_abs": 2.05702122002549e-12
           },
           "monopoles.res": {
-            "relative_l2": 5.809962569423132e-14,
+            "relative_l2": 5.811027461302057e-14,
             "max_abs": 3.055333763768431e-12
           }
         },
@@ -336,57 +336,57 @@
       "case": "rectangular",
       "variant": "gpu",
       "run": {
-        "directory": "/home/abhishek/.cache/sky3d-benchmark-r1m_aytw/rectangular-gpu",
-        "seconds": 13.77354217800007,
+        "directory": "/home/abhishek/.cache/sky3d-benchmark-jtpr2jk4/rectangular-gpu",
+        "seconds": 13.642741178000051,
         "threads": 8,
         "backend": "gpu",
         "input_sha256": "9a1c3c5308e3416046599e6d2b75e2bd170ffe53d4a272cc3e74f9caaf7f09ef",
         "final_time": 9.99999999999998,
         "final_energy_mev": -141.979643,
         "final_checkpoint_particles": [
-          9.99999999926234,
+          9.999999999262336,
           9.999999998502513
         ],
         "checkpoint_particle_atol": 1e-06,
         "primitive_validation": {
-          "hpsi_relative_l2": 3.982200076014637e-15,
-          "hpsi_max_abs": 1.831026719408895e-14,
-          "density_relative_l2": 2.6660649904695643e-16,
+          "hpsi_relative_l2": 4.2917528647762466e-15,
+          "hpsi_max_abs": 2.345278802542142e-14,
+          "density_relative_l2": 2.8115318362254943e-16,
           "density_max_abs": 5.551115123125783e-17
         }
       },
       "comparison": {
         "wavefunction": {
-          "relative_l2": 9.663134553492449e-14,
-          "max_abs": 2.8076765212561815e-14
+          "relative_l2": 9.663028584071906e-14,
+          "max_abs": 2.8075159182659597e-14
         },
         "fields": {
           "Rho": {
-            "relative_l2": 8.845831480995834e-14,
-            "max_abs": 9.33975119465913e-15
+            "relative_l2": 8.848577751911584e-14,
+            "max_abs": 9.367506770274758e-15
           },
           "Tau": {
-            "relative_l2": 6.936837306106842e-14,
-            "max_abs": 6.925016116099414e-15
+            "relative_l2": 6.940254793252194e-14,
+            "max_abs": 6.8833827526759706e-15
           },
           "Current": {
-            "relative_l2": 5.0049532748881614e-11,
-            "max_abs": 1.3287981825982342e-15
+            "relative_l2": 5.0035624967154994e-11,
+            "max_abs": 1.326196097384269e-15
           },
           "Spindens": {
-            "relative_l2": 1.5055739324885298e-09,
-            "max_abs": 6.737665980693919e-15
+            "relative_l2": 1.5055327774277595e-09,
+            "max_abs": 6.728233421793295e-15
           },
           "s-o-Dens": {
-            "relative_l2": 1.8000445392355754e-13,
-            "max_abs": 1.8275311819415663e-15
+            "relative_l2": 1.800180671627184e-13,
+            "max_abs": 1.824929096727601e-15
           },
           "Upot": {
-            "relative_l2": 4.964296666062003e-14,
-            "max_abs": 3.538502824085299e-12
+            "relative_l2": 4.9672996449260086e-14,
+            "max_abs": 3.765876499528531e-12
           },
           "Wcoul": {
-            "relative_l2": 6.98648221463345e-14,
+            "relative_l2": 7.003323423247077e-14,
             "max_abs": 4.920508445138694e-13
           }
         },
@@ -397,11 +397,11 @@
             "total_integrated_energy_max_abs_mev": 0.0
           },
           "quadrupoles.res": {
-            "relative_l2": 6.943989994813798e-14,
-            "max_abs": 2.8883562208648073e-12
+            "relative_l2": 6.942863916309098e-14,
+            "max_abs": 2.8812507935072063e-12
           },
           "monopoles.res": {
-            "relative_l2": 5.934697349096435e-14,
+            "relative_l2": 5.934741663431662e-14,
             "max_abs": 3.431921413721284e-12
           }
         },
@@ -425,8 +425,8 @@
       "case": "resetcm",
       "variant": "cpu",
       "run": {
-        "directory": "/home/abhishek/.cache/sky3d-benchmark-r1m_aytw/resetcm-cpu",
-        "seconds": 33.913728522000156,
+        "directory": "/home/abhishek/.cache/sky3d-benchmark-jtpr2jk4/resetcm-cpu",
+        "seconds": 32.902767651999966,
         "threads": 8,
         "backend": "cpu",
         "input_sha256": "8e8f00d93b405636c21ad384ec376774a8b6f02845402df4778008798c46086e",
@@ -434,43 +434,43 @@
         "final_energy_mev": -141.9803304,
         "final_checkpoint_particles": [
           9.999999999858694,
-          9.999999999949708
+          9.99999999994971
         ],
         "checkpoint_particle_atol": 1e-06
       },
       "comparison": {
         "wavefunction": {
-          "relative_l2": 9.15186571628223e-14,
-          "max_abs": 2.804549499095616e-14
+          "relative_l2": 9.151843097700254e-14,
+          "max_abs": 2.8015215915338094e-14
         },
         "fields": {
           "Rho": {
-            "relative_l2": 9.184624829193143e-14,
-            "max_abs": 9.853229343548264e-15
+            "relative_l2": 9.184683299471096e-14,
+            "max_abs": 9.825473767932635e-15
           },
           "Tau": {
-            "relative_l2": 7.612243944730445e-14,
-            "max_abs": 7.91033905045424e-15
+            "relative_l2": 7.61554804934795e-14,
+            "max_abs": 8.007483565108942e-15
           },
           "Current": {
-            "relative_l2": 1.2509481738127366e-10,
-            "max_abs": 1.635844237846129e-15
+            "relative_l2": 1.250280407966723e-10,
+            "max_abs": 1.6254358969902682e-15
           },
           "Spindens": {
-            "relative_l2": 2.0517782395245876e-09,
-            "max_abs": 6.7478574811152825e-15
+            "relative_l2": 2.050081818758665e-09,
+            "max_abs": 6.755067425562311e-15
           },
           "s-o-Dens": {
-            "relative_l2": 1.8625191014984544e-13,
-            "max_abs": 1.9142673557404066e-15
+            "relative_l2": 1.8658502953140836e-13,
+            "max_abs": 1.9402882078800587e-15
           },
           "Upot": {
-            "relative_l2": 4.7305343173788236e-14,
-            "max_abs": 3.609557097661309e-12
+            "relative_l2": 4.728048446828243e-14,
+            "max_abs": 3.680611371237319e-12
           },
           "Wcoul": {
-            "relative_l2": 7.036445574171346e-14,
-            "max_abs": 5.071498776487715e-13
+            "relative_l2": 7.020241595382682e-14,
+            "max_abs": 5.062616992290714e-13
           }
         },
         "printed_observables": {
@@ -480,12 +480,12 @@
             "total_integrated_energy_max_abs_mev": 0.0
           },
           "quadrupoles.res": {
-            "relative_l2": 5.731533261908597e-14,
-            "max_abs": 2.0179413695586845e-12
+            "relative_l2": 5.750114884863627e-14,
+            "max_abs": 2.035704937952687e-12
           },
           "monopoles.res": {
-            "relative_l2": 5.729202789573711e-14,
-            "max_abs": 3.147704319417244e-12
+            "relative_l2": 5.724496250323133e-14,
+            "max_abs": 3.154809746774845e-12
           }
         },
         "tolerances": {
@@ -508,8 +508,8 @@
       "case": "resetcm",
       "variant": "gpu",
       "run": {
-        "directory": "/home/abhishek/.cache/sky3d-benchmark-r1m_aytw/resetcm-gpu",
-        "seconds": 14.135779764000063,
+        "directory": "/home/abhishek/.cache/sky3d-benchmark-jtpr2jk4/resetcm-gpu",
+        "seconds": 13.67388127900017,
         "threads": 8,
         "backend": "gpu",
         "input_sha256": "8e8f00d93b405636c21ad384ec376774a8b6f02845402df4778008798c46086e",
@@ -517,49 +517,49 @@
         "final_energy_mev": -141.9803304,
         "final_checkpoint_particles": [
           9.999999999858694,
-          9.999999999949708
+          9.99999999994971
         ],
         "checkpoint_particle_atol": 1e-06,
         "primitive_validation": {
-          "hpsi_relative_l2": 4.15760527666208e-15,
-          "hpsi_max_abs": 2.145001452144392e-14,
-          "density_relative_l2": 3.0927229374813373e-16,
+          "hpsi_relative_l2": 3.8456367376312555e-15,
+          "hpsi_max_abs": 2.135787485786098e-14,
+          "density_relative_l2": 2.9252077328870385e-16,
           "density_max_abs": 5.551115123125783e-17
         }
       },
       "comparison": {
         "wavefunction": {
-          "relative_l2": 9.135930983412652e-14,
-          "max_abs": 2.7130194922024457e-14
+          "relative_l2": 9.136042459422104e-14,
+          "max_abs": 2.71140757598759e-14
         },
         "fields": {
           "Rho": {
-            "relative_l2": 8.846423630930834e-14,
-            "max_abs": 9.3119956190435e-15
+            "relative_l2": 8.846892542178889e-14,
+            "max_abs": 9.284240043427872e-15
           },
           "Tau": {
-            "relative_l2": 6.941177813587199e-14,
-            "max_abs": 6.8833827526759706e-15
+            "relative_l2": 6.944596360472528e-14,
+            "max_abs": 6.827871601444713e-15
           },
           "Current": {
-            "relative_l2": 1.055259464134867e-10,
-            "max_abs": 1.4664918585038933e-15
+            "relative_l2": 1.0550403425742338e-10,
+            "max_abs": 1.4966326788989903e-15
           },
           "Spindens": {
-            "relative_l2": 2.0518120465916374e-09,
+            "relative_l2": 2.051620945460422e-09,
             "max_abs": 6.7297513048347746e-15
           },
           "s-o-Dens": {
-            "relative_l2": 1.8050752565641312e-13,
-            "max_abs": 1.8561541192951836e-15
+            "relative_l2": 1.8041579359621607e-13,
+            "max_abs": 1.8457457784393227e-15
           },
           "Upot": {
-            "relative_l2": 4.890464114721641e-14,
-            "max_abs": 3.694822225952521e-12
+            "relative_l2": 4.889374451966237e-14,
+            "max_abs": 3.339550858072471e-12
           },
           "Wcoul": {
-            "relative_l2": 7.006140447683044e-14,
-            "max_abs": 4.947153797729698e-13
+            "relative_l2": 7.007155600312645e-14,
+            "max_abs": 4.956035581926699e-13
           }
         },
         "printed_observables": {
@@ -569,12 +569,12 @@
             "total_integrated_energy_max_abs_mev": 0.0
           },
           "quadrupoles.res": {
-            "relative_l2": 5.977101537057189e-14,
-            "max_abs": 2.6361135496699717e-12
+            "relative_l2": 5.976492172684911e-14,
+            "max_abs": 2.632560835991171e-12
           },
           "monopoles.res": {
-            "relative_l2": 5.872218235275753e-14,
-            "max_abs": 3.566924533515703e-12
+            "relative_l2": 5.87405252152797e-14,
+            "max_abs": 3.559819106158102e-12
           }
         },
         "tolerances": {

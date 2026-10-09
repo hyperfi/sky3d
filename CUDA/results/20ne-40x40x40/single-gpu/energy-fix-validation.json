@@ -1,0 +1,711 @@
+{
+  "run_directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza",
+  "state_sha256": "ea7ec8de58dcbe1d37a3c003cffa263b1a58542af27d3abc9f99078c5cea5abc",
+  "build": {
+    "arch": "sm_120",
+    "cuda_home": "/usr/local/cuda",
+    "variants": {
+      "reference": "-O3 -march=native -ffp-contract=off -fopenmp",
+      "cpu": "-O3 -march=native -ffast-math -fopenmp",
+      "gpu": "-O3 -march=native -ffast-math -fopenmp"
+    },
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+    "gfortran": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "source_commit": "70971055a9f8931c20eb4e6a9cc8fbe433265f29",
+    "source_dirty": true,
+    "executable_sha256": {
+      "reference": "7f77bbe30be33fb12c88eff4c1d432257fbf584dfad0221e37eaabb6c2b723a4",
+      "cpu": "9b4355e0e234103d0cb2290015183dc4a06ef0e5d1ab9e8631dd474ab03adf25",
+      "gpu": "6a8221e849529ff3c43bbf0e671abe018ad88d326b2677637ed327c752e27e1c"
+    },
+    "library_sha256": "30cd193543683c044591ac4a6743c721a6b77995f381c273f731e43e6a56ec1a",
+    "source_sha256": {
+      "Code/coulomb.f90": "5d9011974a3ec788b109455033e79d4e7fe3962421e1adc649e23a071690a31d",
+      "Code/densities.f90": "4430ddd24940b67f564814a61dbcb68459c18528a9bc8935131bdf0253bfb9b1",
+      "Code/dynamic.f90": "bb09b047cdb4d95bb15205e1c4fe161e5bcc599341db6622bf1ed5d7955a9e40",
+      "Code/energies.f90": "60d00ab2a55afa73525c175c09651d4d596d248ca8724f258d7c5487e73bb2cc",
+      "Code/external.f90": "4d911dd988e77d805fa49cbd93d6519dc9e8098ecc7f09cfc350613779e750a8",
+      "Code/fftw3.f": "8bdbee5f7a7a28762abd79f536aaf28deaca0197cc0e931b1cb9364f43b2a314",
+      "Code/forces.data": "2c5712b83aed67d310abc50590a3078a8d0e5d8e16b46315d92ba6dfe76f4728",
+      "Code/forces.f90": "380153c21f072d8bc49a59619d9c0c3aa478bd8ebadf483b2c0b7a7e0126373e",
+      "Code/fourier.f90": "ff323a3c9c85aad2e85a01251c1db939c5cb882922330764c9ec0403552c6f40",
+      "Code/fragments.f90": "47aead4560e57fee09dd3012cb79539381dddfa7196b07b58425e092df5f937c",
+      "Code/gpu_runtime.f90": "acf964b740f5f0c50af3e00ab647e3f0f2ce8ed17dd9c9d07e0b23c7cf4f3230",
+      "Code/grids.f90": "2899b53e968f968cd910d220ffa3200ce835b292f21f991aed549907b32226ba",
+      "Code/inout.f90": "fdce0c5da532a2520330fe0f4fe1d3e1cb1df7c904c1b60995999306c5461585",
+      "Code/levels.f90": "40a0cf9bc4ee7e4233766ea6fec057ae21f355a1686d1aa867c6d92f54161bc6",
+      "Code/main3d.f90": "06fc16477195b6eefc61276fec50bd27624937d855cef81ca540258d311bebc7",
+      "Code/Makefile": "9a23610ad88afabf2103e31532d56ccbcb07c55d47b2b4c55833e0c66731fb2c",
+      "Code/meanfield.f90": "59846be7a8b959eca5e1d4007a39538018d5bb4d77f67d0437f6864e34a9972d",
+      "Code/moment.f90": "301231a4975eb2a9e03cd3739a56dca2b681b5ea4383120c7c6145d4d6120677",
+      "Code/pairs.f90": "d872046715200166c9adab75b03d2db36936b5b1d65e9f818e22b734f64ae4a9",
+      "Code/parallel.f90": "e6d3e2e2543bedeb90575f859e26e990e2ff14a52f4cefd49d20a8f1c23ce2b8",
+      "Code/params.f90": "975aec6ec0ad3d11d07c3ac763ec2a1fa7543bf82079ade6ac986cad259dc074",
+      "Code/sequential.f90": "89bd10da9abcbf7bf4fd482c72250e0f6ea23e0a45cc89fa324943273e18cecd",
+      "Code/static.f90": "bc9243946fe926e818c47702f66046cb9395da39ea9579187dad968e57bd2906",
+      "Code/trivial.f90": "e44c37e3fc59391b4fe641d480e5154aa9c9e9bc48a71db8932e1b07b76a8708",
+      "Code/twobody.f90": "69ab4cb00f7c8d8cf13aa2e2f833a4ceff59a4035825670e1f231c88a218b5ab",
+      "Code/user.f90": "59adf01b45cd06afabb57b8a3e232f02605547993ecdbfe4a4717b8f97e74d89",
+      "Code/user_sample.f90": "788f06dcbd29a047ca218a21e73447bee3a7f47e00db5d1a86cbf8009fbabc7b",
+      "Code/ylm.f90": "58b3b7eb7190e8fee4e3e69b46282d75d7efd776445139dcc308c7418afff610",
+      "CUDA/reductions.cuh": "77dfc2a75931c73cbede7106255a02eaddc7a0ab32b868e39c3a59650b42a9e6",
+      "CUDA/gpu_runtime.f90": "774a0bcc5d77ec79e364c8b86078bcb990cdcfb7f01e9974218a50f3b8c315c6",
+      "CUDA/sky_gpu.cu": "7a3dca804d222d0234f2ccd0954f7ed459465e1e50834a8bbbc0255f3fc1061e",
+      "CUDA/build.py": "632743f5995fd7fe4c62e458272294d55c55a32c0b9d925bf31336d1559d47c7"
+    }
+  },
+  "legacy_build": {
+    "arch": "native",
+    "cuda_home": "/usr/local/cuda",
+    "variants": {
+      "reference": "-O3 -march=native -ffp-contract=off -fopenmp",
+      "cpu": "-O3 -march=native -ffast-math -fopenmp",
+      "gpu": "-O3 -march=native -ffast-math -fopenmp"
+    },
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+    "gfortran": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "source_commit": "226a61ae8844c1a4d45c33d969bc682a359423a1",
+    "source_dirty": true,
+    "executable_sha256": {
+      "reference": "38a7e6055d1711a1701e0d0c995dac1e2e71a1bc3ac3bf074bc493a14a220b52",
+      "cpu": "c1355680c47624ad4850ac668bc9784aacaf3e45485c4dc25c83370c0538bc1d",
+      "gpu": "c38ec4c6f4312e9f56d0f8a55cef242c169b53777b343bbe5616d806e7ff9fd1"
+    },
+    "library_sha256": "b0dd28f80adb9c890669752083e81a84c893a9e1bbdc51940c583a990825c441",
+    "source_sha256": {
+      "Code/coulomb.f90": "8c8294cfe876731441ecf805f03e06aed31732bde443e754a11e1df5cd0fc8cb",
+      "Code/densities.f90": "4430ddd24940b67f564814a61dbcb68459c18528a9bc8935131bdf0253bfb9b1",
+      "Code/dynamic.f90": "a1d7c2161d509e5ce4b11feb79da495cd807d9d5dde7f14c9214935e294e002b",
+      "Code/energies.f90": "60d00ab2a55afa73525c175c09651d4d596d248ca8724f258d7c5487e73bb2cc",
+      "Code/external.f90": "4d911dd988e77d805fa49cbd93d6519dc9e8098ecc7f09cfc350613779e750a8",
+      "Code/fftw3.f": "8bdbee5f7a7a28762abd79f536aaf28deaca0197cc0e931b1cb9364f43b2a314",
+      "Code/forces.data": "2c5712b83aed67d310abc50590a3078a8d0e5d8e16b46315d92ba6dfe76f4728",
+      "Code/forces.f90": "380153c21f072d8bc49a59619d9c0c3aa478bd8ebadf483b2c0b7a7e0126373e",
+      "Code/fourier.f90": "ff323a3c9c85aad2e85a01251c1db939c5cb882922330764c9ec0403552c6f40",
+      "Code/fragments.f90": "47aead4560e57fee09dd3012cb79539381dddfa7196b07b58425e092df5f937c",
+      "Code/gpu_runtime.f90": "c8d1824cdec1c645626d4efbb13c2fe9331bfc7bdcb44ae62a79b540887bb1a5",
+      "Code/grids.f90": "2899b53e968f968cd910d220ffa3200ce835b292f21f991aed549907b32226ba",
+      "Code/inout.f90": "d6c667a54e403894c5c505e2937466df3b0297d7d0e944953a4da76167103891",
+      "Code/levels.f90": "40a0cf9bc4ee7e4233766ea6fec057ae21f355a1686d1aa867c6d92f54161bc6",
+      "Code/main3d.f90": "06fc16477195b6eefc61276fec50bd27624937d855cef81ca540258d311bebc7",
+      "Code/Makefile": "1bd1efbc20e0f79ef0ac48c1e73f72add757a1742a11d7e732ea5ae3f5b1ea05",
+      "Code/meanfield.f90": "5350c557ce765810563f2df9f36102ba7f486935918df132e0078bf592431fda",
+      "Code/moment.f90": "c5e1cce10d193aa81b2310ea7ad8d7bb52359c96d4a1b25f8bc0d5b4d28dbf66",
+      "Code/pairs.f90": "d872046715200166c9adab75b03d2db36936b5b1d65e9f818e22b734f64ae4a9",
+      "Code/parallel.f90": "e6d3e2e2543bedeb90575f859e26e990e2ff14a52f4cefd49d20a8f1c23ce2b8",
+      "Code/params.f90": "975aec6ec0ad3d11d07c3ac763ec2a1fa7543bf82079ade6ac986cad259dc074",
+      "Code/sequential.f90": "89bd10da9abcbf7bf4fd482c72250e0f6ea23e0a45cc89fa324943273e18cecd",
+      "Code/static.f90": "f9038cc0019df21ccc572e567af8511c486c7e16cbf77692a9cc4b399ac634b3",
+      "Code/trivial.f90": "e44c37e3fc59391b4fe641d480e5154aa9c9e9bc48a71db8932e1b07b76a8708",
+      "Code/twobody.f90": "69ab4cb00f7c8d8cf13aa2e2f833a4ceff59a4035825670e1f231c88a218b5ab",
+      "Code/user.f90": "59adf01b45cd06afabb57b8a3e232f02605547993ecdbfe4a4717b8f97e74d89",
+      "Code/user_sample.f90": "788f06dcbd29a047ca218a21e73447bee3a7f47e00db5d1a86cbf8009fbabc7b",
+      "Code/ylm.f90": "58b3b7eb7190e8fee4e3e69b46282d75d7efd776445139dcc308c7418afff610",
+      "CUDA/gpu_runtime.f90": "dd56f6bd8e093ae6182814f88195bab171846e2df4e294732abdcb0d0b2cd41c",
+      "CUDA/sky_gpu.cu": "dcb591a54fa3f9cdf6ddf7250e2b8f6c3210f25c728ead3d7a8658c3640097fd",
+      "CUDA/build.py": "b23a08f7827705f275d0b2b5bded438e2c6d2eba4a4a7135d6c999e8e536948d"
+    }
+  },
+  "runner_sha256": "5212ee50bf7d2161f0ef4ccf27e1b25c36dd27b1117e0dda1f8bf0d70f5254d5",
+  "cases": [
+    {
+      "case": "kick",
+      "runs": {
+        "legacy": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/kick-legacy",
+          "seconds": 79.97389073099998,
+          "input_sha256": "97b30294c1432d44c83728998387da3c7344b7a99352b8b64f67112f0be59761",
+          "particles": [
+            9.99999999985949,
+            9.999999999950402
+          ]
+        },
+        "reference": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/kick-reference",
+          "seconds": 80.63115216200003,
+          "input_sha256": "97b30294c1432d44c83728998387da3c7344b7a99352b8b64f67112f0be59761",
+          "particles": [
+            9.99999999985949,
+            9.999999999950402
+          ],
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 3.552713678800501e-15,
+            "direct_coulomb_energy_correction_mev": 1.7733633799928479e-15
+          }
+        },
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/kick-cpu",
+          "seconds": 32.00381489799997,
+          "input_sha256": "97b30294c1432d44c83728998387da3c7344b7a99352b8b64f67112f0be59761",
+          "particles": [
+            9.999999999858696,
+            9.99999999994971
+          ],
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+            "direct_coulomb_energy_correction_mev": 9.175098971128598e-16
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 9.154556495546372e-14,
+              "max_abs": 2.799823999863599e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 9.18946412753524e-14,
+                "max_abs": 9.867107131356079e-15
+              },
+              "Tau": {
+                "relative_l2": 7.616183287925536e-14,
+                "max_abs": 7.993605777301127e-15
+              },
+              "Current": {
+                "relative_l2": 1.2507495670899995e-10,
+                "max_abs": 1.622616971341806e-15
+              },
+              "Spindens": {
+                "relative_l2": 2.0494069427657035e-09,
+                "max_abs": 6.73755756047667e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.8645157586722244e-13,
+                "max_abs": 1.89605275924265e-15
+              },
+              "Upot": {
+                "relative_l2": 4.727673167030885e-14,
+                "max_abs": 3.510081114654895e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.039349862721494e-14,
+                "max_abs": 5.080380560684716e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 0.0,
+                "max_abs": 0.0,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 5.719286098042559e-14,
+                "max_abs": 2.0179413695586845e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 5.733032722490401e-14,
+                "max_abs": 3.154809746774845e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/kick-gpu",
+          "seconds": 10.933102433000158,
+          "input_sha256": "97b30294c1432d44c83728998387da3c7344b7a99352b8b64f67112f0be59761",
+          "particles": [
+            9.999999999858696,
+            9.99999999994971
+          ],
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 3.552713678800501e-15,
+            "direct_coulomb_energy_correction_mev": -7.997947649589055e-16
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 9.135987997844535e-14,
+              "max_abs": 2.70649250715097e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 8.850427550876565e-14,
+                "max_abs": 9.298117831235686e-15
+              },
+              "Tau": {
+                "relative_l2": 6.961977413763862e-14,
+                "max_abs": 6.8833827526759706e-15
+              },
+              "Current": {
+                "relative_l2": 1.0546929457729653e-10,
+                "max_abs": 1.4784180824012338e-15
+              },
+              "Spindens": {
+                "relative_l2": 2.048713099907398e-09,
+                "max_abs": 6.7397801749302655e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.8116970395884933e-13,
+                "max_abs": 1.8752360775309285e-15
+              },
+              "Upot": {
+                "relative_l2": 4.890093582673972e-14,
+                "max_abs": 3.339550858072471e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.007836270581337e-14,
+                "max_abs": 4.947153797729698e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 0.0,
+                "max_abs": 0.0,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 5.985130944389153e-14,
+                "max_abs": 2.639666263348772e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 5.869008367562356e-14,
+                "max_abs": 3.552713678800501e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        }
+      },
+      "legacy_wavefunction_comparison": {
+        "relative_l2": 0.0,
+        "max_abs": 0.0
+      },
+      "passed": true
+    },
+    {
+      "case": "pulse",
+      "runs": {
+        "legacy": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-legacy",
+          "seconds": 35.45703437500015,
+          "input_sha256": "87af69951c921f9c1fd4edddf4e590d4fee92bacbc5a261473fdfabb6d180e39",
+          "particles": [
+            9.999999999934166,
+            9.999999999970111
+          ]
+        },
+        "reference": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-reference",
+          "seconds": 36.03540560900001,
+          "input_sha256": "87af69951c921f9c1fd4edddf4e590d4fee92bacbc5a261473fdfabb6d180e39",
+          "particles": [
+            9.999999999934168,
+            9.999999999970111
+          ],
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+            "direct_coulomb_energy_correction_mev": 1.1080190524545322e-15
+          }
+        },
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-cpu",
+          "seconds": 16.038855911999917,
+          "input_sha256": "87af69951c921f9c1fd4edddf4e590d4fee92bacbc5a261473fdfabb6d180e39",
+          "particles": [
+            9.999999999933372,
+            9.999999999969416
+          ],
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 3.552713678800501e-15,
+            "direct_coulomb_energy_correction_mev": 2.574664865027922e-15
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 6.18893126066093e-14,
+              "max_abs": 2.0659123035425e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 8.697712420434385e-14,
+                "max_abs": 9.048317650695026e-15
+              },
+              "Tau": {
+                "relative_l2": 6.754231665025883e-14,
+                "max_abs": 6.147859998861804e-15
+              },
+              "Current": {
+                "relative_l2": 8.509216425464388e-09,
+                "max_abs": 9.532305500492555e-16
+              },
+              "Spindens": {
+                "relative_l2": 1.5954630341755284e-05,
+                "max_abs": 6.410887445906788e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.5253478008732315e-13,
+                "max_abs": 1.5126788710517758e-15
+              },
+              "Upot": {
+                "relative_l2": 4.605521276024468e-14,
+                "max_abs": 3.637978807091713e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.01149862328602e-14,
+                "max_abs": 4.947153797729698e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 6.098672304436204e-24,
+                "max_abs": 4.999999999987262e-21,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 6.12489199442109e-14,
+                "max_abs": 1.98596694644948e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 6.113181252743028e-14,
+                "max_abs": 3.240074875066057e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-gpu",
+          "seconds": 6.210769561999996,
+          "input_sha256": "87af69951c921f9c1fd4edddf4e590d4fee92bacbc5a261473fdfabb6d180e39",
+          "particles": [
+            9.999999999933372,
+            9.999999999969416
+          ],
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+            "direct_coulomb_energy_correction_mev": -8.171865984993235e-16
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 6.189041497091369e-14,
+              "max_abs": 2.050155123184851e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 8.627852787998225e-14,
+                "max_abs": 8.965050923848139e-15
+              },
+              "Tau": {
+                "relative_l2": 6.639218655539479e-14,
+                "max_abs": 6.078471059822732e-15
+              },
+              "Current": {
+                "relative_l2": 8.98186689098116e-09,
+                "max_abs": 1.036063596027148e-15
+              },
+              "Spindens": {
+                "relative_l2": 1.592877055217167e-05,
+                "max_abs": 6.389691293434696e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.5216131093537637e-13,
+                "max_abs": 1.4849232954361469e-15
+              },
+              "Upot": {
+                "relative_l2": 4.754698759532277e-14,
+                "max_abs": 3.169020601490047e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.000618613386494e-14,
+                "max_abs": 4.911626660941693e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 5.8180870255932624e-24,
+                "max_abs": 4.000000000019392e-21,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 5.892844930274807e-14,
+                "max_abs": 2.7355895326763857e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 6.454478284538616e-14,
+                "max_abs": 3.659295089164516e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        }
+      },
+      "legacy_wavefunction_comparison": {
+        "relative_l2": 7.592122766894169e-16,
+        "max_abs": 1.8041124150158794e-16
+      },
+      "passed": true
+    },
+    {
+      "case": "pulse-mprint-0",
+      "runs": {
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-mprint-0-cpu",
+          "seconds": 13.33413226000016,
+          "input_sha256": "1e011661c477a98def5163dea77881ad17a95c3144ada4858e9d3fc2a1679563",
+          "particles": [
+            9.999999999933372,
+            9.999999999969416
+          ],
+          "wavefunction": {
+            "relative_l2": 6.189112957337881e-14,
+            "max_abs": 2.0686159003849653e-14
+          },
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+            "direct_coulomb_energy_correction_mev": 1.994442913025314e-15
+          }
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-mprint-0-gpu",
+          "seconds": 5.363624485999935,
+          "input_sha256": "1e011661c477a98def5163dea77881ad17a95c3144ada4858e9d3fc2a1679563",
+          "particles": [
+            9.999999999933372,
+            9.999999999969416
+          ],
+          "wavefunction": {
+            "relative_l2": 6.191240204600374e-14,
+            "max_abs": 2.0518279941342415e-14
+          },
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+            "direct_coulomb_energy_correction_mev": -9.120818277106954e-16
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "pulse-mprint-1",
+      "runs": {
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-mprint-1-cpu",
+          "seconds": 18.94955548600001,
+          "input_sha256": "3185b747a229fd7bdd4283ff04614bcc61aed85d3092ec9df01492bd643fedd9",
+          "particles": [
+            9.999999999933372,
+            9.999999999969416
+          ],
+          "wavefunction": {
+            "relative_l2": 6.1889965149131e-14,
+            "max_abs": 2.069877983199657e-14
+          },
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 3.552713678800501e-15,
+            "direct_coulomb_energy_correction_mev": 2.184835687085449e-15
+          }
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-mprint-1-gpu",
+          "seconds": 6.772636351000074,
+          "input_sha256": "3185b747a229fd7bdd4283ff04614bcc61aed85d3092ec9df01492bd643fedd9",
+          "particles": [
+            9.999999999933372,
+            9.999999999969416
+          ],
+          "wavefunction": {
+            "relative_l2": 6.190861882995241e-14,
+            "max_abs": 2.0504965691731018e-14
+          },
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+            "direct_coulomb_energy_correction_mev": -8.476478337368076e-16
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "pulse-mprint-7",
+      "runs": {
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-mprint-7-cpu",
+          "seconds": 14.055814577000092,
+          "input_sha256": "e6339d7583abb0a6a2d42b1a96d6ed58f375a69f5d5daab990bee6f9f9d76b53",
+          "particles": [
+            9.999999999933372,
+            9.999999999969416
+          ],
+          "wavefunction": {
+            "relative_l2": 6.189173133314286e-14,
+            "max_abs": 2.066722728887832e-14
+          },
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+            "direct_coulomb_energy_correction_mev": 2.4411634860721063e-15
+          }
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-mprint-7-gpu",
+          "seconds": 5.594161761999658,
+          "input_sha256": "e6339d7583abb0a6a2d42b1a96d6ed58f375a69f5d5daab990bee6f9f9d76b53",
+          "particles": [
+            9.999999999933372,
+            9.999999999969416
+          ],
+          "wavefunction": {
+            "relative_l2": 6.190606150869913e-14,
+            "max_abs": 2.0511821074466957e-14
+          },
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+            "direct_coulomb_energy_correction_mev": -9.357205410005496e-16
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "pulse-restart-to-30",
+      "runs": {
+        "reference": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-restart-30-reference",
+          "seconds": 10.275868466000247,
+          "input_sha256": "4ab237244f8b23370759de2564315329d1158a4328a2d1a39b65ad9735ff779d",
+          "particles": [
+            9.999999999950813,
+            9.99999999997775
+          ],
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+            "direct_coulomb_energy_correction_mev": 2.2430772202023068e-15
+          }
+        },
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-restart-30-cpu",
+          "seconds": 5.3639731680000295,
+          "input_sha256": "4ab237244f8b23370759de2564315329d1158a4328a2d1a39b65ad9735ff779d",
+          "particles": [
+            9.999999999950814,
+            9.99999999997775
+          ],
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+            "direct_coulomb_energy_correction_mev": 1.2722626724577155e-15
+          }
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-restart-30-gpu",
+          "seconds": 2.8916270340000665,
+          "input_sha256": "4ab237244f8b23370759de2564315329d1158a4328a2d1a39b65ad9735ff779d",
+          "particles": [
+            9.999999999950814,
+            9.999999999977751
+          ],
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+            "direct_coulomb_energy_correction_mev": -4.0594068376532917e-16
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "pulse-restart-to-40",
+      "runs": {
+        "reference": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-restart-40-reference",
+          "seconds": 10.242183137000211,
+          "input_sha256": "507814e0a32302db54b1613382476ebdc85adadbeb24e7bd06a5b5d1bd78a0ab",
+          "particles": [
+            9.999999999934166,
+            9.999999999970111
+          ],
+          "wavefunction": {
+            "relative_l2": 9.291143238373123e-16,
+            "max_abs": 1.4946834900704541e-16
+          },
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+            "direct_coulomb_energy_correction_mev": 1.1969969155999525e-15
+          }
+        },
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-restart-40-cpu",
+          "seconds": 5.296347127999979,
+          "input_sha256": "507814e0a32302db54b1613382476ebdc85adadbeb24e7bd06a5b5d1bd78a0ab",
+          "particles": [
+            9.999999999934168,
+            9.999999999970111
+          ],
+          "wavefunction": {
+            "relative_l2": 1.0892411426327218e-15,
+            "max_abs": 1.9724042404289787e-16
+          },
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 2.6645352591003757e-15,
+            "direct_coulomb_energy_correction_mev": 1.9390020299318035e-16
+          }
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-energy-fix-68hq0bza/pulse-restart-40-gpu",
+          "seconds": 2.896823829999903,
+          "input_sha256": "507814e0a32302db54b1613382476ebdc85adadbeb24e7bd06a5b5d1bd78a0ab",
+          "particles": [
+            9.999999999934168,
+            9.999999999970111
+          ],
+          "wavefunction": {
+            "relative_l2": 1.0586926782598266e-15,
+            "max_abs": 1.979753166958531e-16
+          },
+          "fresh_coulomb": {
+            "potential_max_abs_difference_mev": 3.552713678800501e-15,
+            "direct_coulomb_energy_correction_mev": 4.201645189864561e-16
+          }
+        }
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}

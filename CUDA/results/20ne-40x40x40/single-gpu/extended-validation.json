@@ -1,0 +1,1905 @@
+{
+  "run_directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs",
+  "state_sha256": "ea7ec8de58dcbe1d37a3c003cffa263b1a58542af27d3abc9f99078c5cea5abc",
+  "source_commit": "a701ad38f23f4e7d0c95417fcc394c75f3da0422",
+  "source_status": [
+    " M Code/Changes.txt",
+    " M Code/Mainpage.dox",
+    " M Code/coulomb.f90",
+    " M Code/densities.f90",
+    " M Code/energies.f90",
+    " M Code/external.f90",
+    " M Code/fftw3.f",
+    " M Code/forces.data",
+    " M Code/forces.f90",
+    " M Code/fourier.f90",
+    " M Code/fragments.f90",
+    " M Code/grids.f90",
+    " M Code/levels.f90",
+    " M Code/main3d.f90",
+    " M Code/pairs.f90",
+    " M Code/parallel.f90",
+    " M Code/params.f90",
+    " M Code/sequential.f90",
+    " M Code/trivial.f90",
+    " M Code/twobody.f90",
+    " M Code/user.f90",
+    " M Code/user_sample.f90",
+    " M Doc-doxygen/Documentation.bib",
+    " M Doc-doxygen/Doxyfile",
+    " M Doc-doxygen/Makefile",
+    " M Doc-doxygen/commands.sty",
+    " M Doc-doxygen/html/_formulas.tex",
+    " M Doc-doxygen/html/_mainpage_8dox.html",
+    " M Doc-doxygen/html/annotated.html",
+    " M Doc-doxygen/html/annotated_dup.js",
+    " M Doc-doxygen/html/citelist.html",
+    " M Doc-doxygen/html/classes.html",
+    " M Doc-doxygen/html/coulomb_8f90.html",
+    " M Doc-doxygen/html/coulomb_8f90.js",
+    " M Doc-doxygen/html/densities_8f90.html",
+    " M Doc-doxygen/html/densities_8f90.js",
+    " M Doc-doxygen/html/dir_23fdee2f6995db16c755697cdf620cf4.html",
+    " M Doc-doxygen/html/doxygen.css",
+    " M Doc-doxygen/html/doxygen.svg",
+    " M Doc-doxygen/html/dynamic_8f90.html",
+    " M Doc-doxygen/html/dynamic_8f90.js",
+    " M Doc-doxygen/html/dynsections.js",
+    " M Doc-doxygen/html/energies_8f90.html",
+    " M Doc-doxygen/html/energies_8f90.js",
+    " M Doc-doxygen/html/external_8f90.html",
+    " M Doc-doxygen/html/external_8f90.js",
+    " M Doc-doxygen/html/files.html",
+    " M Doc-doxygen/html/files_dup.js",
+    " M Doc-doxygen/html/forces_8f90.html",
+    " M Doc-doxygen/html/forces_8f90.js",
+    " M Doc-doxygen/html/fourier_8f90.html",
+    " M Doc-doxygen/html/fourier_8f90.js",
+    " M Doc-doxygen/html/fragments_8f90.html",
+    " M Doc-doxygen/html/fragments_8f90.js",
+    " M Doc-doxygen/html/functions.html",
+    " M Doc-doxygen/html/functions_vars.html",
+    " M Doc-doxygen/html/globals.html",
+    " M Doc-doxygen/html/globals_func.html",
+    " M Doc-doxygen/html/grids_8f90.html",
+    " M Doc-doxygen/html/grids_8f90.js",
+    " M Doc-doxygen/html/index.html",
+    " M Doc-doxygen/html/inout_8f90.html",
+    " M Doc-doxygen/html/inout_8f90.js",
+    " M Doc-doxygen/html/jquery.js",
+    " M Doc-doxygen/html/levels_8f90.html",
+    " M Doc-doxygen/html/levels_8f90.js",
+    " M Doc-doxygen/html/main3d_8f90.html",
+    " M Doc-doxygen/html/main3d_8f90.js",
+    " M Doc-doxygen/html/meanfield_8f90.html",
+    " M Doc-doxygen/html/meanfield_8f90.js",
+    " M Doc-doxygen/html/menu.js",
+    " M Doc-doxygen/html/menudata.js",
+    " M Doc-doxygen/html/moment_8f90.html",
+    " M Doc-doxygen/html/moment_8f90.js",
+    " M Doc-doxygen/html/namespacecoulomb.html",
+    " M Doc-doxygen/html/namespacedensities.html",
+    " M Doc-doxygen/html/namespacedynamic.html",
+    " M Doc-doxygen/html/namespaceenergies.html",
+    " M Doc-doxygen/html/namespaceexternal.html",
+    " M Doc-doxygen/html/namespaceforces.html",
+    " M Doc-doxygen/html/namespaceforces.js",
+    " M Doc-doxygen/html/namespacefourier.html",
+    " M Doc-doxygen/html/namespacefragments.html",
+    " M Doc-doxygen/html/namespacegrids.html",
+    " M Doc-doxygen/html/namespaceinout.html",
+    " M Doc-doxygen/html/namespacelevels.html",
+    " M Doc-doxygen/html/namespacemeanfield.html",
+    " M Doc-doxygen/html/namespacemembers.html",
+    " M Doc-doxygen/html/namespacemembers_b.html",
+    " M Doc-doxygen/html/namespacemembers_c.html",
+    " M Doc-doxygen/html/namespacemembers_d.html",
+    " M Doc-doxygen/html/namespacemembers_dup.js",
+    " M Doc-doxygen/html/namespacemembers_e.html",
+    " M Doc-doxygen/html/namespacemembers_f.html",
+    " M Doc-doxygen/html/namespacemembers_func.html",
+    " M Doc-doxygen/html/namespacemembers_g.html",
+    " M Doc-doxygen/html/namespacemembers_h.html",
+    " M Doc-doxygen/html/namespacemembers_i.html",
+    " M Doc-doxygen/html/namespacemembers_l.html",
+    " M Doc-doxygen/html/namespacemembers_m.html",
+    " M Doc-doxygen/html/namespacemembers_n.html",
+    " M Doc-doxygen/html/namespacemembers_o.html",
+    " M Doc-doxygen/html/namespacemembers_p.html",
+    " M Doc-doxygen/html/namespacemembers_q.html",
+    " M Doc-doxygen/html/namespacemembers_r.html",
+    " M Doc-doxygen/html/namespacemembers_s.html",
+    " M Doc-doxygen/html/namespacemembers_t.html",
+    " M Doc-doxygen/html/namespacemembers_u.html",
+    " M Doc-doxygen/html/namespacemembers_v.html",
+    " M Doc-doxygen/html/namespacemembers_vars.html",
+    " M Doc-doxygen/html/namespacemembers_vars.js",
+    " M Doc-doxygen/html/namespacemembers_vars_b.html",
+    " M Doc-doxygen/html/namespacemembers_vars_c.html",
+    " M Doc-doxygen/html/namespacemembers_vars_d.html",
+    " M Doc-doxygen/html/namespacemembers_vars_e.html",
+    " M Doc-doxygen/html/namespacemembers_vars_f.html",
+    " M Doc-doxygen/html/namespacemembers_vars_g.html",
+    " M Doc-doxygen/html/namespacemembers_vars_h.html",
+    " M Doc-doxygen/html/namespacemembers_vars_i.html",
+    " M Doc-doxygen/html/namespacemembers_vars_l.html",
+    " M Doc-doxygen/html/namespacemembers_vars_m.html",
+    " M Doc-doxygen/html/namespacemembers_vars_n.html",
+    " M Doc-doxygen/html/namespacemembers_vars_o.html",
+    " M Doc-doxygen/html/namespacemembers_vars_p.html",
+    " M Doc-doxygen/html/namespacemembers_vars_q.html",
+    " M Doc-doxygen/html/namespacemembers_vars_r.html",
+    " M Doc-doxygen/html/namespacemembers_vars_s.html",
+    " M Doc-doxygen/html/namespacemembers_vars_t.html",
+    " M Doc-doxygen/html/namespacemembers_vars_u.html",
+    " M Doc-doxygen/html/namespacemembers_vars_v.html",
+    " M Doc-doxygen/html/namespacemembers_vars_w.html",
+    " M Doc-doxygen/html/namespacemembers_vars_x.html",
+    " M Doc-doxygen/html/namespacemembers_vars_y.html",
+    " M Doc-doxygen/html/namespacemembers_vars_z.html",
+    " M Doc-doxygen/html/namespacemembers_w.html",
+    " M Doc-doxygen/html/namespacemembers_x.html",
+    " M Doc-doxygen/html/namespacemembers_y.html",
+    " M Doc-doxygen/html/namespacemembers_z.html",
+    " M Doc-doxygen/html/namespacemoment.html",
+    " M Doc-doxygen/html/namespacepairs.html",
+    " M Doc-doxygen/html/namespaceparallel.html",
+    " M Doc-doxygen/html/namespaceparams.html",
+    " M Doc-doxygen/html/namespaces.html",
+    " M Doc-doxygen/html/namespaces_dup.js",
+    " M Doc-doxygen/html/namespacestatic.html",
+    " M Doc-doxygen/html/namespacetrivial.html",
+    " M Doc-doxygen/html/namespacetwobody.html",
+    " M Doc-doxygen/html/namespaceuser.html",
+    " M Doc-doxygen/html/navtree.css",
+    " M Doc-doxygen/html/navtree.js",
+    " M Doc-doxygen/html/navtreedata.js",
+    " M Doc-doxygen/html/navtreeindex0.js",
+    " M Doc-doxygen/html/navtreeindex1.js",
+    " M Doc-doxygen/html/pages.html",
+    " M Doc-doxygen/html/pairs_8f90.html",
+    " M Doc-doxygen/html/pairs_8f90.js",
+    " M Doc-doxygen/html/parallel_8f90.html",
+    " M Doc-doxygen/html/parallel_8f90.js",
+    " M Doc-doxygen/html/params_8f90.html",
+    " M Doc-doxygen/html/params_8f90.js",
+    " M Doc-doxygen/html/resize.js",
+    " M Doc-doxygen/html/search/all_0.html",
+    " M Doc-doxygen/html/search/all_0.js",
+    " M Doc-doxygen/html/search/all_1.html",
+    " M Doc-doxygen/html/search/all_1.js",
+    " M Doc-doxygen/html/search/all_10.html",
+    " M Doc-doxygen/html/search/all_10.js",
+    " M Doc-doxygen/html/search/all_11.html",
+    " M Doc-doxygen/html/search/all_11.js",
+    " M Doc-doxygen/html/search/all_12.html",
+    " M Doc-doxygen/html/search/all_12.js",
+    " M Doc-doxygen/html/search/all_13.html",
+    " M Doc-doxygen/html/search/all_13.js",
+    " M Doc-doxygen/html/search/all_14.html",
+    " M Doc-doxygen/html/search/all_14.js",
+    " M Doc-doxygen/html/search/all_15.html",
+    " M Doc-doxygen/html/search/all_15.js",
+    " M Doc-doxygen/html/search/all_16.html",
+    " M Doc-doxygen/html/search/all_16.js",
+    " M Doc-doxygen/html/search/all_17.html",
+    " M Doc-doxygen/html/search/all_17.js",
+    " M Doc-doxygen/html/search/all_2.html",
+    " M Doc-doxygen/html/search/all_2.js",
+    " M Doc-doxygen/html/search/all_3.html",
+    " M Doc-doxygen/html/search/all_3.js",
+    " M Doc-doxygen/html/search/all_4.html",
+    " M Doc-doxygen/html/search/all_4.js",
+    " M Doc-doxygen/html/search/all_5.html",
+    " M Doc-doxygen/html/search/all_5.js",
+    " M Doc-doxygen/html/search/all_6.html",
+    " M Doc-doxygen/html/search/all_6.js",
+    " M Doc-doxygen/html/search/all_7.html",
+    " M Doc-doxygen/html/search/all_7.js",
+    " M Doc-doxygen/html/search/all_8.html",
+    " M Doc-doxygen/html/search/all_8.js",
+    " M Doc-doxygen/html/search/all_9.html",
+    " M Doc-doxygen/html/search/all_9.js",
+    " M Doc-doxygen/html/search/all_a.html",
+    " M Doc-doxygen/html/search/all_a.js",
+    " M Doc-doxygen/html/search/all_b.html",
+    " M Doc-doxygen/html/search/all_b.js",
+    " M Doc-doxygen/html/search/all_c.html",
+    " M Doc-doxygen/html/search/all_c.js",
+    " M Doc-doxygen/html/search/all_d.html",
+    " M Doc-doxygen/html/search/all_d.js",
+    " M Doc-doxygen/html/search/all_e.html",
+    " M Doc-doxygen/html/search/all_e.js",
+    " M Doc-doxygen/html/search/all_f.html",
+    " M Doc-doxygen/html/search/all_f.js",
+    " M Doc-doxygen/html/search/classes_0.html",
+    " M Doc-doxygen/html/search/classes_0.js",
+    " M Doc-doxygen/html/search/classes_1.html",
+    " M Doc-doxygen/html/search/classes_1.js",
+    " M Doc-doxygen/html/search/close.svg",
+    " M Doc-doxygen/html/search/files_0.html",
+    " M Doc-doxygen/html/search/files_0.js",
+    " M Doc-doxygen/html/search/files_1.html",
+    " M Doc-doxygen/html/search/files_1.js",
+    " M Doc-doxygen/html/search/files_2.html",
+    " M Doc-doxygen/html/search/files_2.js",
+    " M Doc-doxygen/html/search/files_3.html",
+    " M Doc-doxygen/html/search/files_3.js",
+    " M Doc-doxygen/html/search/files_4.html",
+    " M Doc-doxygen/html/search/files_4.js",
+    " M Doc-doxygen/html/search/files_5.html",
+    " M Doc-doxygen/html/search/files_5.js",
+    " M Doc-doxygen/html/search/files_6.html",
+    " M Doc-doxygen/html/search/files_6.js",
+    " M Doc-doxygen/html/search/files_7.html",
+    " M Doc-doxygen/html/search/files_7.js",
+    " M Doc-doxygen/html/search/files_8.html",
+    " M Doc-doxygen/html/search/files_8.js",
+    " M Doc-doxygen/html/search/files_9.html",
+    " M Doc-doxygen/html/search/files_9.js",
+    " M Doc-doxygen/html/search/files_a.html",
+    " M Doc-doxygen/html/search/files_a.js",
+    " M Doc-doxygen/html/search/files_b.html",
+    " M Doc-doxygen/html/search/files_b.js",
+    " M Doc-doxygen/html/search/functions_0.html",
+    " M Doc-doxygen/html/search/functions_0.js",
+    " M Doc-doxygen/html/search/functions_1.html",
+    " M Doc-doxygen/html/search/functions_1.js",
+    " M Doc-doxygen/html/search/functions_10.html",
+    " M Doc-doxygen/html/search/functions_10.js",
+    " M Doc-doxygen/html/search/functions_11.html",
+    " M Doc-doxygen/html/search/functions_11.js",
+    " M Doc-doxygen/html/search/functions_2.html",
+    " M Doc-doxygen/html/search/functions_2.js",
+    " M Doc-doxygen/html/search/functions_3.html",
+    " M Doc-doxygen/html/search/functions_3.js",
+    " M Doc-doxygen/html/search/functions_4.html",
+    " M Doc-doxygen/html/search/functions_4.js",
+    " M Doc-doxygen/html/search/functions_5.html",
+    " M Doc-doxygen/html/search/functions_5.js",
+    " M Doc-doxygen/html/search/functions_6.html",
+    " M Doc-doxygen/html/search/functions_6.js",
+    " M Doc-doxygen/html/search/functions_7.html",
+    " M Doc-doxygen/html/search/functions_7.js",
+    " M Doc-doxygen/html/search/functions_8.html",
+    " M Doc-doxygen/html/search/functions_8.js",
+    " M Doc-doxygen/html/search/functions_9.html",
+    " M Doc-doxygen/html/search/functions_9.js",
+    " M Doc-doxygen/html/search/functions_a.html",
+    " M Doc-doxygen/html/search/functions_a.js",
+    " M Doc-doxygen/html/search/functions_b.html",
+    " M Doc-doxygen/html/search/functions_b.js",
+    " M Doc-doxygen/html/search/functions_c.html",
+    " M Doc-doxygen/html/search/functions_c.js",
+    " M Doc-doxygen/html/search/functions_d.html",
+    " M Doc-doxygen/html/search/functions_d.js",
+    " M Doc-doxygen/html/search/functions_e.html",
+    " M Doc-doxygen/html/search/functions_e.js",
+    " M Doc-doxygen/html/search/functions_f.html",
+    " M Doc-doxygen/html/search/functions_f.js",
+    " M Doc-doxygen/html/search/mag_sel.svg",
+    " M Doc-doxygen/html/search/namespaces_0.html",
+    " M Doc-doxygen/html/search/namespaces_0.js",
+    " M Doc-doxygen/html/search/namespaces_1.html",
+    " M Doc-doxygen/html/search/namespaces_1.js",
+    " M Doc-doxygen/html/search/namespaces_2.html",
+    " M Doc-doxygen/html/search/namespaces_2.js",
+    " M Doc-doxygen/html/search/namespaces_3.html",
+    " M Doc-doxygen/html/search/namespaces_3.js",
+    " M Doc-doxygen/html/search/namespaces_4.html",
+    " M Doc-doxygen/html/search/namespaces_4.js",
+    " M Doc-doxygen/html/search/namespaces_5.html",
+    " M Doc-doxygen/html/search/namespaces_5.js",
+    " M Doc-doxygen/html/search/namespaces_6.html",
+    " M Doc-doxygen/html/search/namespaces_6.js",
+    " M Doc-doxygen/html/search/namespaces_7.html",
+    " M Doc-doxygen/html/search/namespaces_7.js",
+    " M Doc-doxygen/html/search/namespaces_8.html",
+    " M Doc-doxygen/html/search/namespaces_8.js",
+    " M Doc-doxygen/html/search/namespaces_9.html",
+    " M Doc-doxygen/html/search/namespaces_9.js",
+    " M Doc-doxygen/html/search/namespaces_a.html",
+    " M Doc-doxygen/html/search/namespaces_a.js",
+    " M Doc-doxygen/html/search/namespaces_b.html",
+    " M Doc-doxygen/html/search/namespaces_b.js",
+    " M Doc-doxygen/html/search/nomatches.html",
+    " M Doc-doxygen/html/search/pages_0.html",
+    " M Doc-doxygen/html/search/pages_0.js",
+    " M Doc-doxygen/html/search/pages_1.html",
+    " M Doc-doxygen/html/search/pages_1.js",
+    " M Doc-doxygen/html/search/search.css",
+    " M Doc-doxygen/html/search/search.js",
+    " M Doc-doxygen/html/search/searchdata.js",
+    " M Doc-doxygen/html/search/variables_0.html",
+    " M Doc-doxygen/html/search/variables_0.js",
+    " M Doc-doxygen/html/search/variables_1.html",
+    " M Doc-doxygen/html/search/variables_1.js",
+    " M Doc-doxygen/html/search/variables_10.html",
+    " M Doc-doxygen/html/search/variables_10.js",
+    " M Doc-doxygen/html/search/variables_11.html",
+    " M Doc-doxygen/html/search/variables_11.js",
+    " M Doc-doxygen/html/search/variables_12.html",
+    " M Doc-doxygen/html/search/variables_12.js",
+    " M Doc-doxygen/html/search/variables_13.html",
+    " M Doc-doxygen/html/search/variables_13.js",
+    " M Doc-doxygen/html/search/variables_14.html",
+    " M Doc-doxygen/html/search/variables_14.js",
+    " M Doc-doxygen/html/search/variables_15.html",
+    " M Doc-doxygen/html/search/variables_15.js",
+    " M Doc-doxygen/html/search/variables_16.html",
+    " M Doc-doxygen/html/search/variables_16.js",
+    " M Doc-doxygen/html/search/variables_17.html",
+    " M Doc-doxygen/html/search/variables_17.js",
+    " M Doc-doxygen/html/search/variables_2.html",
+    " M Doc-doxygen/html/search/variables_2.js",
+    " M Doc-doxygen/html/search/variables_3.html",
+    " M Doc-doxygen/html/search/variables_3.js",
+    " M Doc-doxygen/html/search/variables_4.html",
+    " M Doc-doxygen/html/search/variables_4.js",
+    " M Doc-doxygen/html/search/variables_5.html",
+    " M Doc-doxygen/html/search/variables_5.js",
+    " M Doc-doxygen/html/search/variables_6.html",
+    " M Doc-doxygen/html/search/variables_6.js",
+    " M Doc-doxygen/html/search/variables_7.html",
+    " M Doc-doxygen/html/search/variables_7.js",
+    " M Doc-doxygen/html/search/variables_8.html",
+    " M Doc-doxygen/html/search/variables_8.js",
+    " M Doc-doxygen/html/search/variables_9.html",
+    " M Doc-doxygen/html/search/variables_9.js",
+    " M Doc-doxygen/html/search/variables_a.html",
+    " M Doc-doxygen/html/search/variables_a.js",
+    " M Doc-doxygen/html/search/variables_b.html",
+    " M Doc-doxygen/html/search/variables_b.js",
+    " M Doc-doxygen/html/search/variables_c.html",
+    " M Doc-doxygen/html/search/variables_c.js",
+    " M Doc-doxygen/html/search/variables_d.html",
+    " M Doc-doxygen/html/search/variables_d.js",
+    " M Doc-doxygen/html/search/variables_e.html",
+    " M Doc-doxygen/html/search/variables_e.js",
+    " M Doc-doxygen/html/search/variables_f.html",
+    " M Doc-doxygen/html/search/variables_f.js",
+    " M Doc-doxygen/html/sequential_8f90.html",
+    " M Doc-doxygen/html/sequential_8f90.js",
+    " M Doc-doxygen/html/static_8f90.html",
+    " M Doc-doxygen/html/static_8f90.js",
+    " M Doc-doxygen/html/structforces_1_1force-members.html",
+    " M Doc-doxygen/html/structforces_1_1force.html",
+    " M Doc-doxygen/html/structforces_1_1force.js",
+    " M Doc-doxygen/html/structforces_1_1pairing-members.html",
+    " M Doc-doxygen/html/structforces_1_1pairing.html",
+    " M Doc-doxygen/html/structforces_1_1pairing.js",
+    " M Doc-doxygen/html/trivial_8f90.html",
+    " M Doc-doxygen/html/trivial_8f90.js",
+    " M Doc-doxygen/html/twobody_8f90.html",
+    " M Doc-doxygen/html/twobody_8f90.js",
+    " M Doc-doxygen/html/user_8f90.html",
+    " M Doc-doxygen/html/user_8f90.js",
+    " M Doc-doxygen/html/user__sample_8f90.html",
+    " M Doc-doxygen/html/user__sample_8f90.js",
+    " M Doc-doxygen/latex/Makefile",
+    " M Doc-doxygen/latex/_mainpage_8dox.tex",
+    " M Doc-doxygen/latex/annotated.tex",
+    " M Doc-doxygen/latex/bibTmpFile_1.bib",
+    " M Doc-doxygen/latex/coulomb_8f90.tex",
+    " M Doc-doxygen/latex/densities_8f90.tex",
+    " M Doc-doxygen/latex/dir_23fdee2f6995db16c755697cdf620cf4.tex",
+    " M Doc-doxygen/latex/doxygen.sty",
+    " M Doc-doxygen/latex/dynamic_8f90.tex",
+    " M Doc-doxygen/latex/energies_8f90.tex",
+    " M Doc-doxygen/latex/external_8f90.tex",
+    " M Doc-doxygen/latex/files.tex",
+    " M Doc-doxygen/latex/forces_8f90.tex",
+    " M Doc-doxygen/latex/fourier_8f90.tex",
+    " M Doc-doxygen/latex/fragments_8f90.tex",
+    " M Doc-doxygen/latex/grids_8f90.tex",
+    " M Doc-doxygen/latex/index.tex",
+    " M Doc-doxygen/latex/inout_8f90.tex",
+    " M Doc-doxygen/latex/levels_8f90.tex",
+    " M Doc-doxygen/latex/longtable_doxygen.sty",
+    " M Doc-doxygen/latex/main3d_8f90.tex",
+    " M Doc-doxygen/latex/meanfield_8f90.tex",
+    " M Doc-doxygen/latex/moment_8f90.tex",
+    " M Doc-doxygen/latex/namespacecoulomb.tex",
+    " M Doc-doxygen/latex/namespacedensities.tex",
+    " M Doc-doxygen/latex/namespacedynamic.tex",
+    " M Doc-doxygen/latex/namespaceenergies.tex",
+    " M Doc-doxygen/latex/namespaceexternal.tex",
+    " M Doc-doxygen/latex/namespaceforces.tex",
+    " M Doc-doxygen/latex/namespacefourier.tex",
+    " M Doc-doxygen/latex/namespacefragments.tex",
+    " M Doc-doxygen/latex/namespacegrids.tex",
+    " M Doc-doxygen/latex/namespaceinout.tex",
+    " M Doc-doxygen/latex/namespacelevels.tex",
+    " M Doc-doxygen/latex/namespacemeanfield.tex",
+    " M Doc-doxygen/latex/namespacemoment.tex",
+    " M Doc-doxygen/latex/namespacepairs.tex",
+    " M Doc-doxygen/latex/namespaceparallel.tex",
+    " M Doc-doxygen/latex/namespaceparams.tex",
+    " M Doc-doxygen/latex/namespaces.tex",
+    " M Doc-doxygen/latex/namespacestatic.tex",
+    " M Doc-doxygen/latex/namespacetrivial.tex",
+    " M Doc-doxygen/latex/namespacetwobody.tex",
+    " M Doc-doxygen/latex/namespaceuser.tex",
+    " M Doc-doxygen/latex/pairs_8f90.tex",
+    " M Doc-doxygen/latex/parallel_8f90.tex",
+    " M Doc-doxygen/latex/params_8f90.tex",
+    " M Doc-doxygen/latex/refman.tex",
+    " M Doc-doxygen/latex/sequential_8f90.tex",
+    " M Doc-doxygen/latex/static_8f90.tex",
+    " M Doc-doxygen/latex/structforces_1_1force.tex",
+    " M Doc-doxygen/latex/structforces_1_1pairing.tex",
+    " M Doc-doxygen/latex/trivial_8f90.tex",
+    " M Doc-doxygen/latex/twobody_8f90.tex",
+    " M Doc-doxygen/latex/user_8f90.tex",
+    " M Doc-doxygen/latex/user__sample_8f90.tex",
+    " M Documentation-Source/Makedoc",
+    " M Documentation-Source/Userguide.bib",
+    " M Documentation-Source/Userguide.tex",
+    " M Documentation-Source/Wavefun.eps",
+    " M Documentation-Source/dynamic-grids.eps",
+    " M Documentation-Source/dynamic-steps.eps",
+    " M Documentation-Source/dynamicSV-energ.eps",
+    " M Documentation-Source/elsarticle-num.bst",
+    " M Documentation-Source/elsarticle.cls",
+    " M Documentation-Source/epj.bst",
+    " M Documentation-Source/static-grid.eps",
+    " M Paper/v1.0/Makedoc",
+    " M Paper/v1.0/Sky3D.bib",
+    " M Paper/v1.0/Sky3D.tex",
+    " M Paper/v1.0/Wavefun.eps",
+    " M Paper/v1.0/dynamic-grids.eps",
+    " M Paper/v1.0/dynamic-steps.eps",
+    " M Paper/v1.0/dynamicSV-energ.eps",
+    " M Paper/v1.0/elsarticle-num.bst",
+    " M Paper/v1.0/elsarticle.cls",
+    " M Paper/v1.0/epj.bst",
+    " M Paper/v1.0/static-grid.eps",
+    " M Paper/v1.1/elsarticle-num.bst",
+    " M Paper/v1.1/elsarticle.cls",
+    " M Paper/v1.1/epj.bst",
+    " M Paper/v1.1/template.tex",
+    " M Paper/v1.1/update.bib",
+    " M Paper/v1.1/update.tex",
+    " M Test/Collision/dipoles.res",
+    " M Test/Collision/energies.res",
+    " M Test/Collision/for005.coll",
+    " M Test/Collision/for006.coll",
+    " M Test/Collision/momenta.res",
+    " M Test/Collision/monopoles.res",
+    " M Test/Collision/quadrupoles.res",
+    " M Test/Collision/spin.res",
+    " M Test/GR/for005.gr",
+    " M Test/GR/spectral_analysis.f90",
+    " M Test/Static/for005.static",
+    " M Test/Static/for006.static",
+    " M Test/Testcases.tex",
+    " M Test/testcase-16O.eps",
+    " M Utils/Convert/Makefile",
+    " M Utils/Convert/Tdhf2Silo.f90",
+    " M Utils/Convert/convert",
+    " M Utils/Convert/silo.inc",
+    " M Utils/Cuts/Cuts.f90",
+    " M Utils/Fileinfo/fileinfo.f90",
+    " M Utils/Inertia/Inertia.f90",
+    " M Utils/Overlap/det.f",
+    " M Utils/Overlap/overlap.f90",
+    " M docs/SINGLE_GPU_PLAN.md",
+    " M docs/SINGLE_GPU_RESULTS.md",
+    " M projects/icnpa2026_20Ne_Kresolved_E2/summary/results.csv",
+    " M projects/mg24_mqc_snp2026/paper/official_cont_samp.tex",
+    "?? CUDA/results/20ne-40x40x40/single-gpu/benchmark.json",
+    "?? CUDA/results/20ne-40x40x40/single-gpu/energy-fix-validation.json",
+    "?? CUDA/results/20ne-40x40x40/single-gpu/sanitizer.json",
+    "?? CUDA/results/20ne-k0-final/",
+    "?? CUDA/validate_memory.py"
+  ],
+  "runner_sha256": "69f5d518501427b5737fc46677eda0ee17d716d206aeaed1b9a062ad52a5c920",
+  "build": {
+    "arch": "sm_120",
+    "cuda_home": "/usr/local/cuda",
+    "variants": {
+      "reference": "-O3 -march=native -ffp-contract=off -fopenmp",
+      "cpu": "-O3 -march=native -ffast-math -fopenmp",
+      "gpu": "-O3 -march=native -ffast-math -fopenmp"
+    },
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+    "gfortran": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "source_commit": "70971055a9f8931c20eb4e6a9cc8fbe433265f29",
+    "source_dirty": true,
+    "executable_sha256": {
+      "reference": "7f77bbe30be33fb12c88eff4c1d432257fbf584dfad0221e37eaabb6c2b723a4",
+      "cpu": "9b4355e0e234103d0cb2290015183dc4a06ef0e5d1ab9e8631dd474ab03adf25",
+      "gpu": "6a8221e849529ff3c43bbf0e671abe018ad88d326b2677637ed327c752e27e1c"
+    },
+    "library_sha256": "30cd193543683c044591ac4a6743c721a6b77995f381c273f731e43e6a56ec1a",
+    "source_sha256": {
+      "Code/coulomb.f90": "5d9011974a3ec788b109455033e79d4e7fe3962421e1adc649e23a071690a31d",
+      "Code/densities.f90": "4430ddd24940b67f564814a61dbcb68459c18528a9bc8935131bdf0253bfb9b1",
+      "Code/dynamic.f90": "bb09b047cdb4d95bb15205e1c4fe161e5bcc599341db6622bf1ed5d7955a9e40",
+      "Code/energies.f90": "60d00ab2a55afa73525c175c09651d4d596d248ca8724f258d7c5487e73bb2cc",
+      "Code/external.f90": "4d911dd988e77d805fa49cbd93d6519dc9e8098ecc7f09cfc350613779e750a8",
+      "Code/fftw3.f": "8bdbee5f7a7a28762abd79f536aaf28deaca0197cc0e931b1cb9364f43b2a314",
+      "Code/forces.data": "2c5712b83aed67d310abc50590a3078a8d0e5d8e16b46315d92ba6dfe76f4728",
+      "Code/forces.f90": "380153c21f072d8bc49a59619d9c0c3aa478bd8ebadf483b2c0b7a7e0126373e",
+      "Code/fourier.f90": "ff323a3c9c85aad2e85a01251c1db939c5cb882922330764c9ec0403552c6f40",
+      "Code/fragments.f90": "47aead4560e57fee09dd3012cb79539381dddfa7196b07b58425e092df5f937c",
+      "Code/gpu_runtime.f90": "acf964b740f5f0c50af3e00ab647e3f0f2ce8ed17dd9c9d07e0b23c7cf4f3230",
+      "Code/grids.f90": "2899b53e968f968cd910d220ffa3200ce835b292f21f991aed549907b32226ba",
+      "Code/inout.f90": "fdce0c5da532a2520330fe0f4fe1d3e1cb1df7c904c1b60995999306c5461585",
+      "Code/levels.f90": "40a0cf9bc4ee7e4233766ea6fec057ae21f355a1686d1aa867c6d92f54161bc6",
+      "Code/main3d.f90": "06fc16477195b6eefc61276fec50bd27624937d855cef81ca540258d311bebc7",
+      "Code/Makefile": "9a23610ad88afabf2103e31532d56ccbcb07c55d47b2b4c55833e0c66731fb2c",
+      "Code/meanfield.f90": "59846be7a8b959eca5e1d4007a39538018d5bb4d77f67d0437f6864e34a9972d",
+      "Code/moment.f90": "301231a4975eb2a9e03cd3739a56dca2b681b5ea4383120c7c6145d4d6120677",
+      "Code/pairs.f90": "d872046715200166c9adab75b03d2db36936b5b1d65e9f818e22b734f64ae4a9",
+      "Code/parallel.f90": "e6d3e2e2543bedeb90575f859e26e990e2ff14a52f4cefd49d20a8f1c23ce2b8",
+      "Code/params.f90": "975aec6ec0ad3d11d07c3ac763ec2a1fa7543bf82079ade6ac986cad259dc074",
+      "Code/sequential.f90": "89bd10da9abcbf7bf4fd482c72250e0f6ea23e0a45cc89fa324943273e18cecd",
+      "Code/static.f90": "bc9243946fe926e818c47702f66046cb9395da39ea9579187dad968e57bd2906",
+      "Code/trivial.f90": "e44c37e3fc59391b4fe641d480e5154aa9c9e9bc48a71db8932e1b07b76a8708",
+      "Code/twobody.f90": "69ab4cb00f7c8d8cf13aa2e2f833a4ceff59a4035825670e1f231c88a218b5ab",
+      "Code/user.f90": "59adf01b45cd06afabb57b8a3e232f02605547993ecdbfe4a4717b8f97e74d89",
+      "Code/user_sample.f90": "788f06dcbd29a047ca218a21e73447bee3a7f47e00db5d1a86cbf8009fbabc7b",
+      "Code/ylm.f90": "58b3b7eb7190e8fee4e3e69b46282d75d7efd776445139dcc308c7418afff610",
+      "CUDA/reductions.cuh": "77dfc2a75931c73cbede7106255a02eaddc7a0ab32b868e39c3a59650b42a9e6",
+      "CUDA/gpu_runtime.f90": "774a0bcc5d77ec79e364c8b86078bcb990cdcfb7f01e9974218a50f3b8c315c6",
+      "CUDA/sky_gpu.cu": "7a3dca804d222d0234f2ccd0954f7ed459465e1e50834a8bbbc0255f3fc1061e",
+      "CUDA/build.py": "632743f5995fd7fe4c62e458272294d55c55a32c0b9d925bf31336d1559d47c7"
+    }
+  },
+  "nucleus": "20Ne",
+  "grid": [
+    40,
+    40,
+    40
+  ],
+  "spacing_fm": [
+    0.6,
+    0.6,
+    0.6
+  ],
+  "short_duration_fm_c": 10,
+  "long_duration_fm_c": 100,
+  "coverage": "20Ne integration, unboosted and longer-run block; other nuclei/forces and production accuracy remain pending",
+  "limits": {
+    "occupied_gram_max_abs_error": 1e-06,
+    "occupied_gram_max_abs_drift": 1e-06,
+    "checkpoint_particle_drift": 1e-06,
+    "initial_flow_atol_mev": 1e-05,
+    "physical_energy_drift": "recorded, not assigned a production-accuracy pass"
+  },
+  "cases": [
+    {
+      "case": "boost-dt01-order4",
+      "duration_fm_c": 10,
+      "runs": {
+        "reference": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/boost-dt01-order4-reference",
+          "seconds": 79.70452846700027,
+          "threads": 1,
+          "backend": "cpu",
+          "input_sha256": "97b30294c1432d44c83728998387da3c7344b7a99352b8b64f67112f0be59761",
+          "final_time": 9.99999999999998,
+          "final_energy_mev": -141.9803304,
+          "final_checkpoint_particles": [
+            9.999999999859488,
+            9.999999999950404
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "invariants": {
+            "gram_max_abs_error": 2.1515535250119875e-09,
+            "gram_max_abs_drift": 2.1515536068571966e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803332,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              9.999999999859488,
+              9.999999999950404
+            ],
+            "dt_fm_c": 0.1,
+            "taylor_order": 4
+          }
+        },
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/boost-dt01-order4-cpu",
+          "seconds": 31.89746374800052,
+          "threads": 8,
+          "backend": "cpu",
+          "input_sha256": "97b30294c1432d44c83728998387da3c7344b7a99352b8b64f67112f0be59761",
+          "final_time": 9.99999999999998,
+          "final_energy_mev": -141.9803304,
+          "final_checkpoint_particles": [
+            9.999999999858696,
+            9.99999999994971
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "invariants": {
+            "gram_max_abs_error": 2.1515505453723743e-09,
+            "gram_max_abs_drift": 2.1515506272175846e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803332,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              9.999999999858696,
+              9.99999999994971
+            ],
+            "dt_fm_c": 0.1,
+            "taylor_order": 4
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 9.154945429691443e-14,
+              "max_abs": 2.8031284088050768e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 9.188812956956283e-14,
+                "max_abs": 9.867107131356079e-15
+              },
+              "Tau": {
+                "relative_l2": 7.620003831825682e-14,
+                "max_abs": 7.924216838262055e-15
+              },
+              "Current": {
+                "relative_l2": 1.2517598660213578e-10,
+                "max_abs": 1.622833811776303e-15
+              },
+              "Spindens": {
+                "relative_l2": 2.051864150838169e-09,
+                "max_abs": 6.764933665331929e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.8658846233280136e-13,
+                "max_abs": 1.910797908788453e-15
+              },
+              "Upot": {
+                "relative_l2": 4.7338916973084573e-14,
+                "max_abs": 3.552713678800501e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.041385468508797e-14,
+                "max_abs": 5.080380560684716e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 0.0,
+                "max_abs": 0.0,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 5.738934123179698e-14,
+                "max_abs": 2.0250467969162855e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 5.725455136229245e-14,
+                "max_abs": 3.140598892059643e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/boost-dt01-order4-gpu",
+          "seconds": 10.948913922000429,
+          "threads": 8,
+          "backend": "gpu",
+          "input_sha256": "97b30294c1432d44c83728998387da3c7344b7a99352b8b64f67112f0be59761",
+          "final_time": 9.99999999999998,
+          "final_energy_mev": -141.9803304,
+          "final_checkpoint_particles": [
+            9.999999999858694,
+            9.999999999949708
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "primitive_validation": {
+            "hpsi_relative_l2": 4.158492059884434e-15,
+            "hpsi_max_abs": 2.057240568458324e-14,
+            "density_relative_l2": 3.10333465638644e-16,
+            "density_max_abs": 5.551115123125783e-17
+          },
+          "invariants": {
+            "gram_max_abs_error": 2.151553027197213e-09,
+            "gram_max_abs_drift": 2.1515531088298547e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803332,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              9.999999999858694,
+              9.999999999949708
+            ],
+            "dt_fm_c": 0.1,
+            "taylor_order": 4
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 9.138721283669064e-14,
+              "max_abs": 2.7096322944618877e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 8.852810977397067e-14,
+                "max_abs": 9.3119956190435e-15
+              },
+              "Tau": {
+                "relative_l2": 6.96526554175687e-14,
+                "max_abs": 6.897260540483785e-15
+              },
+              "Current": {
+                "relative_l2": 1.0566866553996746e-10,
+                "max_abs": 1.4836222528291643e-15
+              },
+              "Spindens": {
+                "relative_l2": 2.050692904832069e-09,
+                "max_abs": 6.758265821971143e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.8080396090670674e-13,
+                "max_abs": 1.844011054963346e-15
+              },
+              "Upot": {
+                "relative_l2": 4.894260911708876e-14,
+                "max_abs": 3.325340003357269e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.0081413983761e-14,
+                "max_abs": 4.947153797729698e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 0.0,
+                "max_abs": 0.0,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 5.983139347377676e-14,
+                "max_abs": 2.639666263348772e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 5.87205544624774e-14,
+                "max_abs": 3.559819106158102e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "boost-dt005-order4",
+      "duration_fm_c": 10,
+      "runs": {
+        "reference": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/boost-dt005-order4-reference",
+          "seconds": 157.615704971,
+          "threads": 1,
+          "backend": "cpu",
+          "input_sha256": "70c5051a5964afa3a9390c13bf48b5be3b3ece1d1e928baeca79031857e782fe",
+          "final_time": 10.000000000000007,
+          "final_energy_mev": -141.9803304,
+          "final_checkpoint_particles": [
+            10.000000000020876,
+            10.000000000024531
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "invariants": {
+            "gram_max_abs_error": 2.1515584386113086e-09,
+            "gram_max_abs_drift": 2.1515585204565164e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803332,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              10.000000000020876,
+              10.000000000024531
+            ],
+            "dt_fm_c": 0.05,
+            "taylor_order": 4
+          }
+        },
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/boost-dt005-order4-cpu",
+          "seconds": 60.09627409299992,
+          "threads": 8,
+          "backend": "cpu",
+          "input_sha256": "70c5051a5964afa3a9390c13bf48b5be3b3ece1d1e928baeca79031857e782fe",
+          "final_time": 10.000000000000007,
+          "final_energy_mev": -141.9803304,
+          "final_checkpoint_particles": [
+            10.000000000020082,
+            10.000000000023839
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "invariants": {
+            "gram_max_abs_error": 2.1515554694883725e-09,
+            "gram_max_abs_drift": 2.1515555503518138e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803332,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              10.000000000020082,
+              10.000000000023839
+            ],
+            "dt_fm_c": 0.05,
+            "taylor_order": 4
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 9.150927247647908e-14,
+              "max_abs": 2.7905764949553885e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 9.185885205134006e-14,
+                "max_abs": 9.853229343548264e-15
+              },
+              "Tau": {
+                "relative_l2": 7.611799102911328e-14,
+                "max_abs": 7.868705687030797e-15
+              },
+              "Current": {
+                "relative_l2": 1.2503634056082486e-10,
+                "max_abs": 1.639747365667077e-15
+              },
+              "Spindens": {
+                "relative_l2": 2.04786153420452e-09,
+                "max_abs": 6.707579370407446e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.863646436120402e-13,
+                "max_abs": 1.9029916531465574e-15
+              },
+              "Upot": {
+                "relative_l2": 4.744874923855218e-14,
+                "max_abs": 3.780087354243733e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.034001431576859e-14,
+                "max_abs": 5.071498776487715e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 0.0,
+                "max_abs": 0.0,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 5.70836683397136e-14,
+                "max_abs": 1.91491267287347e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 5.753500266381891e-14,
+                "max_abs": 3.232969447708456e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/boost-dt005-order4-gpu",
+          "seconds": 19.542456492999918,
+          "threads": 8,
+          "backend": "gpu",
+          "input_sha256": "70c5051a5964afa3a9390c13bf48b5be3b3ece1d1e928baeca79031857e782fe",
+          "final_time": 10.000000000000007,
+          "final_energy_mev": -141.9803304,
+          "final_checkpoint_particles": [
+            10.00000000002008,
+            10.000000000023837
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "primitive_validation": {
+            "hpsi_relative_l2": 3.855710634026654e-15,
+            "hpsi_max_abs": 2.0701417506086743e-14,
+            "density_relative_l2": 2.978777914186762e-16,
+            "density_max_abs": 5.551115123125783e-17
+          },
+          "invariants": {
+            "gram_max_abs_error": 2.1515579545897586e-09,
+            "gram_max_abs_drift": 2.151558036308454e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803332,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              10.00000000002008,
+              10.000000000023837
+            ],
+            "dt_fm_c": 0.05,
+            "taylor_order": 4
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 9.137399464178734e-14,
+              "max_abs": 2.708018362057997e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 8.85113053579777e-14,
+                "max_abs": 9.3119956190435e-15
+              },
+              "Tau": {
+                "relative_l2": 6.96236935126212e-14,
+                "max_abs": 6.786238238021269e-15
+              },
+              "Current": {
+                "relative_l2": 1.0543615966296488e-10,
+                "max_abs": 1.5243882545146192e-15
+              },
+              "Spindens": {
+                "relative_l2": 2.04820514853882e-09,
+                "max_abs": 6.7173371899598155e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.808190032092514e-13,
+                "max_abs": 1.8474805019152996e-15
+              },
+              "Upot": {
+                "relative_l2": 4.896500660705183e-14,
+                "max_abs": 3.481659405224491e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.016104743628503e-14,
+                "max_abs": 4.947153797729698e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 0.0,
+                "max_abs": 0.0,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 6.332801998060563e-14,
+                "max_abs": 2.518873998269555e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 6.330879927188571e-14,
+                "max_abs": 3.673505943879718e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "boost-dt01-order6",
+      "duration_fm_c": 10,
+      "runs": {
+        "reference": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/boost-dt01-order6-reference",
+          "seconds": 107.29982401300003,
+          "threads": 1,
+          "backend": "cpu",
+          "input_sha256": "832081e705f1093f2a40f786cf57e97f331769b8da398082eaee535ab1374772",
+          "final_time": 9.99999999999998,
+          "final_energy_mev": -141.9803304,
+          "final_checkpoint_particles": [
+            10.000000000026104,
+            10.000000000026938
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "invariants": {
+            "gram_max_abs_error": 2.151559279140719e-09,
+            "gram_max_abs_drift": 2.151559360004129e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803332,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              10.000000000026104,
+              10.000000000026938
+            ],
+            "dt_fm_c": 0.1,
+            "taylor_order": 6
+          }
+        },
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/boost-dt01-order6-cpu",
+          "seconds": 38.413103956999294,
+          "threads": 8,
+          "backend": "cpu",
+          "input_sha256": "832081e705f1093f2a40f786cf57e97f331769b8da398082eaee535ab1374772",
+          "final_time": 9.99999999999998,
+          "final_energy_mev": -141.9803304,
+          "final_checkpoint_particles": [
+            10.000000000025308,
+            10.000000000026247
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "invariants": {
+            "gram_max_abs_error": 2.1515563410975642e-09,
+            "gram_max_abs_drift": 2.151556422942743e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803332,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              10.000000000025308,
+              10.000000000026247
+            ],
+            "dt_fm_c": 0.1,
+            "taylor_order": 6
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 9.151086638347506e-14,
+              "max_abs": 2.792277122232112e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 9.186808801594308e-14,
+                "max_abs": 9.867107131356079e-15
+              },
+              "Tau": {
+                "relative_l2": 7.614127493510277e-14,
+                "max_abs": 7.979727989493313e-15
+              },
+              "Current": {
+                "relative_l2": 1.2491294518776772e-10,
+                "max_abs": 1.6401810465360711e-15
+              },
+              "Spindens": {
+                "relative_l2": 2.0503565480578098e-09,
+                "max_abs": 6.7518148190448546e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.866003338805007e-13,
+                "max_abs": 1.9220736113823023e-15
+              },
+              "Upot": {
+                "relative_l2": 4.731557418388362e-14,
+                "max_abs": 3.538502824085299e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.031288551006258e-14,
+                "max_abs": 5.062616992290714e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 0.0,
+                "max_abs": 0.0,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 5.758299010871763e-14,
+                "max_abs": 1.9255708139098715e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 5.744469787992456e-14,
+                "max_abs": 3.140598892059643e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/boost-dt01-order6-gpu",
+          "seconds": 14.469827887000065,
+          "threads": 8,
+          "backend": "gpu",
+          "input_sha256": "832081e705f1093f2a40f786cf57e97f331769b8da398082eaee535ab1374772",
+          "final_time": 9.99999999999998,
+          "final_energy_mev": -141.9803304,
+          "final_checkpoint_particles": [
+            10.000000000025306,
+            10.000000000026247
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "primitive_validation": {
+            "hpsi_relative_l2": 4.1586189434598105e-15,
+            "hpsi_max_abs": 2.132553192443071e-14,
+            "density_relative_l2": 3.095020269665626e-16,
+            "density_max_abs": 5.551115123125783e-17
+          },
+          "invariants": {
+            "gram_max_abs_error": 2.1515588091132316e-09,
+            "gram_max_abs_drift": 2.15155889095841e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803332,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              10.000000000025306,
+              10.000000000026247
+            ],
+            "dt_fm_c": 0.1,
+            "taylor_order": 6
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 9.136105126130234e-14,
+              "max_abs": 2.707058078134533e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 8.8457320975449e-14,
+                "max_abs": 9.298117831235686e-15
+              },
+              "Tau": {
+                "relative_l2": 6.960299734349462e-14,
+                "max_abs": 6.925016116099414e-15
+              },
+              "Current": {
+                "relative_l2": 1.0553000693052993e-10,
+                "max_abs": 1.5144135945277526e-15
+              },
+              "Spindens": {
+                "relative_l2": 2.0515119702618295e-09,
+                "max_abs": 6.743358042099468e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.805366349328373e-13,
+                "max_abs": 1.865695098413056e-15
+              },
+              "Upot": {
+                "relative_l2": 4.890757885512832e-14,
+                "max_abs": 3.169020601490047e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.012536836494084e-14,
+                "max_abs": 4.929390229335695e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 0.0,
+                "max_abs": 0.0,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 5.5694785382628586e-14,
+                "max_abs": 2.383870878475136e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 6.415459690945587e-14,
+                "max_abs": 3.822719918389339e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "boost-dt005-order6",
+      "duration_fm_c": 10,
+      "runs": {
+        "reference": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/boost-dt005-order6-reference",
+          "seconds": 208.14108641200073,
+          "threads": 1,
+          "backend": "cpu",
+          "input_sha256": "5e195e604fed9356492dc7fc51fefec139f21953d0ada33bb0a017cc3d946002",
+          "final_time": 10.000000000000007,
+          "final_energy_mev": -141.9803304,
+          "final_checkpoint_particles": [
+            10.000000000026082,
+            10.000000000026922
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "invariants": {
+            "gram_max_abs_error": 2.1515586789025554e-09,
+            "gram_max_abs_drift": 2.1515587691607e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803332,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              10.000000000026082,
+              10.000000000026922
+            ],
+            "dt_fm_c": 0.05,
+            "taylor_order": 6
+          }
+        },
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/boost-dt005-order6-cpu",
+          "seconds": 74.04678318400056,
+          "threads": 8,
+          "backend": "cpu",
+          "input_sha256": "5e195e604fed9356492dc7fc51fefec139f21953d0ada33bb0a017cc3d946002",
+          "final_time": 10.000000000000007,
+          "final_energy_mev": -141.9803304,
+          "final_checkpoint_particles": [
+            10.000000000025286,
+            10.00000000002623
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "invariants": {
+            "gram_max_abs_error": 2.151555712870909e-09,
+            "gram_max_abs_drift": 2.1515558029328113e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803332,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              10.000000000025286,
+              10.00000000002623
+            ],
+            "dt_fm_c": 0.05,
+            "taylor_order": 6
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 9.154875926650199e-14,
+              "max_abs": 2.8072830147465564e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 9.188089160598244e-14,
+                "max_abs": 9.853229343548264e-15
+              },
+              "Tau": {
+                "relative_l2": 7.614271373968185e-14,
+                "max_abs": 8.007483565108942e-15
+              },
+              "Current": {
+                "relative_l2": 1.2512618987729378e-10,
+                "max_abs": 1.6479873021779667e-15
+              },
+              "Spindens": {
+                "relative_l2": 2.049144389555251e-09,
+                "max_abs": 6.770029415542611e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.8635410533002156e-13,
+                "max_abs": 1.902124291408569e-15
+              },
+              "Upot": {
+                "relative_l2": 4.733822260817516e-14,
+                "max_abs": 3.609557097661309e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.031094755074568e-14,
+                "max_abs": 5.071498776487715e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 0.0,
+                "max_abs": 0.0,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 5.891652596620104e-14,
+                "max_abs": 2.0889956431346945e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 5.735997327692847e-14,
+                "max_abs": 3.112177182629239e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/boost-dt005-order6-gpu",
+          "seconds": 26.676842130000296,
+          "threads": 8,
+          "backend": "gpu",
+          "input_sha256": "5e195e604fed9356492dc7fc51fefec139f21953d0ada33bb0a017cc3d946002",
+          "final_time": 10.000000000000007,
+          "final_energy_mev": -141.9803304,
+          "final_checkpoint_particles": [
+            10.000000000025286,
+            10.000000000026228
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "primitive_validation": {
+            "hpsi_relative_l2": 4.158331191258398e-15,
+            "hpsi_max_abs": 2.010699415441723e-14,
+            "density_relative_l2": 3.0977573998513713e-16,
+            "density_max_abs": 5.551115123125783e-17
+          },
+          "invariants": {
+            "gram_max_abs_error": 2.151558155478717e-09,
+            "gram_max_abs_drift": 2.1515582459388528e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803332,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              10.000000000025286,
+              10.000000000026228
+            ],
+            "dt_fm_c": 0.05,
+            "taylor_order": 6
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 9.13935957768472e-14,
+              "max_abs": 2.7117385585323425e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 8.850896274734158e-14,
+                "max_abs": 9.3119956190435e-15
+              },
+              "Tau": {
+                "relative_l2": 6.964794205844125e-14,
+                "max_abs": 6.855627177060342e-15
+              },
+              "Current": {
+                "relative_l2": 1.0581128409799173e-10,
+                "max_abs": 1.5092094240998222e-15
+              },
+              "Spindens": {
+                "relative_l2": 2.0512403162384584e-09,
+                "max_abs": 6.76861995271838e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.8072216323545504e-13,
+                "max_abs": 1.8318679906315083e-15
+              },
+              "Upot": {
+                "relative_l2": 4.8998445385174806e-14,
+                "max_abs": 3.510081114654895e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.012377059036318e-14,
+                "max_abs": 4.947153797729698e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 0.0,
+                "max_abs": 0.0,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 6.022936979557908e-14,
+                "max_abs": 2.8066438062523957e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 6.39968513855061e-14,
+                "max_abs": 3.822719918389339e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "unboosted-dt01-order4",
+      "duration_fm_c": 10,
+      "runs": {
+        "reference": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/unboosted-dt01-order4-reference",
+          "seconds": 79.12808831700022,
+          "threads": 1,
+          "backend": "cpu",
+          "input_sha256": "916974815b163538e5faaeebf750cde76c62a6812a0d1f6cadf8fed2ce11749e",
+          "final_time": 9.99999999999998,
+          "final_energy_mev": -141.9803622,
+          "final_checkpoint_particles": [
+            9.999999999834172,
+            9.999999999924162
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "invariants": {
+            "gram_max_abs_error": 2.142373157445807e-09,
+            "gram_max_abs_drift": 2.142373238302821e-09,
+            "integrated_energy_initial_mev": -141.980365,
+            "integrated_energy_final_mev": -141.980365,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              9.999999999834172,
+              9.999999999924162
+            ],
+            "dt_fm_c": 0.1,
+            "taylor_order": 4
+          }
+        },
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/unboosted-dt01-order4-cpu",
+          "seconds": 31.36277191099998,
+          "threads": 8,
+          "backend": "cpu",
+          "input_sha256": "916974815b163538e5faaeebf750cde76c62a6812a0d1f6cadf8fed2ce11749e",
+          "final_time": 9.99999999999998,
+          "final_energy_mev": -141.9803622,
+          "final_checkpoint_particles": [
+            9.999999999833376,
+            9.999999999923467
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "invariants": {
+            "gram_max_abs_error": 2.142370203951596e-09,
+            "gram_max_abs_drift": 2.1423702857907254e-09,
+            "integrated_energy_initial_mev": -141.980365,
+            "integrated_energy_final_mev": -141.980365,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              9.999999999833376,
+              9.999999999923467
+            ],
+            "dt_fm_c": 0.1,
+            "taylor_order": 4
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 9.132887548034174e-14,
+              "max_abs": 2.7848194096317732e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 9.173732144124969e-14,
+                "max_abs": 9.867107131356079e-15
+              },
+              "Tau": {
+                "relative_l2": 7.588081982248786e-14,
+                "max_abs": 7.896461262646426e-15
+              },
+              "Current": {
+                "relative_l2": 1.2246756015135827e-05,
+                "max_abs": 1.6705387073656652e-15
+              },
+              "Spindens": {
+                "relative_l2": 8.222676792341409e-05,
+                "max_abs": 6.760325806098866e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.8592189721320952e-13,
+                "max_abs": 1.9264104200722443e-15
+              },
+              "Upot": {
+                "relative_l2": 4.740920133391765e-14,
+                "max_abs": 3.581135388230905e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.032820719630043e-14,
+                "max_abs": 5.071498776487715e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 5.854674598790519e-23,
+                "max_abs": 3.000000000012079e-20,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 5.796106881922481e-14,
+                "max_abs": 1.9753088054130785e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 5.763123677332693e-14,
+                "max_abs": 3.126388037344441e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/unboosted-dt01-order4-gpu",
+          "seconds": 10.963800237999749,
+          "threads": 8,
+          "backend": "gpu",
+          "input_sha256": "916974815b163538e5faaeebf750cde76c62a6812a0d1f6cadf8fed2ce11749e",
+          "final_time": 9.99999999999998,
+          "final_energy_mev": -141.9803622,
+          "final_checkpoint_particles": [
+            9.999999999833376,
+            9.99999999992347
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "primitive_validation": {
+            "hpsi_relative_l2": 4.146146035544166e-15,
+            "hpsi_max_abs": 1.8867259564679274e-14,
+            "density_relative_l2": 3.0690576634757585e-16,
+            "density_max_abs": 5.551115123125783e-17
+          },
+          "invariants": {
+            "gram_max_abs_error": 2.14237267334609e-09,
+            "gram_max_abs_drift": 2.142372755185219e-09,
+            "integrated_energy_initial_mev": -141.980365,
+            "integrated_energy_final_mev": -141.980365,
+            "integrated_energy_max_drift_mev": 0.0,
+            "final_particles": [
+              9.999999999833376,
+              9.99999999992347
+            ],
+            "dt_fm_c": 0.1,
+            "taylor_order": 4
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 9.134149636562711e-14,
+              "max_abs": 2.704631309828135e-14
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 8.846530161900358e-14,
+                "max_abs": 9.325873406851315e-15
+              },
+              "Tau": {
+                "relative_l2": 6.957585449703557e-14,
+                "max_abs": 6.8833827526759706e-15
+              },
+              "Current": {
+                "relative_l2": 1.0386074374625934e-05,
+                "max_abs": 1.4437236128816977e-15
+              },
+              "Spindens": {
+                "relative_l2": 8.218758893168263e-05,
+                "max_abs": 6.759566864578126e-15
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.8113925533435637e-13,
+                "max_abs": 1.850949948867253e-15
+              },
+              "Upot": {
+                "relative_l2": 4.8909648686666244e-14,
+                "max_abs": 3.382183422218077e-12
+              },
+              "Wcoul": {
+                "relative_l2": 7.012772558600935e-14,
+                "max_abs": 4.947153797729698e-13
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 4.474841525796326e-23,
+                "max_abs": 1.999999999994905e-20,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 5.1144493412676934e-14,
+                "max_abs": 1.758593271006248e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 6.43878296947621e-14,
+                "max_abs": 3.439026841078885e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "long-boost-dt01-order4",
+      "duration_fm_c": 100,
+      "reference": "optimized parallel CPU; strict CPU checked in short controls",
+      "runs": {
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/long-cpu",
+          "seconds": 304.19144040100036,
+          "threads": 8,
+          "backend": "cpu",
+          "input_sha256": "30927e05a7ef149c3005d819f3f04dc1cfc40049f22e7d245e5130a02f64c831",
+          "final_time": 99.9999999999986,
+          "final_energy_mev": -141.9803303,
+          "final_checkpoint_particles": [
+            9.999999998344338,
+            9.99999999924517
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "invariants": {
+            "gram_max_abs_error": 4.9506685959620295e-09,
+            "gram_max_abs_drift": 4.950670412195411e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803331,
+            "integrated_energy_max_drift_mev": 9.999999406318238e-08,
+            "final_particles": [
+              9.999999998344338,
+              9.99999999924517
+            ],
+            "dt_fm_c": 0.1,
+            "taylor_order": 4
+          }
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-extended-0rr95vbs/long-gpu",
+          "seconds": 92.0314048350001,
+          "threads": 8,
+          "backend": "gpu",
+          "input_sha256": "30927e05a7ef149c3005d819f3f04dc1cfc40049f22e7d245e5130a02f64c831",
+          "final_time": 99.9999999999986,
+          "final_energy_mev": -141.9803303,
+          "final_checkpoint_particles": [
+            9.999999998344336,
+            9.99999999924517
+          ],
+          "checkpoint_particle_atol": 1e-06,
+          "primitive_validation": {
+            "hpsi_relative_l2": 4.159084691692452e-15,
+            "hpsi_max_abs": 2.0490759302765808e-14,
+            "density_relative_l2": 3.089861033509117e-16,
+            "density_max_abs": 5.551115123125783e-17
+          },
+          "invariants": {
+            "gram_max_abs_error": 4.95066825721134e-09,
+            "gram_max_abs_drift": 4.950669786487493e-09,
+            "integrated_energy_initial_mev": -141.9803332,
+            "integrated_energy_final_mev": -141.9803331,
+            "integrated_energy_max_drift_mev": 9.999999406318238e-08,
+            "final_particles": [
+              9.999999998344336,
+              9.99999999924517
+            ],
+            "dt_fm_c": 0.1,
+            "taylor_order": 4
+          },
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 1.9093129210507336e-14,
+              "max_abs": 5.26362099283617e-15
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 6.3204109458072795e-15,
+                "max_abs": 6.800116025829084e-16
+              },
+              "Tau": {
+                "relative_l2": 1.014035795098916e-14,
+                "max_abs": 1.457167719820518e-15
+              },
+              "Current": {
+                "relative_l2": 1.566927252367906e-11,
+                "max_abs": 1.8385358339922941e-16
+              },
+              "Spindens": {
+                "relative_l2": 1.6943015677427664e-11,
+                "max_abs": 8.630249292984615e-17
+              },
+              "s-o-Dens": {
+                "relative_l2": 1.6998138115411475e-14,
+                "max_abs": 3.2786273695961654e-16
+              },
+              "Upot": {
+                "relative_l2": 1.2984960706510053e-14,
+                "max_abs": 6.536993168992922e-13
+              },
+              "Wcoul": {
+                "relative_l2": 7.467572985169731e-16,
+                "max_abs": 1.9539925233402755e-14
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 0.0,
+                "max_abs": 0.0,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 8.893998014083737e-15,
+                "max_abs": 1.2363443602225743e-12
+              },
+              "monopoles.res": {
+                "relative_l2": 1.0055727820424698e-14,
+                "max_abs": 1.7266188478970435e-12
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        }
+      },
+      "passed": true
+    }
+  ],
+  "integration_sensitivity": [
+    {
+      "case": "boost-dt01-order4",
+      "reference": "boost-dt005-order6",
+      "backend": "strict CPU",
+      "wavefunction": {
+        "relative_l2": 5.632061702745176e-09,
+        "max_abs": 9.64308758641902e-10
+      },
+      "printed_observables": {
+        "energies.res": {
+          "relative_l2": 1.6235248448851716e-12,
+          "max_abs": 6.000000000013156e-10
+        },
+        "quadrupoles.res": {
+          "relative_l2": 6.3048051851972605e-09,
+          "max_abs": 2.629788156127688e-07
+        },
+        "monopoles.res": {
+          "relative_l2": 1.2668538405067756e-10,
+          "max_abs": 1.046215591937738e-08
+        }
+      },
+      "integrated_energy_max_difference_mev": 0.0,
+      "interpretation": "Measured integration sensitivity, not a CPU/GPU equivalence or production-accuracy pass"
+    },
+    {
+      "case": "boost-dt005-order4",
+      "reference": "boost-dt005-order6",
+      "backend": "strict CPU",
+      "wavefunction": {
+        "relative_l2": 3.2771624590215136e-10,
+        "max_abs": 7.747406202238382e-11
+      },
+      "printed_observables": {
+        "energies.res": {
+          "relative_l2": 8.285015530637906e-14,
+          "max_abs": 1.0000000000021927e-10
+        },
+        "quadrupoles.res": {
+          "relative_l2": 2.3443198888191296e-11,
+          "max_abs": 1.5359304939011054e-09
+        },
+        "monopoles.res": {
+          "relative_l2": 2.1768452662597657e-11,
+          "max_abs": 2.073065274998953e-09
+        }
+      },
+      "integrated_energy_max_difference_mev": 0.0,
+      "interpretation": "Measured integration sensitivity, not a CPU/GPU equivalence or production-accuracy pass"
+    },
+    {
+      "case": "boost-dt01-order6",
+      "reference": "boost-dt005-order6",
+      "backend": "strict CPU",
+      "wavefunction": {
+        "relative_l2": 4.209411552745546e-09,
+        "max_abs": 5.447049367507763e-10
+      },
+      "printed_observables": {
+        "energies.res": {
+          "relative_l2": 1.3689092256080996e-12,
+          "max_abs": 5.000000000010964e-10
+        },
+        "quadrupoles.res": {
+          "relative_l2": 6.680285360726429e-09,
+          "max_abs": 2.771711393734222e-07
+        },
+        "monopoles.res": {
+          "relative_l2": 3.2729400265568615e-10,
+          "max_abs": 2.871732363018964e-08
+        }
+      },
+      "integrated_energy_max_difference_mev": 0.0,
+      "interpretation": "Measured integration sensitivity, not a CPU/GPU equivalence or production-accuracy pass"
+    }
+  ],
+  "passed": true,
+  "status": "completed"
+}

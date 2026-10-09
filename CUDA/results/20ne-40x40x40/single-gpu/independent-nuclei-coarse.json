@@ -1,0 +1,727 @@
+{
+  "run_directory": "/home/abhishek/.cache/sky3d-single-coverage-irgh6g11",
+  "build": {
+    "arch": "sm_120",
+    "cuda_home": "/usr/local/cuda",
+    "variants": {
+      "reference": "-O3 -march=native -ffp-contract=off -fopenmp",
+      "cpu": "-O3 -march=native -ffast-math -fopenmp",
+      "gpu": "-O3 -march=native -ffast-math -fopenmp"
+    },
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+    "gfortran": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "source_commit": "a701ad38f23f4e7d0c95417fcc394c75f3da0422",
+    "source_dirty": true,
+    "executable_sha256": {
+      "reference": "bf8ba655e2ae506646540b1f64dee88790390efa529fee9cef9e5c131de9e9d4",
+      "cpu": "6d0849613841bcef980b9e9b553c639fd1b10ff3a0ae4027bcbc22af552a319e",
+      "gpu": "5c37f36412d9df90704d320ba56ab9390a25924f3d78c49c8a4024f49d0fc5df"
+    },
+    "library_sha256": "ae27606c48c218fff9b621e11113e3e1184d245e49d2131486b87fc3c6dc7331",
+    "source_sha256": {
+      "Code/coulomb.f90": "5d9011974a3ec788b109455033e79d4e7fe3962421e1adc649e23a071690a31d",
+      "Code/densities.f90": "4430ddd24940b67f564814a61dbcb68459c18528a9bc8935131bdf0253bfb9b1",
+      "Code/dynamic.f90": "bb09b047cdb4d95bb15205e1c4fe161e5bcc599341db6622bf1ed5d7955a9e40",
+      "Code/energies.f90": "60d00ab2a55afa73525c175c09651d4d596d248ca8724f258d7c5487e73bb2cc",
+      "Code/external.f90": "4d911dd988e77d805fa49cbd93d6519dc9e8098ecc7f09cfc350613779e750a8",
+      "Code/fftw3.f": "8bdbee5f7a7a28762abd79f536aaf28deaca0197cc0e931b1cb9364f43b2a314",
+      "Code/forces.data": "2c5712b83aed67d310abc50590a3078a8d0e5d8e16b46315d92ba6dfe76f4728",
+      "Code/forces.f90": "380153c21f072d8bc49a59619d9c0c3aa478bd8ebadf483b2c0b7a7e0126373e",
+      "Code/fourier.f90": "ff323a3c9c85aad2e85a01251c1db939c5cb882922330764c9ec0403552c6f40",
+      "Code/fragments.f90": "47aead4560e57fee09dd3012cb79539381dddfa7196b07b58425e092df5f937c",
+      "Code/gpu_runtime.f90": "acf964b740f5f0c50af3e00ab647e3f0f2ce8ed17dd9c9d07e0b23c7cf4f3230",
+      "Code/grids.f90": "2899b53e968f968cd910d220ffa3200ce835b292f21f991aed549907b32226ba",
+      "Code/inout.f90": "fdce0c5da532a2520330fe0f4fe1d3e1cb1df7c904c1b60995999306c5461585",
+      "Code/levels.f90": "40a0cf9bc4ee7e4233766ea6fec057ae21f355a1686d1aa867c6d92f54161bc6",
+      "Code/main3d.f90": "06fc16477195b6eefc61276fec50bd27624937d855cef81ca540258d311bebc7",
+      "Code/Makefile": "9a23610ad88afabf2103e31532d56ccbcb07c55d47b2b4c55833e0c66731fb2c",
+      "Code/meanfield.f90": "59846be7a8b959eca5e1d4007a39538018d5bb4d77f67d0437f6864e34a9972d",
+      "Code/moment.f90": "db336897cd25969b51cb81dad618790a57f74934ce24761ba92861891321a29f",
+      "Code/pairs.f90": "d872046715200166c9adab75b03d2db36936b5b1d65e9f818e22b734f64ae4a9",
+      "Code/parallel.f90": "e6d3e2e2543bedeb90575f859e26e990e2ff14a52f4cefd49d20a8f1c23ce2b8",
+      "Code/params.f90": "975aec6ec0ad3d11d07c3ac763ec2a1fa7543bf82079ade6ac986cad259dc074",
+      "Code/sequential.f90": "89bd10da9abcbf7bf4fd482c72250e0f6ea23e0a45cc89fa324943273e18cecd",
+      "Code/static.f90": "bc9243946fe926e818c47702f66046cb9395da39ea9579187dad968e57bd2906",
+      "Code/trivial.f90": "e44c37e3fc59391b4fe641d480e5154aa9c9e9bc48a71db8932e1b07b76a8708",
+      "Code/twobody.f90": "69ab4cb00f7c8d8cf13aa2e2f833a4ceff59a4035825670e1f231c88a218b5ab",
+      "Code/user.f90": "59adf01b45cd06afabb57b8a3e232f02605547993ecdbfe4a4717b8f97e74d89",
+      "Code/user_sample.f90": "788f06dcbd29a047ca218a21e73447bee3a7f47e00db5d1a86cbf8009fbabc7b",
+      "Code/ylm.f90": "58b3b7eb7190e8fee4e3e69b46282d75d7efd776445139dcc308c7418afff610",
+      "CUDA/reductions.cuh": "77dfc2a75931c73cbede7106255a02eaddc7a0ab32b868e39c3a59650b42a9e6",
+      "CUDA/gpu_runtime.f90": "774a0bcc5d77ec79e364c8b86078bcb990cdcfb7f01e9974218a50f3b8c315c6",
+      "CUDA/sky_gpu.cu": "7a3dca804d222d0234f2ccd0954f7ed459465e1e50834a8bbbc0255f3fc1061e",
+      "CUDA/build.py": "632743f5995fd7fe4c62e458272294d55c55a32c0b9d925bf31336d1559d47c7"
+    }
+  },
+  "runner_sha256": "4731f3ceafa5c0b6b4bd3a52ccd1d8d56ce9085af37f9cf7f466f7d436aba28b",
+  "mode": "prepare",
+  "cases": [
+    {
+      "case": "16o-sly5",
+      "kind": "converged independent CPU preparation plus CPU/GPU TDHF",
+      "runs": {
+        "static": {
+          "directory": "/home/abhishek/.cache/sky3d-single-coverage-irgh6g11/16o-sly5-static",
+          "seconds": 21.109253093000007,
+          "input_sha256": "ada3912efd6faef41a4902650b0665863b54274bd3d6ba9c6425f5e3c1ad1763",
+          "checkpoint_sha256": "5fd6989590f250cbdc6c6f43b5ca9136ad60606a6c3d0ebbb369bf4572d9692b",
+          "step": 327,
+          "particles": [
+            8.000000000000005,
+            8.000000000000007
+          ],
+          "settings": {},
+          "pre_gradient_fluctuation_mev": 9.8065068e-07,
+          "fractional_orbitals": 0
+        },
+        "static-gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-single-coverage-irgh6g11/16o-sly5-static-gpu",
+          "seconds": 13.798446543999987,
+          "input_sha256": "ada3912efd6faef41a4902650b0665863b54274bd3d6ba9c6425f5e3c1ad1763",
+          "checkpoint_sha256": "6e07368b32e354d8cdeb3f6eeff309d2282d98e74a5443f26c54dab23b44ac76",
+          "step": 327,
+          "particles": [
+            8.00000000000001,
+            8.000000000000004
+          ],
+          "settings": {},
+          "pre_gradient_fluctuation_mev": 9.80670128e-07,
+          "density_from_checkpoint": {
+            "relative_l2": 1.4228243852514259e-15,
+            "max_abs": 4.718447854656915e-16
+          },
+          "per_species_subspace_min_singular_values": [
+            1.0000000000000004,
+            0.9999999999999994
+          ]
+        },
+        "cpu": {
+          "directory": "/home/abhishek/.cache/sky3d-single-coverage-irgh6g11/16o-sly5-td-cpu",
+          "seconds": 12.830828169,
+          "input_sha256": "70c07b7bdb01116a92af3b0be3800f74f6b6272cde3383dbb90b437156f3f4be",
+          "checkpoint_sha256": "0400e2d6efbb79d21277b982d5de40fad96b6ed92e23df400f6c3d9292b34289",
+          "step": 100,
+          "particles": [
+            7.999999999906731,
+            7.999999999956174
+          ],
+          "settings": {},
+          "occupation_max_drift": 0.0
+        },
+        "gpu": {
+          "directory": "/home/abhishek/.cache/sky3d-single-coverage-irgh6g11/16o-sly5-td-gpu",
+          "seconds": 4.333895569000006,
+          "input_sha256": "70c07b7bdb01116a92af3b0be3800f74f6b6272cde3383dbb90b437156f3f4be",
+          "checkpoint_sha256": "2f81aaf926a369b607440c7a77dd1e0608fdda4aff6f4252b2fdc4367e7319c0",
+          "step": 100,
+          "particles": [
+            7.9999999999067315,
+            7.999999999956174
+          ],
+          "settings": {},
+          "occupation_max_drift": 0.0,
+          "comparison": {
+            "wavefunction": {
+              "relative_l2": 2.4672219653505535e-15,
+              "max_abs": 7.264660714793996e-16
+            },
+            "fields": {
+              "Rho": {
+                "relative_l2": 1.4343659299466752e-15,
+                "max_abs": 1.942890293094024e-16
+              },
+              "Tau": {
+                "relative_l2": 2.3291596953796494e-15,
+                "max_abs": 3.0531133177191805e-16
+              },
+              "Current": {
+                "relative_l2": 1.0107755493663578e-11,
+                "max_abs": 8.244002269036654e-17
+              },
+              "Spindens": {
+                "relative_l2": 6.152389511434755e-11,
+                "max_abs": 5.312590645178972e-17
+              },
+              "s-o-Dens": {
+                "relative_l2": 2.0168801430815496e-14,
+                "max_abs": 6.559423143537302e-17
+              },
+              "Upot": {
+                "relative_l2": 3.166268814738704e-15,
+                "max_abs": 4.334310688136611e-13
+              },
+              "Wcoul": {
+                "relative_l2": 3.0683872651880993e-16,
+                "max_abs": 4.440892098500626e-15
+              }
+            },
+            "printed_observables": {
+              "energies.res": {
+                "relative_l2": 0.0,
+                "max_abs": 0.0,
+                "total_integrated_energy_max_abs_mev": 0.0
+              },
+              "quadrupoles.res": {
+                "relative_l2": 2.084344481020262e-14,
+                "max_abs": 1.5699941346980495e-13
+              },
+              "monopoles.res": {
+                "relative_l2": 1.7122061947622695e-14,
+                "max_abs": 8.952838470577262e-13
+              }
+            },
+            "tolerances": {
+              "wavefunction_relative_l2": 1e-09,
+              "wavefunction_max_abs": 1e-09,
+              "field_max_abs": "1e-9 + 1e-10 * max(abs(reference))",
+              "printed_observables_rtol": 1e-05,
+              "printed_observables_atol": 1e-07,
+              "time_particle_count_rtol": 0,
+              "time_particle_count_atol": 1e-06,
+              "total_integrated_energy_rtol": 0,
+              "total_integrated_energy_atol_mev": 2e-07,
+              "collective_flow_energy_atol_mev": 5e-06,
+              "initial_collective_flow_energy_atol_mev": 1e-05,
+              "collective_flow_note": "j^2/rho in near-vacuum padding is sensitive to roundoff, including between CPU variants"
+            }
+          }
+        }
+      },
+      "static_time_to_solution_speedup_one_pair": 1.529828232887491,
+      "fresh_field_probes": {
+        "cpu": {
+          "grid": [
+            32,
+            32,
+            32
+          ],
+          "spacing_fm": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "states": 16,
+          "fresh_field_observables": {
+            "integrated_energy_mev": -113.82567782912739,
+            "koopman_energy_using_saved_orbital_energies_mev": 47.999673814701374,
+            "rms_radius_fm": 2.7200613658718376,
+            "beta": 9.969318384962156e-11,
+            "gamma_degrees": 22.418379452580254,
+            "particles": [
+              8.00000000000023,
+              8.000000000000181
+            ],
+            "center_of_mass_fm": [
+              -1.8842751239309203e-16,
+              4.454893500905692e-17,
+              -1.7007556526420875e-16
+            ]
+          },
+          "fft_matrix_field_derivative_max_abs": [
+            1.0775205820006092e-13,
+            1.0705928522887318e-13,
+            9.947214694529854e-14
+          ],
+          "weighted_direct_residual_per_state_mev": 4.770073935472725e-09,
+          "weighted_h_squared_fluctuation_per_state_mev": 1.9153353850095914e-06,
+          "species": [
+            {
+              "species": "neutrons",
+              "orthonormality_max_abs": 6.239453399379903e-14,
+              "hamiltonian_antihermiticity_max_abs_mev": 1.928416682031243e-14,
+              "effective_mass_antihermiticity_max_abs_mev": 1.42470002774892e-14,
+              "remaining_terms_antihermiticity_max_abs_mev": 1.0224926420888326e-14,
+              "direct_residual_norm_mev": [
+                1.4234508928340173e-09,
+                1.423443220604364e-09,
+                1.9839957085318196e-09,
+                1.9839916884734545e-09,
+                1.8735511444793647e-09,
+                1.8735444634988786e-09,
+                5.361790504811553e-09,
+                5.361808656271279e-09
+              ],
+              "h_squared_fluctuation_mev": [
+                2.0117443845399727e-06,
+                2.011816320379744e-06,
+                1.7142120791793356e-06,
+                1.714364656307592e-06,
+                1.8404605297893418e-06,
+                1.840551844552542e-06,
+                2.8343555873685613e-06,
+                2.8342638999127616e-06
+              ],
+              "unoccupied_residual_norm_mev": [
+                1.4234501808137758e-09,
+                1.423442224895602e-09,
+                1.971013394898339e-09,
+                1.971019001778513e-09,
+                1.8673901693301e-09,
+                1.8673820245921686e-09,
+                5.354854498798233e-09,
+                5.354866472285831e-09
+              ],
+              "orbital_energy_mev": [
+                -35.25950150510245,
+                -35.259501505103316,
+                -19.448289224409212,
+                -19.44828922440948,
+                -19.448289223540566,
+                -19.448289223541718,
+                -13.662965486438672,
+                -13.66296548643872
+              ]
+            },
+            {
+              "species": "protons",
+              "orthonormality_max_abs": 5.3068660577119755e-14,
+              "hamiltonian_antihermiticity_max_abs_mev": 7.779326266114342e-15,
+              "effective_mass_antihermiticity_max_abs_mev": 9.835690336015568e-15,
+              "remaining_terms_antihermiticity_max_abs_mev": 9.976137142017875e-15,
+              "direct_residual_norm_mev": [
+                1.5372466472321468e-09,
+                1.5372649987383137e-09,
+                2.1030891062986943e-09,
+                2.1030905564786798e-09,
+                1.7148259610168882e-09,
+                1.7148205718370442e-09,
+                2.2162636468911674e-08,
+                2.216263237754543e-08
+              ],
+              "h_squared_fluctuation_mev": [
+                1.5107449849744635e-06,
+                1.5108026507581253e-06,
+                1.3171208796490774e-06,
+                1.317132025549061e-06,
+                1.4695423442923659e-06,
+                1.4696319992479098e-06,
+                2.624313160825874e-06,
+                2.6243088128267374e-06
+              ],
+              "unoccupied_residual_norm_mev": [
+                1.5372466234552789e-09,
+                1.537264947846004e-09,
+                2.091376303136677e-09,
+                2.091379553592549e-09,
+                1.7083833764642996e-09,
+                1.708378697341358e-09,
+                2.2161030457371873e-08,
+                2.216102686515898e-08
+              ],
+              "orbital_energy_mev": [
+                -31.541890781259436,
+                -31.541890781259703,
+                -16.04423239401504,
+                -16.044232394015584,
+                -16.044232393167746,
+                -16.04423239316859,
+                -10.376577972352132,
+                -10.3765779723521
+              ]
+            }
+          ],
+          "note": "Fresh fields rebuilt from checkpoint psi; projected occupied-subspace measurements. This is not a full operator-norm bound or a physical ground-state validation."
+        },
+        "gpu": {
+          "grid": [
+            32,
+            32,
+            32
+          ],
+          "spacing_fm": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "states": 16,
+          "fresh_field_observables": {
+            "integrated_energy_mev": -113.8256778291274,
+            "koopman_energy_using_saved_orbital_energies_mev": 47.99967381470185,
+            "rms_radius_fm": 2.720061365871837,
+            "beta": 9.969303219030531e-11,
+            "gamma_degrees": 22.418501779758916,
+            "particles": [
+              8.000000000000181,
+              8.00000000000017
+            ],
+            "center_of_mass_fm": [
+              3.1774754782049686e-16,
+              4.150523824755091e-16,
+              3.367259463932689e-16
+            ]
+          },
+          "fft_matrix_field_derivative_max_abs": [
+            1.0775205820006092e-13,
+            1.0705928522887318e-13,
+            1.0085855761676754e-13
+          ],
+          "weighted_direct_residual_per_state_mev": 4.7700826358594985e-09,
+          "weighted_h_squared_fluctuation_per_state_mev": 1.915359696893629e-06,
+          "species": [
+            {
+              "species": "neutrons",
+              "orthonormality_max_abs": 6.128431096843908e-14,
+              "hamiltonian_antihermiticity_max_abs_mev": 9.895427870308819e-15,
+              "effective_mass_antihermiticity_max_abs_mev": 1.2382990601018121e-14,
+              "remaining_terms_antihermiticity_max_abs_mev": 1.2113984298185221e-14,
+              "direct_residual_norm_mev": [
+                1.423460467681069e-09,
+                1.4234618401447081e-09,
+                1.9839783468038807e-09,
+                1.983985048184287e-09,
+                1.8735468407362515e-09,
+                1.8735480564905176e-09,
+                5.361834179076108e-09,
+                5.361825061960735e-09
+              ],
+              "h_squared_fluctuation_mev": [
+                2.011916317626654e-06,
+                2.0120880649614566e-06,
+                1.7142619477770627e-06,
+                1.7143468930998724e-06,
+                1.8404263621298268e-06,
+                1.8406417066005558e-06,
+                2.8342564641786805e-06,
+                2.8342164852505272e-06
+              ],
+              "unoccupied_residual_norm_mev": [
+                1.4234599492129182e-09,
+                1.4234592023343394e-09,
+                1.9710017872527605e-09,
+                1.9710071627406094e-09,
+                1.86738575460835e-09,
+                1.8673870801899227e-09,
+                5.354895249020707e-09,
+                5.3548864724256655e-09
+              ],
+              "orbital_energy_mev": [
+                -35.25950150510255,
+                -35.25950150510322,
+                -19.448289224409073,
+                -19.448289224408967,
+                -19.448289223540478,
+                -19.44828922354144,
+                -13.662965486438738,
+                -13.662965486438624
+              ]
+            },
+            {
+              "species": "protons",
+              "orthonormality_max_abs": 3.3528735343715195e-14,
+              "hamiltonian_antihermiticity_max_abs_mev": 8.499231113980387e-15,
+              "effective_mass_antihermiticity_max_abs_mev": 1.5223871141356214e-14,
+              "remaining_terms_antihermiticity_max_abs_mev": 6.796482987608198e-15,
+              "direct_residual_norm_mev": [
+                1.537249015985915e-09,
+                1.537258573975659e-09,
+                2.103096483181807e-09,
+                2.103103601299482e-09,
+                1.714830387685067e-09,
+                1.7148419072226305e-09,
+                2.216264995044539e-08,
+                2.216265241287847e-08
+              ],
+              "h_squared_fluctuation_mev": [
+                1.5108610601195034e-06,
+                1.5108679197103125e-06,
+                1.3172795001430343e-06,
+                1.3169903170827898e-06,
+                1.4695767402195206e-06,
+                1.4694605442984623e-06,
+                2.6242885242626796e-06,
+                2.624276302837126e-06
+              ],
+              "unoccupied_residual_norm_mev": [
+                1.5372489917713288e-09,
+                1.5372585256888283e-09,
+                2.0913800769722743e-09,
+                2.0913889633045e-09,
+                1.7083884107349989e-09,
+                1.7083996693923936e-09,
+                2.2161043957815737e-08,
+                2.2161046292967736e-08
+              ],
+              "orbital_energy_mev": [
+                -31.541890781259358,
+                -31.54189078125959,
+                -16.044232394015207,
+                -16.044232394015285,
+                -16.04423239316775,
+                -16.044232393168222,
+                -10.376577972352083,
+                -10.376577972351994
+              ]
+            }
+          ],
+          "note": "Fresh fields rebuilt from checkpoint psi; projected occupied-subspace measurements. This is not a full operator-norm bound or a physical ground-state validation."
+        }
+      },
+      "fresh_field_integrated_energy_difference_mev": 1.4210854715202004e-14,
+      "fresh_field_residual_limit_mev": 1e-06,
+      "static_stopping_serr_mev": 1e-06,
+      "passed": true
+    },
+    {
+      "case": "20ne-sly4-vdi",
+      "kind": "converged independent CPU preparation plus CPU/GPU TDHF",
+      "runs": {}
+    }
+  ],
+  "passed": false,
+  "fresh_field_probe_build": {
+    "flags": "-O3 -march=native -ffp-contract=off -fopenmp",
+    "source_sha256": {
+      "Code/coulomb.f90": "5d9011974a3ec788b109455033e79d4e7fe3962421e1adc649e23a071690a31d",
+      "Code/densities.f90": "4430ddd24940b67f564814a61dbcb68459c18528a9bc8935131bdf0253bfb9b1",
+      "Code/dynamic.f90": "bb09b047cdb4d95bb15205e1c4fe161e5bcc599341db6622bf1ed5d7955a9e40",
+      "Code/energies.f90": "60d00ab2a55afa73525c175c09651d4d596d248ca8724f258d7c5487e73bb2cc",
+      "Code/external.f90": "4d911dd988e77d805fa49cbd93d6519dc9e8098ecc7f09cfc350613779e750a8",
+      "Code/fftw3.f": "8bdbee5f7a7a28762abd79f536aaf28deaca0197cc0e931b1cb9364f43b2a314",
+      "Code/forces.data": "2c5712b83aed67d310abc50590a3078a8d0e5d8e16b46315d92ba6dfe76f4728",
+      "Code/forces.f90": "380153c21f072d8bc49a59619d9c0c3aa478bd8ebadf483b2c0b7a7e0126373e",
+      "Code/fourier.f90": "ff323a3c9c85aad2e85a01251c1db939c5cb882922330764c9ec0403552c6f40",
+      "Code/fragments.f90": "47aead4560e57fee09dd3012cb79539381dddfa7196b07b58425e092df5f937c",
+      "Code/gpu_runtime.f90": "acf964b740f5f0c50af3e00ab647e3f0f2ce8ed17dd9c9d07e0b23c7cf4f3230",
+      "Code/grids.f90": "2899b53e968f968cd910d220ffa3200ce835b292f21f991aed549907b32226ba",
+      "Code/inout.f90": "fdce0c5da532a2520330fe0f4fe1d3e1cb1df7c904c1b60995999306c5461585",
+      "Code/levels.f90": "40a0cf9bc4ee7e4233766ea6fec057ae21f355a1686d1aa867c6d92f54161bc6",
+      "Code/main3d.f90": "06fc16477195b6eefc61276fec50bd27624937d855cef81ca540258d311bebc7",
+      "Code/Makefile": "9a23610ad88afabf2103e31532d56ccbcb07c55d47b2b4c55833e0c66731fb2c",
+      "Code/meanfield.f90": "59846be7a8b959eca5e1d4007a39538018d5bb4d77f67d0437f6864e34a9972d",
+      "Code/moment.f90": "db336897cd25969b51cb81dad618790a57f74934ce24761ba92861891321a29f",
+      "Code/pairs.f90": "d872046715200166c9adab75b03d2db36936b5b1d65e9f818e22b734f64ae4a9",
+      "Code/parallel.f90": "e6d3e2e2543bedeb90575f859e26e990e2ff14a52f4cefd49d20a8f1c23ce2b8",
+      "Code/params.f90": "975aec6ec0ad3d11d07c3ac763ec2a1fa7543bf82079ade6ac986cad259dc074",
+      "Code/sequential.f90": "89bd10da9abcbf7bf4fd482c72250e0f6ea23e0a45cc89fa324943273e18cecd",
+      "Code/static.f90": "bc9243946fe926e818c47702f66046cb9395da39ea9579187dad968e57bd2906",
+      "Code/trivial.f90": "e44c37e3fc59391b4fe641d480e5154aa9c9e9bc48a71db8932e1b07b76a8708",
+      "Code/twobody.f90": "69ab4cb00f7c8d8cf13aa2e2f833a4ceff59a4035825670e1f231c88a218b5ab",
+      "Code/user.f90": "59adf01b45cd06afabb57b8a3e232f02605547993ecdbfe4a4717b8f97e74d89",
+      "Code/user_sample.f90": "788f06dcbd29a047ca218a21e73447bee3a7f47e00db5d1a86cbf8009fbabc7b",
+      "Code/ylm.f90": "58b3b7eb7190e8fee4e3e69b46282d75d7efd776445139dcc308c7418afff610"
+    },
+    "executable_sha256": "d1229dbbdfb6abcfdc7651f42bfa2872c54a144415c4412a97761f599bc261fc",
+    "static_executable_sha256": "bf8ba655e2ae506646540b1f64dee88790390efa529fee9cef9e5c131de9e9d4",
+    "diagnostic_script_sha256": "69e86f3784ce08211ef445f238227a336b3c5c16d0789732d1d29c336a09d88d",
+    "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "source_commit": "a701ad38f23f4e7d0c95417fcc394c75f3da0422"
+  },
+  "error": "AssertionError: 20ne-sly4-vdi: requested serr not reached; raw calculation preserved at /home/abhishek/.cache/sky3d-single-coverage-irgh6g11/20ne-sly4-vdi-static",
+  "failed_state_fresh_probe": {
+    "directory": "/home/abhishek/.cache/sky3d-single-coverage-irgh6g11/20ne-sly4-vdi-failed-fresh",
+    "checkpoint_sha256": "475b2dc6cd58fb9003d9cf2158b871138a5817514ae10b19663df9bd984211da",
+    "metrics": {
+      "grid": [
+        32,
+        32,
+        32
+      ],
+      "spacing_fm": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "states": 36,
+      "fresh_field_observables": {
+        "integrated_energy_mev": -141.90953347109786,
+        "koopman_energy_using_saved_orbital_energies_mev": 64.13870367061722,
+        "rms_radius_fm": 2.9766244050430757,
+        "beta": 0.3381131276891434,
+        "gamma_degrees": 0.0,
+        "particles": [
+          10.000000000000185,
+          10.0000000000004
+        ],
+        "center_of_mass_fm": [
+          5.587855612896854e-16,
+          -3.5240580397967515e-17,
+          -2.4820714989828797e-17
+        ]
+      },
+      "fft_matrix_field_derivative_max_abs": [
+        1.0837511443817505e-13,
+        1.032528685232756e-13,
+        1.032528685232756e-13
+      ],
+      "weighted_direct_residual_per_state_mev": 2.5240297777202154e-06,
+      "weighted_h_squared_fluctuation_per_state_mev": 4.5693666893572594e-06,
+      "species": [
+        {
+          "species": "neutrons",
+          "orthonormality_max_abs": 7.704947790943632e-14,
+          "hamiltonian_antihermiticity_max_abs_mev": 2.7509291380244775e-05,
+          "effective_mass_antihermiticity_max_abs_mev": 2.750929138081288e-05,
+          "remaining_terms_antihermiticity_max_abs_mev": 2.3364326363345895e-14,
+          "direct_residual_norm_mev": [
+            5.234823677730008e-10,
+            5.234773146981667e-10,
+            1.4644423838824165e-09,
+            1.4644445892102598e-09,
+            8.152104979304159e-10,
+            8.152122184058341e-10,
+            5.860958888590732e-06,
+            5.860958921432329e-06,
+            1.8218059697640783e-05,
+            1.821805971663299e-05,
+            1.675518048158598e-09,
+            1.6755193972622539e-09,
+            9.249179737522282e-06,
+            9.249179759014923e-06,
+            3.188485518417449e-05,
+            3.1884855177163514e-05,
+            2.7541860451787887e-05,
+            2.7541860431467455e-05
+          ],
+          "h_squared_fluctuation_mev": [
+            4.3799673517243695e-07,
+            4.3766126723613744e-07,
+            1.8538269611650268e-06,
+            1.85368239071445e-06,
+            4.430684367411529e-07,
+            4.4261404013917414e-07,
+            1.1444487457517025e-05,
+            1.1444496478385114e-05,
+            2.8752028233244175e-05,
+            2.8752023665445616e-05,
+            1.0934425399073271e-06,
+            1.09340576977279e-06,
+            1.1574742049305423e-05,
+            1.1574703644617251e-05,
+            8.007702120727831e-06,
+            8.007692794129454e-06,
+            2.3377328995922563e-05,
+            2.3377332111886816e-05
+          ],
+          "unoccupied_residual_norm_mev": [
+            4.681904640376347e-10,
+            4.6818407315203e-10,
+            1.4596071378548075e-09,
+            1.4596104316425248e-09,
+            8.152104428963349e-10,
+            8.152120134659227e-10,
+            4.985547812214088e-07,
+            4.98554776759493e-07,
+            4.320615774553893e-07,
+            4.320615810060227e-07,
+            1.6755180424340114e-09,
+            1.6755193960936938e-09,
+            9.540418202736348e-07,
+            9.54041831856318e-07,
+            3.0122743447768906e-06,
+            3.012274340866575e-06,
+            2.5519461069244236e-06,
+            2.551946094306161e-06
+          ],
+          "orbital_energy_mev": [
+            -38.26408709976429,
+            -38.26408709976579,
+            -25.30503737458923,
+            -25.30503737459052,
+            -21.156262563530092,
+            -21.156262563530248,
+            -16.121043599725052,
+            -16.121043599725112,
+            -12.389227857276472,
+            -12.389227857276623,
+            -9.643649598011878,
+            -9.643649598011843,
+            -6.108113631692934,
+            -6.108113631692906,
+            -4.967548883825986,
+            -4.96754888382601,
+            -2.4606791275731013,
+            -2.4606791275730933
+          ]
+        },
+        {
+          "species": "protons",
+          "orthonormality_max_abs": 7.904787935853364e-14,
+          "hamiltonian_antihermiticity_max_abs_mev": 2.6947185886583996e-05,
+          "effective_mass_antihermiticity_max_abs_mev": 2.6947185885539252e-05,
+          "remaining_terms_antihermiticity_max_abs_mev": 1.1955594237386403e-14,
+          "direct_residual_norm_mev": [
+            4.95141759331445e-10,
+            4.951297355692054e-10,
+            8.444108112277722e-10,
+            8.44407796241942e-10,
+            7.573140404271663e-10,
+            7.573150648299282e-10,
+            4.293510314925157e-06,
+            4.293510293330106e-06,
+            1.7057627608217325e-05,
+            1.7057627615273736e-05,
+            1.0185751503686807e-09,
+            1.0185735452631672e-09,
+            8.959120331402034e-06,
+            8.959120343669697e-06,
+            2.9175040248472948e-05,
+            2.917504021608778e-05,
+            0.0002108562427525185,
+            0.00021085624275433913
+          ],
+          "h_squared_fluctuation_mev": [
+            6.036800108303728e-07,
+            6.039267795898598e-07,
+            1.4102583048687524e-06,
+            1.4106520679827428e-06,
+            3.164377366840446e-07,
+            3.1673437822368886e-07,
+            9.352385135641721e-06,
+            9.352383646935426e-06,
+            2.7638578132553453e-05,
+            2.763858276085744e-05,
+            9.479872905177589e-07,
+            9.480040392217597e-07,
+            1.294592282097592e-05,
+            1.2945889170252634e-05,
+            1.139041376482306e-06,
+            1.1391179862755075e-06,
+            0.00019062062287450026,
+            0.0001906206229185985
+          ],
+          "unoccupied_residual_norm_mev": [
+            4.708791981948943e-10,
+            4.708674679982109e-10,
+            8.413746713146726e-10,
+            8.413784340390494e-10,
+            7.573139667804455e-10,
+            7.573149743080749e-10,
+            3.6085085590537084e-07,
+            3.6085085417172426e-07,
+            5.903445489802738e-07,
+            5.903445605042037e-07,
+            1.0185751431835105e-09,
+            1.0185735442105451e-09,
+            9.201434264786289e-07,
+            9.201434347962438e-07,
+            2.746393349650214e-06,
+            2.746393339370266e-06,
+            0.00021007045061399924,
+            0.00021007045061572477
+          ],
+          "orbital_energy_mev": [
+            -33.81783853199194,
+            -33.81783853199374,
+            -21.18913664447669,
+            -21.189136644477845,
+            -17.078351845846733,
+            -17.07835184584673,
+            -12.152177674603514,
+            -12.152177674603594,
+            -8.575823510811928,
+            -8.575823510811835,
+            -5.8445811341814435,
+            -5.844581134181495,
+            -2.365046197519246,
+            -2.3650461975192734,
+            -1.38435977831417,
+            -1.3843597783141894,
+            0.8701576012678768,
+            0.8701576012678786
+          ]
+        }
+      ],
+      "note": "Fresh fields rebuilt from checkpoint psi; projected occupied-subspace measurements. This is not a full operator-norm bound or a physical ground-state validation."
+    }
+  }
+}

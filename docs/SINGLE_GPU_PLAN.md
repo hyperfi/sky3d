@@ -15,7 +15,7 @@ center-of-mass resets, a restart and CUDA memory checking.
 
 The measured 40³/0.6 fm Sly5 20Ne workload takes 43.45 s on GPU versus 62.60 s
 for the best measured CPU configuration: 1.441× for 200 steps at dt=0.1 fm/c.
-This is the current local result, not a target or a production-length guarantee.
+This was the starting local result, not a target or a production-length guarantee.
 See [the baseline report](FINE_GRID_GPU_RESULTS.md). CPU fields and diagnostics
 account for about half the instrumented GPU job; they guide the next work.
 
@@ -142,20 +142,34 @@ actual speedups are documented. A source build alone does not satisfy this gate.
 ## Execution status
 
 - Baseline hybrid implementation and fine-grid checkpoint: complete.
-- Stage 1: in progress. The initial 20Ne block passed all 17 numerical jobs,
-  including the 100 fm/c CPU/GPU endpoint and 15 script tests. See
-  [the milestone report](EXTENDED_GPU_VALIDATION.md). The diagnostic Coulomb
-  time-level fix now passes legacy-trajectory, external-pulse, output-interval
-  and two-boundary restart checks; the standard, rectangular and reset-CM
-  comparisons pass again. Fresh timing gives 1.450× speedup. The matched
-  6000 fm/c K=0 response replay passes against current CPU and the saved local
-  calculation at all three smoothing widths; the matched long pair measures
-  1.091× speedup on that separate coarse grid. See
-  [the correction and response report](ENERGY_FIX_AND_QUADRUPOLE.md).
-  Broader nuclei/forces/occupations and physical production accuracy remain
-  pending.
-- Stages 2–5: pending, in the order above.
-- Multi-GPU: deferred until the single-GPU work is complete.
+- Stage 1: 20Ne fixed-setting, rectangular/reset, pulse, output-schedule and
+  segmented-restart checks pass on the final backend. 16O/SLy5 and 20Ne/SLy4
+  with VDI fractional occupations pass fixed-iteration implementation controls.
+  The final 17-job integration/unboosted/100 fm/c matrix passes. Independent
+  converged-state and own-GPU-checkpoint TDHF checks pass for 16O/SLy5 and
+  paired 20Ne/SLy4; refinement/timestep failures remain explicitly recorded.
+- Stage 2: complete. Skyrme, real-field derivatives and isolated/periodic
+  Coulomb are on GPU; periodic/disabled-Coulomb controls pass. The field-only
+  milestone measured 2.0603x against CPU8; see [GPU_FIELD_PORT.md](GPU_FIELD_PORT.md).
+- Stage 3: complete. Resident predictor/corrector densities, M=0 reductions,
+  single-particle properties and field graphs pass component/pulse/restart
+  controls and CUDA memcheck. Other M projections retain native CPU diagnostics.
+  The final fine-grid 200-step benchmark measures 3.1879x against the best
+  measured CPU4/8/20 configuration (three interleaved complete jobs each).
+- Stage 4: complete. GPU damped gradients, static Hamiltonians, densities
+  and fields pass 120-iteration controls. Ordered orthogonalization, pairing,
+  basis overlaps and small diagonalization retain CPU execution. Fresh-field
+  convergence, subspace and time-to-solution checks pass. The independent
+  static speedups are 1.6243x for 16O and 1.7948x for paired 20Ne, one pair
+  each. Static fallbacks pass with small diagonalization both on and off.
+- Stage 5: backend comparisons, profiling, static/dynamic memory checking,
+  refusal checks and 19 unit tests are complete. Clean-clone validation is
+  pending. The 6000 fm/c K=0 replay matches CPU and the existing local spectrum,
+  but its archived coarse CPU and GPU trajectories both fail the unchanged
+  physical Gram gate (6.4175e-5 versus 1e-6). This remains a failed scientific
+  qualification gate; refined long-response convergence is future physics
+  validation, not an accepted production result or a relaxed GPU tolerance.
+- Multi-GPU: deferred until later, as requested.
 
-Update this status with evidence at each checkpoint. A failed numerical gate
-takes priority over adding the next acceleration feature.
+See [SINGLE_GPU_RESULTS.md](SINGLE_GPU_RESULTS.md) and the linked machine-readable
+reports. Update the status only when the corresponding gates finish.

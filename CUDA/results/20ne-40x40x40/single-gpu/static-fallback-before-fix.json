@@ -1,0 +1,344 @@
+{
+  "run_directory": "/home/abhishek/.cache/sky3d-static-check-z614pqd6",
+  "steps": 120,
+  "passed": false,
+  "cases": [
+    {
+      "variant": "reference",
+      "threads": 1,
+      "mprint": 10,
+      "settings": {},
+      "directory": "/home/abhishek/.cache/sky3d-static-check-z614pqd6/0-reference-1",
+      "fields": {
+        "Rho": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0
+        },
+        "Tau": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0
+        },
+        "Current": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0
+        },
+        "Spindens": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0
+        },
+        "s-o-Dens": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0
+        },
+        "Upot": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0
+        },
+        "Wcoul": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0
+        }
+      },
+      "passed": true,
+      "geometry": {
+        "relative_l2": 0.0,
+        "max_abs": 0.0
+      }
+    },
+    {
+      "variant": "reference",
+      "threads": 8,
+      "mprint": 10,
+      "settings": {},
+      "directory": "/home/abhishek/.cache/sky3d-static-check-z614pqd6/1-reference-8",
+      "fields": {
+        "Rho": {
+          "relative_l2": 1.4731714862935123e-15,
+          "max_abs": 1.8041124150158794e-16
+        },
+        "Tau": {
+          "relative_l2": 1.2509077662908047e-15,
+          "max_abs": 1.6653345369377348e-16
+        },
+        "Current": {
+          "relative_l2": 0.5034443510432159,
+          "max_abs": 7.649046326885234e-17
+        },
+        "Spindens": {
+          "relative_l2": 0.6270797842336081,
+          "max_abs": 3.8565071275309393e-16
+        },
+        "s-o-Dens": {
+          "relative_l2": 1.3334406710518146e-14,
+          "max_abs": 1.700029006457271e-16
+        },
+        "Upot": {
+          "relative_l2": 1.1071290128734271e-15,
+          "max_abs": 1.2079226507921703e-13
+        },
+        "Wcoul": {
+          "relative_l2": 1.4862706165349504e-15,
+          "max_abs": 1.1546319456101628e-14
+        }
+      },
+      "passed": true,
+      "geometry": {
+        "relative_l2": 0.0,
+        "max_abs": 0.0
+      }
+    },
+    {
+      "variant": "reference",
+      "threads": 8,
+      "mprint": 10,
+      "settings": {},
+      "directory": "/home/abhishek/.cache/sky3d-static-check-z614pqd6/2-reference-8",
+      "fields": {
+        "Rho": {
+          "relative_l2": 1.0183911001359093e-15,
+          "max_abs": 1.249000902703301e-16
+        },
+        "Tau": {
+          "relative_l2": 9.677884856526548e-16,
+          "max_abs": 1.249000902703301e-16
+        },
+        "Current": {
+          "relative_l2": 0.5576712748146138,
+          "max_abs": 7.838781707070197e-17
+        },
+        "Spindens": {
+          "relative_l2": 0.6399321397720147,
+          "max_abs": 3.5822039778921066e-16
+        },
+        "s-o-Dens": {
+          "relative_l2": 8.746191783007867e-15,
+          "max_abs": 7.806255641895632e-17
+        },
+        "Upot": {
+          "relative_l2": 9.02817764485086e-16,
+          "max_abs": 1.0658141036401503e-13
+        },
+        "Wcoul": {
+          "relative_l2": 1.0877014909720567e-15,
+          "max_abs": 7.105427357601002e-15
+        }
+      },
+      "passed": true,
+      "geometry": {
+        "relative_l2": 0.0,
+        "max_abs": 0.0
+      }
+    },
+    {
+      "variant": "cpu",
+      "threads": 8,
+      "mprint": 10,
+      "settings": {},
+      "directory": "/home/abhishek/.cache/sky3d-static-check-z614pqd6/3-cpu-8",
+      "fields": {
+        "Rho": {
+          "relative_l2": 8.862427691024238e-15,
+          "max_abs": 9.853229343548264e-16
+        },
+        "Tau": {
+          "relative_l2": 7.144084261230664e-15,
+          "max_abs": 6.106226635438361e-16
+        },
+        "Current": {
+          "relative_l2": 1.0077878443299533,
+          "max_abs": 1.2945373939476923e-16
+        },
+        "Spindens": {
+          "relative_l2": 0.9581260817158708,
+          "max_abs": 7.043248363008958e-16
+        },
+        "s-o-Dens": {
+          "relative_l2": 3.2579687420662846e-14,
+          "max_abs": 3.0704605524789486e-16
+        },
+        "Upot": {
+          "relative_l2": 4.767240730207067e-15,
+          "max_abs": 3.410605131648481e-13
+        },
+        "Wcoul": {
+          "relative_l2": 5.267585447013151e-15,
+          "max_abs": 4.263256414560601e-14
+        }
+      },
+      "passed": true,
+      "geometry": {
+        "relative_l2": 0.0,
+        "max_abs": 0.0
+      }
+    },
+    {
+      "variant": "cpu",
+      "threads": 8,
+      "mprint": 0,
+      "settings": {},
+      "directory": "/home/abhishek/.cache/sky3d-static-check-z614pqd6/4-cpu-8",
+      "fields": {
+        "Rho": {
+          "relative_l2": 1.0416781341584653e-14,
+          "max_abs": 2.3592239273284576e-15
+        }
+      },
+      "passed": true
+    },
+    {
+      "variant": "gpu",
+      "threads": 8,
+      "mprint": 10,
+      "settings": {},
+      "directory": "/home/abhishek/.cache/sky3d-static-check-z614pqd6/5-gpu-8",
+      "fields": {
+        "Rho": {
+          "relative_l2": 7.577629108724844e-15,
+          "max_abs": 8.881784197001252e-16
+        },
+        "Tau": {
+          "relative_l2": 5.030276070657203e-15,
+          "max_abs": 4.0245584642661925e-16
+        },
+        "Current": {
+          "relative_l2": 0.9886914722774051,
+          "max_abs": 1.3118846287074604e-16
+        },
+        "Spindens": {
+          "relative_l2": 0.9364310789880981,
+          "max_abs": 6.824510574710008e-16
+        },
+        "s-o-Dens": {
+          "relative_l2": 2.59222559862134e-14,
+          "max_abs": 2.463307335887066e-16
+        },
+        "Upot": {
+          "relative_l2": 4.3565514909232985e-15,
+          "max_abs": 3.126388037344441e-13
+        },
+        "Wcoul": {
+          "relative_l2": 5.157068153357378e-15,
+          "max_abs": 3.9968028886505635e-14
+        }
+      },
+      "passed": true,
+      "geometry": {
+        "relative_l2": 0.0,
+        "max_abs": 0.0
+      }
+    },
+    {
+      "variant": "gpu",
+      "threads": 8,
+      "mprint": 0,
+      "settings": {},
+      "directory": "/home/abhishek/.cache/sky3d-static-check-z614pqd6/6-gpu-8",
+      "fields": {
+        "Rho": {
+          "relative_l2": 9.19036181012571e-15,
+          "max_abs": 2.1649348980190553e-15
+        }
+      },
+      "passed": true
+    },
+    {
+      "variant": "gpu",
+      "threads": 8,
+      "mprint": 10,
+      "settings": {
+        "SKY3D_GPU_FIELDS": "0"
+      },
+      "directory": "/home/abhishek/.cache/sky3d-static-check-z614pqd6/7-gpu-8",
+      "fields": {
+        "Rho": {
+          "relative_l2": 8.853554258267539e-15,
+          "max_abs": 9.71445146547012e-16
+        },
+        "Tau": {
+          "relative_l2": 7.123887010219685e-15,
+          "max_abs": 6.38378239159465e-16
+        },
+        "Current": {
+          "relative_l2": 1.0200704051103233,
+          "max_abs": 1.3129688308799459e-16
+        },
+        "Spindens": {
+          "relative_l2": 1.0717029729643872,
+          "max_abs": 7.877812985279675e-16
+        },
+        "s-o-Dens": {
+          "relative_l2": 2.9506415832610134e-14,
+          "max_abs": 3.0704605524789486e-16
+        },
+        "Upot": {
+          "relative_l2": 4.739134810023832e-15,
+          "max_abs": 3.552713678800501e-13
+        },
+        "Wcoul": {
+          "relative_l2": 5.3834788125333e-15,
+          "max_abs": 4.3520742565306136e-14
+        }
+      },
+      "passed": false,
+      "geometry": {
+        "relative_l2": 0.0785935764852878,
+        "max_abs": 44.204913480000016
+      }
+    }
+  ],
+  "build": {
+    "arch": "sm_120",
+    "cuda_home": "/usr/local/cuda",
+    "variants": {
+      "reference": "-O3 -march=native -ffp-contract=off -fopenmp",
+      "cpu": "-O3 -march=native -ffast-math -fopenmp",
+      "gpu": "-O3 -march=native -ffast-math -fopenmp"
+    },
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+    "gfortran": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "source_commit": "70971055a9f8931c20eb4e6a9cc8fbe433265f29",
+    "source_dirty": true,
+    "executable_sha256": {
+      "reference": "7f77bbe30be33fb12c88eff4c1d432257fbf584dfad0221e37eaabb6c2b723a4",
+      "cpu": "9b4355e0e234103d0cb2290015183dc4a06ef0e5d1ab9e8631dd474ab03adf25",
+      "gpu": "6a8221e849529ff3c43bbf0e671abe018ad88d326b2677637ed327c752e27e1c"
+    },
+    "library_sha256": "30cd193543683c044591ac4a6743c721a6b77995f381c273f731e43e6a56ec1a",
+    "source_sha256": {
+      "Code/coulomb.f90": "5d9011974a3ec788b109455033e79d4e7fe3962421e1adc649e23a071690a31d",
+      "Code/densities.f90": "4430ddd24940b67f564814a61dbcb68459c18528a9bc8935131bdf0253bfb9b1",
+      "Code/dynamic.f90": "bb09b047cdb4d95bb15205e1c4fe161e5bcc599341db6622bf1ed5d7955a9e40",
+      "Code/energies.f90": "60d00ab2a55afa73525c175c09651d4d596d248ca8724f258d7c5487e73bb2cc",
+      "Code/external.f90": "4d911dd988e77d805fa49cbd93d6519dc9e8098ecc7f09cfc350613779e750a8",
+      "Code/fftw3.f": "8bdbee5f7a7a28762abd79f536aaf28deaca0197cc0e931b1cb9364f43b2a314",
+      "Code/forces.data": "2c5712b83aed67d310abc50590a3078a8d0e5d8e16b46315d92ba6dfe76f4728",
+      "Code/forces.f90": "380153c21f072d8bc49a59619d9c0c3aa478bd8ebadf483b2c0b7a7e0126373e",
+      "Code/fourier.f90": "ff323a3c9c85aad2e85a01251c1db939c5cb882922330764c9ec0403552c6f40",
+      "Code/fragments.f90": "47aead4560e57fee09dd3012cb79539381dddfa7196b07b58425e092df5f937c",
+      "Code/gpu_runtime.f90": "acf964b740f5f0c50af3e00ab647e3f0f2ce8ed17dd9c9d07e0b23c7cf4f3230",
+      "Code/grids.f90": "2899b53e968f968cd910d220ffa3200ce835b292f21f991aed549907b32226ba",
+      "Code/inout.f90": "fdce0c5da532a2520330fe0f4fe1d3e1cb1df7c904c1b60995999306c5461585",
+      "Code/levels.f90": "40a0cf9bc4ee7e4233766ea6fec057ae21f355a1686d1aa867c6d92f54161bc6",
+      "Code/main3d.f90": "06fc16477195b6eefc61276fec50bd27624937d855cef81ca540258d311bebc7",
+      "Code/Makefile": "9a23610ad88afabf2103e31532d56ccbcb07c55d47b2b4c55833e0c66731fb2c",
+      "Code/meanfield.f90": "59846be7a8b959eca5e1d4007a39538018d5bb4d77f67d0437f6864e34a9972d",
+      "Code/moment.f90": "301231a4975eb2a9e03cd3739a56dca2b681b5ea4383120c7c6145d4d6120677",
+      "Code/pairs.f90": "d872046715200166c9adab75b03d2db36936b5b1d65e9f818e22b734f64ae4a9",
+      "Code/parallel.f90": "e6d3e2e2543bedeb90575f859e26e990e2ff14a52f4cefd49d20a8f1c23ce2b8",
+      "Code/params.f90": "975aec6ec0ad3d11d07c3ac763ec2a1fa7543bf82079ade6ac986cad259dc074",
+      "Code/sequential.f90": "89bd10da9abcbf7bf4fd482c72250e0f6ea23e0a45cc89fa324943273e18cecd",
+      "Code/static.f90": "bc9243946fe926e818c47702f66046cb9395da39ea9579187dad968e57bd2906",
+      "Code/trivial.f90": "e44c37e3fc59391b4fe641d480e5154aa9c9e9bc48a71db8932e1b07b76a8708",
+      "Code/twobody.f90": "69ab4cb00f7c8d8cf13aa2e2f833a4ceff59a4035825670e1f231c88a218b5ab",
+      "Code/user.f90": "59adf01b45cd06afabb57b8a3e232f02605547993ecdbfe4a4717b8f97e74d89",
+      "Code/user_sample.f90": "788f06dcbd29a047ca218a21e73447bee3a7f47e00db5d1a86cbf8009fbabc7b",
+      "Code/ylm.f90": "58b3b7eb7190e8fee4e3e69b46282d75d7efd776445139dcc308c7418afff610",
+      "CUDA/reductions.cuh": "77dfc2a75931c73cbede7106255a02eaddc7a0ab32b868e39c3a59650b42a9e6",
+      "CUDA/gpu_runtime.f90": "774a0bcc5d77ec79e364c8b86078bcb990cdcfb7f01e9974218a50f3b8c315c6",
+      "CUDA/sky_gpu.cu": "7a3dca804d222d0234f2ccd0954f7ed459465e1e50834a8bbbc0255f3fc1061e",
+      "CUDA/build.py": "632743f5995fd7fe4c62e458272294d55c55a32c0b9d925bf31336d1559d47c7"
+    }
+  },
+  "runner_sha256": "880cd6e29295b5b8c9e9800d661b6af0c29f75646fbcd31f630884e36fe82277",
+  "note": "Static fields and printed geometry; not individual orbital phases or convergence proof"
+}
