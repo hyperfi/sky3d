@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "published_source_commit": "6784452be788371e60d1b8e28f3d4512a6ce816a",
+  "clone_directory": "/home/abhishek/.cache/sky3d-gpu-onboarding-2vdnyajv/checkout",
+  "run_directory": "/home/abhishek/.cache/sky3d-gpu-onboarding-2vdnyajv",
+  "build": {
+    "arch": "native",
+    "cuda_home": "/usr/local/cuda",
+    "variants": {
+      "reference": "-O3 -march=native -ffp-contract=off -fopenmp",
+      "cpu": "-O3 -march=native -ffast-math -fopenmp",
+      "gpu": "-O3 -march=native -ffast-math -fopenmp"
+    },
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+    "gfortran": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "source_commit": "6784452be788371e60d1b8e28f3d4512a6ce816a",
+    "source_dirty": false,
+    "executable_sha256": {
+      "reference": "bf8ba655e2ae506646540b1f64dee88790390efa529fee9cef9e5c131de9e9d4",
+      "cpu": "6d0849613841bcef980b9e9b553c639fd1b10ff3a0ae4027bcbc22af552a319e",
+      "gpu": "5a49742c51cfb915944b2288a008bd1d05ed8cd3c5737b23e253347d33b13806"
+    },
+    "library_sha256": "305edf61329e56fa0a370b777ac448ef846ed12444c2db3ca4c3368d1eb7fdbb",
+    "source_sha256": {
+      "Code/fragments.f90": "e327df2918e680cd8e9bb1a9af7ee935d22187f729de62c45710943e30bf2737",
+      "Code/external.f90": "f0b142715e60189f5c90756479009ea48478d6e2682ef18b8f0106a99252b9ff",
+      "Code/fftw3.f": "96c5e32ba2ed67252390cec3e6c16d6a191dd80599dfe5ee670148c95a2e5dc2",
+      "Code/moment.f90": "db336897cd25969b51cb81dad618790a57f74934ce24761ba92861891321a29f",
+      "Code/dynamic.f90": "bb09b047cdb4d95bb15205e1c4fe161e5bcc599341db6622bf1ed5d7955a9e40",
+      "Code/twobody.f90": "8ed1fe041c14f52a2a29fc58b6fc2bfaab3c526f6a79396a4731737619308f46",
+      "Code/main3d.f90": "63580485906f034a52b65f1ab068c4308dc037aaab7e1c77db58b7f869fdb208",
+      "Code/levels.f90": "b0e2ae8db9689592631d7075c5f13fab94cba769010815b39cc657b5a29e3abe",
+      "Code/fourier.f90": "1f5970ec83d590d8ce4e2be7b34ff8ea8a4c543cd811a877edafaa12fb8e05ee",
+      "Code/trivial.f90": "0e78ebc5fc5ecd1e0cf1402bb5403e16175bc2a0e634c35ca6ce8ad219117da0",
+      "Code/forces.data": "6bd36d34e5d00269ce57ff473756f6068d10548b1e3da5034fc7152bdfbf64b2",
+      "Code/params.f90": "624b7be81ca0fae3307d922916c291299f6436dc08e61f3cee918070b5f431ac",
+      "Code/grids.f90": "68bc77ec96f3563be45877a52855ef829546c87f0006584730cd661aeb7b8fef",
+      "Code/ylm.f90": "58b3b7eb7190e8fee4e3e69b46282d75d7efd776445139dcc308c7418afff610",
+      "Code/energies.f90": "8dc797189d00997b8ce6374d1e65974546b2b475a092eed55ab81744e38053a4",
+      "Code/forces.f90": "e5aca179a3d4283e44198bde72327c497980d559a96325d0424d3a2bf8c484ce",
+      "Code/user.f90": "b321289cda0fdd912351b7fb7d7c9b5b646d2e345f8346f08086949f4faf5559",
+      "Code/user_sample.f90": "80c7d887479b3c234a10620468c24edff48d9ef362938e2cd76e8153524f44b8",
+      "Code/inout.f90": "fdce0c5da532a2520330fe0f4fe1d3e1cb1df7c904c1b60995999306c5461585",
+      "Code/densities.f90": "2b8a0282f4ad1845ba78b0ee90a8200037f388b56974e722d991449bc83fc7b2",
+      "Code/static.f90": "bc9243946fe926e818c47702f66046cb9395da39ea9579187dad968e57bd2906",
+      "Code/Makefile": "9a23610ad88afabf2103e31532d56ccbcb07c55d47b2b4c55833e0c66731fb2c",
+      "Code/meanfield.f90": "59846be7a8b959eca5e1d4007a39538018d5bb4d77f67d0437f6864e34a9972d",
+      "Code/sequential.f90": "62a3ba2b7bb8710f144f9e050f726e358b8c9d7f3840006da5a7fed209abaaa2",
+      "Code/coulomb.f90": "abe9107fe1f2cf606be983d5fe9d19de9bfdf9e7490e4c16c6311417f3dd9381",
+      "Code/parallel.f90": "7bcde44ac9858acad65d1f7d8f9ded348842d505fa02b6388aedabcca88d8802",
+      "Code/pairs.f90": "2cb3d0d9bb8df1b32c06e081410d40fd0ecedd702fa7faf2f2346231b0ea7e59",
+      "Code/gpu_runtime.f90": "acf964b740f5f0c50af3e00ab647e3f0f2ce8ed17dd9c9d07e0b23c7cf4f3230",
+      "CUDA/reductions.cuh": "77dfc2a75931c73cbede7106255a02eaddc7a0ab32b868e39c3a59650b42a9e6",
+      "CUDA/gpu_runtime.f90": "774a0bcc5d77ec79e364c8b86078bcb990cdcfb7f01e9974218a50f3b8c315c6",
+      "CUDA/sky_gpu.cu": "7a3dca804d222d0234f2ccd0954f7ed459465e1e50834a8bbbc0255f3fc1061e",
+      "CUDA/build.py": "632743f5995fd7fe4c62e458272294d55c55a32c0b9d925bf31336d1559d47c7"
+    }
+  },
+  "guide_sha256": "2fd3ef124c9f17648cc4c438dbb345e83f83180fdd2841f45d8362b235e3be82",
+  "example_sha256": "6d556a693913a619fe214c8ddaf68586c413110562985923417e0f1ab18677c3",
+  "checks": [
+    "build",
+    "preflight",
+    "unit-tests",
+    "prepare",
+    "own-gpu"
+  ],
+  "manual_tdhf": {
+    "directory": "/home/abhishek/.cache/sky3d-gpu-onboarding-2vdnyajv/manual-tdhf",
+    "steps": 100,
+    "time_fm_c": 9.99999999999998,
+    "particles": [
+      7.99999999990444,
+      7.9999999999522755
+    ]
+  },
+  "note": "Fresh HTTPS clone of published branch; guide and example overlaid before native build. Cold independent CPU/GPU preparation, own-GPU evolution, preflight, 19 tests and manual example verified in configured Ubuntu/WSL environment. OS, driver and dependency installation were not repeated. Raw checkpoints and logs stay in cache."
+}

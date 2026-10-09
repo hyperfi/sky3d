@@ -1,5 +1,11 @@
 # Single-GPU Sky3D backend
 
+New clone? Follow the **[GPU quick start](../docs/GPU_QUICKSTART.md)** for
+dependencies, compilation, a checkpoint-free first test and a manual TDHF run.
+Its native build, cold CPU/GPU 16O preparation, own-GPU evolution, 19 script
+tests and manual 100-step example pass in a fresh HTTPS clone on the tested
+WSL host; see the [first-run check report](results/20ne-40x40x40/single-gpu/onboarding-validation.json).
+
 This branch retains Sky3D's Fortran input and output and calls an FP64 CUDA
 C++/cuFFT backend through a C ABI. The GPU computes Hamiltonians, Fourier
 derivatives, predictor/corrector propagation, all five densities, Skyrme fields,
@@ -39,13 +45,13 @@ hardware-dependent; memory fit alone cannot predict it.
 ## Build in WSL or Linux
 
 Requirements: a compatible NVIDIA GPU/driver, CUDA toolkit with cuFFT,
-g++/gfortran, make, FFTW3, LAPACK/OpenBLAS, Python 3.10+ and NumPy.
+g++/gfortran, make, FFTW3, LAPACK/OpenBLAS, Python 3.11+ and NumPy.
 This machine uses CUDA 13.0, gfortran 13.3, an RTX 5070 with 12 GB VRAM,
 and an Intel Core Ultra 7 265K. CUDA 13.0's nvcc is now the local WSL default.
 No NVIDIA Fortran compiler is required.
 
 ```bash
-cd /mnt/d/Coding/sky3d
+cd /path/to/sky3d
 export CUDA_HOME=/usr/local/cuda
 python3 CUDA/build.py
 ```
@@ -80,9 +86,9 @@ python3 CUDA/preflight.py --input /path/to/calculation/for005
 # From the calculation directory:
 export OMP_NUM_THREADS=8 OPENBLAS_NUM_THREADS=1
 export OMP_PROC_BIND=close OMP_PLACES=cores
-SKY3D_BACKEND=gpu /mnt/d/Coding/sky3d/CUDA/build/gpu/sky3d.gpu
+SKY3D_BACKEND=gpu /absolute/path/to/sky3d/CUDA/build/gpu/sky3d.gpu
 # CPU comparison, with the same input, in another fresh directory:
-SKY3D_BACKEND=cpu /mnt/d/Coding/sky3d/CUDA/build/cpu/sky3d.cpu
+SKY3D_BACKEND=cpu /absolute/path/to/sky3d/CUDA/build/cpu/sky3d.cpu
 ```
 
 `SKY3D_BACKEND=cpu` also selects CPU execution in the GPU-linked executable.
@@ -386,11 +392,11 @@ the single GPU via NVIDIA's usual device visibility mapping.
 
 ## Moving to another machine
 
-After publishing the `gpu` branch, clone it and build locally; binaries, large
+Clone the `gpu` branch and build locally; binaries, large
 states, `.tdd` files and compiler products are intentionally excluded:
 
 ```bash
-git clone --branch gpu git@github.com:hyperfi/sky3d.git
+git clone --branch gpu --single-branch https://github.com/hyperfi/sky3d.git
 cd sky3d
 export CUDA_HOME=/usr/local/cuda
 python3 CUDA/build.py --build-dir "$HOME/.cache/sky3d-build"

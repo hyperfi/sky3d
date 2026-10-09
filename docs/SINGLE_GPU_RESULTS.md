@@ -207,7 +207,7 @@ are not static solutions or performance claims for a 208-nucleon nucleus.
 
 See [CUDA/README.md](../CUDA/README.md) for clone/build/run commands and
 component controls. Native binaries must be rebuilt on the destination host.
-The branch is kept local until publication is requested. Static checkpoints
+The `gpu` branch is published; compile it locally after cloning. Static checkpoints
 must be prepared locally or transferred separately, not committed to Git.
 
 A clean local clone of checkpoint `c939eb5` rebuilds the reference, CPU and

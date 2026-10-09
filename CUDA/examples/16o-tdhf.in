@@ -1,0 +1,28 @@
+! Short 16O/SLy5 quadrupole example. Prepare initial.tdhf using the quick start.
+! This 10 fm/c run checks execution; it is not a production response spectrum.
+&files
+ wffile='dynamic.tdhf'
+/
+&force
+ name='Sly5', pairing='NONE'
+/
+&main
+ imode=2, nof=1, tfft=T,
+ mprint=10, mplot=0, mrest=100, writeselect='r'
+/
+&grid
+ nx=40, ny=40, nz=40,
+ dx=0.6, dy=0.6, dz=0.6, periodic=F
+/
+&dynamic
+ nt=100, dt=0.1, mxpact=4, texternal=T
+/
+&extern
+ ipulse=0, isoext=0, ampl_ext=5.0D-5,
+ L_val=2, M_val=0, radext=200.0D0, widext=1.0D0,
+ textfield_periodic=F
+/
+&fragments
+ filename='initial.tdhf', fix_boost=T,
+ fcent(1,1)=0.0, 0.0, 0.0
+/
