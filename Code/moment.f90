@@ -27,6 +27,7 @@
 MODULE Moment
   USE Params
   USE Grids, ONLY: nx,ny,nz,x,y,z,wxyz
+  USE GPU_Runtime, ONLY: gpu_enabled,gpu_diagnostics_enabled,gpu_moments_first,gpu_moments_second
   USE Spherical_Harmonics
 
   IMPLICIT NONE
@@ -127,10 +128,18 @@ CONTAINS
     REAL(db) :: xx(3),x2(3),vol,radius,eta
     REAL(db) :: qmat(3,3,2),qmtot(3,3)
     REAL(db) :: Mono(2),Quad(2),Oct(2),HexaDeca(2),DiaTriaConta(2),tmp,facn,facp
-    REAL(db) :: Di_is(2),Di_iv(2)
+    REAL(db) :: Di_is(2),Di_iv(2),first(7,2),second(19,2)
+    LOGICAL :: device_moments
+    device_moments=gpu_enabled.AND.gpu_diagnostics_enabled.AND.M_val==0
     pnr=0.D0
     cm=0.D0
     pcm=0.D0
+    IF(device_moments) THEN
+       CALL gpu_moments_first(first)
+       pnr=first(1,:)
+       cm=first(2:4,:)
+       IF(tdynamic) pcm=first(5:7,:)
+    ELSE
     DO iq=1,2  
        DO iz=1,nz  
           xx(3)=z(iz)  
@@ -145,6 +154,7 @@ CONTAINS
           ENDDO
        ENDDO
     ENDDO
+    ENDIF
     pnrtot=pnr(1)+pnr(2)  
     cmtot=(cm(:,1)+cm(:,2))/pnrtot  
     DO iq=1,2
@@ -165,6 +175,29 @@ CONTAINS
     HexaDeca = 0.0D0
     DiaTriaConta = 0.0D0
 
+    IF(device_moments) THEN
+       CALL gpu_moments_second(cm,second)
+       rms=second(1,:)
+       r3=second(2,:)
+       r4=second(3,:)
+       qmat(1,1,:)=second(4,:)
+       qmat(1,2,:)=second(5,:)
+       qmat(1,3,:)=second(6,:)
+       qmat(2,2,:)=second(7,:)
+       qmat(2,3,:)=second(8,:)
+       qmat(3,3,:)=second(9,:)
+       qmat(2,1,:)=qmat(1,2,:)
+       qmat(3,1,:)=qmat(1,3,:)
+       qmat(3,2,:)=qmat(2,3,:)
+       x2m=second(10:12,:)
+       Mono=second(13,:)
+       Di_is=second(14,:)
+       Di_iv=second(15,:)
+       Quad=second(16,:)
+       Oct=second(17,:)
+       HexaDeca=second(18,:)
+       DiaTriaConta=second(19,:)
+    ELSE
     DO iq=1,2  
        DO iz=1,nz  
           xx(3)=z(iz)-cm(3,iq)  
@@ -220,6 +253,7 @@ CONTAINS
     ENDDO
     
 
+    ENDIF
     r2tot=(rms(1)+rms(2))/pnrtot
     rmstot=SQRT((rms(1)+rms(2))/pnrtot)
     rms=SQRT(rms/pnr)  

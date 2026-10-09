@@ -1,0 +1,15 @@
+{
+  "grid": {
+    "nx": 40,
+    "ny": 40,
+    "nz": 40
+  },
+  "input": "/home/abhishek/.cache/sky3d-convergence-x6wxa6r1/polished40/20ne_sly5.tdhf",
+  "input_sha256": "ea7ec8de58dcbe1d37a3c003cffa263b1a58542af27d3abc9f99078c5cea5abc",
+  "interpolation": false,
+  "max_relative_discrete_norm_error": 8.057554623517994e-15,
+  "output": "/home/abhishek/.cache/sky3d-fine20ne-rotated-zaxis.tdhf",
+  "output_sha256": "b529d19ac8d0ce91d9921bfef17c132d3ceddfa72edec2780087ab817a3bbdcf",
+  "rotation": "active R_y(-pi/2): x -> z",
+  "wavefunctions_rotated": 20
+}

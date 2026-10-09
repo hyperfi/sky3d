@@ -19,7 +19,7 @@ def allocation_bytes(grid, states):
         raise ValueError('Case exceeds current single-batch indexing limits')
     # Nine wavefunction banks; density/field helpers; worst-case isolated
     # Coulomb work/kernel on the doubled box. Periodic runs reserve this too.
-    return cells * (2 * states * 16 * 9 + 840) + states * 12
+    return cells * (2 * states * 16 * 9 + 1016) + states * 52 + ((cells + 255)//256) * max(10 * states, 38) * 8
 
 
 def assess(required, free, fraction=0.8):

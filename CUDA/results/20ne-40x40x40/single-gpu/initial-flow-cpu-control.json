@@ -1,0 +1,18 @@
+{
+  "run_directory": "/home/abhishek/.cache/sky3d-benchmark-p041_pnv",
+  "case": "rectangular44x42x40",
+  "comparison": "optimized CPU versus strict CPU, before GPU evaluation",
+  "first_collective_energy_cpu_mev": [
+    8.49902e-05,
+    0.000111903
+  ],
+  "first_collective_energy_reference_mev": [
+    8.9211e-05,
+    0.000123851
+  ],
+  "initial_max_abs_difference_mev": 1.1947999999999988e-05,
+  "maximum_total_integrated_energy_difference_mev": 0.0,
+  "failed_initial_only_budget_mev": 1e-05,
+  "explicit_rectangular_validation_budget_mev": 2e-05,
+  "note": "Existing j squared over rho near-vacuum sensitivity; do not use this initial flow value as a precise physical observable. Total energy, density and wavefunction limits remain unchanged."
+}

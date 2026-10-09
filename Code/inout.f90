@@ -38,6 +38,7 @@ MODULE Inout
   USE Densities, ONLY: rho,tau,current,sdens,sodens
   USE Meanfield, ONLY: upot
   USE Coulomb, ONLY: wcoul
+  USE GPU_Runtime, ONLY: gpu_enabled,gpu_diagnostics_enabled,gpu_properties,gpu_push
   USE Levels
   IMPLICIT NONE
   PRIVATE :: write_one_density,write_vec_density
@@ -393,7 +394,17 @@ CONTAINS
     USE Trivial, ONLY: cmulx,cmuly,cmulz
     INTEGER :: nst,ix,iy,iz,is,ixx,iyy,izz
     COMPLEX(db),ALLOCATABLE,DIMENSION(:,:,:,:) :: pst,psx,psy,psz,psw
+    REAL(db) :: gpu_energy(nstmax),gpu_norm(nstmax)
     REAL(db) ::rp,ip,xx(nx),yy(ny),zz(nz),cc(3),ss(3),kin,xpar
+    IF(gpu_enabled.AND.gpu_diagnostics_enabled) THEN
+       IF(.NOT.tdynamic) CALL gpu_push(psi)
+       CALL gpu_properties(cmtot,f%h2m,sp_orbital,sp_spin,sp_kinetic,sp_parity,gpu_energy,gpu_norm)
+       IF(tdynamic) THEN
+          sp_energy=gpu_energy
+          sp_norm=gpu_norm
+       ENDIF
+       RETURN
+    ENDIF
     ALLOCATE(pst(nx,ny,nz,2),psx(nx,ny,nz,2),psy(nx,ny,nz,2),psz(nx,ny,nz,2),psw(nx,ny,nz,2))
     sp_orbital=0.D0
     sp_spin=0.D0

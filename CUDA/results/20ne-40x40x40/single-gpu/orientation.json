@@ -1,0 +1,114 @@
+{
+  "original": {
+    "state_sha256": "ea7ec8de58dcbe1d37a3c003cffa263b1a58542af27d3abc9f99078c5cea5abc",
+    "grid": [
+      40,
+      40,
+      40
+    ],
+    "spacing_fm": [
+      0.6,
+      0.6,
+      0.6
+    ],
+    "particles": [
+      10.000000000000789,
+      10.000000000000709
+    ],
+    "center_of_mass_fm": [
+      -6.094334273342618e-16,
+      4.0608317465375387e-16,
+      1.3219818570087727e-18
+    ],
+    "coordinate_mean_square_fm2": [
+      4.429492675271774,
+      2.195089656729336,
+      2.1950896614075077
+    ],
+    "principal_mean_square_fm2": [
+      4.429492675271774,
+      2.1950896614075077,
+      2.195089656729335
+    ],
+    "principal_axes_columns_xyz": [
+      [
+        1.0,
+        -1.962094185039389e-16,
+        1.847006849016548e-17
+      ],
+      [
+        -1.847007931672213e-17,
+        -5.5178577818004726e-08,
+        0.9999999999999983
+      ],
+      [
+        1.962094174847865e-16,
+        0.9999999999999983,
+        5.517857792902703e-08
+      ]
+    ],
+    "longest_axis_xyz": [
+      1.0,
+      -1.847007931672213e-17,
+      1.962094174847865e-16
+    ],
+    "transverse_relative_splitting": 2.1311988290435093e-09,
+    "note": "Axis signs are conventional. A spherical density has no preferred intrinsic axis; nearly degenerate transverse axes are not individually robust."
+  },
+  "rotated": {
+    "state_sha256": "b529d19ac8d0ce91d9921bfef17c132d3ceddfa72edec2780087ab817a3bbdcf",
+    "grid": [
+      40,
+      40,
+      40
+    ],
+    "spacing_fm": [
+      0.6,
+      0.6,
+      0.6
+    ],
+    "particles": [
+      10.000000000000787,
+      10.000000000000703
+    ],
+    "center_of_mass_fm": [
+      -8.537717858210016e-17,
+      4.910100904199573e-16,
+      -9.57638827144122e-16
+    ],
+    "coordinate_mean_square_fm2": [
+      2.195089661407506,
+      2.195089656729335,
+      4.429492675271776
+    ],
+    "principal_mean_square_fm2": [
+      4.429492675271776,
+      2.195089661407506,
+      2.1950896567293343
+    ],
+    "principal_axes_columns_xyz": [
+      [
+        -1.8556008858901786e-16,
+        0.9999999999999908,
+        -1.3518217053349368e-07
+      ],
+      [
+        2.220446049250313e-16,
+        1.3518217053349365e-07,
+        0.9999999999999909
+      ],
+      [
+        1.0,
+        1.855600503854814e-16,
+        -3.3306690738754696e-16
+      ]
+    ],
+    "longest_axis_xyz": [
+      -1.8556008858901786e-16,
+      2.220446049250313e-16,
+      1.0
+    ],
+    "transverse_relative_splitting": 2.1311984244229457e-09,
+    "note": "Axis signs are conventional. A spherical density has no preferred intrinsic axis; nearly degenerate transverse axes are not individually robust."
+  }
+}

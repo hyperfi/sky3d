@@ -84,7 +84,7 @@ external.o : external.f90 params.o $(PARALLEL_SKY) grids.o levels.o meanfield.o 
 coulomb.o : coulomb.f90 params.o grids.o densities.o Makefile
 
 inout.o : inout.f90 params.o $(PARALLEL_SKY) grids.o moment.o densities.o \
-	levels.o  coulomb.o forces.o meanfield.o forces.o Makefile
+	levels.o  coulomb.o forces.o meanfield.o gpu_runtime.o Makefile
 
 trivial.o : trivial.f90 params.o grids.o Makefile
 
@@ -96,7 +96,7 @@ params.o : params.f90 Makefile
 
 gpu_runtime.o : gpu_runtime.f90 params.o Makefile
 
-moment.o : moment.f90 params.o grids.o densities.o ylm.o Makefile 
+moment.o : moment.f90 params.o grids.o densities.o ylm.o gpu_runtime.o Makefile 
 
 sequential.o: sequential.f90 levels.o params.o grids.o densities.o Makefile
 
@@ -122,7 +122,7 @@ meanfield.o : meanfield.f90 params.o densities.o forces.o grids.o coulomb.o \
 pairs.o : pairs.f90 forces.o grids.o levels.o densities.o Makefile
 
 static.o : static.f90 params.o densities.o grids.o \
-	levels.o moment.o energies.o inout.o pairs.o meanfield.o Makefile
+	levels.o moment.o energies.o inout.o pairs.o meanfield.o gpu_runtime.o Makefile
 
 dynamic.o : dynamic.f90 params.o densities.o grids.o trivial.o \
 	levels.o moment.o energies.o inout.o meanfield.o $(PARALLEL_SKY) \

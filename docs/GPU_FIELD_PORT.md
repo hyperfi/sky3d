@@ -46,3 +46,8 @@ only when the symmetry axis is the lab z axis. The finer benchmark's long axis
 is x; the saved K=0 response uses the archived exact 90-degree grid/spinor
 rotation mapping that axis to z. Boost and readout must use the same frame.
 Arbitrary interpolated rotations require their own numerical validation.
+
+The repeated 200-step benchmark at this milestone measured 62.2160 s CPU8 and
+30.1976 s GPU8 (three interleaved jobs each): 2.0603x. This precedes the later
+resident-density, diagnostic-reduction and static port, which have a separate
+final report.

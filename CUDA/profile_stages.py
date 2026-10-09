@@ -16,7 +16,7 @@ from benchmark import REPO, checkpoint, check_observable, difference, input_text
 
 FLAGS = '-O3 -march=native -ffast-math -fopenmp'
 SLOTS = ['initialization', 'predictor', 'midpoint_fields_and_upload', 'corrector',
-         'center_of_mass', 'diagnostics', 'final_fields_and_upload', 'restart_io',
+         'center_of_mass', 'endpoint_fields_and_diagnostics', 'next_predictor_upload', 'restart_io',
          'cleanup', 'skyrme_inclusive', 'poisson_inclusive', 'tinfo_inclusive']
 TIMER = '''MODULE checkpoint_timers
   IMPLICIT NONE
@@ -75,7 +75,7 @@ def instrument(build):
         ('       ! compute mean field and add external field', '       CALL timer_end(2,stage_start)\n       CALL timer_begin(stage_start)\n'),
         ('       ! Step 3: full time step', '       CALL timer_end(3,stage_start)\n       CALL timer_begin(stage_start)\n'),
         ('       ! Step 4: eliminate center-of-mass motion if desired', '       CALL timer_end(4,stage_start)\n       CALL timer_begin(stage_start)\n'),
-        ('       ! Step 5: generating some output', '       CALL timer_end(5,stage_start)\n       CALL timer_begin(stage_start)\n'),
+        ('       ! Step 5: output uses fields and wavefunctions at the same time.', '       CALL timer_end(5,stage_start)\n       CALL timer_begin(stage_start)\n'),
         ('       ! Step 6: finishing up', '       CALL timer_end(6,stage_start)\n       CALL timer_begin(stage_start)\n'),
         ('       IF(output_due(iter,mrest)) THEN', '       CALL timer_end(7,stage_start)\n       CALL timer_begin(stage_start)\n'),
         ('    END DO Timestepping', '       CALL timer_end(8,stage_start)\n'),
@@ -85,7 +85,7 @@ def instrument(build):
     block = replace_once(block, '    END DO Timestepping\n', '    END DO Timestepping\n    CALL timer_begin(stage_start)\n')
     block = replace_once(block, '  END SUBROUTINE dynamichf', '    CALL timer_end(9,stage_start)\n  END SUBROUTINE dynamichf')
     path.write_text(text[:match.start()]+block+text[match.end():])
-    for filename, name, anchor, slot in [('meanfield.f90', 'skyrme', '    ALLOCATE(workden(', 10),
+    for filename, name, anchor, slot in [('meanfield.f90', 'skyrme', '    IF(gpu_enabled.AND.gpu_fields_enabled) THEN', 10),
                                         ('coulomb.f90', 'poisson', '    ALLOCATE(rho2(', 11),
                                         ('dynamic.f90', 'tinfo', '    ALLOCATE(ps1(', 12)]:
         path = build/filename
@@ -93,6 +93,8 @@ def instrument(build):
         match = re.search(rf'(?ims)^  SUBROUTINE {name}\b.*?^  END SUBROUTINE {name}\b', text)
         block = match.group()
         block = replace_once(block, anchor, '    INTEGER(8) :: local_start\n    CALL timer_begin(local_start)\n'+anchor)
+        if name == 'skyrme':
+            block = replace_once(block, '       RETURN', '       CALL timer_end(10,local_start)\n       RETURN')
         end = f'  END SUBROUTINE {name}'
         block = replace_once(block, end, f'    CALL timer_end({slot},local_start)\n'+end)
         path.write_text(text[:match.start()]+block+text[match.end():])
@@ -178,7 +180,7 @@ def main():
                   source_sha256={str(p.relative_to(REPO)):hashlib.sha256(p.read_bytes()).hexdigest() for p in (REPO/'Code').glob('*.f90')},
                   limits='Instrumented wall times locate costs, not speedup evidence. Stages 1-9 do not overlap; '
                          'the last three inclusive timers overlap those stages and must not be added. '
-                         'GPU stage times include synchronization and density download; fields stages include upload. '
+                         'GPU stage times include required synchronization; CPU consumer density/field downloads are inside endpoint diagnostics. '
                          'Program setup before dynamichf and loop stdout writes are outside the stage totals. '
                          'Timers are called only on the serial coordinator, including OpenMP runs.')
     args.output.parent.mkdir(parents=True, exist_ok=True)

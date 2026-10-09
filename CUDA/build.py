@@ -56,7 +56,7 @@ def main():
             subprocess.run(cmd, cwd=path, stdout=log, stderr=subprocess.STDOUT, check=True)
         print('Built:', path / f'sky3d.{name}', flush=True)
     sources = [p for p in (REPO / 'Code').iterdir() if p.suffix in {'.f90', '.f', '.data'} or p.name == 'Makefile']
-    sources += list((REPO / 'CUDA').glob('*.f90')) + [REPO / 'CUDA/sky_gpu.cu', Path(__file__).resolve()]
+    sources += list((REPO / 'CUDA').glob('*.cuh')) + list((REPO / 'CUDA').glob('*.f90')) + [REPO / 'CUDA/sky_gpu.cu', Path(__file__).resolve()]
     metadata = dict(arch=args.arch, cuda_home=str(cuda), variants=variants,
                     nvcc=subprocess.check_output([str(nvcc), '--version'], text=True).strip(),
                     gfortran=subprocess.check_output(['gfortran', '--version'], text=True).splitlines()[0],

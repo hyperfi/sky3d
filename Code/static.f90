@@ -10,7 +10,11 @@
 MODULE Static
   USE Params
   USE Densities
-  USE Meanfield, ONLY: skyrme, hpsi, upot, bmass
+  USE Meanfield, ONLY: skyrme, hpsi, upot, bmass,upload_gpu_fields
+  USE Parallel, ONLY: tmpi
+  USE Forces, ONLY: h2ma
+  USE GPU_Runtime, ONLY: gpu_enabled,gpu_initialize,gpu_rebuild_density, &
+       gpu_static_step,gpu_hamiltonian,gpu_finish
   USE Levels
   USE Grids
   USE Moment
@@ -218,7 +222,7 @@ CONTAINS
     LOGICAL, PARAMETER :: taddnew=.TRUE. ! mix old and new densities
     LOGICAL :: converged
     INTEGER :: iq,nst,firstiter
-    REAL(db) :: sumflu,denerg
+    REAL(db) :: sumflu,denerg,delta(nstmax)
     REAL(db),PARAMETER :: addnew=0.2D0,addco=1.0D0-addnew      
     ! Step 1: initialization
     converged=.FALSE.
@@ -235,20 +239,31 @@ CONTAINS
        sumflu=0.D0
        CALL schmid
     END IF
+    CALL gpu_initialize(psi,wocc,isospin,(/dx,dy,dz/),tfft,tmpi)
     ! Step 2: calculate densities and mean field
     rho=0.0D0
     tau=0.0D0
     current=0.0D0
     sdens=0.0D0
     sodens=0.0D0
+    IF(gpu_enabled) THEN
+       CALL gpu_rebuild_density(psi,wocc,rho,tau,current,sdens,sodens)
+    ELSE
     DO nst=1,nstmax
        CALL add_density(isospin(nst),wocc(nst),psi(:,:,:,:,nst), &
             rho,tau,current,sdens,sodens)  
     ENDDO
+    ENDIF
     CALL skyrme
     ! Step 3: initial gradient step
     delesum=0.0D0  
     sumflu=0.0D0  
+    IF(gpu_enabled) THEN
+       CALL upload_gpu_fields
+       CALL gpu_static_step(psi,sp_energy,e0dmp,h2ma,x0dmp,sp_efluct1,sp_efluct2,sp_norm,delta)
+       sumflu=SUM(wocc*sp_efluct1)
+       delesum=SUM(wocc*delta)
+    ELSE
     !$OMP PARALLEL DO DEFAULT(SHARED) PRIVATE(nst,denerg) &
     !$OMP    SCHEDULE(STATIC) REDUCTION(+: sumflu , delesum)
     DO nst=1,nstmax
@@ -258,6 +273,7 @@ CONTAINS
        delesum=delesum+wocc(nst)*denerg  
     ENDDO
     !$OMP END PARALLEL DO
+    ENDIF
     ! pairing and orthogonalization
     IF(ipair/=0) CALL pair
     CALL schmid
@@ -274,6 +290,12 @@ CONTAINS
        sumflu=0.0D0
        ! Assemble against one unchanged basis before any thread updates psi.
        IF(tdiag.AND.iter>20) CALL build_static_hmatrix
+       IF(gpu_enabled) THEN
+          CALL upload_gpu_fields
+          CALL gpu_static_step(psi,sp_energy,e0dmp,h2ma,x0dmp,sp_efluct1,sp_efluct2,sp_norm,delta)
+          sumflu=SUM(wocc*sp_efluct1)
+          delesum=SUM(wocc*delta)
+       ELSE
        !$OMP PARALLEL DO DEFAULT(SHARED) PRIVATE(nst,denerg) &
        !$OMP    SCHEDULE(STATIC) REDUCTION(+: sumflu , delesum)
        DO nst=1,nstmax
@@ -283,6 +305,7 @@ CONTAINS
           delesum=delesum+wocc(nst)*denerg  
        ENDDO
        !$OMP END PARALLEL DO
+       ENDIF
        ! Step 6: diagonalize if desired
        IF(tdiag.AND.iter>20) THEN
           !$OMP PARALLEL DO DEFAULT(SHARED) PRIVATE(iq) SCHEDULE(STATIC) 
@@ -304,6 +327,9 @@ CONTAINS
        current=0.0D0
        sdens=0.0D0
        sodens=0.0D0
+       IF(gpu_enabled) THEN
+          CALL gpu_rebuild_density(psi,wocc,rho,tau,current,sdens,sodens)
+       ELSE
        !$OMP PARALLEL DO DEFAULT(SHARED) PRIVATE(nst) SCHEDULE(STATIC) &
        !$OMP REDUCTION(+:rho, tau, current, sdens, sodens)
        DO nst=1,nstmax
@@ -311,6 +337,7 @@ CONTAINS
                rho,tau,current,sdens,sodens)  
        ENDDO
        !$OMP END PARALLEL DO
+       ENDIF
        IF(taddnew) THEN
           rho=addnew*rho+addco*upot
           tau=addnew*tau+addco*bmass
@@ -359,6 +386,7 @@ CONTAINS
             ', h*h=',SUM(wocc*sp_efluct2)/nstmax,', serr=',serr
     ENDIF
     IF(tdiag) DEALLOCATE(hmatr)
+    CALL gpu_finish
   END SUBROUTINE statichf
 !---------------------------------------------------------------------------  
 ! DESCRIPTION: grstep
@@ -482,6 +510,21 @@ CONTAINS
     USE Trivial, ONLY: overlap
     INTEGER :: nst,nst2
     COMPLEX(db) :: hp(nx,ny,nz,2)
+    COMPLEX(db),ALLOCATABLE :: allhp(:,:,:,:,:)
+    IF(gpu_enabled) THEN
+       ALLOCATE(allhp(nx,ny,nz,2,nstmax))
+       CALL upload_gpu_fields
+       CALL gpu_hamiltonian(psi,allhp)
+       !$OMP PARALLEL DO DEFAULT(SHARED) PRIVATE(nst,nst2) SCHEDULE(STATIC)
+       DO nst=1,nstmax
+          DO nst2=1,nstmax
+             IF(isospin(nst2)==isospin(nst)) &
+                  hmatr(nst2,nst)=overlap(psi(:,:,:,:,nst2),allhp(:,:,:,:,nst))
+          ENDDO
+       ENDDO
+       !$OMP END PARALLEL DO
+       RETURN
+    ENDIF
     !$OMP PARALLEL DO DEFAULT(SHARED) PRIVATE(nst,nst2,hp) SCHEDULE(STATIC)
     DO nst=1,nstmax
        CALL hpsi(isospin(nst),0.0D0,psi(:,:,:,:,nst),hp)

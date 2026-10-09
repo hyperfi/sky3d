@@ -28,7 +28,8 @@ Module Meanfield
   USE Forces 
   USE Grids, ONLY: nx,ny,nz,der1x,der2x,der1y,der2y,der1z,der2z,periodic,wxyz
   USE Coulomb, ONLY: poisson,wcoul,get_coulomb_kernel
-  USE GPU_Runtime, ONLY: gpu_fields,gpu_enabled,gpu_fields_enabled,gpu_skyrme,gpu_coulomb_config,gpu_coulomb_pull
+  USE GPU_Runtime, ONLY: gpu_fields,gpu_enabled,gpu_fields_enabled,gpu_skyrme,gpu_coulomb_config,gpu_coulomb_pull, &
+       gpu_resident,gpu_fields_pull
   IMPLICIT NONE
   REAL(db),ALLOCATABLE,DIMENSION(:,:,:,:)   :: upot   !<this is the local part of the mean field 
   !!\f$ U_q \f$. It is a scalar field with isospin index.
@@ -49,6 +50,12 @@ CONTAINS
   SUBROUTINE upload_gpu_fields
     CALL gpu_fields(upot,bmass,spot,dbmass,aq,wlspot)
   END SUBROUTINE upload_gpu_fields
+  SUBROUTINE sync_gpu_fields
+    IF(gpu_enabled.AND.gpu_fields_enabled) THEN
+       CALL gpu_fields_pull(upot,bmass,spot,dbmass,aq,wlspot)
+       IF(tcoul) CALL gpu_coulomb_pull(wcoul)
+    ENDIF
+  END SUBROUTINE sync_gpu_fields
 !---------------------------------------------------------------------------  
 ! DESCRIPTION: alloc_fields
 !> @brief
@@ -141,7 +148,7 @@ CONTAINS
           CALL gpu_coulomb_config(coul_kernel,periodic,MERGE(4.D0*pi*e2,e2*wxyz,periodic))
        ENDIF
        CALL gpu_skyrme(coeff,rho,tau,current,sdens,sodens,upot,bmass,spot,dbmass,aq,wlspot)
-       IF(tcoul) CALL gpu_coulomb_pull(wcoul)
+       IF(tcoul.AND..NOT.gpu_resident) CALL gpu_coulomb_pull(wcoul)
        RETURN
     ENDIF
     ALLOCATE(workden(nx,ny,nz,2),workvec(nx,ny,nz,3,2))

@@ -49,3 +49,13 @@
 !/results/20ne-k0-response/quadrupole-differences.pdf
 !/results/20ne-k0-response/quadrupole-smoothing-overlay.png
 !/results/20ne-k0-response/quadrupole-smoothing-overlay.pdf
+
+!/results/20ne-40x40x40/single-gpu/
+/results/20ne-40x40x40/single-gpu/*
+!/results/20ne-40x40x40/single-gpu/*.json
+!/results/20ne-40x40x40/single-gpu/*.png
+!/results/20ne-40x40x40/single-gpu/*.pdf
+/results/20ne-k0-final/*
+!/results/20ne-k0-final/quadrupole-comparison.json
+!/results/20ne-k0-final/*.png
+!/results/20ne-k0-final/*.pdf

@@ -14,7 +14,7 @@ class MemoryPolicy(unittest.TestCase):
     def test_states_include_empty_orbitals(self):
         a = preflight.allocation_bytes([24, 24, 24], 20)
         b = preflight.allocation_bytes([24, 24, 24], 24)
-        self.assertEqual(b-a, 24**3 * 2 * 4 * 16 * 9 + 4 * 12)
+        self.assertEqual(b-a, 24**3 * 2 * 4 * 16 * 9 + 4 * 52 + 54 * 40 * 8)
 
     def test_rectangular_grid_and_index_limit(self):
         self.assertGreater(preflight.allocation_bytes([28, 26, 24], 20), preflight.allocation_bytes([24]*3, 20))

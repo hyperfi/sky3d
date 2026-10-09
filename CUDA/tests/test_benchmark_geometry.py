@@ -6,7 +6,7 @@ import unittest
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from benchmark import input_text, check_observable
+from benchmark import input_text, check_observable, difference
 
 
 class InputGeometry(unittest.TestCase):
@@ -29,6 +29,13 @@ class InputGeometry(unittest.TestCase):
     def test_resetcm_works_with_explicit_order(self):
         text = input_text(100, resetcm=True, mxpact=6, dt=0.1)
         self.assertIn('mxpact=6, mrescm=1,', text)
+
+
+class EmptyCoulombOutput(unittest.TestCase):
+    def test_disabled_coulomb_has_matching_empty_records(self):
+        self.assertEqual(difference(np.empty(0), np.empty(0)), dict(relative_l2=0.,max_abs=0.))
+        with self.assertRaises(ValueError):
+            difference(np.empty(0), np.ones(1))
 
 
 class FlowComparison(unittest.TestCase):

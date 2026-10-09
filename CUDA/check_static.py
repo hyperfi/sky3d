@@ -23,14 +23,14 @@ def main():
     rows = []
     reference = None
     reference_state = None
-    for name, threads, prints in [('reference', 1, 10), ('reference', 8, 10), ('reference', 8, 10), ('cpu', 8, 10), ('cpu', 8, 0)]:
+    for name, threads, prints in [('reference', 1, 10), ('reference', 8, 10), ('reference', 8, 10), ('cpu', 8, 10), ('cpu', 8, 0), ('gpu', 8, 10), ('gpu', 8, 0)]:
         path = root / f'{len(rows)}-{name}-{threads}'
         path.mkdir()
         (path / 'for005').write_text(text.replace('mprint=10', f'mprint={prints}'))
         exe = args.build_dir.resolve() / name / f'sky3d.{name}'
         with (path / 'stdout.log').open('w') as log:
             subprocess.run([str(exe)], cwd=path, check=True, stdout=log, stderr=subprocess.STDOUT,
-                           env=dict(os.environ, SKY3D_BACKEND='cpu', OMP_NUM_THREADS=str(threads), OPENBLAS_NUM_THREADS='1'))
+                           env=dict(os.environ, SKY3D_BACKEND='gpu' if name == 'gpu' else 'cpu', OMP_NUM_THREADS=str(threads), OPENBLAS_NUM_THREADS='1'))
         state = checkpoint(path / '20ne_sly5.tdhf')
         assert state['step'] == 120
         if prints:

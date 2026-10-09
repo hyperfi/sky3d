@@ -1,12 +1,18 @@
-# CUDA C++ TDHF pilot
+# Single-GPU Sky3D backend
 
-This branch keeps Sky3D's Fortran input, fields and output and uses a C ABI to
-call an FP64 CUDA C++/cuFFT backend. The time-dependent predictor/corrector,
-Hamiltonian application, Fourier derivatives, and five density calculations
-run on one GPU. Wavefunctions, Taylor buffers and FFT workspace stay resident.
-Field construction (including Coulomb), moments, diagnostic Hamiltonian calls,
-static relaxation and file I/O still run on the CPU. This is an integrated
-pilot, not a complete GPU rewrite.
+This branch retains Sky3D's Fortran input and output and calls an FP64 CUDA
+C++/cuFFT backend through a C ABI. The GPU computes Hamiltonians, Fourier
+derivatives, predictor/corrector propagation, all five densities, Skyrme fields,
+isolated or periodic Coulomb, and single-particle diagnostic reductions.
+Densities and fields stay resident through dynamic steps, with explicit CPU
+synchronization for output, external fields and center-of-mass corrections.
+
+The static solver also uses GPU Hamiltonians, damped gradients, densities and
+fields. Pairing, ordered Gram-Schmidt, basis overlaps, small LAPACK
+diagonalizations, integrated energy output and file I/O retain the CPU paths.
+M=0 geometry/multipoles use GPU reductions; other projections explicitly use
+the native CPU diagnostic formulas. These retained CPU components are part of
+the measured complete jobs. Multi-GPU/MPI and out-of-core execution are deferred.
 
 The CPU control fixes are described in [CPU_FIXES.md](../docs/CPU_FIXES.md).
 The historical [GPU audit](../docs/GPU_AUDIT.md) contains measurements of the
@@ -43,7 +49,7 @@ executables without CUDA. Those executables reject `SKY3D_BACKEND=gpu`.
 ## Run and check VRAM
 
 Use a fresh calculation directory containing `for005`, with fragment paths
-resolved relative to that directory. This pilot requires `tfft=T`, even grid
+resolved relative to that directory. The GPU backend requires `tfft=T`, even grid
 dimensions, one process, and a complex128 Fortran build. It rejects MPI GPU
 mode; this branch has no multi-GPU decomposition or out-of-core mode.
 
@@ -63,15 +69,16 @@ SKY3D_BACKEND=cpu /mnt/d/Coding/sky3d/CUDA/build/cpu/sky3d.cpu
 ```
 
 `SKY3D_BACKEND=cpu` also selects CPU execution in the GPU-linked executable.
-Without this variable, the GPU-linked executable defaults to GPU in dynamic
-mode; static mode remains CPU. Device 0 is used, respecting CUDA's device
+Without this variable, the GPU-linked executable defaults to GPU in both dynamic
+and static mode. Device 0 is used, respecting CUDA's device
 visibility mapping. Set `CUDA_VISIBLE_DEVICES` before starting to select a GPU.
 
 The preflight uses the backend's allocation formula and **actual cuFFT plan
-workspace**, queried without allocating transform arrays. It accounts for
+workspace**, queried without allocating transform arrays. It includes the static preconditioner
+plan and block reductions. It accounts for
 all propagated states, including unoccupied orbitals; mass number alone is
 not a sufficient memory estimate. For G grid cells and S states the arrays
-require `G * (288*S + 400) + 12*S` bytes, plus cuFFT workspace. The CUDA
+require `G*(288*S + 1016) + 52*S + ceil(G/256)*max(10*S,38)*8` bytes, plus cuFFT workspace. The CUDA
 context, plans, graph metadata and other applications also consume memory;
 the safety reserve is therefore necessary. Host RAM is needed independently
 for Sky3D's normal arrays and CPU work buffers.
@@ -102,7 +109,7 @@ The implementation uses one nonblocking stream and shared workspace, so FFTs
 and buffer reuse remain ordered. See NVIDIA's [cuFFT graph support](https://docs.nvidia.com/cuda/cufft/index.html#cuda-graphs-support)
 and [CUDA graphs guide](https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/cuda-graphs.html).
 
-## Reproduce the small-nucleus checks
+## Earlier milestones and reproducibility inputs
 
 Large scientific data are excluded from Git. A fresh clone can generate a
 20Ne state from the included SLy5 static input:
@@ -260,8 +267,9 @@ external-pulse propagation timing is preserved. Kick/pulse trajectories,
 diagnostic intervals and two restart boundaries pass the new regression
 checks. Fresh matched 40³ timings are 61.79 seconds for CPU and 42.61 seconds
 for GPU: 1.450× speedup, or 31.04% less wall time, for 200 steps at dt=0.1.
-The CPU fields, diagnostics and static preparation remain the next acceleration
-targets in the single-GPU plan.
+Those timings describe the earlier hybrid implementation. Fields, diagnostics
+and static acceleration have since been implemented; use the final report for
+current measurements.
 
 The response replay uses the original local z-aligned 24³ state and archived
 6000 fm/c K=0 data, which are excluded from Git. It compares both backends
@@ -285,3 +293,35 @@ The explicit replay particle budget reflects the measured 3.26e-6 neutron
 drift already present in the archived coarse-grid calculation. Other checks
 retain their default 1e-6 limit. Reproducing that saved case does not establish
 fine-grid convergence, K=1/2 agreement or agreement with experimental data.
+
+## Component controls
+
+All default to `1` in a GPU run. Use `0` for an explicit comparison path:
+
+- `SKY3D_GPU_FIELDS`: CPU field construction; also disables device residency.
+- `SKY3D_GPU_RESIDENT`: copy densities/fields at each stage.
+- `SKY3D_GPU_DIAGNOSTICS`: native CPU moments and single-particle properties.
+- `SKY3D_GPU_GRAPHS`: enqueue kernels/FFTs directly rather than replaying graphs.
+
+These switches retain the same propagator and physical input. The standard
+CPU executable requires no CUDA installation. `CUDA_VISIBLE_DEVICES` selects
+the single GPU via NVIDIA's usual device visibility mapping.
+
+## Moving to another machine
+
+After publishing the `gpu` branch, clone it and build locally; binaries, large
+states, `.tdd` files and compiler products are intentionally excluded:
+
+```bash
+git clone --branch gpu git@github.com:hyperfi/sky3d.git
+cd sky3d
+export CUDA_HOME=/usr/local/cuda
+python3 CUDA/build.py --build-dir "$HOME/.cache/sky3d-build"
+python3 CUDA/preflight.py --library "$HOME/.cache/sky3d-build/libsky3d_gpu.so"     --grid 40 40 40 --states 20
+```
+
+Prepare each static nucleus locally or transfer the validated checkpoint
+separately. Keep a matched parallel CPU control and benchmark the complete
+job on that machine. A larger GPU or a case fitting in VRAM is not a speedup
+prediction. See [the final single-GPU report](../docs/SINGLE_GPU_RESULTS.md)
+for measured workloads, numerical coverage and scientific limits.

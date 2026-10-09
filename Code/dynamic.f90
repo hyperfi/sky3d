@@ -17,8 +17,9 @@ MODULE DYNAMIC
   USE Moment
   USE Twobody, ONLY: twobody_analysis,istwobody,roft,roft_old
   USE Parallel
-  USE Meanfield, ONLY: skyrme, hpsi, spot,upot,upload_gpu_fields
-  USE GPU_Runtime, ONLY: gpu_enabled,gpu_initialize,gpu_stage,gpu_pull,gpu_push,gpu_probe,gpu_finish
+  USE Meanfield, ONLY: skyrme, hpsi, spot,upot,upload_gpu_fields,sync_gpu_fields
+  USE GPU_Runtime, ONLY: gpu_enabled,gpu_initialize,gpu_stage,gpu_pull,gpu_push,gpu_probe,gpu_finish, &
+       gpu_resident,gpu_diagnostics_enabled,gpu_download_density
   USE Trivial, ONLY: overlap
   USE Inout, ONLY: write_wavefunctions,write_densities, plot_density, &
        sp_properties,start_protocol
@@ -230,6 +231,7 @@ CONTAINS
        bare_upot=upot
        CALL extfld(time)
     ENDIF
+    IF(gpu_enabled) CALL upload_gpu_fields
     CALL tinfo
     ! A restart must reconstruct the same next-predictor field as continuation.
     IF(text_timedep.AND.trestart) THEN
@@ -306,6 +308,7 @@ CONTAINS
        ! Step 4: eliminate center-of-mass motion if desired
        IF(mrescm/=0) THEN  
           IF(MOD(iter,mrescm)==0) THEN  
+             IF(gpu_resident) CALL gpu_download_density(rho,tau,current,sdens,sodens)
              CALL gpu_pull(psi)
              CALL resetcm
              CALL gpu_push(psi)
@@ -333,6 +336,7 @@ CONTAINS
           bare_upot=upot
           CALL extfld(time)
        ENDIF
+       IF(gpu_enabled) CALL upload_gpu_fields
        CALL tinfo
        ! Step 6: finishing up
        ! Preserve the original next-predictor external time without an extra
@@ -487,7 +491,15 @@ CONTAINS
     ALLOCATE(ps1(nx,ny,nz,2))
     ! Step 1
     printnow=output_due(iter,mprint)
-    IF(printnow) CALL gpu_pull(psi)
+    ! CPU consumers explicitly request current arrays; otherwise densities stay resident.
+    IF(gpu_resident) THEN
+       IF(printnow.OR.output_due(iter,mplot).OR.nof==2.OR.M_val/=0.OR..NOT.gpu_diagnostics_enabled) &
+            CALL gpu_download_density(rho,tau,current,sdens,sodens)
+    ENDIF
+    IF(gpu_enabled) THEN
+       IF(printnow.OR.output_due(iter,mplot)) CALL sync_gpu_fields
+       IF(printnow.AND..NOT.gpu_diagnostics_enabled) CALL gpu_pull(psi)
+    ENDIF
     ! Step 2: twobody analysis
     IF(nof/=2) THEN  
       istwobody=.FALSE.
@@ -509,6 +521,7 @@ CONTAINS
     ENDIF
     ! Step 4: single-particle properties
     IF(printnow) THEN  
+       IF(.NOT.(gpu_enabled.AND.gpu_diagnostics_enabled)) THEN
        sp_energy=0.0D0
        sp_norm=0.0D0
        DO nst=1,nstloc
@@ -518,6 +531,7 @@ CONTAINS
           sp_norm(globalindex(nst))=&
                overlap(psi(:,:,:,:,nst),psi(:,:,:,:,nst))
        ENDDO
+       ENDIF
        CALL sp_properties
        IF(tmpi) THEN
           CALL collect_sp_properties
@@ -624,6 +638,8 @@ CONTAINS
     CHARACTER(8) :: requested
     CALL get_environment_variable('SKY3D_GPU_VALIDATE',requested,STATUS=status)
     IF(TRIM(requested)/='1') RETURN
+    CALL sync_gpu_fields
+    IF(gpu_resident) CALL gpu_download_density(rho,tau,current,sdens,sodens)
     ALLOCATE(gh(nx,ny,nz,2,nstloc),ch(nx,ny,nz,2),gd(nx,ny,nz,11,2),cd(nx,ny,nz,11,2))
     CALL gpu_probe(gh,gd)
     hdifference=0D0

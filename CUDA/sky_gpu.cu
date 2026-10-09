@@ -83,6 +83,9 @@ __global__ void h_axis(const Z* p,const Z* d1,const Z* d2,Z* h,Z* coupled,
 __global__ void add_h(Z* h,const Z* d,int count){
   int t=blockIdx.x*blockDim.x+threadIdx.x;if(t<count)h[t]=h[t]+d[t];
 }
+__global__ void average_density(double* den,const double* old,int count){
+  int t=blockIdx.x*blockDim.x+threadIdx.x;if(t<count)den[t]=0.5*(old[t]+den[t]);
+}
 __global__ void recurrence(Z* term,Z* result,const Z* h,int count,double coefficient){
   int t=blockIdx.x*blockDim.x+threadIdx.x;
   if(t<count){Z v={-coefficient*h[t].y,coefficient*h[t].x};term[t]=v;result[t]=result[t]+v;}
@@ -167,10 +170,12 @@ __global__ void coulomb_extract(const Z* data,double* wc,int nx,int ny,int nz,in
   int x=t%nx,y=(t/nx)%ny,z=t/(nx*ny);
   wc[t]=data[x+nx*factor*(y+ny*factor*z)].x/(g*factor*factor*factor);
 }
+#include "reductions.cuh"
 
 struct PlanSet{
   cufftHandle plans[3]={0,0,0};
   cufftHandle realplans[3]={0,0,0},coulplans[2]={0,0};
+  cufftHandle fullplan=0;
   size_t workspace=0;int nx,ny,nz,states,g,count;
   PlanSet(int x,int y,int z,int ns):nx(x),ny(y),nz(z),states(ns){
     if(x<2||y<2||z<2||x%2||y%2||z%2||ns<1)throw std::runtime_error("Grid dimensions must be positive even integers and states positive");
@@ -193,12 +198,17 @@ struct PlanSet{
       FFT(cufftMakePlan3d(coulplans[mode],factor*z,factor*y,factor*x,CUFFT_Z2Z,&bytes));
       workspace=std::max(workspace,bytes);
     }
+    int dims[3]={z,y,x};size_t fullbytes=0;
+    FFT(cufftCreate(&fullplan));FFT(cufftSetAutoAllocation(fullplan,0));
+    FFT(cufftMakePlanMany(fullplan,3,dims,nullptr,1,g,nullptr,1,g,CUFFT_Z2Z,2*states,&fullbytes));
+    workspace=std::max(workspace,fullbytes);
     }catch(...){for(auto p:plans)if(p)cufftDestroy(p);for(auto p:realplans)if(p)cufftDestroy(p);
-      for(auto p:coulplans)if(p)cufftDestroy(p);throw;}
+      for(auto p:coulplans)if(p)cufftDestroy(p);if(fullplan)cufftDestroy(fullplan);throw;}
   }
   ~PlanSet(){for(auto p:plans)if(p)cufftDestroy(p);for(auto p:realplans)if(p)cufftDestroy(p);
-    for(auto p:coulplans)if(p)cufftDestroy(p);}
-  uint64_t required()const{return uint64_t(count)*sizeof(Z)*9+uint64_t(g)*840+uint64_t(states)*12+workspace;}
+    for(auto p:coulplans)if(p)cufftDestroy(p);if(fullplan)cufftDestroy(fullplan);}
+  size_t reduction_bytes()const{return size_t((g+255)/256)*std::max(10*states,38)*8;}
+  uint64_t required()const{return uint64_t(count)*sizeof(Z)*9+uint64_t(g)*1016+uint64_t(states)*52+reduction_bytes()+workspace;}
 };
 struct DeviceMemory{
   std::vector<void*> pointers;
@@ -224,7 +234,12 @@ struct State:PlanSet{
   double *divj,*laprho,*gradrho,*curls,*curlc,*wc;
   Z *coulwork,*coulkernel;
   bool coul_enabled=false,periodic=false,device_fields=false;
+  bool density_current=false;
   double coul_scale=0;
+  Couplings graph_couplings={};
+  bool field_graph_valid=false;
+  double *old_den,*statistics,*old_energy;
+  void* reduction;
   void* work;
   template<class T>void alloc(T*& p,size_t bytes){CUDA(cudaMalloc(&p,bytes));
     try{allocations.pointers.push_back(p);}catch(...){cudaFree(p);throw;}}
@@ -246,15 +261,72 @@ struct State:PlanSet{
     alloc(divj,size_t(g)*2*8);alloc(laprho,size_t(g)*2*8);
     for(double** p:{&gradrho,&curls,&curlc})alloc(*p,size_t(g)*6*8);
     alloc(wc,size_t(g)*8);alloc(coulwork,size_t(g)*8*sizeof(Z));alloc(coulkernel,size_t(g)*8*sizeof(Z));
+    alloc(old_den,size_t(g)*22*8);alloc(statistics,size_t(states)*4*8);alloc(old_energy,size_t(states)*8);
+    alloc(reduction,reduction_bytes());
     work=nullptr;if(workspace)alloc(work,workspace);
     for(auto plan:plans){FFT(cufftSetWorkArea(plan,work));FFT(cufftSetStream(plan,stream));}
     for(auto plan:realplans){FFT(cufftSetWorkArea(plan,work));FFT(cufftSetStream(plan,stream));}
     for(auto plan:coulplans){FFT(cufftSetWorkArea(plan,work));FFT(cufftSetStream(plan,stream));}
+    FFT(cufftSetWorkArea(fullplan,work));FFT(cufftSetStream(fullplan,stream));
     CUDA(cudaMemcpy(psi,p,bytes,cudaMemcpyHostToDevice));CUDA(cudaMemcpy(weights,occ,size_t(states)*8,cudaMemcpyHostToDevice));
     CUDA(cudaMemcpy(iq,isospin,size_t(states)*4,cudaMemcpyHostToDevice));
     std::fflush(stdout);
   }
   int blocks()const{return (count-1)/256+1;}
+  template<int N>std::vector<Values<N>> sums(int groups){
+    int nblocks=(g+255)/256;std::vector<Values<N>> raw(nblocks*groups),out(groups);
+    CUDA(cudaStreamSynchronize(stream));
+    CUDA(cudaMemcpy(raw.data(),reduction,raw.size()*sizeof(Values<N>),cudaMemcpyDeviceToHost));
+    for(int group=0;group<groups;group++)for(int block=0;block<nblocks;block++)
+      for(int k=0;k<N;k++)out[group].v[k]+=raw[group*nblocks+block].v[k];
+    return out;
+  }
+  void properties(const double* cm,const double* h2m,double* output){
+    hpsi(psi);CUDA(cudaMemcpyAsync(term,h,size_t(count)*sizeof(Z),cudaMemcpyDeviceToDevice,stream));
+    Z* gradients[3]={d1,d2,coupled};
+    for(int axis=0;axis<3;axis++){
+      derivative(psi,axis,gradients[axis],h);
+      kinetic_add<<<blocks(),256,0,stream>>>(result,h,count,axis==0);
+    }
+    dim3 grid((g+255)/256,states);
+    properties_kernel<<<grid,256,0,stream>>>(psi,term,d1,d2,coupled,result,(Values<10>*)reduction,
+      g,nx,ny,nz,spacing[0],spacing[1],spacing[2],cm[0],cm[1],cm[2]);
+    auto values=sums<10>(states);std::vector<int> species(states);
+    CUDA(cudaMemcpy(species.data(),iq,size_t(states)*4,cudaMemcpyDeviceToHost));
+    double volume=spacing[0]*spacing[1]*spacing[2];
+    for(int state=0;state<states;state++)for(int k=0;k<10;k++)
+      output[k+10*state]=values[state].v[k]*volume*(k==2?h2m[species[state]-1]:1);
+  }
+  void static_step(const Z* input,const double* energies,double e0,double h2m,double x0,
+                   double* spe,double* fluct1,double* fluct2,double* norms,double* delta,Z* output){
+    size_t bytes=size_t(count)*sizeof(Z);
+    CUDA(cudaMemcpyAsync(psi,input,bytes,cudaMemcpyHostToDevice,stream));
+    CUDA(cudaMemcpyAsync(old_energy,energies,size_t(states)*8,cudaMemcpyHostToDevice,stream));
+    hpsi(psi);
+    static_shift<<<blocks(),256,0,stream>>>(psi,h,term,count,g,old_energy);
+    hpsi(term);
+    static_statistics<<<dim3((g+255)/256,states),256,0,stream>>>(psi,term,h,(Values<4>*)reduction,g,old_energy);
+    auto stats=sums<4>(states);double volume=spacing[0]*spacing[1]*spacing[2];
+    for(int state=0;state<states;state++){
+      for(int k=0;k<4;k++)stats[state].v[k]*=volume;
+      double n=stats[state].v[0],b=stats[state].v[1];
+      if(!std::isfinite(n)||n<=0)throw std::runtime_error("Invalid static orbital norm");
+      norms[state]=n;fluct1[state]=sqrt(fabs(stats[state].v[2]/n-(b/n)*(b/n)));
+      fluct2[state]=sqrt(fabs(stats[state].v[3]/n-(b/n)*(b/n)));
+      spe[state]=b+energies[state];delta[state]=(energies[state]-spe[state])/fabs(spe[state]);
+    }
+    CUDA(cudaMemcpyAsync(statistics,stats.data(),size_t(states)*sizeof(Values<4>),cudaMemcpyHostToDevice,stream));
+    if(e0>0){
+      static_residual<<<blocks(),256,0,stream>>>(psi,term,count,g,statistics);
+      CUDA(cudaMemcpyAsync(result,term,bytes,cudaMemcpyDeviceToDevice,stream));
+      FFT(cufftExecZ2Z(fullplan,result,result,CUFFT_FORWARD));
+      damp_scale<<<blocks(),256,0,stream>>>(result,count,nx,ny,nz,spacing[0],spacing[1],spacing[2],e0,h2m);
+      FFT(cufftExecZ2Z(fullplan,result,result,CUFFT_INVERSE));
+    }
+    static_update<<<blocks(),256,0,stream>>>(psi,result,term,statistics,count,g,x0,e0>0);
+    CUDA(cudaGetLastError());CUDA(cudaStreamSynchronize(stream));
+    CUDA(cudaMemcpy(output,psi,bytes,cudaMemcpyDeviceToHost));density_current=false;
+  }
   void real_derivative(const double* src,int channels,int component,int axis,int order,
                        double* dst,int outchannels,int outcomponent,double factor=1,bool add=false){
     int n=axis==0?nx:(axis==1?ny:nz),blocks=(2*g-1)/256+1;
@@ -271,7 +343,7 @@ struct State:PlanSet{
       real_derivative(den,11,component+j,k,1,output,3,axis,-1,true);
     }
   }
-  void skyrme(Couplings f){
+  void enqueue_skyrme(Couplings f){
     for(int axis=0;axis<3;axis++){
       real_derivative(den,11,8+axis,axis,1,divj,1,0,1,axis!=0);
       real_derivative(den,11,0,axis,2,laprho,1,0,1,axis!=0);
@@ -289,6 +361,25 @@ struct State:PlanSet{
     skyrme_local<<<(2*g-1)/256+1,256,0,stream>>>(den,divj,laprho,gradrho,curls,curlc,wc,u,b,s,a,w,g,f,coul_enabled);
     for(int axis=0;axis<3;axis++)real_derivative(b,1,0,axis,1,dbm,3,axis);
     CUDA(cudaGetLastError());
+  }
+  void skyrme(Couplings f){
+    const char* setting=std::getenv("SKY3D_GPU_GRAPHS");
+    if(setting&&std::string(setting)=="0"){enqueue_skyrme(f);return;}
+    if(setting&&std::string(setting)!="1")throw std::runtime_error("SKY3D_GPU_GRAPHS must be 0 or 1");
+    GraphKey key{-1,0,0};auto found=graphs.entries.find(key);
+    bool same=field_graph_valid&&std::equal(f.c,f.c+15,graph_couplings.c);
+    if(found!=graphs.entries.end()&&!same){cudaGraphExecDestroy(found->second);graphs.entries.erase(found);found=graphs.entries.end();}
+    if(found==graphs.entries.end()){
+      cudaGraph_t graph=nullptr;cudaGraphExec_t executable=nullptr;
+      CUDA(cudaStreamBeginCapture(stream,cudaStreamCaptureModeThreadLocal));
+      try{enqueue_skyrme(f);}catch(...){cudaStreamEndCapture(stream,&graph);if(graph)cudaGraphDestroy(graph);throw;}
+      CUDA(cudaStreamEndCapture(stream,&graph));
+      try{CUDA(cudaGraphInstantiate(&executable,graph,0));}catch(...){cudaGraphDestroy(graph);throw;}
+      cudaGraphDestroy(graph);
+      try{found=graphs.entries.emplace(key,executable).first;}catch(...){cudaGraphExecDestroy(executable);throw;}
+      graph_couplings=f;field_graph_valid=true;
+    }
+    CUDA(cudaGraphLaunch(found->second,stream));
   }
   void derivative(const Z* input,int axis,Z* first,Z* second_output=nullptr){
     int n=axis==0?nx:(axis==1?ny:nz);
@@ -358,7 +449,9 @@ extern "C" void* sky_gpu_create(int nx,int ny,int nz,int ns,const double* spacin
 }
 extern "C" void sky_gpu_fields(void* pointer,const double* u,const double* b,const double* s,const double* dbm,const double* a,const double* w){
   try{State& p=*(State*)pointer;
-    CUDA(cudaMemcpy(p.u,u,size_t(p.g)*2*8,cudaMemcpyHostToDevice));CUDA(cudaMemcpy(p.b,b,size_t(p.g)*2*8,cudaMemcpyHostToDevice));
+    CUDA(cudaMemcpy(p.u,u,size_t(p.g)*2*8,cudaMemcpyHostToDevice));
+    if(p.device_fields)return;
+    CUDA(cudaMemcpy(p.b,b,size_t(p.g)*2*8,cudaMemcpyHostToDevice));
     for(auto pair:{std::pair<double*,const double*>{p.s,s},{p.dbm,dbm},{p.a,a},{p.w,w}})
       CUDA(cudaMemcpy(pair.first,pair.second,size_t(p.g)*6*8,cudaMemcpyHostToDevice));
   }catch(const std::exception& e){failure(e);}
@@ -367,13 +460,13 @@ extern "C" void sky_gpu_coulomb_config(void* pointer,const Z* kernel,int periodi
   try{State& p=*(State*)pointer;if(p.coul_enabled)return;
     p.periodic=periodic!=0;p.coul_scale=scale;
     CUDA(cudaMemcpy(p.coulkernel,kernel,size_t(p.g)*(p.periodic?1:8)*sizeof(Z),cudaMemcpyHostToDevice));
-    p.coul_enabled=true;
+    p.coul_enabled=true;p.field_graph_valid=false;
   }catch(const std::exception& e){failure(e);}
 }
 extern "C" void sky_gpu_skyrme(void* pointer,const double* coeff,const double* rho,const double* tau,
-  const double* current,const double* spin,const double* so,double* u,double* b,double* s,double* dbm,double* a,double* w){
+  const double* current,const double* spin,const double* so,double* u,double* b,double* s,double* dbm,double* a,double* w,int resident){
   try{State& p=*(State*)pointer;Couplings f;std::copy(coeff,coeff+15,f.c);
-    for(int q=0;q<2;q++){
+    if(!resident||!p.density_current)for(int q=0;q<2;q++){
       size_t scalar=size_t(p.g)*8,vector=3*scalar;
       CUDA(cudaMemcpyAsync(p.den+p.g*(11*q),rho+p.g*q,scalar,cudaMemcpyHostToDevice,p.stream));
       CUDA(cudaMemcpyAsync(p.den+p.g*(1+11*q),tau+p.g*q,scalar,cudaMemcpyHostToDevice,p.stream));
@@ -383,29 +476,81 @@ extern "C" void sky_gpu_skyrme(void* pointer,const double* coeff,const double* r
     }
     p.skyrme(f);CUDA(cudaStreamSynchronize(p.stream));
     CUDA(cudaMemcpy(u,p.u,size_t(p.g)*2*8,cudaMemcpyDeviceToHost));
-    CUDA(cudaMemcpy(b,p.b,size_t(p.g)*2*8,cudaMemcpyDeviceToHost));
-    for(auto pair:{std::pair<double*,double*>{s,p.s},{dbm,p.dbm},{a,p.a},{w,p.w}})
-      CUDA(cudaMemcpy(pair.first,pair.second,size_t(p.g)*6*8,cudaMemcpyDeviceToHost));
-    p.device_fields=true;
+    if(!resident){
+      CUDA(cudaMemcpy(b,p.b,size_t(p.g)*2*8,cudaMemcpyDeviceToHost));
+      for(auto pair:{std::pair<double*,double*>{s,p.s},{dbm,p.dbm},{a,p.a},{w,p.w}})
+        CUDA(cudaMemcpy(pair.first,pair.second,size_t(p.g)*6*8,cudaMemcpyDeviceToHost));
+    }
+    p.device_fields=true;p.density_current=true;
   }catch(const std::exception& e){failure(e);}
 }
 extern "C" void sky_gpu_coulomb_pull(void* pointer,double* wc){
   try{State& p=*(State*)pointer;CUDA(cudaMemcpy(wc,p.wc,size_t(p.g)*8,cudaMemcpyDeviceToHost));}
   catch(const std::exception& e){failure(e);}
 }
-extern "C" void sky_gpu_stage(void* pointer,int order,double dt_hbc,int commit,double* density){
+extern "C" void sky_gpu_stage(void* pointer,int order,double dt_hbc,int commit,double* density,int resident){
   try{State& p=*(State*)pointer;
     if(order<0||!std::isfinite(dt_hbc))throw std::runtime_error("Invalid propagator order or timestep");
-    p.stage(order,dt_hbc);CUDA(cudaStreamSynchronize(p.stream));
-    CUDA(cudaMemcpy(density,p.den,size_t(p.g)*22*8,cudaMemcpyDeviceToHost));
+    if(resident&&!commit)CUDA(cudaMemcpyAsync(p.old_den,p.den,size_t(p.g)*22*8,cudaMemcpyDeviceToDevice,p.stream));
+    p.stage(order,dt_hbc);
+    if(resident&&!commit)average_density<<<(22*p.g-1)/256+1,256,0,p.stream>>>(p.den,p.old_den,22*p.g);
+    CUDA(cudaStreamSynchronize(p.stream));
+    if(!resident)CUDA(cudaMemcpy(density,p.den,size_t(p.g)*22*8,cudaMemcpyDeviceToHost));
+    p.density_current=true;
     if(commit)std::swap(p.psi,p.result);
   }catch(const std::exception& e){failure(e);}
 }
 extern "C" void sky_gpu_pull(void* pointer,Z* output){
-  try{State& p=*(State*)pointer;CUDA(cudaMemcpy(output,p.psi,size_t(p.count)*sizeof(Z),cudaMemcpyDeviceToHost));}catch(const std::exception& e){failure(e);}
+  try{State& p=*(State*)pointer;CUDA(cudaStreamSynchronize(p.stream));CUDA(cudaMemcpy(output,p.psi,size_t(p.count)*sizeof(Z),cudaMemcpyDeviceToHost));}catch(const std::exception& e){failure(e);}
 }
 extern "C" void sky_gpu_push(void* pointer,const Z* input){
-  try{State& p=*(State*)pointer;CUDA(cudaMemcpy(p.psi,input,size_t(p.count)*sizeof(Z),cudaMemcpyHostToDevice));}catch(const std::exception& e){failure(e);}
+  try{State& p=*(State*)pointer;CUDA(cudaMemcpy(p.psi,input,size_t(p.count)*sizeof(Z),cudaMemcpyHostToDevice));p.density_current=false;}catch(const std::exception& e){failure(e);}
+}
+extern "C" void sky_gpu_fields_pull(void* pointer,double* u,double* b,double* s,double* dbm,double* a,double* w){
+  try{State& p=*(State*)pointer;CUDA(cudaStreamSynchronize(p.stream));
+    CUDA(cudaMemcpy(u,p.u,size_t(p.g)*2*8,cudaMemcpyDeviceToHost));CUDA(cudaMemcpy(b,p.b,size_t(p.g)*2*8,cudaMemcpyDeviceToHost));
+    for(auto pair:{std::pair<double*,double*>{s,p.s},{dbm,p.dbm},{a,p.a},{w,p.w}})
+      CUDA(cudaMemcpy(pair.first,pair.second,size_t(p.g)*6*8,cudaMemcpyDeviceToHost));
+  }catch(const std::exception& e){failure(e);}
+}
+extern "C" void sky_gpu_density_pull(void* pointer,double* density){
+  try{State& p=*(State*)pointer;CUDA(cudaStreamSynchronize(p.stream));CUDA(cudaMemcpy(density,p.den,size_t(p.g)*22*8,cudaMemcpyDeviceToHost));}
+  catch(const std::exception& e){failure(e);}
+}
+extern "C" void sky_gpu_density_refresh(void* pointer,const Z* psi,const double* weights,double* density){
+  try{State& p=*(State*)pointer;
+    CUDA(cudaMemcpyAsync(p.psi,psi,size_t(p.count)*sizeof(Z),cudaMemcpyHostToDevice,p.stream));
+    CUDA(cudaMemcpyAsync(p.weights,weights,size_t(p.states)*8,cudaMemcpyHostToDevice,p.stream));
+    p.densities(p.psi);CUDA(cudaStreamSynchronize(p.stream));
+    CUDA(cudaMemcpy(density,p.den,size_t(p.g)*22*8,cudaMemcpyDeviceToHost));p.density_current=true;
+  }catch(const std::exception& e){failure(e);}
+}
+extern "C" void sky_gpu_properties(void* pointer,const double* cm,const double* h2m,double* values){
+  try{((State*)pointer)->properties(cm,h2m,values);}catch(const std::exception& e){failure(e);}
+}
+extern "C" void sky_gpu_moments_first(void* pointer,double* values){
+  try{State& p=*(State*)pointer;
+    moments_first<<<dim3((p.g+255)/256,2),256,0,p.stream>>>(p.den,(Values<19>*)p.reduction,
+      p.g,p.nx,p.ny,p.nz,p.spacing[0],p.spacing[1],p.spacing[2]);
+    auto result=p.sums<19>(2);for(int q=0;q<2;q++)for(int k=0;k<7;k++)values[k+7*q]=result[q].v[k];
+  }catch(const std::exception& e){failure(e);}
+}
+extern "C" void sky_gpu_moments_second(void* pointer,const double* cm,double* values){
+  try{State& p=*(State*)pointer;
+    moments_second<<<dim3((p.g+255)/256,2),256,0,p.stream>>>(p.den,(Values<19>*)p.reduction,
+      p.g,p.nx,p.ny,p.nz,p.spacing[0],p.spacing[1],p.spacing[2],cm[0],cm[1],cm[2],cm[3],cm[4],cm[5]);
+    auto result=p.sums<19>(2);for(int q=0;q<2;q++)for(int k=0;k<19;k++)values[k+19*q]=result[q].v[k];
+  }catch(const std::exception& e){failure(e);}
+}
+extern "C" void sky_gpu_static_step(void* pointer,const Z* input,const double* energies,double e0,double h2m,double x0,
+  double* spe,double* fluct1,double* fluct2,double* norms,double* delta,Z* output){
+  try{((State*)pointer)->static_step(input,energies,e0,h2m,x0,spe,fluct1,fluct2,norms,delta,output);}
+  catch(const std::exception& e){failure(e);}
+}
+extern "C" void sky_gpu_hamiltonian(void* pointer,const Z* input,Z* output){
+  try{State& p=*(State*)pointer;CUDA(cudaMemcpyAsync(p.psi,input,size_t(p.count)*sizeof(Z),cudaMemcpyHostToDevice,p.stream));
+    p.hpsi(p.psi);CUDA(cudaStreamSynchronize(p.stream));CUDA(cudaMemcpy(output,p.h,size_t(p.count)*sizeof(Z),cudaMemcpyDeviceToHost));}
+  catch(const std::exception& e){failure(e);}
 }
 extern "C" void sky_gpu_probe(void* pointer,Z* hout,double* density){
   try{State& p=*(State*)pointer;p.hpsi(p.psi);CUDA(cudaGetLastError());CUDA(cudaStreamSynchronize(p.stream));

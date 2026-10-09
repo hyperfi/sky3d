@@ -66,6 +66,10 @@ def densities(path):
 
 
 def difference(actual, expected):
+    if actual.shape != expected.shape:
+        raise ValueError("Comparison arrays have different shapes")
+    if actual.size == 0:
+        return dict(relative_l2=0.0, max_abs=0.0)
     delta = actual - expected
     return dict(relative_l2=float(np.linalg.norm(delta.ravel()) / max(np.linalg.norm(expected.ravel()), 1e-300)),
                 max_abs=float(np.max(np.abs(delta))))
@@ -158,7 +162,7 @@ def compare(path, reference, initial_flow_atol=5e-6):
     fields = {key: difference(actual[key], target[key]) for key in target}
     # Near-zero spin/current fields need absolute tolerances, not unstable relative errors.
     for key, error in fields.items():
-        assert error['max_abs'] < 1e-9 + 1e-10 * np.max(np.abs(target[key])), (key, error)
+        assert error['max_abs'] < 1e-9 + 1e-10 * np.max(np.abs(target[key]), initial=0.0), (key, error)
     observables = {}
     for name in ('energies.res', 'quadrupoles.res', 'monopoles.res'):
         a, b = np.loadtxt(path / name, ndmin=2), np.loadtxt(reference / name, ndmin=2)
