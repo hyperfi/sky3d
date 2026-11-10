@@ -38,6 +38,10 @@ versus 1206.8849 s: 2.4184x** in one pair of full jobs. CPU, GPU and the saved
 local quadrupole spectra agree across all three smoothing widths.
 The archived coarse response nevertheless fails the physical orthogonality
 gate on both CPU and GPU; matching its plot does not qualify it for production.
+The [overlap study](../docs/ORTHOGONALITY_STUDY.md) tests the common numerical
+failure directly. Reducing timestep or increasing Taylor order leaves the
+coarse error floor unchanged; the settled 40³ state recovers the short-time
+overlap invariant. Long response qualification remains separate.
 See [SINGLE_GPU_RESULTS.md](../docs/SINGLE_GPU_RESULTS.md) for exact workloads,
 validation evidence, orientation conventions and limits. Speed is case- and
 hardware-dependent; memory fit alone cannot predict it.

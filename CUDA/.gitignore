@@ -59,3 +59,15 @@
 !/results/20ne-k0-final/quadrupole-comparison.json
 !/results/20ne-k0-final/*.png
 !/results/20ne-k0-final/*.pdf
+
+# Keep study data and vector figures; leave raster exports and raw runs local.
+/results/orthogonality/*
+!/results/orthogonality/coarse-200.json
+!/results/orthogonality/coarse-200.pdf
+!/results/orthogonality/execution-protocol.json
+!/results/orthogonality/fine-20-equivalence.json
+!/results/orthogonality/fine-20-equivalence.pdf
+!/results/orthogonality/fine-200.json
+!/results/orthogonality/fine-200.pdf
+!/results/orthogonality/fine-preflight.json
+!/results/orthogonality/fine-z-static-probe.json

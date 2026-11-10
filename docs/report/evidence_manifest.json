@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source_snapshot": "9576125da0372c5cb3092032fafad32a50339bd2",
-  "report_generator_sha256": "ee9ccab7c7c8806fad6977452fddc9235719d0194accff2630fbcb8adecc910e",
+  "report_generator_sha256": "8d747e88e2134d8bdf3335bb95379899c842ec1ef82bce5d9898dee30db202f7",
   "evidence_sha256": {
     "CUDA/results/20ne-40x40x40/single-gpu/benchmark-final4.json": "1566873f60ed601f70eff9b6455be8ecfaf918d6c8b22c6f76b4705af51daac0",
     "CUDA/results/20ne-40x40x40/single-gpu/profile.json": "808636c853f426c47bfd0511bb80ccc19bd3126370317fd3374564cef779a75c",
@@ -12,6 +12,12 @@
     "CUDA/results/static-convergence-40-polished.json": "8f9b2084b3b8fdc0dfda94e1ec454603dbb19f865eb5ae27c7a4c957459fad53",
     "CUDA/results/20ne-40x40x40/single-gpu/orientation.json": "c6af536a44ad006c37398ed1ccd9a43581696ef501577ddeb140b1d1d90533b2",
     "CUDA/results/20ne-k0-final/quadrupole-comparison.json": "3ac3960922e723765ab52f80f1094e6e084520bd9aee161cad19597a1e55374c",
+    "CUDA/results/orthogonality/coarse-200.json": "35a0de3fe2a29810e3de4415e2395e621e025c3a71030f36be0dc36128cad952",
+    "CUDA/results/orthogonality/fine-200.json": "6b8dceb251d5ff9da72f2a0ac4118296bc2c6ccc2428ea4b89f27a10efa60a87",
+    "CUDA/results/orthogonality/fine-20-equivalence.json": "407922e503954df5bc3921bb6a9d77bb875a2d0c0900c3093dc26ae48412ac64",
+    "CUDA/results/orthogonality/fine-z-static-probe.json": "37c818658eef9a21a7b00d3ba70fccb8785275ac5cf33f7a22e9c7d2bbc286f1",
+    "CUDA/results/orthogonality/fine-preflight.json": "3d85c11fdfa059b8023a388e060efe09b7689c20bf152e4da91d1b8e2d267ddc",
+    "CUDA/results/orthogonality/execution-protocol.json": "457b937dd2d647c7f1ea30b15d2278806adf0974d4919e428b49cca9dc0839a5",
     "CUDA/results/20ne-40x40x40/single-gpu/validation.json": "247468ab972eede15d07fef5e0b7afa286df3834bd89bc5548e768d991d7a3f4",
     "CUDA/results/20ne-40x40x40/single-gpu/extended-validation.json": "70b16c0b8eaed389d5cb14824d2e2b04d61e633736d000c174927cea3b71e55e",
     "CUDA/results/20ne-40x40x40/single-gpu/mode-controls.json": "36c725c0e1bb1a7894b3c9f04da8863cba6ceeb54ca9fd05beb38fbc51e4ce59",
@@ -46,7 +52,9 @@
     "Code/meanfield.f90": "59846be7a8b959eca5e1d4007a39538018d5bb4d77f67d0437f6864e34a9972d",
     "CUDA/build.py": "632743f5995fd7fe4c62e458272294d55c55a32c0b9d925bf31336d1559d47c7",
     "Utils/Strength_Calculation/sky3d_response/analysis.py": "079113447ad14c03be556087260de6ed6816ead9a87e861e5c73e1e1fb5c5962",
-    "docs/STATIC_CONVERGENCE.md": "02a66484b6051cdcf43531bb1735485c9602f7eaed30b4b3cc96af18fb78fc33"
+    "docs/STATIC_CONVERGENCE.md": "02a66484b6051cdcf43531bb1735485c9602f7eaed30b4b3cc96af18fb78fc33",
+    "CUDA/study_orthogonality.py": "5f0af89c87260991240437c5a692b00c74bb962df5e9a02aa881d2e11c659f96",
+    "docs/ORTHOGONALITY_STUDY.md": "25f7097cda476f34c9ff08e865820f9563c82f35d78eff0f405fa75e89c8c374"
   },
   "raw_response_sha256": {
     "/home/abhishek/.cache/sky3d-quadrupole-9x6hb65y/cpu/quadrupoles.res": "0892ca86b3600a5847967e3e46f6a7f50c8c9ece7a7e7bce7c8721ec3819cb3f",

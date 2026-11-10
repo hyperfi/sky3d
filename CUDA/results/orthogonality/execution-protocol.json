@@ -1,0 +1,9 @@
+{
+  "study_date": "2026-10-13",
+  "environment": "Ubuntu under WSL2, NVIDIA GeForce RTX 5070, 12 GB VRAM",
+  "coarse_scan": "All twelve 200 fm/c GPU trajectories ran sequentially. The final part of the scan overlapped a strict CPU fresh-field static probe.",
+  "fine_scan": "Four 200 fm/c GPU trajectories ran sequentially. The separate 20 fm/c CPU/GPU equivalence controls overlapped the beginning of this scan.",
+  "fine_short_controls_cpu_affinity": "The complete short-control runner was launched with taskset -c 8-15; both its CPU and GPU host work inherit that affinity.",
+  "timing_interpretation": "Recorded seconds are diagnostic execution costs under these loads. They must not be used to claim a new CPU/GPU speedup or replace the existing sequential repeated benchmark.",
+  "numerical_interpretation": "Independent process directories and immutable copied seeds were used. Concurrency affects throughput; no process shares its wavefunctions or Hamiltonian fields with another calculation. Endpoint scientific checks are performed on each process's own checkpoint."
+}

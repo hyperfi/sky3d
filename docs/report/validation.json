@@ -1,9 +1,9 @@
 {
   "source_snapshot": "9576125da0372c5cb3092032fafad32a50339bd2",
-  "pdf_sha256": "125c963a45ea0785426f0d800d7a732feec9f9924f91dd19d713e65a7029d0b5",
-  "pages": 42,
-  "vector_figures": 9,
-  "numbered_tables": 14,
+  "pdf_sha256": "f9c3f7116c14c90a20fc2b80bc722ae8be926019af409b73d8e48c9507f47276",
+  "pages": 47,
+  "vector_figures": 10,
+  "numbered_tables": 16,
   "embedded_fonts": true,
   "words_outside_safety_margins": [],
   "unresolved_reference_markers": 0,
@@ -51,9 +51,59 @@
     39,
     40,
     41,
-    42
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
   ],
-  "numerical_simulations_rerun_for_report": false,
-  "basis": "Saved benchmark and validation evidence; response plots regenerated from preserved raw time histories.",
-  "physical_limit": "The coarse 6000 fm/c response replay retains its failed orthogonality gate."
+  "numerical_simulations_rerun_for_report": true,
+  "basis": "Retained benchmark and response evidence plus new fixed-state 20Ne timestep/order controls. The asset generator and PDF builder themselves run no nuclear simulations.",
+  "physical_limit": "The coarse 6000 fm/c response remains failed. Finer-state 200 fm/c endpoint controls pass; fine 6000 fm/c and response mesh/box convergence remain pending.",
+  "editorial_review": {
+    "revision_date": "2026-10-14",
+    "writing_guide": "docs/WRITING_STYLE.md",
+    "writing_guide_sha256": "7aa85615c294bac74283c08065a5de3422701f36c5cd54782f5eff5b6baf9447",
+    "skill": "no-ai-slop",
+    "skill_sha256": "16719efd6dc6fe5978be7f6db41a474ca246970e5014acc057e29d7bfbd63b0e",
+    "evaluation_checklist_sha256": "d0625b5ab63aef355130bcc06d7c93a05bbb0279ab9d9bcf5fbd4176752f1c48",
+    "review_method": "Manual editorial review against the scientific writing guide and skill checklist, followed by wording scans and rendered-page inspection.",
+    "checks": {
+      "physical_question_result_and_limitation_lead": true,
+      "physical_workflow_precedes_response_results": true,
+      "diagnostics_and_preparation_history_retained_in_appendices": true,
+      "main_text_precision_matches_claim": true,
+      "no_promotional_or_banned_wording": true,
+      "scientific_claims_and_saved_evidence_preserved": true,
+      "no_conversation_or_first_person_references": true,
+      "captions_state_normalization_smoothing_and_scope": true,
+      "technical_detail_retained_for_reproducibility": true,
+      "no_ai_slop_evaluation_review_completed": true,
+      "new_overlap_controls_and_long_response_limit_distinguished": true
+    }
+  },
+  "report_revision_date": "2026-10-14",
+  "rendered_pages_checked_individually": [
+    4,
+    12,
+    39,
+    40,
+    41,
+    45,
+    46
+  ],
+  "rendering_tool": "Bundled Poppler, 90 dpi; contact sheets plus individual pages",
+  "report_generation_runs_sky3d": false,
+  "new_study": {
+    "numerical_jobs": 20,
+    "retained_coarse_failures": 12,
+    "finer_state_passes": 8,
+    "raw_inputs_checkpoints_and_observables_hash_verified": true,
+    "source_and_binaries_verified": true,
+    "unit_tests_passed": 25,
+    "timings_used_for_new_speedup_claim": false
+  },
+  "evidence_file_hashes_verified": 37,
+  "report_source_sha256": "96afc1cb98cad0430ee9f65c4b1b4ea5db045ce6f078587873889c852783de5e"
 }

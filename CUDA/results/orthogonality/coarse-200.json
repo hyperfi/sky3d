@@ -1,0 +1,515 @@
+{
+  "run_directory": "/home/abhishek/.cache/sky3d-overlap-ixg9gb1h",
+  "state_path": "/mnt/d/Coding/sky3d/projects/icnpa2026_20Ne_Kresolved_E2/static/20ne_sly5_zaxis.tdhf",
+  "state_sha256": "07353fe3a3fefd74db4a34a129da1f2f969267f9757472193eb6ea3ed5d236f3",
+  "build": {
+    "arch": "sm_120",
+    "cuda_home": "/usr/local/cuda",
+    "variants": {
+      "reference": "-O3 -march=native -ffp-contract=off -fopenmp",
+      "cpu": "-O3 -march=native -ffast-math -fopenmp",
+      "gpu": "-O3 -march=native -ffast-math -fopenmp"
+    },
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+    "gfortran": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "source_commit": "a701ad38f23f4e7d0c95417fcc394c75f3da0422",
+    "source_dirty": true,
+    "executable_sha256": {
+      "reference": "bf8ba655e2ae506646540b1f64dee88790390efa529fee9cef9e5c131de9e9d4",
+      "cpu": "6d0849613841bcef980b9e9b553c639fd1b10ff3a0ae4027bcbc22af552a319e",
+      "gpu": "5c37f36412d9df90704d320ba56ab9390a25924f3d78c49c8a4024f49d0fc5df"
+    },
+    "library_sha256": "ae27606c48c218fff9b621e11113e3e1184d245e49d2131486b87fc3c6dc7331",
+    "source_sha256": {
+      "Code/coulomb.f90": "5d9011974a3ec788b109455033e79d4e7fe3962421e1adc649e23a071690a31d",
+      "Code/densities.f90": "4430ddd24940b67f564814a61dbcb68459c18528a9bc8935131bdf0253bfb9b1",
+      "Code/dynamic.f90": "bb09b047cdb4d95bb15205e1c4fe161e5bcc599341db6622bf1ed5d7955a9e40",
+      "Code/energies.f90": "60d00ab2a55afa73525c175c09651d4d596d248ca8724f258d7c5487e73bb2cc",
+      "Code/external.f90": "4d911dd988e77d805fa49cbd93d6519dc9e8098ecc7f09cfc350613779e750a8",
+      "Code/fftw3.f": "8bdbee5f7a7a28762abd79f536aaf28deaca0197cc0e931b1cb9364f43b2a314",
+      "Code/forces.data": "2c5712b83aed67d310abc50590a3078a8d0e5d8e16b46315d92ba6dfe76f4728",
+      "Code/forces.f90": "380153c21f072d8bc49a59619d9c0c3aa478bd8ebadf483b2c0b7a7e0126373e",
+      "Code/fourier.f90": "ff323a3c9c85aad2e85a01251c1db939c5cb882922330764c9ec0403552c6f40",
+      "Code/fragments.f90": "47aead4560e57fee09dd3012cb79539381dddfa7196b07b58425e092df5f937c",
+      "Code/gpu_runtime.f90": "acf964b740f5f0c50af3e00ab647e3f0f2ce8ed17dd9c9d07e0b23c7cf4f3230",
+      "Code/grids.f90": "2899b53e968f968cd910d220ffa3200ce835b292f21f991aed549907b32226ba",
+      "Code/inout.f90": "fdce0c5da532a2520330fe0f4fe1d3e1cb1df7c904c1b60995999306c5461585",
+      "Code/levels.f90": "40a0cf9bc4ee7e4233766ea6fec057ae21f355a1686d1aa867c6d92f54161bc6",
+      "Code/main3d.f90": "06fc16477195b6eefc61276fec50bd27624937d855cef81ca540258d311bebc7",
+      "Code/Makefile": "9a23610ad88afabf2103e31532d56ccbcb07c55d47b2b4c55833e0c66731fb2c",
+      "Code/meanfield.f90": "59846be7a8b959eca5e1d4007a39538018d5bb4d77f67d0437f6864e34a9972d",
+      "Code/moment.f90": "db336897cd25969b51cb81dad618790a57f74934ce24761ba92861891321a29f",
+      "Code/pairs.f90": "d872046715200166c9adab75b03d2db36936b5b1d65e9f818e22b734f64ae4a9",
+      "Code/parallel.f90": "e6d3e2e2543bedeb90575f859e26e990e2ff14a52f4cefd49d20a8f1c23ce2b8",
+      "Code/params.f90": "975aec6ec0ad3d11d07c3ac763ec2a1fa7543bf82079ade6ac986cad259dc074",
+      "Code/sequential.f90": "89bd10da9abcbf7bf4fd482c72250e0f6ea23e0a45cc89fa324943273e18cecd",
+      "Code/static.f90": "bc9243946fe926e818c47702f66046cb9395da39ea9579187dad968e57bd2906",
+      "Code/trivial.f90": "e44c37e3fc59391b4fe641d480e5154aa9c9e9bc48a71db8932e1b07b76a8708",
+      "Code/twobody.f90": "69ab4cb00f7c8d8cf13aa2e2f833a4ceff59a4035825670e1f231c88a218b5ab",
+      "Code/user.f90": "59adf01b45cd06afabb57b8a3e232f02605547993ecdbfe4a4717b8f97e74d89",
+      "Code/user_sample.f90": "788f06dcbd29a047ca218a21e73447bee3a7f47e00db5d1a86cbf8009fbabc7b",
+      "Code/ylm.f90": "58b3b7eb7190e8fee4e3e69b46282d75d7efd776445139dcc308c7418afff610",
+      "CUDA/reductions.cuh": "77dfc2a75931c73cbede7106255a02eaddc7a0ab32b868e39c3a59650b42a9e6",
+      "CUDA/gpu_runtime.f90": "774a0bcc5d77ec79e364c8b86078bcb990cdcfb7f01e9974218a50f3b8c315c6",
+      "CUDA/sky_gpu.cu": "7a3dca804d222d0234f2ccd0954f7ed459465e1e50834a8bbbc0255f3fc1061e",
+      "CUDA/build.py": "632743f5995fd7fe4c62e458272294d55c55a32c0b9d925bf31336d1559d47c7"
+    }
+  },
+  "runner_sha256": "5f0af89c87260991240437c5a692b00c74bb962df5e9a02aa881d2e11c659f96",
+  "source_commit": "9cdcb8e6cce5f27ab27f1bdba0bf195b6d144bc2",
+  "grid": [
+    24,
+    24,
+    24
+  ],
+  "spacing_fm": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "duration_fm_c": 200,
+  "sample_interval_fm_c": 2,
+  "backends": [
+    "gpu"
+  ],
+  "threads": 8,
+  "limits": {
+    "gram_max_abs_error": 1e-06,
+    "gram_max_abs_drift": 1e-06,
+    "particle_max_abs_drift": 1e-06
+  },
+  "interpretation": "Fixed-state timestep/order sensitivity; no automatic spatial or spectral convergence claim",
+  "cases": [
+    {
+      "directory": "/home/abhishek/.cache/sky3d-overlap-ixg9gb1h/unboosted-dt0.2-order4-gpu",
+      "seconds": 19.205195199,
+      "returncode": 0,
+      "input_sha256": "d1f4910984945c48ff16867b7a432dfe379e0f3b621defc1bf28878884c9bb6e",
+      "completed": true,
+      "invariant_passed": false,
+      "final_step": 1000,
+      "final_time_fm_c": 199.9999999999972,
+      "checkpoint_sha256": "0fbbc6e0bf60c3ae4dad0a4c479da2998e31a52c93444b50e45851de3b1beed0",
+      "gram_max_abs_error": 9.322383680942066e-05,
+      "gram_max_abs_drift": 9.322383680934947e-05,
+      "norm_max_abs_error": 4.638932793454842e-08,
+      "overlap_max_abs": 9.322383680942066e-05,
+      "particles": [
+        9.999999903619639,
+        9.9999999590896
+      ],
+      "particle_max_abs_drift": 9.6380361469528e-08,
+      "integrated_energy_max_drift_mev": 7.000000010748408e-06,
+      "uncorrected_quadrupole_max_drift_fm2": 0.003651980168640989,
+      "observable_sha256": {
+        "energies.res": "bdc25c1c96250ac5dfb76066e0a0f698ed18052488c4be39b8bef028cbc6a202",
+        "quadrupoles.res": "ef1a0d4b7b5c6aa2d41ffd030c4be5884b37928613561dbe8297cc1129bcdd9d"
+      },
+      "label": "unboosted-dt0.2-order4-gpu",
+      "dt_fm_c": 0.2,
+      "taylor_order": 4,
+      "backend": "gpu",
+      "boosted": false
+    },
+    {
+      "directory": "/home/abhishek/.cache/sky3d-overlap-ixg9gb1h/boost-dt0.2-order4-gpu",
+      "seconds": 18.32573775,
+      "returncode": 0,
+      "input_sha256": "f2a10a6673a6cd2bb72e587d948361a999340650d9ad87a3c711c92a9564b6dc",
+      "completed": true,
+      "invariant_passed": false,
+      "final_step": 1000,
+      "final_time_fm_c": 199.9999999999972,
+      "checkpoint_sha256": "18a2a8e0ef2c8b8d53bb46d599de1133b072234478416f7148f684c5fca8dc28",
+      "gram_max_abs_error": 9.321432772602811e-05,
+      "gram_max_abs_drift": 9.321432772609583e-05,
+      "norm_max_abs_error": 4.511663764805718e-08,
+      "overlap_max_abs": 9.321432772602811e-05,
+      "particles": [
+        9.999999931945625,
+        9.999999977666722
+      ],
+      "particle_max_abs_drift": 6.805437458012875e-08,
+      "integrated_energy_max_drift_mev": 1.3400000000274304e-05,
+      "uncorrected_quadrupole_max_drift_fm2": 0.10387502146123495,
+      "observable_sha256": {
+        "energies.res": "99daacb95f5e38649623646aaa597cd3417ab6a95d489e7a7cc6dc735271c211",
+        "quadrupoles.res": "ffb800d582a486fb5bff06d134842bad020f703938cc2270e7629690b8044448"
+      },
+      "label": "boost-dt0.2-order4-gpu",
+      "dt_fm_c": 0.2,
+      "taylor_order": 4,
+      "backend": "gpu",
+      "boosted": true
+    },
+    {
+      "directory": "/home/abhishek/.cache/sky3d-overlap-ixg9gb1h/unboosted-dt0.2-order6-gpu",
+      "seconds": 25.093449584999995,
+      "returncode": 0,
+      "input_sha256": "87d3286c29c821ed50badeec62c86b19eb0b7ed6c0880b9fb00ddf40c433bda9",
+      "completed": true,
+      "invariant_passed": false,
+      "final_step": 1000,
+      "final_time_fm_c": 199.9999999999972,
+      "checkpoint_sha256": "f90d0d5fadf0cc164017240b475d479c9a597a0888bf480dee42599b9d504018",
+      "gram_max_abs_error": 9.322386095931232e-05,
+      "gram_max_abs_drift": 9.322386095927806e-05,
+      "norm_max_abs_error": 8.887008462465928e-09,
+      "overlap_max_abs": 9.322386095931232e-05,
+      "particles": [
+        10.000000010404323,
+        10.000000008148074
+      ],
+      "particle_max_abs_drift": 1.040432273669012e-08,
+      "integrated_energy_max_drift_mev": 1.499999996212864e-06,
+      "uncorrected_quadrupole_max_drift_fm2": 0.003660014456286831,
+      "observable_sha256": {
+        "energies.res": "815c23d62aebe600b1406754820b35574a777a0119d540df593a2e454101391e",
+        "quadrupoles.res": "f3678992145a99735045f6db396f8f9d4341f84fdbe4a674327096e85ef99f21"
+      },
+      "label": "unboosted-dt0.2-order6-gpu",
+      "dt_fm_c": 0.2,
+      "taylor_order": 6,
+      "backend": "gpu",
+      "boosted": false
+    },
+    {
+      "directory": "/home/abhishek/.cache/sky3d-overlap-ixg9gb1h/boost-dt0.2-order6-gpu",
+      "seconds": 25.729445983999994,
+      "returncode": 0,
+      "input_sha256": "73e3d23d7720d1ab85bbfd07c2fd696c29eb131e06562596856805b066e4830e",
+      "completed": true,
+      "invariant_passed": false,
+      "final_step": 1000,
+      "final_time_fm_c": 199.9999999999972,
+      "checkpoint_sha256": "4ac116970a119c1a476b9c369743672e6e397cb9a1fcfa827c9d17e0800c4129",
+      "gram_max_abs_error": 9.321435305287644e-05,
+      "gram_max_abs_drift": 9.321435305316748e-05,
+      "norm_max_abs_error": 2.7119329226721334e-08,
+      "overlap_max_abs": 9.321435305287644e-05,
+      "particles": [
+        10.000000038732017,
+        10.000000026723093
+      ],
+      "particle_max_abs_drift": 3.873201670501203e-08,
+      "integrated_energy_max_drift_mev": 1.1600000021871892e-05,
+      "uncorrected_quadrupole_max_drift_fm2": 0.10387166277986637,
+      "observable_sha256": {
+        "energies.res": "3f646e4c5d4b017959745b674330664151888c5ae3e8587adb8869e02d843cee",
+        "quadrupoles.res": "287f5613342c3eab73d0931bcfdebd54a409027a574b7fc3bfb4b9a212d7e77b"
+      },
+      "label": "boost-dt0.2-order6-gpu",
+      "dt_fm_c": 0.2,
+      "taylor_order": 6,
+      "backend": "gpu",
+      "boosted": true
+    },
+    {
+      "directory": "/home/abhishek/.cache/sky3d-overlap-ixg9gb1h/unboosted-dt0.1-order4-gpu",
+      "seconds": 35.87859181399999,
+      "returncode": 0,
+      "input_sha256": "8da68ae47a656139a03388cbef67f650565241341ad590125b1a65ad07408ae8",
+      "completed": true,
+      "invariant_passed": false,
+      "final_step": 2000,
+      "final_time_fm_c": 199.99999999999292,
+      "checkpoint_sha256": "461591cc42afa5f9d815270ac08144499808038515ff0ad7b53255d17388611d",
+      "gram_max_abs_error": 9.322385341350359e-05,
+      "gram_max_abs_drift": 9.322385341367097e-05,
+      "norm_max_abs_error": 8.878344948115569e-09,
+      "overlap_max_abs": 9.322385341350359e-05,
+      "particles": [
+        10.000000007050671,
+        10.000000006604871
+      ],
+      "particle_max_abs_drift": 7.050671158026489e-09,
+      "integrated_energy_max_drift_mev": 1.7000000127609383e-06,
+      "uncorrected_quadrupole_max_drift_fm2": 0.0036576867592472695,
+      "observable_sha256": {
+        "energies.res": "1797a30bfd27bc80f3b37812cdc40c49742847087efc6fef88772148a2e5f543",
+        "quadrupoles.res": "3aedd3a4496f416480c67109e67e9c35a1088e919bb4fb12f06be75e676a2c5d"
+      },
+      "label": "unboosted-dt0.1-order4-gpu",
+      "dt_fm_c": 0.1,
+      "taylor_order": 4,
+      "backend": "gpu",
+      "boosted": false
+    },
+    {
+      "directory": "/home/abhishek/.cache/sky3d-overlap-ixg9gb1h/boost-dt0.1-order4-gpu",
+      "seconds": 35.95943009700001,
+      "returncode": 0,
+      "input_sha256": "6cc570264987af0b2abba70620fb4d646d88c71206c138a47bcef25f3d9d2509",
+      "completed": true,
+      "invariant_passed": false,
+      "final_step": 2000,
+      "final_time_fm_c": 199.99999999999292,
+      "checkpoint_sha256": "7b79bf7f40c4e6505e3d87c681a20214736b1ad2e235a90312782cd4fb264354",
+      "gram_max_abs_error": 9.321434082019245e-05,
+      "gram_max_abs_drift": 9.321434082017753e-05,
+      "norm_max_abs_error": 2.7116171974483905e-08,
+      "overlap_max_abs": 9.321434082019245e-05,
+      "particles": [
+        10.000000035384755,
+        10.000000025185415
+      ],
+      "particle_max_abs_drift": 3.538475468189972e-08,
+      "integrated_energy_max_drift_mev": 1.1700000015935075e-05,
+      "uncorrected_quadrupole_max_drift_fm2": 0.10387288454104748,
+      "observable_sha256": {
+        "energies.res": "c7099ccaa8585e860a63c1642993829146537b98c56e99cb100a340b5bde67fe",
+        "quadrupoles.res": "e9f33b5fd1701efa0cceb076716c166498a23a362b07f6b3b05cc14f4220b678"
+      },
+      "label": "boost-dt0.1-order4-gpu",
+      "dt_fm_c": 0.1,
+      "taylor_order": 4,
+      "backend": "gpu",
+      "boosted": true
+    },
+    {
+      "directory": "/home/abhishek/.cache/sky3d-overlap-ixg9gb1h/unboosted-dt0.1-order6-gpu",
+      "seconds": 48.50372379500001,
+      "returncode": 0,
+      "input_sha256": "c7946c9b32cac6af8b810840aee9fc99f73b3a2df5603ff22b0b5e64260dc12e",
+      "completed": true,
+      "invariant_passed": false,
+      "final_step": 2000,
+      "final_time_fm_c": 199.99999999999292,
+      "checkpoint_sha256": "3669447b0b3040b26d2e9097895989abafa98cecd9396354f282f4b86251ae38",
+      "gram_max_abs_error": 9.322385494312186e-05,
+      "gram_max_abs_drift": 9.322385494327531e-05,
+      "norm_max_abs_error": 8.886407609765001e-09,
+      "overlap_max_abs": 9.322385494312186e-05,
+      "particles": [
+        10.000000010387836,
+        10.000000008137837
+      ],
+      "particle_max_abs_drift": 1.0387836368863645e-08,
+      "integrated_energy_max_drift_mev": 1.499999996212864e-06,
+      "uncorrected_quadrupole_max_drift_fm2": 0.003658195054228486,
+      "observable_sha256": {
+        "energies.res": "642c18785b82d8cab65a072417d2380d86751c42bde703cf1b2c37c1001cd81f",
+        "quadrupoles.res": "b714076689eb2cd61eea0bba9da0a460b38574c1f7668de2511c75dd8b3b8a92"
+      },
+      "label": "unboosted-dt0.1-order6-gpu",
+      "dt_fm_c": 0.1,
+      "taylor_order": 6,
+      "backend": "gpu",
+      "boosted": false
+    },
+    {
+      "directory": "/home/abhishek/.cache/sky3d-overlap-ixg9gb1h/boost-dt0.1-order6-gpu",
+      "seconds": 48.61176219599997,
+      "returncode": 0,
+      "input_sha256": "e2470d416015cf28c82ff2658b24f88a3dfe09cfe293c635b6ed129446c307be",
+      "completed": true,
+      "invariant_passed": false,
+      "final_step": 2000,
+      "final_time_fm_c": 199.99999999999292,
+      "checkpoint_sha256": "6537e8dd95605371eae1913a0c6ab03814b7e65975f4d6ca94102d3b20b11835",
+      "gram_max_abs_error": 9.321434245006927e-05,
+      "gram_max_abs_drift": 9.32143424502629e-05,
+      "norm_max_abs_error": 2.7117465384307593e-08,
+      "overlap_max_abs": 9.321434245006927e-05,
+      "particles": [
+        10.000000038721918,
+        10.000000026717967
+      ],
+      "particle_max_abs_drift": 3.872191811638004e-08,
+      "integrated_energy_max_drift_mev": 1.1600000021871892e-05,
+      "uncorrected_quadrupole_max_drift_fm2": 0.10387267087677543,
+      "observable_sha256": {
+        "energies.res": "c4ef10e4fcabccf082fdde58b653bed2ab888b8feea5976ad9a8042d83088094",
+        "quadrupoles.res": "e9c2ec6dfbb4b3691cfab8bd2841e83261c620dc73a73f195f5421b9a469ef3f"
+      },
+      "label": "boost-dt0.1-order6-gpu",
+      "dt_fm_c": 0.1,
+      "taylor_order": 6,
+      "backend": "gpu",
+      "boosted": true
+    },
+    {
+      "directory": "/home/abhishek/.cache/sky3d-overlap-ixg9gb1h/unboosted-dt0.05-order4-gpu",
+      "seconds": 70.279074036,
+      "returncode": 0,
+      "input_sha256": "50bff21aad650bec18881197d35673d9fa07af812c275d00c530372e7572f69b",
+      "completed": true,
+      "invariant_passed": false,
+      "final_step": 4000,
+      "final_time_fm_c": 200.00000000001123,
+      "checkpoint_sha256": "0f9b5bd430c8322ec1bfa58f227dfb706667b359fb603f77c42f6f15398d59db",
+      "gram_max_abs_error": 9.322385444179726e-05,
+      "gram_max_abs_drift": 9.322385444176301e-05,
+      "norm_max_abs_error": 8.886354097015214e-09,
+      "overlap_max_abs": 9.322385444179726e-05,
+      "particles": [
+        10.000000010283456,
+        10.000000008089852
+      ],
+      "particle_max_abs_drift": 1.0283455864623647e-08,
+      "integrated_energy_max_drift_mev": 1.499999996212864e-06,
+      "uncorrected_quadrupole_max_drift_fm2": 0.0036580701237625135,
+      "observable_sha256": {
+        "energies.res": "41bf143008423f934e94c0c39b4d66ea1595696434247c094349d6831d7cd448",
+        "quadrupoles.res": "df934b680624c4672a4f3cfa78a4c2571d22f66c28fa3c64468dbd950b90dd34"
+      },
+      "label": "unboosted-dt0.05-order4-gpu",
+      "dt_fm_c": 0.05,
+      "taylor_order": 4,
+      "backend": "gpu",
+      "boosted": false
+    },
+    {
+      "directory": "/home/abhishek/.cache/sky3d-overlap-ixg9gb1h/boost-dt0.05-order4-gpu",
+      "seconds": 70.56914144400002,
+      "returncode": 0,
+      "input_sha256": "8518038529b05f011fbe10d3c4f07e22433a0e51be085136b94773a3a66b4847",
+      "completed": true,
+      "invariant_passed": false,
+      "final_step": 4000,
+      "final_time_fm_c": 200.00000000001123,
+      "checkpoint_sha256": "ba1b5da14c54f263392f5969923e60aa29a19c8b7dc0bb8f41675da3cedec144",
+      "gram_max_abs_error": 9.321434097814281e-05,
+      "gram_max_abs_drift": 9.32143409781083e-05,
+      "norm_max_abs_error": 2.7117129208775737e-08,
+      "overlap_max_abs": 9.321434097814281e-05,
+      "particles": [
+        10.000000038618992,
+        10.000000026671426
+      ],
+      "particle_max_abs_drift": 3.861899244839151e-08,
+      "integrated_energy_max_drift_mev": 1.1600000021871892e-05,
+      "uncorrected_quadrupole_max_drift_fm2": 0.10387277853484989,
+      "observable_sha256": {
+        "energies.res": "647be76259a37279472f353efb1ee87f535d9845ca042ae7a1debc46e5e9ee54",
+        "quadrupoles.res": "08ae42a27152015cba933b002389004b8b05f93c7211c6e86da408e9f93fcf95"
+      },
+      "label": "boost-dt0.05-order4-gpu",
+      "dt_fm_c": 0.05,
+      "taylor_order": 4,
+      "backend": "gpu",
+      "boosted": true
+    },
+    {
+      "directory": "/home/abhishek/.cache/sky3d-overlap-ixg9gb1h/unboosted-dt0.05-order6-gpu",
+      "seconds": 97.50639865899996,
+      "returncode": 0,
+      "input_sha256": "8507c917e197afc2ec746139f3361bb2e0040b6994b25e3cadee680e18594ec0",
+      "completed": true,
+      "invariant_passed": false,
+      "final_step": 4000,
+      "final_time_fm_c": 200.00000000001123,
+      "checkpoint_sha256": "00cbc08e06508f7cdd860f5f04c42ad72a87cef4803e017f26ad2974e24fd865",
+      "gram_max_abs_error": 9.322385453807845e-05,
+      "gram_max_abs_drift": 9.322385453804419e-05,
+      "norm_max_abs_error": 8.886644087269246e-09,
+      "overlap_max_abs": 9.322385453807845e-05,
+      "particles": [
+        10.000000010388007,
+        10.000000008138398
+      ],
+      "particle_max_abs_drift": 1.0388006899120228e-08,
+      "integrated_energy_max_drift_mev": 1.499999996212864e-06,
+      "uncorrected_quadrupole_max_drift_fm2": 0.0036581020689538946,
+      "observable_sha256": {
+        "energies.res": "b41241a1852899007c907739fbbc174e261089fe36122c030bca55da428275b0",
+        "quadrupoles.res": "4fe2d8dc0b7a6da87495abb74504ba7baa63a25a7017be02e9a91a964d63c585"
+      },
+      "label": "unboosted-dt0.05-order6-gpu",
+      "dt_fm_c": 0.05,
+      "taylor_order": 6,
+      "backend": "gpu",
+      "boosted": false
+    },
+    {
+      "directory": "/home/abhishek/.cache/sky3d-overlap-ixg9gb1h/boost-dt0.05-order6-gpu",
+      "seconds": 97.413096822,
+      "returncode": 0,
+      "input_sha256": "feb95439d9b19e5d23cb290e75a83764bd36c2fd7536de58bcf5f2127b4adc0f",
+      "completed": true,
+      "invariant_passed": false,
+      "final_step": 4000,
+      "final_time_fm_c": 200.00000000001123,
+      "checkpoint_sha256": "772d8590970a105e01244ef8fccfd568d6b7a0d2f1304c165cdbea0b09470e33",
+      "gram_max_abs_error": 9.321434108317866e-05,
+      "gram_max_abs_drift": 9.321434108310721e-05,
+      "norm_max_abs_error": 2.711715962888661e-08,
+      "overlap_max_abs": 9.321434108317866e-05,
+      "particles": [
+        10.000000038723234,
+        10.00000002671974
+      ],
+      "particle_max_abs_drift": 3.8723234396798034e-08,
+      "integrated_energy_max_drift_mev": 1.1600000021871892e-05,
+      "uncorrected_quadrupole_max_drift_fm2": 0.10387276467893969,
+      "observable_sha256": {
+        "energies.res": "4cdd5683bcae848271a71ab90907f184a12292593033c1b1b848348263733df5",
+        "quadrupoles.res": "ceb4731cd957a2252f9334b86cb28fd75931211a21be6c521dadd8fe09c7c36a"
+      },
+      "label": "boost-dt0.05-order6-gpu",
+      "dt_fm_c": 0.05,
+      "taylor_order": 6,
+      "backend": "gpu",
+      "boosted": true
+    }
+  ],
+  "status": "complete",
+  "integration_sensitivity": [
+    {
+      "case": "boost-dt0.2-order4-gpu",
+      "reference": "boost-dt0.05-order6-gpu",
+      "reference_is_converged": false,
+      "matched_unboosted_delta": {
+        "relative_l2": 0.00015731118472032897,
+        "max_abs": 1.4645047286876434e-05
+      }
+    },
+    {
+      "case": "boost-dt0.2-order6-gpu",
+      "reference": "boost-dt0.05-order6-gpu",
+      "reference_is_converged": false,
+      "matched_unboosted_delta": {
+        "relative_l2": 0.00015692309613601302,
+        "max_abs": 1.4647266716849572e-05
+      }
+    },
+    {
+      "case": "boost-dt0.1-order4-gpu",
+      "reference": "boost-dt0.05-order6-gpu",
+      "reference_is_converged": false,
+      "matched_unboosted_delta": {
+        "relative_l2": 3.1375575478013445e-05,
+        "max_abs": 2.916039072431431e-06
+      }
+    },
+    {
+      "case": "boost-dt0.1-order6-gpu",
+      "reference": "boost-dt0.05-order6-gpu",
+      "reference_is_converged": false,
+      "matched_unboosted_delta": {
+        "relative_l2": 3.136070946195724e-05,
+        "max_abs": 2.919701572068334e-06
+      }
+    },
+    {
+      "case": "boost-dt0.05-order4-gpu",
+      "reference": "boost-dt0.05-order6-gpu",
+      "reference_is_converged": false,
+      "matched_unboosted_delta": {
+        "relative_l2": 3.9090079684477415e-08,
+        "max_abs": 3.44449091471688e-09
+      }
+    },
+    {
+      "case": "boost-dt0.05-order6-gpu",
+      "reference": "boost-dt0.05-order6-gpu",
+      "reference_is_converged": false,
+      "matched_unboosted_delta": {
+        "relative_l2": 0.0,
+        "max_abs": 0.0
+      }
+    }
+  ],
+  "cpu_gpu_equivalence": [],
+  "all_cases_invariant_passed": false
+}

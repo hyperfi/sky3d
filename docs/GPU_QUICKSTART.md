@@ -188,6 +188,13 @@ inspect the density's principal axes: native lab M=0 is about z and need not
 be intrinsic K=0. Rotation must include spinors. See the
 [alignment discussion](SINGLE_GPU_RESULTS.md#static-alignment-and-the-response-frame).
 
+For the archived 24³/1 fm 20Ne state, a smaller timestep does not remove
+the measured overlap error. Prepare and settle a state on the finer mesh
+before using it: editing only `&grid` while retaining that coarse checkpoint
+does not reproduce the finer-state test. The
+[overlap study](ORTHOGONALITY_STUDY.md) gives the controls and remaining
+long-response checks.
+
 Use the total propagated state count, including empty orbitals, in preflight.
 For one-fragment input it can read that count directly from the checkpoint;
 for manual/multiple-fragment cases supply both `--grid` and `--states`.

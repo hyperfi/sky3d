@@ -172,6 +172,46 @@ def main():
     assert abs(err-q['spectrum_comparisons']['gpu_vs_current_cpu']['relative_l2'])<1e-15
     plots(ASSETS,signals,spectra,smooth)
     response_inputs={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in [*paths.values(),reference]}
+    overlap_root = REPO/'CUDA/results/orthogonality'
+    overlap = {name: load(overlap_root/(name+'.json')) for name in
+               ('coarse-200', 'fine-200', 'fine-20-equivalence')}
+    for name, study in overlap.items():
+        expected_cases = 12 if name == 'coarse-200' else 4
+        if (study['status'] != 'complete' or len(study['cases']) != expected_cases
+                or not all(row['completed'] for row in study['cases'])):
+            raise ValueError(f'Incomplete overlap study: {name}')
+        if study['limits']['gram_max_abs_error'] != 1e-6:
+            raise ValueError('Report assumes the unchanged 1e-6 overlap limit')
+    if not overlap['fine-200']['all_cases_invariant_passed']:
+        raise ValueError('Fine-grid invariant gate failed; revise the report before exporting assets')
+    if (len(overlap['fine-20-equivalence']['cpu_gpu_equivalence']) != 2
+            or not all(row['passed'] for row in overlap['fine-20-equivalence']['cpu_gpu_equivalence'])):
+        raise ValueError('Fine-grid short CPU/GPU equivalence failed')
+    rows = [['Mesh', r'$\Delta t$ (fm/$c$)', 'Order', r'Max $|G-I|$', 'Max norm error', r'Max $|\Delta N|$']]
+    fig, ax = plt.subplots(figsize=(7.1,4.0), constrained_layout=True)
+    for name, mesh, label, color in [('coarse-200', r'$24^3$/1 fm', '24³ / 1 fm', GREY),
+                                     ('fine-200', r'$40^3$/0.6 fm', '40³ / 0.6 fm', BLUE)]:
+        cases = [row for row in overlap[name]['cases'] if row['backend'] == 'gpu']
+        for dt, order in sorted({(row['dt_fm_c'], row['taylor_order']) for row in cases}, reverse=True):
+            group = [row for row in cases if row['dt_fm_c'] == dt and row['taylor_order'] == order]
+            if len(group) != 2 or {row['boosted'] for row in group} != {False,True}:
+                raise ValueError('Require matched boosted/unboosted overlap controls')
+            rows.append([mesh, f'{dt:g}', str(order)] + [sci(max(row[key] for row in group)) for key in
+                ('gram_max_abs_error','norm_max_abs_error','particle_max_abs_drift')])
+        steps = sorted({row['dt_fm_c'] for row in cases})
+        low = [min(row['gram_max_abs_error'] for row in cases if row['dt_fm_c']==dt) for dt in steps]
+        high = [max(row['gram_max_abs_error'] for row in cases if row['dt_fm_c']==dt) for dt in steps]
+        ax.fill_between(steps, low, high, color=color, alpha=.2)
+        ax.loglog(steps, high, 'o-', color=color, label=label)
+    ax.axhline(1e-6, color='black', ls=':', label='Unchanged overlap limit')
+    ax.set(xticks=[.05,.1,.2], xticklabels=['0.05','0.1','0.2'], xlabel='Timestep (fm/c)',
+           ylabel=r'Endpoint maximum $|G-I|$', title='Occupied-orbital overlap error at 200 fm/c')
+    ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+    ax.legend(frameon=False, fontsize=9); ax.grid(alpha=.18, which='both')
+    save(fig, 'orthogonality-refinement')
+    tex_table('orthogonality-study', 'lrrrrr', rows)
+    for name in ('fine-z-static-probe','fine-preflight','execution-protocol'):
+        load(overlap_root/(name+'.json'))
     # Keep exact report and code identities beside all generated assets.
     for name in ['validation','extended-validation','mode-controls','static-controls','static-diagonalization-off',
                  'static-fallback-before-fix','energy-fix-validation','initial-flow-cpu-control','sanitizer',
@@ -181,7 +221,8 @@ def main():
         final(name)
     srcpaths=['CUDA/sky_gpu.cu','CUDA/reductions.cuh','CUDA/gpu_runtime.f90','Code/gpu_runtime.f90',
               'Code/dynamic.f90','Code/static.f90','Code/moment.f90','Code/meanfield.f90','CUDA/build.py',
-              'Utils/Strength_Calculation/sky3d_response/analysis.py','docs/STATIC_CONVERGENCE.md']
+              'Utils/Strength_Calculation/sky3d_response/analysis.py','docs/STATIC_CONVERGENCE.md',
+              'CUDA/study_orthogonality.py','docs/ORTHOGONALITY_STUDY.md']
     source_sha={s:hashlib.sha256((REPO/s).read_bytes()).hexdigest() for s in srcpaths}
     manifest={'schema_version':1,'source_snapshot':'9576125da0372c5cb3092032fafad32a50339bd2',
         'report_generator_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -191,7 +232,10 @@ def main():
     (HERE/'evidence_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     lines=[]
     for path,digest in inputs.items():
-        lines.extend([r'\noindent\path{'+path+r'}\par',r'{\footnotesize\ttfamily '+digest+r'}\par\smallskip'])
+        lines.extend([r'\par\noindent\begin{minipage}{\linewidth}',
+                      r'\path{'+path+r'}\par',
+                      r'{\footnotesize\ttfamily '+digest+r'}\par',
+                      r'\end{minipage}\par\smallskip'])
     (TABLES/'evidence_hashes.tex').write_text('\n'.join(lines)+'\n')
     lines=[]
     for label,digest in [('Fine 20Ne initial checkpoint',b['state_sha256']),('Archived K=0 initial checkpoint',q['state_sha256']),
@@ -199,7 +243,9 @@ def main():
                          ('Final benchmark CUDA library',b['build']['library_sha256']),
                          ('Response GPU executable',q['build']['executable_sha256']['gpu']),
                          ('Response CUDA library',q['build']['library_sha256'])]:
-        lines.extend([r'\noindent '+label+r'\par',r'{\footnotesize\ttfamily '+digest+r'}\par\smallskip'])
+        lines.extend([r'\par\noindent\begin{minipage}{\linewidth}',label+r'\par',
+                      r'{\footnotesize\ttfamily '+digest+r'}\par',
+                      r'\end{minipage}\par\smallskip'])
     (TABLES/'key_hashes.tex').write_text('\n'.join(lines)+'\n')
     print('Generated report assets and tables; response reanalysis relative L2:',err)
 

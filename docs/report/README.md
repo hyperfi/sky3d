@@ -5,6 +5,15 @@ changes, strict numerical controls, failed physical gates, complete-job
 benchmarks, response plots, memory policy and the new-clone workflow.
 It does not rerun nuclear simulations or replace saved timing evidence.
 
+The prose revision follows `docs/WRITING_STYLE.md` and
+the no-ai-slop editing checklist. The main text leads with the physical
+workflow, response comparison and measured speedup. Exact diagnostics,
+failed preparation records and development timings are retained in the
+appendices. The 14 October addendum incorporates the new fixed-state
+timestep/order and mesh controls from `CUDA/results/orthogonality/`.
+They identify the coarse overlap error floor and test a settled, z-aligned
+finer state; the numerical Hamiltonian and propagator are unchanged.
+
 From Linux/WSL, compile the retained source, vector figures and tables with
 an existing PDFLaTeX installation:
 
@@ -29,5 +38,6 @@ and response-input hashes.
 
 The final PDF is checked for unresolved references, font embedding, text
 extraction and rendered page layout. Its scientific conclusions remain those
-of the cited saved evidence, including the failed coarse long-response
-orthogonality gate.
+of the cited evidence, including the failed coarse long-response
+orthogonality gate. The new short-time controls do not qualify a finer
+6000 fm/c spectrum.
