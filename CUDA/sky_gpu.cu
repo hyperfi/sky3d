@@ -12,6 +12,7 @@
 #include <stdexcept>
 #include <string>
 #include <tuple>
+#include <utility>
 #include <vector>
 
 using Z=cufftDoubleComplex;
@@ -374,7 +375,7 @@ struct State:PlanSet{
       CUDA(cudaStreamBeginCapture(stream,cudaStreamCaptureModeThreadLocal));
       try{enqueue_skyrme(f);}catch(...){cudaStreamEndCapture(stream,&graph);if(graph)cudaGraphDestroy(graph);throw;}
       CUDA(cudaStreamEndCapture(stream,&graph));
-      try{CUDA(cudaGraphInstantiate(&executable,graph,0));}catch(...){cudaGraphDestroy(graph);throw;}
+      try{CUDA(cudaGraphInstantiateWithFlags(&executable,graph,0));}catch(...){cudaGraphDestroy(graph);throw;}
       cudaGraphDestroy(graph);
       try{found=graphs.entries.emplace(key,executable).first;}catch(...){cudaGraphExecDestroy(executable);throw;}
       graph_couplings=f;field_graph_valid=true;
@@ -429,7 +430,7 @@ struct State:PlanSet{
       CUDA(cudaStreamBeginCapture(stream,cudaStreamCaptureModeThreadLocal));
       try{enqueue_stage(order,dt_hbc);}catch(...){cudaStreamEndCapture(stream,&graph);if(graph)cudaGraphDestroy(graph);throw;}
       CUDA(cudaStreamEndCapture(stream,&graph));
-      try{CUDA(cudaGraphInstantiate(&executable,graph,0));}catch(...){cudaGraphDestroy(graph);throw;}
+      try{CUDA(cudaGraphInstantiateWithFlags(&executable,graph,0));}catch(...){cudaGraphDestroy(graph);throw;}
       cudaGraphDestroy(graph);
       try{found=graphs.entries.emplace(key,executable).first;}catch(...){cudaGraphExecDestroy(executable);throw;}
     }
@@ -452,8 +453,9 @@ extern "C" void sky_gpu_fields(void* pointer,const double* u,const double* b,con
     CUDA(cudaMemcpy(p.u,u,size_t(p.g)*2*8,cudaMemcpyHostToDevice));
     if(p.device_fields)return;
     CUDA(cudaMemcpy(p.b,b,size_t(p.g)*2*8,cudaMemcpyHostToDevice));
-    for(auto pair:{std::pair<double*,const double*>{p.s,s},{p.dbm,dbm},{p.a,a},{p.w,w}})
-      CUDA(cudaMemcpy(pair.first,pair.second,size_t(p.g)*6*8,cudaMemcpyHostToDevice));
+    const std::pair<double*,const double*> fields[]={{p.s,s},{p.dbm,dbm},{p.a,a},{p.w,w}};
+    for(const auto& [destination,source]:fields)
+      CUDA(cudaMemcpy(destination,source,size_t(p.g)*6*8,cudaMemcpyHostToDevice));
   }catch(const std::exception& e){failure(e);}
 }
 extern "C" void sky_gpu_coulomb_config(void* pointer,const Z* kernel,int periodic,double scale){
@@ -478,8 +480,9 @@ extern "C" void sky_gpu_skyrme(void* pointer,const double* coeff,const double* r
     CUDA(cudaMemcpy(u,p.u,size_t(p.g)*2*8,cudaMemcpyDeviceToHost));
     if(!resident){
       CUDA(cudaMemcpy(b,p.b,size_t(p.g)*2*8,cudaMemcpyDeviceToHost));
-      for(auto pair:{std::pair<double*,double*>{s,p.s},{dbm,p.dbm},{a,p.a},{w,p.w}})
-        CUDA(cudaMemcpy(pair.first,pair.second,size_t(p.g)*6*8,cudaMemcpyDeviceToHost));
+      const std::pair<double*,const double*> fields[]={{s,p.s},{dbm,p.dbm},{a,p.a},{w,p.w}};
+      for(const auto& [destination,source]:fields)
+        CUDA(cudaMemcpy(destination,source,size_t(p.g)*6*8,cudaMemcpyDeviceToHost));
     }
     p.device_fields=true;p.density_current=true;
   }catch(const std::exception& e){failure(e);}
@@ -509,8 +512,9 @@ extern "C" void sky_gpu_push(void* pointer,const Z* input){
 extern "C" void sky_gpu_fields_pull(void* pointer,double* u,double* b,double* s,double* dbm,double* a,double* w){
   try{State& p=*(State*)pointer;CUDA(cudaStreamSynchronize(p.stream));
     CUDA(cudaMemcpy(u,p.u,size_t(p.g)*2*8,cudaMemcpyDeviceToHost));CUDA(cudaMemcpy(b,p.b,size_t(p.g)*2*8,cudaMemcpyDeviceToHost));
-    for(auto pair:{std::pair<double*,double*>{s,p.s},{dbm,p.dbm},{a,p.a},{w,p.w}})
-      CUDA(cudaMemcpy(pair.first,pair.second,size_t(p.g)*6*8,cudaMemcpyDeviceToHost));
+    const std::pair<double*,const double*> fields[]={{s,p.s},{dbm,p.dbm},{a,p.a},{w,p.w}};
+    for(const auto& [destination,source]:fields)
+      CUDA(cudaMemcpy(destination,source,size_t(p.g)*6*8,cudaMemcpyDeviceToHost));
   }catch(const std::exception& e){failure(e);}
 }
 extern "C" void sky_gpu_density_pull(void* pointer,double* density){

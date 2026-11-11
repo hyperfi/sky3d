@@ -49,16 +49,17 @@ hardware-dependent; memory fit alone cannot predict it.
 ## Build in WSL or Linux
 
 Requirements: a compatible NVIDIA GPU/driver, CUDA toolkit with cuFFT,
-g++/gfortran, make, FFTW3, LAPACK/OpenBLAS, Python 3.11+ and NumPy.
-This machine uses CUDA 13.0, gfortran 13.3, an RTX 5070 with 12 GB VRAM,
-and an Intel Core Ultra 7 265K. CUDA 13.0's nvcc is now the local WSL default.
-No NVIDIA Fortran compiler is required.
+g++/gfortran, make, FFTW3, LAPACK/OpenBLAS, Python 3.11+ and NumPy. See the
+[GPU quick start](../docs/GPU_QUICKSTART.md#2-clone-and-compile) for toolkit
+selection, commands for Ubuntu 22.04 and versioned NVIDIA installations,
+and the 16O smoke test.
 
-```bash
-cd /path/to/sky3d
-export CUDA_HOME=/usr/local/cuda
-python3 CUDA/build.py
-```
+`CUDA_HOME` selects the toolkit root, such as `/usr` for Ubuntu's distro
+toolkit or `/usr/local/cuda-12.2` for a versioned installation. When unset,
+the builder checks `/usr/local/cuda/bin/nvcc` and then `PATH`. It links cuFFT
+from the selected toolkit's library layout. Use `--host-compiler PATH` to
+select nvcc's C++ host compiler for one build, for example
+`--host-compiler /usr/bin/g++-10` for the CUDA 11.5 workaround.
 
 The builder creates isolated `reference`, `cpu`, and `gpu` executables and
 `libsky3d_gpu.so` under the ignored `CUDA/build/` directory. `Code/` objects and
@@ -66,9 +67,12 @@ production runs are untouched. The reference disables fast-math and FP
 contraction. Both performance builds use `-O3 -march=native -ffast-math
 -fopenmp` for their CPU code; CUDA uses complex128 without `--use_fast_math`.
 `build.json` records flags, compiler versions, source and executable hashes.
-Rebuild on each new machine: native CPU/GPU binaries and their library paths
-are local artifacts. `--arch sm_120` can explicitly target this GPU; the
-default `native` targets the installed GPU.
+Rebuild on each new machine because the CPU instructions and library paths
+are host-specific. The default `--arch native` uses nvcc's GPU detection.
+An explicit target such as `--arch sm_86` or `--arch sm_120` also works with
+a toolkit supporting that target. The builder reports the selected compiler,
+architecture and output directory. Build failures include a diagnostic and
+the path to the full log.
 
 The normal `Code/Makefile` and the 24Mg project Makefile still build CPU-only
 executables without CUDA. Those executables reject `SKY3D_BACKEND=gpu`.
