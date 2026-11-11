@@ -2,10 +2,9 @@
 
 ## GPU branch: start here
 
-For compilation, CUDA/WSL setup and a first calculation from a clean clone,
-follow the **[GPU quick start](docs/GPU_QUICKSTART.md)**. It generates a small
-16O static state locally, checks CPU/GPU agreement and shows how to launch TDHF.
-No downloaded wavefunction or prebuilt binary is required.
+Build Sky3D using the [GPU build guide](docs/GPU_QUICKSTART.md), then run the
+**[oxygen-16 GPU demo](Test/GPU/README.md)**. The supplied inputs prepare a
+ground-state checkpoint and use it for a short quadrupole TDHF run.
 
 The backend uses GNU Fortran plus CUDA C++/cuFFT; NVIDIA Fortran is not required.
 Use Linux or WSL2 with a compatible NVIDIA GPU and toolkit. See the

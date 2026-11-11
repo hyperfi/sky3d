@@ -1,7 +1,8 @@
 # Compile and run the GPU branch
 
-This guide starts from source and prepares its own small 16O state. It covers
-one NVIDIA GPU on Linux or WSL2. The GPU backend uses FP64 CUDA C++/cuFFT with
+This guide builds Sky3D for one NVIDIA GPU on Linux or WSL2. The
+[oxygen-16 demo](../Test/GPU/README.md) runs from the supplied inputs after
+the build. The GPU backend uses FP64 CUDA C++/cuFFT with
 GNU Fortran; no NVIDIA Fortran compiler is needed. Multi-GPU, GPU MPI and
 out-of-core execution are not implemented.
 
@@ -17,18 +18,13 @@ instructions; do not install a Linux NVIDIA display driver inside WSL.
 For native Linux, follow the
 [CUDA Linux installation guide](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html).
 Run the remaining commands in a Linux or WSL2 Bash terminal. On Ubuntu,
-install the common build and test dependencies:
+install the common build dependencies:
 
 ```bash
 sudo apt-get update
 sudo apt-get install git build-essential gfortran make \
-  libfftw3-dev liblapack-dev libopenblas-dev python3 python3-numpy
+  libfftw3-dev liblapack-dev libopenblas-dev python3
 ```
-
-The smoke-test validators require **Python 3.11 or newer** with NumPy.
-Ubuntu 24.04 supplies Python 3.12. On Ubuntu 22.04, use a separate Python
-3.11+ environment with NumPy and activate it so `python3` below uses that
-interpreter. For response plots, install Matplotlib in the same environment.
 
 Check GPU visibility and the host tools before selecting a toolkit:
 
@@ -40,7 +36,7 @@ else
 fi
 g++ --version
 gfortran --version
-python3 -c 'import sys; assert sys.version_info >= (3, 11); import numpy; print(sys.version, "NumPy", numpy.__version__)'
+python3 --version
 ```
 
 `nvidia-smi` reports the installed driver and the highest CUDA version that
@@ -60,8 +56,6 @@ git clone --branch gpu --single-branch https://github.com/hyperfi/sky3d.git
 cd sky3d
 export SKY3D_REPO="$PWD"
 export SKY3D_BUILD="$HOME/.cache/sky3d-gpu-build"
-export SKY3D_RESULTS="$HOME/.cache/sky3d-first-run"
-mkdir -p "$SKY3D_RESULTS"
 ```
 
 Choose one of the following setups. The builder honors `CUDA_HOME` when set.
@@ -163,14 +157,29 @@ The build produces:
 On compiler or linker failure, the builder prints the first diagnostic it
 finds and the full path to `cuda-build.log` or the variant's `build.log`.
 
-## 3. Check VRAM and run the 16O smoke test
+## 3. Run the demo
 
-This fixture propagates 16 orbitals on a 40³ grid with 0.6 fm spacing.
-The preflight queries actual cuFFT workspace as well as the backend arrays:
+Follow the [oxygen-16 demo in Test/GPU](../Test/GPU/README.md) to prepare
+a ground state and evolve it for 100 steps. To check VRAM before starting,
+query the backend arrays and actual cuFFT workspace for its 40³ grid and
+16 orbitals:
 
 ```bash
 python3 CUDA/preflight.py --library "$SKY3D_BUILD/libsky3d_gpu.so" \
   --grid 40 40 40 --states 16
+```
+
+## 4. Optional release validation
+
+The validators require **Python 3.11 or newer** with NumPy. On Ubuntu 24.04,
+install `python3-numpy` for the system Python 3.12. On Ubuntu 22.04, activate
+a separate Python 3.11+ environment with NumPy. For response plots, install
+Matplotlib in the same environment.
+
+```bash
+cd "$SKY3D_REPO"
+export SKY3D_RESULTS="$HOME/.cache/sky3d-gpu-validation"
+mkdir -p "$SKY3D_RESULTS"
 python3 -m unittest discover -s CUDA/tests -v
 python3 CUDA/validate_single_gpu.py --build-dir "$SKY3D_BUILD" \
   --mode prepare --prepare-case 16o-sly5 \
@@ -197,66 +206,6 @@ directories under `~/.cache/sky3d-*`; their paths are recorded in the JSON.
 No external checkpoint download is needed. A failed convergence or comparison
 preserves its partial report and raw calculation; inspect the recorded
 directory and `stdout.log` before using that state.
-
-## 4. Launch TDHF yourself
-
-Use the independently validated GPU static checkpoint from step 3 with the
-included [16O TDHF input](../CUDA/examples/16o-tdhf.in). Create a fresh run
-directory and copy the checkpoint there:
-
-```bash
-cd "$SKY3D_REPO"
-export SKY3D_RUN="$(mktemp -d "$HOME/.cache/sky3d-16o-run.XXXXXX")"
-cp CUDA/examples/16o-tdhf.in "$SKY3D_RUN/for005"
-python3 - <<'PY'
-import json, os, shutil
-from pathlib import Path
-report = json.loads((Path(os.environ['SKY3D_RESULTS']) / '16o.json').read_text())
-if not report['passed']:
-    raise SystemExit('Static/TDHF validation did not pass')
-case = next(row for row in report['cases'] if row['case'] == '16o-sly5')
-seed = Path(case['runs']['static-gpu']['directory']) / 'static.tdhf'
-shutil.copy2(seed, Path(os.environ['SKY3D_RUN']) / 'initial.tdhf')
-print('Calculation directory:', os.environ['SKY3D_RUN'])
-PY
-python3 CUDA/preflight.py --library "$SKY3D_BUILD/libsky3d_gpu.so" \
-  --input "$SKY3D_RUN/for005"
-export OMP_NUM_THREADS=8 OPENBLAS_NUM_THREADS=1
-export OMP_PROC_BIND=close OMP_PLACES=cores
-cd "$SKY3D_RUN"
-SKY3D_BACKEND=gpu "$SKY3D_BUILD/gpu/sky3d.gpu" > stdout.log 2>&1
-```
-
-Sky3D reads the file named **`for005`** in its working directory. Fragment
-filenames are relative to that directory. The example takes 100 steps at
-dt=0.1 fm/c, writes energies/multipoles every 10 steps and saves the final
-wavefunction as `dynamic.tdhf`. Density snapshots are disabled with `mplot=0`.
-
-Verify completion from the saved checkpoint, since a legacy Fortran `STOP`
-can return exit status zero before reaching the requested endpoint:
-
-```bash
-python3 - <<'PY'
-import os, sys
-from pathlib import Path
-sys.path.insert(0, str(Path(os.environ['SKY3D_REPO']) / 'CUDA'))
-from benchmark import checkpoint
-state = checkpoint(Path(os.environ['SKY3D_RUN']) / 'dynamic.tdhf')
-if state['step'] != 100 or abs(state['time'] - 10.0) > 1e-8:
-    raise SystemExit('Requested 10 fm/c endpoint was not reached; inspect stdout.log')
-if max(abs(number - 8.0) for number in state['particles']) > 1e-6:
-    raise SystemExit('Particle conservation check failed')
-print('Reached', state['step'], 'steps at', state['time'], 'fm/c')
-print('Neutrons/protons:', state['particles'])
-PY
-```
-
-Main outputs are `stdout.log`, `energies.res`, `quadrupoles.res`,
-`monopoles.res` and `dynamic.tdhf`. To compare speed, prepare another fresh
-directory with the same `for005` and `initial.tdhf`, then run
-`SKY3D_BACKEND=cpu "$SKY3D_BUILD/cpu/sky3d.cpu"` with identical output and
-thread settings. Time complete jobs, repeat them sequentially and compare
-their outputs before claiming a speedup.
 
 ## 5. Move to your own nucleus
 
@@ -305,6 +254,6 @@ must be assessed separately; see [results and limits](SINGLE_GPU_RESULTS.md).
 | GPU unavailable in WSL | Check the Windows driver and WSL2 setup; run `nvidia-smi` inside WSL. |
 | Missing `.so` after moving a build | Rebuild on the destination host; the build contains absolute library paths. |
 | Insufficient VRAM | Close competing GPU jobs or use parallel CPU; count all propagated orbitals. |
-| No final checkpoint or wrong endpoint | Inspect `stdout.log`; exit status zero alone does not establish completion. |
+| No final checkpoint or wrong endpoint | Inspect the calculation log for the expected completion message. |
 | Static gate or comparison fails | Preserve the report/raw directory and investigate; do not loosen tolerances automatically. |
 | Numerical results differ on another host | Run matched CPU/GPU checks for that host and case before a production calculation. |
