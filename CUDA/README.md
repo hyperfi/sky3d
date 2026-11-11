@@ -147,25 +147,25 @@ directory. All numerical commands below run in WSL/Linux; substitute the
 checkpoint path, GPU architecture and thread counts for the destination host.
 
 ```bash
-python3 CUDA/build.py --build-dir "$HOME/.cache/sky3d-build" --arch native
-python3 CUDA/benchmark.py --build-dir "$HOME/.cache/sky3d-build" \
+python3 CUDA/build.py --arch native
+python3 CUDA/benchmark.py --build-dir CUDA/build \
   --state /path/to/validated-20ne.tdhf --mode benchmark \
   --steps 200 --dt 0.1 --repetitions 3 --cpu-threads 4 8 20 --gpu-threads 8
-python3 CUDA/validate_extended.py --build-dir "$HOME/.cache/sky3d-build" \
+python3 CUDA/validate_extended.py --build-dir CUDA/build \
   --state /path/to/validated-20ne.tdhf --output /path/to/extended.json
-python3 CUDA/validate_single_gpu.py --build-dir "$HOME/.cache/sky3d-build" \
+python3 CUDA/validate_single_gpu.py --build-dir CUDA/build \
   --state /path/to/validated-20ne.tdhf --mode controls --output /path/to/controls.json
-python3 CUDA/validate_single_gpu.py --build-dir "$HOME/.cache/sky3d-build" \
+python3 CUDA/validate_single_gpu.py --build-dir CUDA/build \
   --mode prepare --prepare-case 16o-sly5 \
   --prepare-mesh 40 --prepare-spacing 0.6 --maxiter 6000 --output /path/to/16o.json
-python3 CUDA/validate_single_gpu.py --build-dir "$HOME/.cache/sky3d-build" \
+python3 CUDA/validate_single_gpu.py --build-dir CUDA/build \
   --mode prepare --prepare-case 20ne-sly4-vdi --prepare-serr 1e-7 \
   --prepare-mesh 56 --prepare-spacing 0.42857142857142855 --dynamic-dt 0.05 \
   --maxiter 6000 --output /path/to/paired.json
-python3 CUDA/validate_prepared_tdhf.py --build-dir "$HOME/.cache/sky3d-build" \
+python3 CUDA/validate_prepared_tdhf.py --build-dir CUDA/build \
   --preparation /path/to/paired.json --case 20ne-sly4-vdi \
   --output /path/to/paired-own-gpu.json
-python3 CUDA/validate_memory.py --build-dir "$HOME/.cache/sky3d-build" \
+python3 CUDA/validate_memory.py --build-dir CUDA/build \
   --output /path/to/memory.json
 ```
 
@@ -193,7 +193,7 @@ can reuse those states on the exact frozen build with an explicit new `--dt`.
 It verifies the original stopping, fresh-field and checkpoint-hash gates first:
 
 ```bash
-python3 CUDA/resume_prepared_dynamics.py --build-dir "$HOME/.cache/sky3d-build" \
+python3 CUDA/resume_prepared_dynamics.py --build-dir CUDA/build \
   --preparation /path/to/failed-paired.json --case 20ne-sly4-vdi \
   --dt 0.05 --output /path/to/paired-resumed.json
 ```
@@ -407,8 +407,8 @@ states, `.tdd` files and compiler products are intentionally excluded:
 git clone --branch gpu --single-branch https://github.com/hyperfi/sky3d.git
 cd sky3d
 export CUDA_HOME=/usr/local/cuda
-python3 CUDA/build.py --build-dir "$HOME/.cache/sky3d-build"
-python3 CUDA/preflight.py --library "$HOME/.cache/sky3d-build/libsky3d_gpu.so"     --grid 40 40 40 --states 20
+python3 CUDA/build.py
+python3 CUDA/preflight.py --grid 40 40 40 --states 20
 ```
 
 Prepare each static nucleus locally or transfer the validated checkpoint

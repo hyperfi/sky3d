@@ -46,16 +46,14 @@ actually used to build. The commands below invoke the selected toolkit's
 
 ## 2. Clone and compile
 
-Clone onto the Linux filesystem, for example under `~/src`, and keep the
-following variables in the same terminal session:
+Clone onto the Linux filesystem, for example under `~/src`. Run the build
+and demo commands from the repository root.
 
 ```bash
 mkdir -p "$HOME/src"
 cd "$HOME/src"
 git clone --branch gpu --single-branch https://github.com/hyperfi/sky3d.git
 cd sky3d
-export SKY3D_REPO="$PWD"
-export SKY3D_BUILD="$HOME/.cache/sky3d-gpu-build"
 ```
 
 Choose one of the following setups. The builder honors `CUDA_HOME` when set.
@@ -79,7 +77,7 @@ The RTX A2000 has compute capability 8.6, so select
 sudo apt-get install nvidia-cuda-toolkit
 export CUDA_HOME=/usr
 "$CUDA_HOME/bin/nvcc" --version
-python3 CUDA/build.py --build-dir "$SKY3D_BUILD" --arch sm_86
+python3 CUDA/build.py --arch sm_86
 ```
 
 On the Ubuntu 22.04 workstation, CUDA 11.5 with GCC 11 failed in
@@ -95,7 +93,7 @@ unverified.
 if [ ! -x /usr/bin/g++-10 ]; then
   sudo apt-get install g++-10
 fi
-python3 CUDA/build.py --build-dir "$SKY3D_BUILD" --arch sm_86 \
+python3 CUDA/build.py --arch sm_86 \
   --host-compiler /usr/bin/g++-10
 ```
 
@@ -114,7 +112,7 @@ export CUDA_HOME=/usr/local/cuda-12.2
 SKY3D_ARCH=sm_86
 "$CUDA_HOME/bin/nvcc" --version
 "$CUDA_HOME/bin/nvcc" --list-gpu-code | grep -Fx "$SKY3D_ARCH" &&
-  python3 CUDA/build.py --build-dir "$SKY3D_BUILD" --arch "$SKY3D_ARCH"
+  python3 CUDA/build.py --arch "$SKY3D_ARCH"
 ```
 
 ### GeForce RTX 5070
@@ -135,7 +133,7 @@ driver with RTX 5070 support. [NVIDIA compute capability table](https://develope
 export CUDA_HOME=/usr/local/cuda-12.8
 "$CUDA_HOME/bin/nvcc" --version
 "$CUDA_HOME/bin/nvcc" --list-gpu-code | grep -Fx sm_120 &&
-  python3 CUDA/build.py --build-dir "$SKY3D_BUILD" --arch sm_120
+  python3 CUDA/build.py --arch sm_120
 ```
 
 ### Build output
@@ -144,9 +142,9 @@ The builder prints the selected `nvcc`, architecture and build directory.
 Rebuild locally after moving machines because library paths and native CPU
 instructions are host-specific.
 
-The build produces:
+The build writes these files under `CUDA/build/`:
 
-| File under `SKY3D_BUILD` | Purpose |
+| File | Purpose |
 | --- | --- |
 | `gpu/sky3d.gpu` | GPU-linked static/TDHF executable |
 | `cpu/sky3d.cpu` | Optimized parallel CPU comparison |
@@ -159,14 +157,15 @@ finds and the full path to `cuda-build.log` or the variant's `build.log`.
 
 ## 3. Run the demo
 
-Follow the [oxygen-16 demo in Test/GPU](../Test/GPU/README.md) to prepare
-a ground state and evolve it for 100 steps. To check VRAM before starting,
+After building, follow the [oxygen-16 demo in Test/GPU](../Test/GPU/README.md)
+to prepare a ground state and evolve it for 100 steps. The demo uses the
+executable in `CUDA/build/` and writes its results under `Test/GPU/`.
+To check VRAM before starting,
 query the backend arrays and actual cuFFT workspace for its 40³ grid and
 16 orbitals:
 
 ```bash
-python3 CUDA/preflight.py --library "$SKY3D_BUILD/libsky3d_gpu.so" \
-  --grid 40 40 40 --states 16
+python3 CUDA/preflight.py --grid 40 40 40 --states 16
 ```
 
 ## 4. Optional release validation
@@ -177,17 +176,15 @@ a separate Python 3.11+ environment with NumPy. For response plots, install
 Matplotlib in the same environment.
 
 ```bash
-cd "$SKY3D_REPO"
-export SKY3D_RESULTS="$HOME/.cache/sky3d-gpu-validation"
-mkdir -p "$SKY3D_RESULTS"
+mkdir -p CUDA/build/validation "$HOME/.cache"
 python3 -m unittest discover -s CUDA/tests -v
-python3 CUDA/validate_single_gpu.py --build-dir "$SKY3D_BUILD" \
+python3 CUDA/validate_single_gpu.py --build-dir CUDA/build \
   --mode prepare --prepare-case 16o-sly5 \
   --prepare-mesh 40 --prepare-spacing 0.6 --maxiter 6000 \
-  --output "$SKY3D_RESULTS/16o.json"
-python3 CUDA/validate_prepared_tdhf.py --build-dir "$SKY3D_BUILD" \
-  --preparation "$SKY3D_RESULTS/16o.json" --case 16o-sly5 \
-  --output "$SKY3D_RESULTS/16o-own-gpu.json"
+  --output CUDA/build/validation/16o.json
+python3 CUDA/validate_prepared_tdhf.py --build-dir CUDA/build \
+  --preparation CUDA/build/validation/16o.json --case 16o-sly5 \
+  --output CUDA/build/validation/16o-own-gpu.json
 ```
 
 The preparation runner generates CPU and GPU static states independently,

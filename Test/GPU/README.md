@@ -3,31 +3,28 @@
 Prepare the SLy5 ground state, then evolve it for 100 steps after a
 quadrupole boost. Both inputs use a 40³ grid with 0.6 fm spacing.
 
-Build Sky3D using the [GPU build guide](../../docs/GPU_QUICKSTART.md).
-Run the commands below from the repository root in Linux or WSL2 Bash.
-If you used `--build-dir`, set `SKY3D_BUILD` to that directory's absolute path
-first. The example creates a fresh calculation directory for each run.
+After building with the [GPU build guide](../../docs/GPU_QUICKSTART.md), run
+this block from the repository root in Linux or WSL2 Bash. It uses
+`CUDA/build/gpu/sky3d.gpu` and creates a fresh `Test/GPU/run.*` directory.
 
 ```bash
-export SKY3D_REPO="$PWD"
-export SKY3D_BUILD="${SKY3D_BUILD:-$SKY3D_REPO/CUDA/build}"
-mkdir -p "$HOME/.cache"
-export SKY3D_RUN="$(mktemp -d "$HOME/.cache/sky3d-16o.XXXXXX")"
+export SKY3D_RUN="$(mktemp -d "$PWD/Test/GPU/run.XXXXXX")"
 printf 'Run directory: %s\n' "$SKY3D_RUN"
 export OMP_NUM_THREADS=8 OPENBLAS_NUM_THREADS=1
 export OMP_PROC_BIND=close OMP_PLACES=cores
 
 (
   set -e
+  sky3d="$PWD/CUDA/build/gpu/sky3d.gpu"
   cd "$SKY3D_RUN"
 
-  cp "$SKY3D_REPO/Test/GPU/for005.static" for005
-  SKY3D_BACKEND=gpu "$SKY3D_BUILD/gpu/sky3d.gpu" > static.log 2>&1
+  cp ../for005.static for005
+  SKY3D_BACKEND=gpu "$sky3d" > static.log 2>&1
   grep 'Static convergence criterion met' static.log
   test -s initial.tdhf
 
-  cp "$SKY3D_REPO/Test/GPU/for005.tdhf" for005
-  SKY3D_BACKEND=gpu "$SKY3D_BUILD/gpu/sky3d.gpu" > dynamic.log 2>&1
+  cp ../for005.tdhf for005
+  SKY3D_BACKEND=gpu "$sky3d" > dynamic.log 2>&1
   grep -E 'Wrote restart file at end of +iter= *100$' dynamic.log
   test -s dynamic.tdhf
   tail -n 1 energies.res
@@ -44,21 +41,22 @@ if a completion message is missing.
 
 ## Optional CPU reference comparison
 
-After the GPU run, use the same static checkpoint and TDHF input with the
-CPU reference executable from the same build. The comparison needs NumPy.
+After the GPU run, use the same terminal at the repository root. The CPU
+reference uses the same static checkpoint and TDHF input. The comparison needs NumPy.
 It reads particle counts from the saved wavefunctions and uses the CUDA
 validator's existing checkpoint and observable tolerances.
 
 ```bash
 (
   set -e
+  repo="$PWD"
   reference="$(mktemp -d "$SKY3D_RUN/reference.XXXXXX")"
-  cp "$SKY3D_REPO/Test/GPU/for005.tdhf" "$reference/for005"
+  cp Test/GPU/for005.tdhf "$reference/for005"
   cp "$SKY3D_RUN/initial.tdhf" "$reference/initial.tdhf"
   cd "$reference"
-  SKY3D_BACKEND=cpu "$SKY3D_BUILD/reference/sky3d.reference" > dynamic.log 2>&1
+  SKY3D_BACKEND=cpu "$repo/CUDA/build/reference/sky3d.reference" > dynamic.log 2>&1
 
-  PYTHONPATH="$SKY3D_REPO/CUDA${PYTHONPATH:+:$PYTHONPATH}" python3 - "$reference" <<'PY'
+  PYTHONPATH="$repo/CUDA${PYTHONPATH:+:$PYTHONPATH}" python3 - "$reference" <<'PY'
 import os
 import sys
 from pathlib import Path
