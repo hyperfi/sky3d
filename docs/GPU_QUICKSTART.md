@@ -56,14 +56,38 @@ git clone --branch gpu --single-branch https://github.com/hyperfi/sky3d.git
 cd sky3d
 ```
 
-Choose one of the following setups. The builder honors `CUDA_HOME` when set.
-With it unset, the builder looks for `nvcc` in `/usr/local/cuda/bin` and then
-on `PATH`. The default `--arch native` asks a supporting `nvcc` to detect the
-visible GPUs. Use an explicit `sm_*` target when building for another machine,
-when the build environment cannot see the target GPU, or when an older
-`nvcc` lacks `native` support. NVIDIA added `native` in CUDA 11.5 Update 1.
+### Choose the toolkit and GPU target
+
+Set `CUDA_HOME` to the installed toolkit directory that contains
+`bin/nvcc`. With it unset, the builder checks `/usr/local/cuda/bin` and then
+`PATH`.
+
+If a compatible `nvcc` can see the GPU you plan to use, run
+`python3 CUDA/build.py` for the default `--arch native`. Use an explicit
+target for a different machine, a GPU that the build environment cannot see,
+or an older `nvcc` without `native` support. NVIDIA added `native` in
+CUDA 11.5 Update 1.
 [NVIDIA nvcc options](https://docs.nvidia.com/cuda/archive/12.8.0/cuda-compiler-driver-nvcc/index.html#gpu-architecture-arch),
 [CUDA 11.6.2 release notes](https://docs.nvidia.com/cuda/archive/11.6.2/cuda-toolkit-release-notes/index.html)
+
+For an explicit target, identify the GPU that will run Sky3D:
+
+```bash
+nvidia-smi --query-gpu=index,name,compute_cap --format=csv
+```
+
+Use that GPU's compute capability without the decimal point and with the
+`sm_` prefix. For example, **8.6 → `sm_86`** and **12.0 → `sm_120`**.
+If the query is unavailable, look up the exact GPU model in NVIDIA's table.
+Use this value for `SKY3D_ARCH` in the versioned toolkit example below.
+The selected compiler's `--list-gpu-code` output confirms whether it can
+build that target. If the target is missing, select a toolkit that supports
+it. [NVIDIA compute capability query](https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html),
+[NVIDIA GPU model table](https://developer.nvidia.com/cuda/gpus)
+
+On a machine with several GPUs, match the target to the GPU you intend to
+run on. See [device selection](../CUDA/README.md#run-and-check-vram) for
+`CUDA_VISIBLE_DEVICES`.
 
 ### Ubuntu 22.04 distro toolkit with an RTX A2000
 
@@ -109,7 +133,7 @@ host compiler support. This example uses CUDA 12.2 and an RTX A2000.
 
 ```bash
 export CUDA_HOME=/usr/local/cuda-12.2
-SKY3D_ARCH=sm_86
+SKY3D_ARCH=sm_86  # Replace with the target for your GPU.
 "$CUDA_HOME/bin/nvcc" --version
 "$CUDA_HOME/bin/nvcc" --list-gpu-code | grep -Fx "$SKY3D_ARCH" &&
   python3 CUDA/build.py --arch "$SKY3D_ARCH"
