@@ -43,13 +43,14 @@ __global__ void unpack_axis(const Z* packed,Z* output,int count,int nx,int ny,in
   int t=blockIdx.x*blockDim.x+threadIdx.x;
   if(t<count) output[physical_index(t,nx,ny,nz,axis)]=packed[t];
 }
-__global__ void spectral_scale(Z* first,Z* second,int count,int n,double spacing,int order){
+struct SpectralFactors { double first,second; };
+
+__global__ void spectral_scale(Z* first,Z* second,int count,int n,const SpectralFactors* factors){
   int t=blockIdx.x*blockDim.x+threadIdx.x;
   if(t>=count) return;
-  int k=t%n,mode=k<n/2?k:k-n;
-  double wave=mode*(2.0*PI)/(n*spacing);
-  if(order==2) second[t]=(-wave*wave/n)*first[t];
-  else first[t]=(k==n/2?0.0:wave/n)*Z{-first[t].y,first[t].x};
+  int k=t%n;
+  if(second) second[t]=factors[k].second*first[t];
+  else first[t]=factors[k].first*Z{-first[t].y,first[t].x};
 }
 __global__ void h_local(const Z* p,Z* h,int count,int g,const int* iq,
                         const double* u,const double* s){
@@ -209,7 +210,9 @@ struct PlanSet{
   ~PlanSet(){for(auto p:plans)if(p)cufftDestroy(p);for(auto p:realplans)if(p)cufftDestroy(p);
     for(auto p:coulplans)if(p)cufftDestroy(p);if(fullplan)cufftDestroy(fullplan);}
   size_t reduction_bytes()const{return size_t((g+255)/256)*std::max(10*states,38)*8;}
-  uint64_t required()const{return uint64_t(count)*sizeof(Z)*9+uint64_t(g)*1016+uint64_t(states)*52+reduction_bytes()+workspace;}
+  size_t spectral_factor_bytes()const{return (size_t(nx)+ny+nz)*sizeof(SpectralFactors);}
+  uint64_t required()const{return uint64_t(count)*sizeof(Z)*9+uint64_t(g)*1016+uint64_t(states)*52+
+    spectral_factor_bytes()+reduction_bytes()+workspace;}
 };
 struct DeviceMemory{
   std::vector<void*> pointers;
@@ -231,6 +234,7 @@ struct State:PlanSet{
   cudaStream_t stream=execution.value;
   GraphCache graphs;
   Z *psi,*result,*term,*h,*d1,*d2,*coupled,*frequency,*second;
+  const SpectralFactors* spectral_factors[3];
   double *u,*b,*s,*dbm,*a,*w,*den,*weights,spacing[3];int* iq;
   double *divj,*laprho,*gradrho,*curls,*curlc,*wc;
   Z *coulwork,*coulkernel;
@@ -256,6 +260,22 @@ struct State:PlanSet{
     for(int k=0;k<states;k++)if(isospin[k]<1||isospin[k]>2||!std::isfinite(occ[k]))throw std::runtime_error("Invalid occupation or isospin");
     size_t bytes=size_t(count)*sizeof(Z);
     for(Z** p:{&psi,&result,&term,&h,&d1,&d2,&coupled,&frequency,&second})alloc(*p,bytes);
+    SpectralFactors* factors;
+    alloc(factors,spectral_factor_bytes());
+    std::vector<SpectralFactors> host_factors;
+    host_factors.reserve(spectral_factor_bytes()/sizeof(SpectralFactors));
+    const int lengths[]={nx,ny,nz};
+    for(int axis=0;axis<3;axis++){
+      int n=lengths[axis];
+      spectral_factors[axis]=factors+host_factors.size();
+      for(int k=0;k<n;k++){
+        int mode=k<n/2?k:k-n;
+        double wave=mode*(2.0*PI)/(n*spacing[axis]);
+        // First derivative suppresses Nyquist; second derivative retains it.
+        host_factors.push_back({k==n/2?0.0:wave/n,-wave*wave/n});
+      }
+    }
+    CUDA(cudaMemcpy(factors,host_factors.data(),spectral_factor_bytes(),cudaMemcpyHostToDevice));
     alloc(u,size_t(g)*2*8);alloc(b,size_t(g)*2*8);
     for(double** p:{&s,&dbm,&a,&w})alloc(*p,size_t(g)*6*8);
     alloc(den,size_t(g)*22*8);alloc(weights,size_t(states)*8);alloc(iq,size_t(states)*4);
@@ -387,11 +407,11 @@ struct State:PlanSet{
     pack_axis<<<blocks(),256,0,stream>>>(input,frequency,count,nx,ny,nz,axis);
     FFT(cufftExecZ2Z(plans[axis],frequency,frequency,CUFFT_FORWARD));
     if(second_output){
-      spectral_scale<<<blocks(),256,0,stream>>>(frequency,second,count,n,spacing[axis],2);
+      spectral_scale<<<blocks(),256,0,stream>>>(frequency,second,count,n,spectral_factors[axis]);
       FFT(cufftExecZ2Z(plans[axis],second,second,CUFFT_INVERSE));
       unpack_axis<<<blocks(),256,0,stream>>>(second,second_output,count,nx,ny,nz,axis);
     }
-    spectral_scale<<<blocks(),256,0,stream>>>(frequency,nullptr,count,n,spacing[axis],1);
+    spectral_scale<<<blocks(),256,0,stream>>>(frequency,nullptr,count,n,spectral_factors[axis]);
     FFT(cufftExecZ2Z(plans[axis],frequency,frequency,CUFFT_INVERSE));
     unpack_axis<<<blocks(),256,0,stream>>>(frequency,first,count,nx,ny,nz,axis);
   }

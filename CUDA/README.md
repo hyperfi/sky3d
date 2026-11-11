@@ -109,7 +109,9 @@ workspace**, queried without allocating transform arrays. It includes the static
 plan and block reductions. It accounts for
 all propagated states, including unoccupied orbitals; mass number alone is
 not a sufficient memory estimate. For G grid cells and S states the arrays
-require `G*(288*S + 1016) + 52*S + ceil(G/256)*max(10*S,38)*8` bytes, plus cuFFT workspace. The CUDA
+require `G*(288*S + 1016) + 52*S + 16*(nx+ny+nz) + ceil(G/256)*max(10*S,38)*8` bytes,
+plus cuFFT workspace. The per-axis Fourier factors account for the
+`16*(nx+ny+nz)` term. The CUDA
 context, plans, graph metadata and other applications also consume memory;
 the safety reserve is therefore necessary. Host RAM is needed independently
 for Sky3D's normal arrays and CPU work buffers.

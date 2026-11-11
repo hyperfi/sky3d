@@ -190,8 +190,9 @@ calculation; larger nuclei and other hardware need their own matched checks.
 ## VRAM and cloning
 
 For G cells and S propagated orbitals, arrays require
-`G*(288*S+1016) + 52*S + ceil(G/256)*max(10*S,38)*8` bytes, plus the maximum
-actual cuFFT workspace. This includes the static preconditioner, reductions,
+`G*(288*S+1016) + 52*S + 16*(nx+ny+nz) + ceil(G/256)*max(10*S,38)*8` bytes, plus
+the maximum actual cuFFT workspace. This includes per-axis Fourier factors,
+the static preconditioner, reductions,
 old predictor density and the doubled isolated Coulomb buffers. S includes
 empty orbitals. CUDA context, plan/graph metadata and other applications need
 additional memory. The runtime refuses allocation above 80% of currently

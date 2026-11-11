@@ -17,9 +17,10 @@ def allocation_bytes(grid, states):
     cells = math.prod(grid)
     if cells > (2**31 - 1)//22 or cells * 2 * states > 2**31 - 1:
         raise ValueError('Case exceeds current single-batch indexing limits')
-    # Nine wavefunction banks; density/field helpers; worst-case isolated
-    # Coulomb work/kernel on the doubled box. Periodic runs reserve this too.
-    return cells * (2 * states * 16 * 9 + 1016) + states * 52 + ((cells + 255)//256) * max(10 * states, 38) * 8
+    # Nine wavefunction banks, density/field helpers and the doubled Coulomb box.
+    # Each Fourier mode also stores two FP64 derivative factors.
+    return (cells * (2 * states * 16 * 9 + 1016) + states * 52 + 16 * sum(grid)
+            + ((cells + 255)//256) * max(10 * states, 38) * 8)
 
 
 def assess(required, free, fraction=0.8):
