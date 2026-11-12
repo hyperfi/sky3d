@@ -39,18 +39,153 @@ __global__ void pack_axis(const Z* input,Z* packed,int count,int nx,int ny,int n
   int t=blockIdx.x*blockDim.x+threadIdx.x;
   if(t<count) packed[t]=input[physical_index(t,nx,ny,nz,axis)];
 }
+template<bool Accumulate=false>
 __global__ void unpack_axis(const Z* packed,Z* output,int count,int nx,int ny,int nz,int axis){
   int t=blockIdx.x*blockDim.x+threadIdx.x;
-  if(t<count) output[physical_index(t,nx,ny,nz,axis)]=packed[t];
+  if(t>=count) return;
+  int index=physical_index(t,nx,ny,nz,axis);
+  if constexpr(Accumulate) output[index]=output[index]+packed[t];
+  else output[index]=packed[t];
 }
 struct SpectralFactors { double first,second; };
+
+// Each warp handles four 24-point lines. Adjacent lanes access adjacent
+// lines, so a strided Y or Z transform still gets coalesced memory accesses.
+__device__ inline Z line_shuffle(Z value,int lane){
+  return {__shfl_sync(0xffffffffu,value.x,lane),__shfl_sync(0xffffffffu,value.y,lane)};
+}
+
+template<bool Inverse>
+__device__ inline Z line_rotate(Z value){
+  if constexpr(Inverse) return {-value.y,value.x};
+  return {value.y,-value.x};
+}
+
+// The forward FFT leaves its frequency indices in bit-reversed order.
+// Applying the factors in that order saves a shuffle in each transform.
+template<int Half,bool Inverse>
+__device__ inline Z line_twiddle(Z value,int column){
+  if constexpr(Half==2){
+    if(column&1) return line_rotate<Inverse>(value);
+  }
+  if constexpr(Half==4){
+    constexpr double half_root_two=0.70710678118654752440;
+    int phase=column&3;
+    if(phase==1) return half_root_two*(value+line_rotate<Inverse>(value));
+    if(phase==2) return line_rotate<Inverse>(value);
+    if(phase==3) return half_root_two*(line_rotate<Inverse>(value)-value);
+  }
+  return value;
+}
+
+template<int Half,bool Inverse>
+__device__ inline Z line_fft8_step(Z value,int lane){
+  int column=lane/4;
+  Z other=line_shuffle(value,lane^(4*Half));
+  bool upper=(column&Half)!=0;
+  if constexpr(Inverse){
+    Z left=upper?other:value;
+    Z right=line_twiddle<Half,true>(upper?value:other,column);
+    return upper?left-right:left+right;
+  }
+  return upper?line_twiddle<Half,false>(other-value,column):value+other;
+}
+
+template<bool Inverse>
+__device__ inline Z line_fft8(Z value,int lane){
+  if constexpr(Inverse){
+    value=line_fft8_step<1,true>(value,lane);
+    value=line_fft8_step<2,true>(value,lane);
+    return line_fft8_step<4,true>(value,lane);
+  }
+  value=line_fft8_step<4,false>(value,lane);
+  value=line_fft8_step<2,false>(value,lane);
+  return line_fft8_step<1,false>(value,lane);
+}
+
+template<bool Inverse>
+__device__ inline void line_fft3(Z& first,Z& second,Z& third){
+  constexpr double half_root_three=0.86602540378443864676;
+  Z sum=second+third;
+  Z midpoint=first+(-0.5)*sum;
+  Z offset=half_root_three*line_rotate<Inverse>(second-third);
+  first=first+sum;
+  second=midpoint+offset;
+  third=midpoint-offset;
+}
+
+template<bool Inverse>
+__device__ inline void line_fft5(Z (&values)[5]){
+  constexpr double c1=0.30901699437494742410,c2=-0.80901699437494742410;
+  constexpr double s1=0.95105651629515357212,s2=0.58778525229247312917;
+  Z sum14=values[1]+values[4],sum23=values[2]+values[3];
+  Z diff14=values[1]-values[4],diff23=values[2]-values[3];
+  Z mid1=values[0]+c1*sum14+c2*sum23;
+  Z mid2=values[0]+c2*sum14+c1*sum23;
+  Z offset1=line_rotate<Inverse>(s1*diff14+s2*diff23);
+  Z offset2=line_rotate<Inverse>(s2*diff14-s1*diff23);
+  values[0]=values[0]+sum14+sum23;
+  values[1]=mid1+offset1;
+  values[4]=mid1-offset1;
+  values[2]=mid2+offset2;
+  values[3]=mid2-offset2;
+}
+
+template<int Odd,bool Inverse>
+__device__ inline void odd_fft(Z (&values)[Odd]){
+  if constexpr(Odd==3) line_fft3<Inverse>(values[0],values[1],values[2]);
+  else line_fft5<Inverse>(values);
+}
+
+template<int Odd,bool Accumulate>
+__global__ void derivative_strided(const Z* input,Z* first,Z* second,int lines,int stride,
+                                   const SpectralFactors* factors){
+  constexpr int n=8*Odd;
+  int lane=threadIdx.x%32,column=lane/4;
+  int line=blockIdx.x*(blockDim.x/8)+(threadIdx.x/32)*4+lane%4;
+  // Other grid lengths are even, so all four lines in a participating warp exist.
+  if(line>=lines) return;
+  int base=(line/stride)*(n*stride)+line%stride;
+  // Good-Thomas indexing for the coprime transform lengths 8 and Odd.
+  // The 8-point forward FFT leaves its mode in bit-reversed order.
+  int mode_column=((column&1)<<2)|(column&2)|(column>>2);
+  constexpr int row_mode=16,column_mode=Odd==3?9:25;
+  int points[Odd],modes[Odd];
+  Z values[Odd],first_modes[Odd];
+  #pragma unroll
+  for(int row=0;row<Odd;row++){
+    points[row]=base+((8*row+Odd*column)%n)*stride;
+    modes[row]=(row_mode*row+column_mode*mode_column)%n;
+    values[row]=line_fft8<false>(input[points[row]],lane);
+  }
+  odd_fft<Odd,false>(values);
+  #pragma unroll
+  for(int row=0;row<Odd;row++)
+    first_modes[row]=factors[modes[row]].first*Z{-values[row].y,values[row].x};
+  odd_fft<Odd,true>(first_modes);
+  #pragma unroll
+  for(int row=0;row<Odd;row++){
+    Z value=line_fft8<true>(first_modes[row],lane);
+    if constexpr(Accumulate) first[points[row]]=first[points[row]]+value;
+    else first[points[row]]=value;
+  }
+  if(second){
+    #pragma unroll
+    for(int row=0;row<Odd;row++) values[row]=factors[modes[row]].second*values[row];
+    odd_fft<Odd,true>(values);
+    #pragma unroll
+    for(int row=0;row<Odd;row++)
+      second[points[row]]=line_fft8<true>(values[row],lane);
+  }
+}
 
 __global__ void spectral_scale(Z* first,Z* second,int count,int n,const SpectralFactors* factors){
   int t=blockIdx.x*blockDim.x+threadIdx.x;
   if(t>=count) return;
   int k=t%n;
-  if(second) second[t]=factors[k].second*first[t];
-  else first[t]=factors[k].first*Z{-first[t].y,first[t].x};
+  Z value=first[t];
+  if(second) second[t]=factors[k].second*value;
+  first[t]=factors[k].first*Z{-value.y,value.x};
 }
 __global__ void h_local(const Z* p,Z* h,int count,int g,const int* iq,
                         const double* u,const double* s){
@@ -69,7 +204,8 @@ __global__ void h_axis(const Z* p,const Z* d1,const Z* d2,Z* h,Z* coupled,
   int cell=t%g,spin=(t/g)%2,q=iq[t/(2*g)]-1,other=t+(spin==0?g:-g);
   double sign=spin==0?0.5:-0.5,B=b[cell+g*q],D=dbm[field_index(cell,axis,q,g)],A=a[field_index(cell,axis,q,g)];
   double wx=w[field_index(cell,0,q,g)],wy=w[field_index(cell,1,q,g)],wz=w[field_index(cell,2,q,g)];
-  Z value=h[t]-B*d2[t];
+  // X's coupled derivative is accumulated here, before the Y terms.
+  Z value=(axis==1?h[t]+coupled[t]:h[t])-B*d2[t];
   if(axis==0){
     value=value-Z{D,0.5*A-sign*wy}*d1[t]-(sign*wz)*d1[other];
     coupled[t]=Z{0,-0.5*(A-2*sign*wy)}*p[t]-(sign*wz)*p[other];
@@ -81,9 +217,6 @@ __global__ void h_axis(const Z* p,const Z* d1,const Z* d2,Z* h,Z* coupled,
     coupled[t]=Z{0,-0.5*A}*p[t]+Z{sign*wx,-0.5*wy}*p[other];
   }
   h[t]=value;
-}
-__global__ void add_h(Z* h,const Z* d,int count){
-  int t=blockIdx.x*blockDim.x+threadIdx.x;if(t<count)h[t]=h[t]+d[t];
 }
 __global__ void average_density(double* den,const double* old,int count){
   int t=blockIdx.x*blockDim.x+threadIdx.x;if(t<count)den[t]=0.5*(old[t]+den[t]);
@@ -402,8 +535,17 @@ struct State:PlanSet{
     }
     CUDA(cudaGraphLaunch(found->second,stream));
   }
+  template<bool Accumulate=false>
   void derivative(const Z* input,int axis,Z* first,Z* second_output=nullptr){
     int n=axis==0?nx:(axis==1?ny:nz);
+    if(axis!=0&&(n==24||n==40)){
+      int lines=count/n,stride=axis==1?nx:nx*ny;
+      if(n==24)
+        derivative_strided<3,Accumulate><<<(lines+31)/32,256,0,stream>>>(input,first,second_output,lines,stride,spectral_factors[axis]);
+      else
+        derivative_strided<5,Accumulate><<<(lines+31)/32,256,0,stream>>>(input,first,second_output,lines,stride,spectral_factors[axis]);
+      return;
+    }
     // X lines are contiguous. cuFFT's out-of-place input is read-only,
     // though its execution API takes a non-const pointer.
     const bool contiguous=axis==0;
@@ -411,22 +553,23 @@ struct State:PlanSet{
       pack_axis<<<blocks(),256,0,stream>>>(input,frequency,count,nx,ny,nz,axis);
     Z* fft_input=contiguous?const_cast<Z*>(input):frequency;
     FFT(cufftExecZ2Z(plans[axis],fft_input,frequency,CUFFT_FORWARD));
+    spectral_scale<<<blocks(),256,0,stream>>>(frequency,second_output?second:nullptr,count,n,spectral_factors[axis]);
     if(second_output){
-      spectral_scale<<<blocks(),256,0,stream>>>(frequency,second,count,n,spectral_factors[axis]);
       FFT(cufftExecZ2Z(plans[axis],second,contiguous?second_output:second,CUFFT_INVERSE));
       if(!contiguous) unpack_axis<<<blocks(),256,0,stream>>>(second,second_output,count,nx,ny,nz,axis);
     }
-    spectral_scale<<<blocks(),256,0,stream>>>(frequency,nullptr,count,n,spectral_factors[axis]);
     FFT(cufftExecZ2Z(plans[axis],frequency,contiguous?first:frequency,CUFFT_INVERSE));
-    if(!contiguous) unpack_axis<<<blocks(),256,0,stream>>>(frequency,first,count,nx,ny,nz,axis);
+    if(!contiguous) unpack_axis<Accumulate><<<blocks(),256,0,stream>>>(frequency,first,count,nx,ny,nz,axis);
   }
   void hpsi(const Z* input){
     h_local<<<blocks(),256,0,stream>>>(input,h,count,g,iq,u,s);
     for(int axis=0;axis<3;axis++){
       derivative(input,axis,d1,d2);
       h_axis<<<blocks(),256,0,stream>>>(input,d1,d2,h,coupled,count,g,iq,axis,b,dbm,a,w);
-      derivative(coupled,axis,d1);
-      add_h<<<blocks(),256,0,stream>>>(h,d1,count);
+      // The X inverse can reuse coupled because the forward FFT has
+      // consumed it. Y and Z add to h as they store the inverse result.
+      if(axis==0) derivative(coupled,axis,coupled);
+      else derivative<true>(coupled,axis,h);
     }
   }
   void densities(const Z* input){
