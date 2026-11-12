@@ -404,16 +404,21 @@ struct State:PlanSet{
   }
   void derivative(const Z* input,int axis,Z* first,Z* second_output=nullptr){
     int n=axis==0?nx:(axis==1?ny:nz);
-    pack_axis<<<blocks(),256,0,stream>>>(input,frequency,count,nx,ny,nz,axis);
-    FFT(cufftExecZ2Z(plans[axis],frequency,frequency,CUFFT_FORWARD));
+    // X lines are contiguous. cuFFT's out-of-place input is read-only,
+    // though its execution API takes a non-const pointer.
+    const bool contiguous=axis==0;
+    if(!contiguous)
+      pack_axis<<<blocks(),256,0,stream>>>(input,frequency,count,nx,ny,nz,axis);
+    Z* fft_input=contiguous?const_cast<Z*>(input):frequency;
+    FFT(cufftExecZ2Z(plans[axis],fft_input,frequency,CUFFT_FORWARD));
     if(second_output){
       spectral_scale<<<blocks(),256,0,stream>>>(frequency,second,count,n,spectral_factors[axis]);
-      FFT(cufftExecZ2Z(plans[axis],second,second,CUFFT_INVERSE));
-      unpack_axis<<<blocks(),256,0,stream>>>(second,second_output,count,nx,ny,nz,axis);
+      FFT(cufftExecZ2Z(plans[axis],second,contiguous?second_output:second,CUFFT_INVERSE));
+      if(!contiguous) unpack_axis<<<blocks(),256,0,stream>>>(second,second_output,count,nx,ny,nz,axis);
     }
     spectral_scale<<<blocks(),256,0,stream>>>(frequency,nullptr,count,n,spectral_factors[axis]);
-    FFT(cufftExecZ2Z(plans[axis],frequency,frequency,CUFFT_INVERSE));
-    unpack_axis<<<blocks(),256,0,stream>>>(frequency,first,count,nx,ny,nz,axis);
+    FFT(cufftExecZ2Z(plans[axis],frequency,contiguous?first:frequency,CUFFT_INVERSE));
+    if(!contiguous) unpack_axis<<<blocks(),256,0,stream>>>(frequency,first,count,nx,ny,nz,axis);
   }
   void hpsi(const Z* input){
     h_local<<<blocks(),256,0,stream>>>(input,h,count,g,iq,u,s);
