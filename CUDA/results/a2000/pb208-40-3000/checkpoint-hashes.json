@@ -1,0 +1,7 @@
+{
+  "shared_restart_sha256": "2b5b56b07d327541cf9f2f810d858e83b320ca7dec071031b9e23cc74dfd4ce8",
+  "endpoint_sha256": {
+    "cpu": "e042141c1b54629d87259298e37bda0e954eb0ee583829f3bced9e3ac748faa0",
+    "gpu": "bae5d371aa1579875c65f8a8dfec72ce6be904d9ba13c7e222b86e93694b6659"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "status": "complete",
+  "checkpoint": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/pb208-screen.8bAD7z/grid-40-cpu/dynamic.tdhf",
+  "grid": [
+    40,
+    40,
+    40
+  ],
+  "spacing_fm": 1.0,
+  "dt_fm_c": 0.2,
+  "start_step": 20,
+  "start_time_fm_c": 4.0,
+  "final_step": 15000,
+  "final_time_fm_c": 3000.0,
+  "steps_to_evolve": 14980,
+  "threads": {
+    "gpu": 8,
+    "cpu": 24
+  },
+  "runs": {
+    "gpu": {
+      "directory": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/pb208-40-3000.tuf83w/gpu",
+      "binary": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/line40.wIP1ci/candidate/gpu/sky3d.gpu",
+      "status": "complete",
+      "pid": 318535,
+      "started_unix": 1794498795.7118783,
+      "seconds": 26615.118503203616,
+      "final_step": 15000,
+      "final_time_fm_c": 2999.9999999994625
+    },
+    "cpu": {
+      "directory": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/pb208-40-3000.tuf83w/cpu",
+      "binary": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/line40.wIP1ci/candidate/cpu/sky3d.cpu",
+      "status": "complete",
+      "pid": 410076,
+      "started_unix": 1794525411.515416,
+      "seconds": 31214.856476198882,
+      "final_step": 15000,
+      "final_time_fm_c": 2999.9999999994625
+    }
+  },
+  "source_hash": "bcce3c1789f8fa92dc8653adc5f53fbf94ddd36d",
+  "gpu_speedup": 1.1728242529689132,
+  "comparison": {
+    "wavefunction": {
+      "relative_l2": 1.057700102359678e-12,
+      "max_abs": 2.079215877010086e-13
+    },
+    "observables": {
+      "energies.res": {
+        "within_existing_tolerance": true,
+        "integrated_energy_max_abs_mev": 0.0
+      },
+      "quadrupoles.res": {
+        "within_existing_tolerance": true
+      },
+      "monopoles.res": {
+        "within_existing_tolerance": true
+      }
+    },
+    "endpoint_invariants": {
+      "gpu": {
+        "particle_max_drift": 0.00016938442077218951,
+        "occupied_gram_max_error": 0.002028199582728206,
+        "occupied_gram_max_drift": 0.0020275043141169797,
+        "occupation_max_drift": 0.0
+      },
+      "cpu": {
+        "particle_max_drift": 0.0001693844211558826,
+        "occupied_gram_max_error": 0.002028199582719049,
+        "occupied_gram_max_drift": 0.0020275043141078143,
+        "occupation_max_drift": 0.0
+      }
+    },
+    "cpu_gpu_agreement_passed": true,
+    "endpoint_invariants_passed": false
+  }
+}

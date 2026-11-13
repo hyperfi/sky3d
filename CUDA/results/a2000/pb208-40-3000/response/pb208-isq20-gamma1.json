@@ -1,0 +1,18 @@
+{
+  "channel": "isoscalar quadrupole, L=2, M=0",
+  "damping_mev": 1.0,
+  "damping_convention": "exp(-Gamma t / (2 hbar)); Gamma is Lorentzian FWHM",
+  "interval_fm_c": [
+    0.0,
+    3000.0
+  ],
+  "sample_spacing_fm_c": 2.0,
+  "shared_cpu_prefix_through_fm_c": 4.0,
+  "unboosted_reference_subtraction": false,
+  "plot_energy_range_mev": [
+    0.0,
+    35.0
+  ],
+  "max_abs_gpu_minus_cpu_fm4_per_mev": 9.887116902973503e-09,
+  "relative_l2_gpu_minus_cpu": 1.144036677686728e-12
+}
