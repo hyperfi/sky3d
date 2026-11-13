@@ -1,0 +1,118 @@
+Starting pilot-1-baseline
+pilot-1-baseline: 17.190 s
+Starting pilot-1-coalesced-yz
+pilot-1-coalesced-yz: 14.568 s
+Starting pilot-1-cuda-12.5
+pilot-1-cuda-12.5: 17.563 s
+Starting pilot-2-cuda-12.5
+pilot-2-cuda-12.5: 17.407 s
+Starting pilot-2-coalesced-yz
+pilot-2-coalesced-yz: 14.773 s
+Starting pilot-2-baseline
+pilot-2-baseline: 17.504 s
+Screening medians {'baseline': 17.34700406342745, 'coalesced-yz': 14.670573150739074, 'cuda-12.5': 17.484900433570147}
+Starting grid-32-cpu
+grid-32-cpu: 15.241 s
+Starting grid-32-gpu
+grid-32-gpu: 19.946 s
+Starting grid-40-cpu
+grid-40-cpu: 48.371 s
+Starting grid-40-gpu
+grid-40-gpu: 48.149 s
+AssertionError: energies.res
+{
+  "status": "complete",
+  "steps": 40,
+  "runs": [
+    {
+      "variant": "baseline",
+      "rep": 1,
+      "seconds": 17.189839573577046,
+      "cpu_wavefunction": {
+        "relative_l2": 4.249698548646396e-15,
+        "max_abs": 5.593023969348752e-16
+      }
+    },
+    {
+      "variant": "coalesced-yz",
+      "rep": 1,
+      "seconds": 14.56784668378532,
+      "cpu_wavefunction": {
+        "relative_l2": 4.286456606667745e-15,
+        "max_abs": 5.729106481574545e-16
+      }
+    },
+    {
+      "variant": "cuda-12.5",
+      "rep": 1,
+      "seconds": 17.56319852732122,
+      "cpu_wavefunction": {
+        "relative_l2": 4.2618872162349405e-15,
+        "max_abs": 5.836925621952896e-16
+      }
+    },
+    {
+      "variant": "cuda-12.5",
+      "rep": 2,
+      "seconds": 17.406602339819074,
+      "cpu_wavefunction": {
+        "relative_l2": 4.258502108254544e-15,
+        "max_abs": 5.623501550354406e-16
+      }
+    },
+    {
+      "variant": "coalesced-yz",
+      "rep": 2,
+      "seconds": 14.773299617692828,
+      "cpu_wavefunction": {
+        "relative_l2": 4.269987234480507e-15,
+        "max_abs": 5.622217108246132e-16
+      }
+    },
+    {
+      "variant": "baseline",
+      "rep": 2,
+      "seconds": 17.50416855327785,
+      "cpu_wavefunction": {
+        "relative_l2": 4.237506192475556e-15,
+        "max_abs": 5.690316088760833e-16
+      }
+    }
+  ],
+  "errors": {},
+  "medians": {
+    "baseline": 17.34700406342745,
+    "coalesced-yz": 14.670573150739074,
+    "cuda-12.5": 17.484900433570147
+  },
+  "grid_sweep": [
+    {
+      "grid": [
+        32,
+        32,
+        32
+      ],
+      "steps": 20,
+      "gpu": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/line24-strided.DbQi1r/candidate/gpu/sky3d.gpu",
+      "cpu_seconds": 15.24079012684524,
+      "gpu_seconds": 19.945568537339568,
+      "wavefunction": {
+        "relative_l2": 8.596919370984932e-16,
+        "max_abs": 1.6184142622847341e-16
+      },
+      "speedup": 0.7641191123889681
+    },
+    {
+      "grid": [
+        40,
+        40,
+        40
+      ],
+      "steps": 20,
+      "gpu": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/line24-strided.DbQi1r/candidate/gpu/sky3d.gpu",
+      "cpu_seconds": 48.37094400078058,
+      "gpu_seconds": 48.14881210774183,
+      "error": "AssertionError: energies.res"
+    }
+  ]
+}

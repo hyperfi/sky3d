@@ -1,0 +1,20 @@
+! Prepare the 16O/SLy5 checkpoint used by for005.tdhf.
+&files
+ wffile='initial.tdhf'
+/
+&force
+ name='Sly5', pairing='NONE'
+/
+&main
+ imode=1, nof=0, tfft=T,
+ mprint=10, mplot=6000, mrest=6000,
+ writeselect='rtcsouw', write_isospin=T
+/
+&grid
+ nx=40, ny=40, nz=40,
+ dx=0.6, dy=0.6, dz=0.6, periodic=F
+/
+&static
+ nneut=8, nprot=8, radinx=2.6, radiny=2.6, radinz=2.6,
+ tdiag=T, tlarge=F, x0dmp=0.4, e0dmp=100.0, maxiter=6000, serr=1.0D-6
+/

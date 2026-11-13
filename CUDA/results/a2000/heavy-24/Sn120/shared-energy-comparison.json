@@ -1,0 +1,8 @@
+{
+  "last_shared_time_fm_c": 3522.0,
+  "samples": 1762,
+  "cpu_final_time_fm_c": 6000.0,
+  "gpu_endpoint_status": "cancelled",
+  "integrated_energy_max_abs_mev": 0.0,
+  "sum_energy_max_abs_mev": 0.0
+}

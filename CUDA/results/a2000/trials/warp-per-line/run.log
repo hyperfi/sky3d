@@ -1,0 +1,12 @@
+Waiting for the heavy-nucleus benchmark queue to release the workstation.
+Starting validate-candidate-graphs-off
+Completed validate-candidate-graphs-off: 6.406 s
+Starting validate-candidate
+Completed validate-candidate: 46.202 s
+Starting timing-1-baseline
+Completed timing-1-baseline: 40.704 s
+Starting timing-1-candidate
+Completed timing-1-candidate: 47.854 s
+Starting timing-2-candidate
+Completed timing-2-candidate: 48.243 s
+Starting timing-2-baseline

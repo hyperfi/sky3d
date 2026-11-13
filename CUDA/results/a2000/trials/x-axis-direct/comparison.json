@@ -1,0 +1,171 @@
+{
+  "baseline": "20c6ee6ac714f0d148ead0294c55a80b77e9fed5",
+  "candidate": "20c6ee6 with out-of-place x-axis FFTs",
+  "static_seconds": 51.399404387921095,
+  "static_iteration": 261,
+  "static_density": {
+    "relative_l2": 1.197208404903206e-15,
+    "max_abs": 3.608224830031759e-16
+  },
+  "timings": [
+    {
+      "rep": 1,
+      "name": "baseline",
+      "seconds": 21.926291724666953,
+      "directory": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/x-axis.pOwNNA/timing-1-baseline",
+      "strict_comparison": {
+        "wavefunction": {
+          "relative_l2": 7.647218815421916e-14,
+          "max_abs": 2.1104078586744446e-14
+        },
+        "integrated_energy_max_abs_mev": 0.0
+      }
+    },
+    {
+      "rep": 1,
+      "name": "candidate",
+      "seconds": 21.10052153468132,
+      "directory": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/x-axis.pOwNNA/timing-1-candidate",
+      "strict_comparison": {
+        "wavefunction": {
+          "relative_l2": 7.645030114264603e-14,
+          "max_abs": 2.1153783401387897e-14
+        },
+        "integrated_energy_max_abs_mev": 0.0
+      }
+    },
+    {
+      "rep": 2,
+      "name": "candidate",
+      "seconds": 21.18598125502467,
+      "directory": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/x-axis.pOwNNA/timing-2-candidate",
+      "strict_comparison": {
+        "wavefunction": {
+          "relative_l2": 7.648508194668724e-14,
+          "max_abs": 2.1153783401387897e-14
+        },
+        "integrated_energy_max_abs_mev": 0.0
+      }
+    },
+    {
+      "rep": 2,
+      "name": "baseline",
+      "seconds": 22.331857616081834,
+      "directory": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/x-axis.pOwNNA/timing-2-baseline",
+      "strict_comparison": {
+        "wavefunction": {
+          "relative_l2": 7.651558713285399e-14,
+          "max_abs": 2.1128816858548113e-14
+        },
+        "integrated_energy_max_abs_mev": 0.0
+      }
+    },
+    {
+      "rep": 3,
+      "name": "baseline",
+      "seconds": 22.393667304888368,
+      "directory": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/x-axis.pOwNNA/timing-3-baseline",
+      "strict_comparison": {
+        "wavefunction": {
+          "relative_l2": 7.651650149458279e-14,
+          "max_abs": 2.113622278474275e-14
+        },
+        "integrated_energy_max_abs_mev": 0.0
+      }
+    },
+    {
+      "rep": 3,
+      "name": "candidate",
+      "seconds": 21.460906852036715,
+      "directory": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/x-axis.pOwNNA/timing-3-candidate",
+      "strict_comparison": {
+        "wavefunction": {
+          "relative_l2": 7.646965180690325e-14,
+          "max_abs": 2.1080950094472947e-14
+        },
+        "integrated_energy_max_abs_mev": 0.0
+      }
+    }
+  ],
+  "medians": {
+    "baseline": 22.331857616081834,
+    "candidate": 21.18598125502467
+  },
+  "speedup": 1.0540865370956276,
+  "rectangular": {
+    "1": {
+      "wavefunction": {
+        "relative_l2": 4.437249069648369e-14,
+        "max_abs": 1.4051066550371892e-14
+      },
+      "integrated_energy_max_abs_mev": 0.0,
+      "fields": {
+        "Rho": {
+          "relative_l2": 7.496594122095995e-14,
+          "max_abs": 1.0477729794899915e-14
+        },
+        "Tau": {
+          "relative_l2": 5.804846502815773e-14,
+          "max_abs": 4.704570066849101e-15
+        },
+        "Current": {
+          "relative_l2": 4.224383200201575e-11,
+          "max_abs": 9.79496406468901e-16
+        },
+        "Spindens": {
+          "relative_l2": 1.9974672202563547e-07,
+          "max_abs": 1.9611048895917804e-15
+        },
+        "s-o-Dens": {
+          "relative_l2": 6.940081544248326e-13,
+          "max_abs": 1.5317608292875207e-15
+        },
+        "Upot": {
+          "relative_l2": 4.1911745954540214e-14,
+          "max_abs": 2.2808421817899216e-12
+        },
+        "Wcoul": {
+          "relative_l2": 5.138754235253123e-14,
+          "max_abs": 3.1175062531474396e-13
+        }
+      }
+    },
+    "0": {
+      "wavefunction": {
+        "relative_l2": 4.436976518738374e-14,
+        "max_abs": 1.4051356100284231e-14
+      },
+      "integrated_energy_max_abs_mev": 0.0,
+      "fields": {
+        "Rho": {
+          "relative_l2": 7.497225871243206e-14,
+          "max_abs": 1.049160758270773e-14
+        },
+        "Tau": {
+          "relative_l2": 5.803689861788548e-14,
+          "max_abs": 4.690692279041286e-15
+        },
+        "Current": {
+          "relative_l2": 4.2209238341927024e-11,
+          "max_abs": 9.766774808204386e-16
+        },
+        "Spindens": {
+          "relative_l2": 1.997844829809797e-07,
+          "max_abs": 1.9745489965306007e-15
+        },
+        "s-o-Dens": {
+          "relative_l2": 6.938729882905389e-13,
+          "max_abs": 1.5178830414797062e-15
+        },
+        "Upot": {
+          "relative_l2": 4.1911298635470785e-14,
+          "max_abs": 2.3874235921539366e-12
+        },
+        "Wcoul": {
+          "relative_l2": 5.1394475818383385e-14,
+          "max_abs": 3.1175062531474396e-13
+        }
+      }
+    }
+  }
+}

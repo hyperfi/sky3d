@@ -1,0 +1,26 @@
+Starting validate-graphs-off
+Completed validate-graphs-off: 4.832 s
+Starting grid24-1-prior
+Completed grid24-1-prior: 33.219 s
+Starting grid24-1-candidate
+Completed grid24-1-candidate: 33.621 s
+Starting grid24-2-candidate
+Completed grid24-2-candidate: 33.742 s
+Starting grid24-2-prior
+Completed grid24-2-prior: 33.603 s
+Starting validate-reference-mixed
+Completed validate-reference-mixed: 10.712 s
+Starting validate-graph-mixed
+Completed validate-graph-mixed: 12.905 s
+Traceback (most recent call last):
+  File "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/line40.wIP1ci/run.py", line 145, in <module>
+    trial('candidate','validate-graph-mixed',10,expected,grid=mixed,common_diagnostics=True)
+  File "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/line40.wIP1ci/run.py", line 119, in trial
+    row['comparison']=compare(path,ref)
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/line40.wIP1ci/run.py", line 96, in compare
+    check_observable(filename, x, y, initial_flow_atol=5e-6)
+  File "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/fused-scale.vVFnZ1/source/CUDA/benchmark.py", line 87, in check_observable
+    assert np.allclose(actual[initial, 6:], reference[initial, 6:], rtol=1e-5, atol=initial_flow_atol), name
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: energies.res

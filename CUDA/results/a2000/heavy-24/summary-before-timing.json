@@ -1,0 +1,57 @@
+{
+  "commit": "ad07395299cd6cd5e450f16d7511d29175b761fd",
+  "build": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/x-axis.pOwNNA/candidate",
+  "run_directory": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/heavy-6000.vj4QGl",
+  "grid": [
+    24,
+    24,
+    24
+  ],
+  "spacing_fm": 1.0,
+  "duration_fm_c": 6000.0,
+  "dt_fm_c": 0.2,
+  "steps": 30000,
+  "taylor_order": 4,
+  "gpu_host_threads": 8,
+  "cpu_threads": 24,
+  "cpu_thread_probe_candidates": [
+    8,
+    16,
+    24
+  ],
+  "nuclei": {
+    "Pb208": {
+      "status": "static",
+      "neutrons": 126,
+      "protons": 82,
+      "pairing": "NONE",
+      "oscillator_widths_fm": [
+        2.45,
+        2.45,
+        2.45
+      ]
+    },
+    "Sn120": {
+      "status": "queued",
+      "neutrons": 70,
+      "protons": 50,
+      "pairing": "VDI",
+      "oscillator_widths_fm": [
+        2.25,
+        2.25,
+        2.25
+      ]
+    },
+    "Sm154": {
+      "status": "queued",
+      "neutrons": 92,
+      "protons": 62,
+      "pairing": "VDI",
+      "oscillator_widths_fm": [
+        2.25,
+        2.25,
+        2.85
+      ]
+    }
+  }
+}

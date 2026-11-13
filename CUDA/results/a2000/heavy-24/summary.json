@@ -1,0 +1,314 @@
+{
+  "commit": "ad07395299cd6cd5e450f16d7511d29175b761fd",
+  "build": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/x-axis.pOwNNA/candidate",
+  "run_directory": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/heavy-6000.vj4QGl",
+  "grid": [
+    24,
+    24,
+    24
+  ],
+  "spacing_fm": 1.0,
+  "duration_fm_c": 6000.0,
+  "dt_fm_c": 0.2,
+  "steps": 30000,
+  "taylor_order": 4,
+  "gpu_host_threads": 8,
+  "static_iteration_cap": 1000,
+  "static_serr": 1e-06,
+  "cpu_thread_probe_candidates": [
+    8,
+    16,
+    24
+  ],
+  "nuclei": {
+    "Pb208": {
+      "status": "complete",
+      "neutrons": 126,
+      "protons": 82,
+      "pairing": "NONE",
+      "oscillator_widths_fm": [
+        2.45,
+        2.45,
+        2.45
+      ],
+      "static_preparation": "saved periodic checkpoint",
+      "static_h2_mev": 0.0001385394453698044,
+      "static_converged": false,
+      "static_iteration": 3000,
+      "propagated_states": 208,
+      "checkpoint": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/heavy-6000.vj4QGl/Pb208/benchmark-initial.tdhf",
+      "checkpoint_sha256": "5b0f6c38621fdc5415b5bd4b919e0a0fd76c6fb96e5e9b44cb1b1597a2b22ef2",
+      "cpu_threads": 24,
+      "pilot_cpu_seconds": {
+        "8": 13.861661469563842,
+        "16": 10.039255980402231,
+        "24": 9.538768410682678
+      },
+      "pilot_gpu_seconds": 17.50829498656094,
+      "pilot_speedup": 0.5448142390795031,
+      "pilot": {
+        "wavefunction": {
+          "relative_l2": 4.225959897672122e-15,
+          "max_abs": 5.423445867311119e-16
+        },
+        "observable": {
+          "energies.res": {
+            "relative_l2": 0.0,
+            "max_abs": 0.0,
+            "within_existing_tolerance": true,
+            "integrated_energy_max_abs_mev": 0.0
+          },
+          "quadrupoles.res": {
+            "relative_l2": 4.271296451249232e-12,
+            "max_abs": 8.610001600573014e-12,
+            "within_existing_tolerance": true
+          },
+          "monopoles.res": {
+            "relative_l2": 9.249275996881694e-15,
+            "max_abs": 2.2737367544323206e-11,
+            "within_existing_tolerance": true
+          }
+        },
+        "endpoint_invariants": {
+          "cpu": {
+            "final_particles": [
+              125.99999983740996,
+              81.99999997277511
+            ],
+            "particle_max_drift": 1.6259004098628793e-07,
+            "occupied_gram_max_error": 2.3876724904086705e-05,
+            "occupied_gram_max_drift": 2.387672490410988e-05,
+            "integrated_energy_max_drift_mev": 9.999999974752427e-06,
+            "occupation_max_drift": 0.0
+          },
+          "gpu": {
+            "final_particles": [
+              125.99999983740996,
+              81.99999997277511
+            ],
+            "particle_max_drift": 1.6259004098628793e-07,
+            "occupied_gram_max_error": 2.3876724904118662e-05,
+            "occupied_gram_max_drift": 2.3876724904141843e-05,
+            "integrated_energy_max_drift_mev": 9.999999974752427e-06,
+            "occupation_max_drift": 0.0
+          }
+        },
+        "cpu_gpu_agreement_passed": true,
+        "endpoint_invariants_passed": false
+      },
+      "gpu_seconds": 12205.093170369044,
+      "cpu_seconds": 5944.650489522144,
+      "speedup": 0.48706309788394647,
+      "comparison": {
+        "wavefunction": {
+          "relative_l2": 3.1400454823261617e-12,
+          "max_abs": 5.974933977544291e-13
+        },
+        "observable": {
+          "energies.res": {
+            "relative_l2": 0.0,
+            "max_abs": 0.0,
+            "within_existing_tolerance": true,
+            "integrated_energy_max_abs_mev": 0.0
+          },
+          "quadrupoles.res": {
+            "relative_l2": 4.771539467663148e-12,
+            "max_abs": 3.896194478159032e-11,
+            "within_existing_tolerance": true
+          },
+          "monopoles.res": {
+            "relative_l2": 1.091080891183588e-14,
+            "max_abs": 5.582023732131347e-11,
+            "within_existing_tolerance": true
+          }
+        },
+        "endpoint_invariants": {
+          "cpu": {
+            "final_particles": [
+              125.99988326867077,
+              81.99997607991376
+            ],
+            "particle_max_drift": 0.00011673132922851437,
+            "occupied_gram_max_error": 0.0009664453246387938,
+            "occupied_gram_max_drift": 0.0009664453246387678,
+            "integrated_energy_max_drift_mev": 0.007421299999805342,
+            "occupation_max_drift": 0.0
+          },
+          "gpu": {
+            "final_particles": [
+              125.99988326867091,
+              81.999976079914
+            ],
+            "particle_max_drift": 0.00011673132908640582,
+            "occupied_gram_max_error": 0.0009664453246374889,
+            "occupied_gram_max_drift": 0.0009664453246374627,
+            "integrated_energy_max_drift_mev": 0.007421299999805342,
+            "occupation_max_drift": 0.0
+          }
+        },
+        "cpu_gpu_agreement_passed": true,
+        "endpoint_invariants_passed": false
+      }
+    },
+    "Sn120": {
+      "status": "cancelled",
+      "neutrons": 70,
+      "protons": 50,
+      "pairing": "VDI",
+      "oscillator_widths_fm": [
+        2.25,
+        2.25,
+        2.25
+      ],
+      "static_seconds": 734.6205565612763,
+      "static_preparation": "completed static run",
+      "static_h2_mev": 0.0003853022688780035,
+      "static_converged": false,
+      "static_iteration": 1000,
+      "propagated_states": 170,
+      "checkpoint": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/heavy-6000.vj4QGl/Sn120/static/initial.tdhf",
+      "checkpoint_sha256": "54c556da5e0f6e1e717bb69dffcdb9e49f3f0ee9e6e072cb52cdf3c935fdc9f1",
+      "cpu_threads": 24,
+      "pilot_cpu_seconds": {
+        "8": 11.21958533488214,
+        "16": 8.624816797673702,
+        "24": 8.166788540780544
+      },
+      "pilot_gpu_seconds": 14.560255350545049,
+      "pilot_speedup": 0.560895969484136,
+      "pilot": {
+        "wavefunction": {
+          "relative_l2": 2.9812771881722873e-15,
+          "max_abs": 4.046035655711835e-16
+        },
+        "observable": {
+          "energies.res": {
+            "relative_l2": 0.0,
+            "max_abs": 0.0,
+            "within_existing_tolerance": true,
+            "integrated_energy_max_abs_mev": 0.0
+          },
+          "quadrupoles.res": {
+            "relative_l2": 6.613243842585687e-13,
+            "max_abs": 2.4140689447449404e-12,
+            "within_existing_tolerance": true
+          },
+          "monopoles.res": {
+            "relative_l2": 7.157322090282577e-15,
+            "max_abs": 6.934897101018578e-12,
+            "within_existing_tolerance": true
+          }
+        },
+        "endpoint_invariants": {
+          "cpu": {
+            "final_particles": [
+              69.99999990757775,
+              49.999999979572735
+            ],
+            "particle_max_drift": 9.242225473826693e-08,
+            "occupied_gram_max_error": 3.459206718647532e-05,
+            "occupied_gram_max_drift": 3.4592067186476865e-05,
+            "integrated_energy_max_drift_mev": 5.1999999186591594e-06,
+            "occupation_max_drift": 0.0
+          },
+          "gpu": {
+            "final_particles": [
+              69.99999990757775,
+              49.99999997957273
+            ],
+            "particle_max_drift": 9.242225473826693e-08,
+            "occupied_gram_max_error": 3.4592067188680126e-05,
+            "occupied_gram_max_drift": 3.4592067188681665e-05,
+            "integrated_energy_max_drift_mev": 5.1999999186591594e-06,
+            "occupation_max_drift": 0.0
+          }
+        },
+        "cpu_gpu_agreement_passed": true,
+        "endpoint_invariants_passed": false
+      },
+      "cpu_seconds": 5249.891639035195,
+      "status_before_cancel": "long-gpu",
+      "cancelled_backend": "gpu",
+      "step_at_cancel": 17610
+    },
+    "Sm154": {
+      "status": "cancelled",
+      "neutrons": 92,
+      "protons": 62,
+      "pairing": "VDI",
+      "oscillator_widths_fm": [
+        2.25,
+        2.25,
+        2.85
+      ],
+      "static_seconds": 1137.0380850266665,
+      "static_preparation": "completed static run",
+      "static_h2_mev": 0.0005310136670940374,
+      "static_converged": false,
+      "static_iteration": 1000,
+      "propagated_states": 214,
+      "checkpoint": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/heavy-6000.vj4QGl/Sm154/static/initial.tdhf",
+      "checkpoint_sha256": "3c453888a7620bb2a0789b33bc0bbeebb04027eb8f2f591d8ce7820f7fed6c5a",
+      "cpu_threads": 24,
+      "pilot_cpu_seconds": {
+        "8": 12.974923927336931,
+        "16": 10.46715647354722,
+        "24": 9.801092851907015
+      },
+      "pilot_gpu_seconds": 17.96668977662921,
+      "pilot_speedup": 0.545514670412806,
+      "pilot": {
+        "wavefunction": {
+          "relative_l2": 3.714055978957335e-15,
+          "max_abs": 5.928593550334434e-16
+        },
+        "observable": {
+          "energies.res": {
+            "relative_l2": 0.0,
+            "max_abs": 0.0,
+            "within_existing_tolerance": true,
+            "integrated_energy_max_abs_mev": 0.0
+          },
+          "quadrupoles.res": {
+            "relative_l2": 6.778940394554116e-15,
+            "max_abs": 1.0913936421275139e-11,
+            "within_existing_tolerance": true
+          },
+          "monopoles.res": {
+            "relative_l2": 8.25056799285383e-15,
+            "max_abs": 1.460875864722766e-11,
+            "within_existing_tolerance": true
+          }
+        },
+        "endpoint_invariants": {
+          "cpu": {
+            "final_particles": [
+              91.99999944004948,
+              62.000000032932505
+            ],
+            "particle_max_drift": 5.599504930842159e-07,
+            "occupied_gram_max_error": 2.9563968574122695e-05,
+            "occupied_gram_max_drift": 2.956396857419357e-05,
+            "integrated_energy_max_drift_mev": 1.4000000192027073e-05,
+            "occupation_max_drift": 0.0
+          },
+          "gpu": {
+            "final_particles": [
+              91.99999944004948,
+              62.000000032932505
+            ],
+            "particle_max_drift": 5.599504930842159e-07,
+            "occupied_gram_max_error": 2.9563968576054682e-05,
+            "occupied_gram_max_drift": 2.9563968576125552e-05,
+            "integrated_energy_max_drift_mev": 1.4000000192027073e-05,
+            "occupation_max_drift": 0.0
+          }
+        },
+        "cpu_gpu_agreement_passed": true,
+        "endpoint_invariants_passed": false
+      },
+      "status_before_cancel": "pilot-complete"
+    }
+  },
+  "queue_status": "cancelled after lead-208 completed"
+}

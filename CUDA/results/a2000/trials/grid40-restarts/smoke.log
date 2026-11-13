@@ -1,0 +1,2 @@
+Oxygen-16 10-iteration density comparison: {'relative_l2': 1.8482364069332282e-16, 'max_abs': 5.551115123125783e-17}
+GPU primitive validation (hpsi L2/max, density L2/max):   1.240747E-15  4.126630E-15  4.292091E-16  1.804112E-16

@@ -1,0 +1,82 @@
+Waiting for the heavy-nucleus benchmark queue to release the workstation.
+Starting reference-100
+Completed reference-100: 23.960 s
+Starting validate-baseline
+Completed validate-baseline: 41.664 s
+Starting validate-candidate
+Completed validate-candidate: 41.358 s
+Starting validate-baseline-graphs-off
+Completed validate-baseline-graphs-off: 5.761 s
+Starting validate-candidate-graphs-off
+Completed validate-candidate-graphs-off: 5.618 s
+Starting timing-1-baseline
+Completed timing-1-baseline: 42.273 s
+Starting timing-1-candidate
+Completed timing-1-candidate: 41.633 s
+Starting timing-2-candidate
+Completed timing-2-candidate: 41.745 s
+Starting timing-2-baseline
+Completed timing-2-baseline: 42.429 s
+Starting timing-3-baseline
+Completed timing-3-baseline: 42.466 s
+Starting timing-3-candidate
+Completed timing-3-candidate: 41.749 s
+Starting trace-baseline
+Completed trace-baseline: 16.010 s
+Starting trace-candidate
+Completed trace-candidate: 16.146 s
+{
+  "medians": {
+    "baseline": 42.428725913167,
+    "candidate": 41.745367255061865
+  },
+  "speedup": 1.0163696884957283,
+  "validation": {
+    "baseline_vs_strict": {
+      "wavefunction": {
+        "relative_l2": 1.0910865951049428e-14,
+        "max_abs": 9.908779368058474e-16
+      },
+      "particle_max_abs_difference": 2.7000623958883807e-13,
+      "integrated_energy_max_abs_mev": 0.0
+    },
+    "candidate_vs_strict": {
+      "wavefunction": {
+        "relative_l2": 1.0896341784425322e-14,
+        "max_abs": 9.99929281344829e-16
+      },
+      "particle_max_abs_difference": 2.7000623958883807e-13,
+      "integrated_energy_max_abs_mev": 0.0
+    },
+    "candidate_vs_baseline": {
+      "wavefunction": {
+        "relative_l2": 1.0776857204993913e-15,
+        "max_abs": 8.441528768080323e-17
+      },
+      "particle_max_abs_difference": 0.0,
+      "integrated_energy_max_abs_mev": 0.0
+    },
+    "graphs_off_vs_baseline": {
+      "wavefunction": {
+        "relative_l2": 4.72236375106103e-16,
+        "max_abs": 7.076311083754596e-17
+      },
+      "particle_max_abs_difference": 1.4210854715202004e-14,
+      "integrated_energy_max_abs_mev": 0.0
+    }
+  },
+  "profiles": {
+    "baseline": {
+      "path": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/fused-scale.vVFnZ1/trace-baseline",
+      "scale_launches": 1860,
+      "scale_seconds": 1.330960127,
+      "total_kernel_seconds": 12.214538997
+    },
+    "candidate": {
+      "path": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/fused-scale.vVFnZ1/trace-candidate",
+      "scale_launches": 1296,
+      "scale_seconds": 1.129929939,
+      "total_kernel_seconds": 11.954341189
+    }
+  }
+}

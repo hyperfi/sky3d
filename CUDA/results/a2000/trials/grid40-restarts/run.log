@@ -1,0 +1,14 @@
+Starting grid40-resume-1-cpu
+Completed grid40-resume-1-cpu: 48.920 s
+Starting grid40-resume-1-candidate
+Completed grid40-resume-1-candidate: 38.929 s
+Starting grid40-resume-2-candidate
+Completed grid40-resume-2-candidate: 39.582 s
+Starting grid40-resume-2-cpu
+Completed grid40-resume-2-cpu: 46.669 s
+Starting validate-baseline-mixed
+Completed validate-baseline-mixed: 12.457 s
+Starting validate-graph-mixed
+Completed validate-graph-mixed: 10.675 s
+Starting validate-no-graph-mixed
+Completed validate-no-graph-mixed: 10.674 s

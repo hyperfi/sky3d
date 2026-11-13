@@ -1,0 +1,86 @@
+{
+  "status": "rejected-after-first-pair",
+  "baseline": "ad07395 plus fused spectral scaling",
+  "candidate": "fused 24-point Fourier derivatives",
+  "input_checkpoint": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/heavy-6000.vj4QGl/Pb208/benchmark-initial.tdhf",
+  "steps": 100,
+  "dt_fm_c": 0.2,
+  "gpu_host_threads": 8,
+  "reference_cpu_threads": 24,
+  "timings": [
+    {
+      "rep": 1,
+      "variant": "baseline",
+      "seconds": 40.70404724776745,
+      "strict_comparison": {
+        "wavefunction": {
+          "relative_l2": 1.0859524220511125e-14,
+          "max_abs": 1.0040617841804611e-15
+        },
+        "particle_max_abs_difference": 2.7000623958883807e-13,
+        "integrated_energy_max_abs_mev": 0.0
+      }
+    },
+    {
+      "rep": 1,
+      "variant": "candidate",
+      "seconds": 47.854312032461166,
+      "strict_comparison": {
+        "wavefunction": {
+          "relative_l2": 1.1075271114988229e-14,
+          "max_abs": 1.0050144075255269e-15
+        },
+        "particle_max_abs_difference": 2.8421709430404007e-13,
+        "integrated_energy_max_abs_mev": 0.0
+      }
+    },
+    {
+      "rep": 2,
+      "variant": "candidate",
+      "seconds": 48.24328771233559,
+      "strict_comparison": {
+        "wavefunction": {
+          "relative_l2": 1.1040554434905834e-14,
+          "max_abs": 1.0061396160665481e-15
+        },
+        "particle_max_abs_difference": 2.7000623958883807e-13,
+        "integrated_energy_max_abs_mev": 0.0
+      }
+    }
+  ],
+  "validation": {
+    "baseline_vs_strict": {
+      "wavefunction": {
+        "relative_l2": 1.0896341784425322e-14,
+        "max_abs": 9.99929281344829e-16
+      },
+      "particle_max_abs_difference": 2.7000623958883807e-13,
+      "integrated_energy_max_abs_mev": 0.0
+    },
+    "candidate_vs_strict": {
+      "wavefunction": {
+        "relative_l2": 1.1066042062696042e-14,
+        "max_abs": 9.941040200671662e-16
+      },
+      "particle_max_abs_difference": 2.5579538487363607e-13,
+      "integrated_energy_max_abs_mev": 0.0
+    },
+    "candidate_vs_baseline": {
+      "wavefunction": {
+        "relative_l2": 1.1332584957467396e-15,
+        "max_abs": 1.0500451862475692e-16
+      },
+      "particle_max_abs_difference": 1.4210854715202004e-14,
+      "integrated_energy_max_abs_mev": 0.0
+    },
+    "graphs_off_vs_baseline": {
+      "wavefunction": {
+        "relative_l2": 5.071692237704715e-16,
+        "max_abs": 8.326672684688674e-17
+      },
+      "particle_max_abs_difference": 1.4210854715202004e-14,
+      "integrated_energy_max_abs_mev": 0.0
+    }
+  },
+  "decision": "Validation passed, but the first matched 100-step pair regressed by more than 15%."
+}

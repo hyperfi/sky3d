@@ -1,0 +1,43 @@
+Starting Pb208/static (8 threads)
+
+Resuming with saved lead-208 checkpoint and 1000-iteration cap for Sn120 and Sm154.
+Pb208: using static checkpoint at iteration 3000 (h**2=0.000138539, converged=False)
+Starting Pb208/pilot-cpu8 (8 threads)
+Completed Pb208/pilot-cpu8 in 13.862 s
+Starting Pb208/pilot-cpu16 (16 threads)
+Completed Pb208/pilot-cpu16 in 10.039 s
+Starting Pb208/pilot-cpu24 (24 threads)
+Completed Pb208/pilot-cpu24 in 9.539 s
+Starting Pb208/pilot-gpu (8 threads)
+Completed Pb208/pilot-gpu in 17.508 s
+Starting Sn120/static (8 threads)
+Completed Sn120/static in 734.621 s
+Sn120: using static checkpoint at iteration 1000 (h**2=0.000385302, converged=False)
+Starting Sn120/pilot-cpu8 (8 threads)
+Completed Sn120/pilot-cpu8 in 11.220 s
+Starting Sn120/pilot-cpu16 (16 threads)
+Completed Sn120/pilot-cpu16 in 8.625 s
+Starting Sn120/pilot-cpu24 (24 threads)
+Completed Sn120/pilot-cpu24 in 8.167 s
+Starting Sn120/pilot-gpu (8 threads)
+Completed Sn120/pilot-gpu in 14.560 s
+Starting Sm154/static (8 threads)
+Completed Sm154/static in 1137.038 s
+Sm154: using static checkpoint at iteration 1000 (h**2=0.000531014, converged=False)
+Starting Sm154/pilot-cpu8 (8 threads)
+Completed Sm154/pilot-cpu8 in 12.975 s
+Starting Sm154/pilot-cpu16 (16 threads)
+Completed Sm154/pilot-cpu16 in 10.467 s
+Starting Sm154/pilot-cpu24 (24 threads)
+Completed Sm154/pilot-cpu24 in 9.801 s
+Starting Sm154/pilot-gpu (8 threads)
+Completed Sm154/pilot-gpu in 17.967 s
+Starting Pb208/gpu (8 threads)
+Completed Pb208/gpu in 12205.093 s
+Starting Pb208/cpu (24 threads)
+Completed Pb208/cpu in 5944.650 s
+Pb208: CPU/GPU speedup 0.487x
+Starting Sn120/cpu (24 threads)
+Completed Sn120/cpu in 5249.892 s
+Starting Sn120/gpu (8 threads)
+Cancelled Sn120/gpu at step 17610; remaining jobs cancelled by user.

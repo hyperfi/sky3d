@@ -1,0 +1,75 @@
+{
+  "medians": {
+    "cpu": 38.93191627599299,
+    "reference": 42.126681722700596,
+    "gpu": 22.145173171535134
+  },
+  "speedup": {
+    "cpu": 1.7580316927047166,
+    "reference": 1.9022963332185274
+  },
+  "comparisons": {
+    "cpu": {
+      "wave": {
+        "relative_l2": 5.059501480503116e-15,
+        "max_abs": 1.18774731498903e-15
+      },
+      "particles": [
+        7.999999999904444,
+        7.999999999952262
+      ],
+      "integrated_energy_max_abs_mev": 0.0,
+      "quadrupole_max_abs": 1.619988865275701e-13
+    },
+    "reference": {
+      "wave": {
+        "relative_l2": 7.646539839079784e-14,
+        "max_abs": 2.1152499638775613e-14
+      },
+      "particles": [
+        7.999999999904444,
+        7.999999999952262
+      ],
+      "integrated_energy_max_abs_mev": 0.0,
+      "quadrupole_max_abs": 5.040065587103015e-13
+    }
+  },
+  "timings": [
+    {
+      "variant": "cpu",
+      "rep": 1,
+      "seconds": 39.442079681903124,
+      "path": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/compare.5viIuu/cpu-timing.eD9wYZ/run-1-cpu"
+    },
+    {
+      "variant": "reference",
+      "rep": 1,
+      "seconds": 42.444803891703486,
+      "path": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/compare.5viIuu/cpu-timing.eD9wYZ/run-1-reference"
+    },
+    {
+      "variant": "reference",
+      "rep": 2,
+      "seconds": 42.126681722700596,
+      "path": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/compare.5viIuu/cpu-timing.eD9wYZ/run-2-reference"
+    },
+    {
+      "variant": "cpu",
+      "rep": 2,
+      "seconds": 38.93191627599299,
+      "path": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/compare.5viIuu/cpu-timing.eD9wYZ/run-2-cpu"
+    },
+    {
+      "variant": "cpu",
+      "rep": 3,
+      "seconds": 38.92200441658497,
+      "path": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/compare.5viIuu/cpu-timing.eD9wYZ/run-3-cpu"
+    },
+    {
+      "variant": "reference",
+      "rep": 3,
+      "seconds": 41.9266359154135,
+      "path": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/compare.5viIuu/cpu-timing.eD9wYZ/run-3-reference"
+    }
+  ]
+}

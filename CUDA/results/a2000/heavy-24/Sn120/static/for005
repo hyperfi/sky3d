@@ -1,0 +1,6 @@
+&files wffile='initial.tdhf' /
+&force name='Sly5', pairing='VDI' /
+&main imode=1, nof=0, tfft=T, mprint=20, mplot=0, mrest=500, writeselect='r' /
+&grid nx=24, ny=24, nz=24, dx=1.0, dy=1.0, dz=1.0, periodic=F /
+&static nneut=70, nprot=50, radinx=2.25, radiny=2.25, radinz=2.25,
+ tdiag=T, tlarge=F, tvaryx_0=F, x0dmp=0.35, e0dmp=100.0, maxiter=1000, serr=1.0D-6 /

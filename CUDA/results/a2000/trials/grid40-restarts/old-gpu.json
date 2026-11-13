@@ -1,0 +1,11 @@
+{
+  "seconds": 46.95987700484693,
+  "comparison": {
+    "wavefunction": {
+      "relative_l2": 1.419086962543253e-15,
+      "max_abs": 2.327375768669319e-16
+    },
+    "particle_max_abs_difference": 1.4210854715202004e-14,
+    "integrated_energy_max_abs_mev": 0.0
+  }
+}
