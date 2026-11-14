@@ -1,0 +1,28 @@
+! Short 16O/SLy5 quadrupole example. Generate initial.tdhf with for005.static.
+! This 10 fm/c run demonstrates the TDHF workflow.
+&files
+ wffile='dynamic.tdhf'
+/
+&force
+ name='Sly5', pairing='NONE'
+/
+&main
+ imode=2, nof=1, tfft=T,
+ mprint=10, mplot=0, mrest=40, writeselect='r'
+/
+&grid
+ nx=24, ny=24, nz=24,
+ dx=1.0, dy=1.0, dz=1.0, periodic=F
+/
+&dynamic
+ nt=40, dt=0.2, mxpact=4, texternal=T
+/
+&extern
+ ipulse=0, isoext=0, ampl_ext=5.0D-5,
+ L_val=2, M_val=0, radext=200.0D0, widext=1.0D0,
+ textfield_periodic=F
+/
+&fragments
+ filename='initial.tdhf', fix_boost=T,
+ fcent(1,1)=0.0, 0.0, 0.0
+/

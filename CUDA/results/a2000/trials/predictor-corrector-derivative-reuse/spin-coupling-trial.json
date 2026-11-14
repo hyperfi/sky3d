@@ -1,0 +1,88 @@
+{
+  "status": "complete",
+  "runs": [
+    {
+      "label": "mixed-baseline",
+      "seconds": 4.759624468162656
+    },
+    {
+      "label": "mixed-graphs-off",
+      "seconds": 5.065087025985122
+    },
+    {
+      "label": "screen-baseline",
+      "seconds": 14.051508765667677
+    },
+    {
+      "label": "screen-candidate",
+      "seconds": 14.318495977669954
+    },
+    {
+      "label": "timing-1-baseline",
+      "seconds": 32.70152347162366
+    },
+    {
+      "label": "timing-1-candidate",
+      "seconds": 32.925777327269316
+    },
+    {
+      "label": "timing-2-candidate",
+      "seconds": 32.91663662157953
+    },
+    {
+      "label": "timing-2-baseline",
+      "seconds": 32.95768838189542
+    },
+    {
+      "label": "timing-3-baseline",
+      "seconds": 33.00046702474356
+    },
+    {
+      "label": "timing-3-candidate",
+      "seconds": 32.98960009776056
+    },
+    {
+      "label": "trace-candidate",
+      "seconds": 13.14438004232943
+    }
+  ],
+  "checks": {
+    "mixed_graphs_off": {
+      "relative_l2": 5.326156869525423e-16,
+      "max_abs": 8.441528768080323e-17
+    },
+    "screen": {
+      "relative_l2": 6.416679151682004e-16,
+      "max_abs": 1.0103182026100664e-16
+    },
+    "timing-1-baseline": {
+      "relative_l2": 1.1032059023051284e-14,
+      "max_abs": 9.970782503357954e-16
+    },
+    "timing-1-candidate": {
+      "relative_l2": 1.0987164986991319e-14,
+      "max_abs": 1.0104671182572175e-15
+    },
+    "timing-2-candidate": {
+      "relative_l2": 1.0992337916150235e-14,
+      "max_abs": 1.012436696614409e-15
+    },
+    "timing-2-baseline": {
+      "relative_l2": 1.0992982851871822e-14,
+      "max_abs": 9.817247538999832e-16
+    },
+    "timing-3-baseline": {
+      "relative_l2": 1.099054566730133e-14,
+      "max_abs": 1.0091022296309434e-15
+    },
+    "timing-3-candidate": {
+      "relative_l2": 1.0993542546566854e-14,
+      "max_abs": 1.007860903556854e-15
+    }
+  },
+  "medians": {
+    "baseline": 32.95768838189542,
+    "candidate": 32.925777327269316
+  },
+  "speedup": 1.0009691815111583
+}

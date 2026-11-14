@@ -1,0 +1,88 @@
+{
+  "status": "complete",
+  "runs": [
+    {
+      "label": "mixed-baseline",
+      "seconds": 8.482092877849936
+    },
+    {
+      "label": "mixed-graphs-off",
+      "seconds": 8.671486228704453
+    },
+    {
+      "label": "screen-baseline",
+      "seconds": 13.786701433360577
+    },
+    {
+      "label": "screen-candidate",
+      "seconds": 13.384971253573895
+    },
+    {
+      "label": "timing-1-baseline",
+      "seconds": 32.49576196633279
+    },
+    {
+      "label": "timing-1-candidate",
+      "seconds": 32.04431512579322
+    },
+    {
+      "label": "timing-2-candidate",
+      "seconds": 32.399195516481996
+    },
+    {
+      "label": "timing-2-baseline",
+      "seconds": 33.55190744437277
+    },
+    {
+      "label": "timing-3-baseline",
+      "seconds": 33.67459402233362
+    },
+    {
+      "label": "timing-3-candidate",
+      "seconds": 32.91835746914148
+    },
+    {
+      "label": "trace-candidate",
+      "seconds": 13.135709112510085
+    }
+  ],
+  "checks": {
+    "mixed_graphs_off": {
+      "relative_l2": 4.847419138788246e-16,
+      "max_abs": 8.326672684688674e-17
+    },
+    "screen": {
+      "relative_l2": 7.029511068421554e-16,
+      "max_abs": 7.757919228897728e-17
+    },
+    "timing-1-baseline": {
+      "relative_l2": 1.098612430818541e-14,
+      "max_abs": 9.977058142341071e-16
+    },
+    "timing-1-candidate": {
+      "relative_l2": 1.0994357622286929e-14,
+      "max_abs": 9.915579844919225e-16
+    },
+    "timing-2-candidate": {
+      "relative_l2": 1.0995314113662937e-14,
+      "max_abs": 1.0172759248934732e-15
+    },
+    "timing-2-baseline": {
+      "relative_l2": 1.0991158349381742e-14,
+      "max_abs": 9.897353777469803e-16
+    },
+    "timing-3-baseline": {
+      "relative_l2": 1.099735194148813e-14,
+      "max_abs": 9.897353777469803e-16
+    },
+    "timing-3-candidate": {
+      "relative_l2": 1.0981517154322209e-14,
+      "max_abs": 1.0147405800334563e-15
+    }
+  },
+  "medians": {
+    "baseline": 33.55190744437277,
+    "candidate": 32.399195516481996
+  },
+  "speedup": 1.0355784120412612
+}

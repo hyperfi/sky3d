@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "runs": [
+    {
+      "label": "grid40-baseline",
+      "seconds": 39.92406187392771
+    },
+    {
+      "label": "grid40-candidate",
+      "seconds": 39.7863388042897
+    }
+  ],
+  "checks": {
+    "wavefunction": {
+      "relative_l2": 3.380166629494259e-16,
+      "max_abs": 7.473417450352271e-17
+    }
+  }
+}
