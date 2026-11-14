@@ -196,27 +196,82 @@ __global__ void h_local(const Z* p,Z* h,int count,int g,const int* iq,
   double sx=s[field_index(cell,0,q,g)],sy=s[field_index(cell,1,q,g)],sz=s[field_index(cell,2,q,g)];
   h[t]=u[base]*p[t]+Z{sx,spin==0?-sy:sy}*p[other]+(spin==0?sz:-sz)*p[t];
 }
+__device__ inline void apply_h_axis(
+    int cell,int spin,int q,int g,int axis,Z value_here,Z value_other,
+    Z gradient,Z other_gradient,Z curvature,Z& h,Z& coupled,
+    const double* b,const double* dbm,const double* a,const double* w){
+  double sign=spin==0?0.5:-0.5,B=b[cell+g*q],D=dbm[field_index(cell,axis,q,g)],A=a[field_index(cell,axis,q,g)];
+  double wx=w[field_index(cell,0,q,g)],wy=w[field_index(cell,1,q,g)],wz=w[field_index(cell,2,q,g)];
+  // X's coupled derivative is accumulated here, before the Y terms.
+  Z value=(axis==1?h+coupled:h)-B*curvature;
+  if(axis==0){
+    value=value-Z{D,0.5*A-sign*wy}*gradient-(sign*wz)*other_gradient;
+    coupled=Z{0,-0.5*(A-2*sign*wy)}*value_here-(sign*wz)*value_other;
+  }else if(axis==1){
+    value=value-Z{D,0.5*A+sign*wx}*gradient+Z{0,0.5*wz}*other_gradient;
+    coupled=Z{0,-0.5*(A+2*sign*wx)}*value_here+Z{0,0.5*wz}*value_other;
+  }else{
+    value=value-Z{D,0.5*A}*gradient+Z{sign*wx,-0.5*wy}*other_gradient;
+    coupled=Z{0,-0.5*A}*value_here+Z{sign*wx,-0.5*wy}*value_other;
+  }
+  h=value;
+}
+
 __global__ void h_axis(const Z* p,const Z* d1,const Z* d2,Z* h,Z* coupled,
                        int count,int g,const int* iq,int axis,const double* b,
                        const double* dbm,const double* a,const double* w){
   int t=blockIdx.x*blockDim.x+threadIdx.x;
   if(t>=count)return;
-  int cell=t%g,spin=(t/g)%2,q=iq[t/(2*g)]-1,other=t+(spin==0?g:-g);
-  double sign=spin==0?0.5:-0.5,B=b[cell+g*q],D=dbm[field_index(cell,axis,q,g)],A=a[field_index(cell,axis,q,g)];
-  double wx=w[field_index(cell,0,q,g)],wy=w[field_index(cell,1,q,g)],wz=w[field_index(cell,2,q,g)];
-  // X's coupled derivative is accumulated here, before the Y terms.
-  Z value=(axis==1?h[t]+coupled[t]:h[t])-B*d2[t];
-  if(axis==0){
-    value=value-Z{D,0.5*A-sign*wy}*d1[t]-(sign*wz)*d1[other];
-    coupled[t]=Z{0,-0.5*(A-2*sign*wy)}*p[t]-(sign*wz)*p[other];
-  }else if(axis==1){
-    value=value-Z{D,0.5*A+sign*wx}*d1[t]+Z{0,0.5*wz}*d1[other];
-    coupled[t]=Z{0,-0.5*(A+2*sign*wx)}*p[t]+Z{0,0.5*wz}*p[other];
-  }else{
-    value=value-Z{D,0.5*A}*d1[t]+Z{sign*wx,-0.5*wy}*d1[other];
-    coupled[t]=Z{0,-0.5*A}*p[t]+Z{sign*wx,-0.5*wy}*p[other];
+  int cell=t%g,spin=(t/g)%2,q=iq[t/(2*g)]-1;
+  int other=t+(spin==0?g:-g);
+  apply_h_axis(cell,spin,q,g,axis,p[t],p[other],d1[t],d1[other],d2[t],
+               h[t],coupled[t],b,dbm,a,w);
+}
+// Adjacent lanes own the two spin components at the same grid point.
+template<int Axis>
+__global__ void h_axis24(const Z* input,Z* h,Z* coupled,int count,int g,int stride,
+                         const int* iq,const SpectralFactors* factors,const double* b,
+                         const double* dbm,const double* a,const double* w){
+  int lane=threadIdx.x%32,column=lane/4,spin=lane%2;
+  int line=blockIdx.x*(blockDim.x/16)+(threadIdx.x/32)*2+(lane%4)/2;
+  if(line>=count/48) return;
+  int lines_per_orbital=g/24;
+  int orbital=line/lines_per_orbital,spatial_line=line%lines_per_orbital;
+  int cell_base=(spatial_line/stride)*(24*stride)+spatial_line%stride;
+  int base=(2*orbital+spin)*g;
+  int q=iq[orbital]-1;
+  int mode_column=((column&1)<<2)|(column&2)|(column>>2);
+  int cells[3],modes[3];
+  Z points[3],values[3],gradients[3];
+  #pragma unroll
+  for(int row=0;row<3;row++){
+    cells[row]=cell_base+((8*row+3*column)%24)*stride;
+    modes[row]=(16*row+9*mode_column)%24;
+    points[row]=input[base+cells[row]];
+    values[row]=line_fft8<false>(points[row],lane);
   }
-  h[t]=value;
+  odd_fft<3,false>(values);
+  #pragma unroll
+  for(int row=0;row<3;row++){
+    gradients[row]=factors[modes[row]].first*Z{-values[row].y,values[row].x};
+    values[row]=factors[modes[row]].second*values[row];
+  }
+  odd_fft<3,true>(gradients);
+  odd_fft<3,true>(values);
+  #pragma unroll
+  for(int row=0;row<3;row++){
+    int t=base+cells[row];
+    Z gradient=line_fft8<true>(gradients[row],lane);
+    Z curvature=line_fft8<true>(values[row],lane);
+    Z other_gradient=line_shuffle(gradient,lane^1);
+    Z other_point=line_shuffle(points[row],lane^1);
+    Z accumulated=h[t],mixed;
+    if constexpr(Axis==1) mixed=coupled[t];
+    apply_h_axis(cells[row],spin,q,g,Axis,points[row],other_point,gradient,other_gradient,
+                 curvature,accumulated,mixed,b,dbm,a,w);
+    h[t]=accumulated;
+    coupled[t]=mixed;
+  }
 }
 __global__ void average_density(double* den,const double* old,int count){
   int t=blockIdx.x*blockDim.x+threadIdx.x;if(t<count)den[t]=0.5*(old[t]+den[t]);
@@ -344,6 +399,7 @@ struct PlanSet{
     for(auto p:coulplans)if(p)cufftDestroy(p);if(fullplan)cufftDestroy(fullplan);}
   size_t reduction_bytes()const{return size_t((g+255)/256)*std::max(10*states,38)*8;}
   size_t spectral_factor_bytes()const{return (size_t(nx)+ny+nz)*sizeof(SpectralFactors);}
+  bool cache_stage_derivatives()const{return nx==24&&ny==24&&nz==24;}
   uint64_t required()const{return uint64_t(count)*sizeof(Z)*9+uint64_t(g)*1016+uint64_t(states)*52+
     spectral_factor_bytes()+reduction_bytes()+workspace;}
 };
@@ -356,7 +412,7 @@ struct StreamOwner{
   StreamOwner(){CUDA(cudaStreamCreateWithFlags(&value,cudaStreamNonBlocking));}
   ~StreamOwner(){cudaStreamDestroy(value);}
 };
-using GraphKey=std::tuple<int,double,uintptr_t>;
+using GraphKey=std::tuple<int,double,uintptr_t,int>;
 struct GraphCache{
   std::map<GraphKey,cudaGraphExec_t> entries;
   ~GraphCache(){for(auto& pair:entries)cudaGraphExecDestroy(pair.second);}
@@ -367,6 +423,9 @@ struct State:PlanSet{
   cudaStream_t stream=execution.value;
   GraphCache graphs;
   Z *psi,*result,*term,*h,*d1,*d2,*coupled,*frequency,*second;
+  Z* stage_first[3]={},*stage_second[3]={};
+  enum class DerivativeCache { none, populate, reuse };
+  bool stage_cache_enabled=false,stage_derivatives_valid=false;
   const SpectralFactors* spectral_factors[3];
   double *u,*b,*s,*dbm,*a,*w,*den,*weights,spacing[3];int* iq;
   double *divj,*laprho,*gradrho,*curls,*curlc,*wc;
@@ -386,13 +445,23 @@ struct State:PlanSet{
     double fraction=0.80;const char* setting=std::getenv("SKY3D_GPU_MEMORY_FRACTION");
     if(setting){char* end=nullptr;fraction=std::strtod(setting,&end);
       if(!end||*end||!std::isfinite(fraction)||fraction<0.05||fraction>0.95)throw std::runtime_error("SKY3D_GPU_MEMORY_FRACTION must be between 0.05 and 0.95");}
-    std::fprintf(stdout,"GPU memory: required %.1f MiB incl cuFFT workspace; free %.1f MiB, total %.1f MiB\n",required()/1048576.,free/1048576.,total/1048576.);
-    if(required()>free*fraction)throw std::runtime_error("Insufficient free VRAM with safety headroom. Use SKY3D_BACKEND=cpu. Oversubscription/extra transfers can be slower than parallel CPU; this backend does not page GPU arrays to system RAM.");
-    if(required()>free*0.60)std::fprintf(stderr,"WARNING: limited VRAM headroom; other GPU use may cause allocation failure. Compare a parallel CPU run before assuming a speedup.\n");
+    const uint64_t base_required=required();
+    const uint64_t cache_bytes=uint64_t(count)*sizeof(Z)*6;
+    stage_cache_enabled=cache_stage_derivatives()&&base_required+cache_bytes<=free*fraction;
+    const uint64_t total_required=base_required+(stage_cache_enabled?cache_bytes:0);
+    std::fprintf(stdout,"GPU memory: required %.1f MiB incl cuFFT workspace; free %.1f MiB, total %.1f MiB\n",total_required/1048576.,free/1048576.,total/1048576.);
+    if(base_required>free*fraction)throw std::runtime_error("Insufficient free VRAM with safety headroom. Use SKY3D_BACKEND=cpu. Oversubscription/extra transfers can be slower than parallel CPU; this backend does not page GPU arrays to system RAM.");
+    if(total_required>free*0.60)std::fprintf(stderr,"WARNING: limited VRAM headroom; other GPU use may cause allocation failure. Compare a parallel CPU run before assuming a speedup.\n");
     for(int k=0;k<3;k++){if(!std::isfinite(steps[k])||steps[k]<=0)throw std::runtime_error("Grid spacing must be positive");spacing[k]=steps[k];}
     for(int k=0;k<states;k++)if(isospin[k]<1||isospin[k]>2||!std::isfinite(occ[k]))throw std::runtime_error("Invalid occupation or isospin");
     size_t bytes=size_t(count)*sizeof(Z);
     for(Z** p:{&psi,&result,&term,&h,&d1,&d2,&coupled,&frequency,&second})alloc(*p,bytes);
+    if(stage_cache_enabled){
+      for(int axis=0;axis<3;axis++){
+        alloc(stage_first[axis],bytes);
+        alloc(stage_second[axis],bytes);
+      }
+    }
     SpectralFactors* factors;
     alloc(factors,spectral_factor_bytes());
     std::vector<SpectralFactors> host_factors;
@@ -454,6 +523,7 @@ struct State:PlanSet{
   void static_step(const Z* input,const double* energies,double e0,double h2m,double x0,
                    double* spe,double* fluct1,double* fluct2,double* norms,double* delta,Z* output){
     size_t bytes=size_t(count)*sizeof(Z);
+    stage_derivatives_valid=false;
     CUDA(cudaMemcpyAsync(psi,input,bytes,cudaMemcpyHostToDevice,stream));
     CUDA(cudaMemcpyAsync(old_energy,energies,size_t(states)*8,cudaMemcpyHostToDevice,stream));
     hpsi(psi);
@@ -520,7 +590,7 @@ struct State:PlanSet{
     const char* setting=std::getenv("SKY3D_GPU_GRAPHS");
     if(setting&&std::string(setting)=="0"){enqueue_skyrme(f);return;}
     if(setting&&std::string(setting)!="1")throw std::runtime_error("SKY3D_GPU_GRAPHS must be 0 or 1");
-    GraphKey key{-1,0,0};auto found=graphs.entries.find(key);
+    GraphKey key{-1,0,0,0};auto found=graphs.entries.find(key);
     bool same=field_graph_valid&&std::equal(f.c,f.c+15,graph_couplings.c);
     if(found!=graphs.entries.end()&&!same){cudaGraphExecDestroy(found->second);graphs.entries.erase(found);found=graphs.entries.end();}
     if(found==graphs.entries.end()){
@@ -561,11 +631,23 @@ struct State:PlanSet{
     FFT(cufftExecZ2Z(plans[axis],frequency,contiguous?first:frequency,CUFFT_INVERSE));
     if(!contiguous) unpack_axis<Accumulate><<<blocks(),256,0,stream>>>(frequency,first,count,nx,ny,nz,axis);
   }
-  void hpsi(const Z* input){
+  void hpsi(const Z* input,DerivativeCache cache=DerivativeCache::none){
+    const bool fuse_axes=nx==24&&ny==24&&nz==24;
     h_local<<<blocks(),256,0,stream>>>(input,h,count,g,iq,u,s);
     for(int axis=0;axis<3;axis++){
-      derivative(input,axis,d1,d2);
-      h_axis<<<blocks(),256,0,stream>>>(input,d1,d2,h,coupled,count,g,iq,axis,b,dbm,a,w);
+      if(cache!=DerivativeCache::none){
+        Z* first=stage_first[axis];
+        Z* second=stage_second[axis];
+        if(cache==DerivativeCache::populate) derivative(input,axis,first,second);
+        h_axis<<<blocks(),256,0,stream>>>(input,first,second,h,coupled,count,g,iq,axis,b,dbm,a,w);
+      }else if(fuse_axes&&axis==1)
+        h_axis24<1><<<(count/48+15)/16,256,0,stream>>>(input,h,coupled,count,g,nx,iq,spectral_factors[1],b,dbm,a,w);
+      else if(fuse_axes&&axis==2)
+        h_axis24<2><<<(count/48+15)/16,256,0,stream>>>(input,h,coupled,count,g,nx*ny,iq,spectral_factors[2],b,dbm,a,w);
+      else{
+        derivative(input,axis,d1,d2);
+        h_axis<<<blocks(),256,0,stream>>>(input,d1,d2,h,coupled,count,g,iq,axis,b,dbm,a,w);
+      }
       // The X inverse can reuse coupled because the forward FFT has
       // consumed it. Y and Z add to h as they store the inverse result.
       if(axis==0) derivative(coupled,axis,coupled);
@@ -576,27 +658,38 @@ struct State:PlanSet{
     derivative(input,0,d1);derivative(input,1,d2);derivative(input,2,coupled);
     density_kernel<<<(2*g-1)/256+1,256,0,stream>>>(input,d1,d2,coupled,den,g,states,iq,weights);
   }
-  void enqueue_stage(int order,double dt_hbc){
+  void enqueue_stage(int order,double dt_hbc,DerivativeCache cache){
     size_t bytes=size_t(count)*sizeof(Z);
     CUDA(cudaMemcpyAsync(result,psi,bytes,cudaMemcpyDeviceToDevice,stream));
-    CUDA(cudaMemcpyAsync(term,psi,bytes,cudaMemcpyDeviceToDevice,stream));
-    for(int m=1;m<=order;m++){
+    // Both stages start from psi, which stays read-only until commit.
+    if(order>0){
+      hpsi(psi,cache);
+      recurrence<<<blocks(),256,0,stream>>>(term,result,h,count,-dt_hbc);
+    }
+    for(int m=2;m<=order;m++){
       hpsi(term);recurrence<<<blocks(),256,0,stream>>>(term,result,h,count,-dt_hbc/m);
     }
     densities(result);CUDA(cudaGetLastError());
   }
-  void stage(int order,double dt_hbc){
+  void stage(int order,double dt_hbc,bool commit){
+    // Fields change between stages, but the starting orbital derivatives do not.
+    DerivativeCache cache=DerivativeCache::none;
+    if(order>0&&stage_cache_enabled){
+      if(!commit) cache=DerivativeCache::populate;
+      else if(stage_derivatives_valid) cache=DerivativeCache::reuse;
+    }
+    stage_derivatives_valid=cache==DerivativeCache::populate;
     const char* setting=std::getenv("SKY3D_GPU_GRAPHS");
-    if(setting&&std::string(setting)=="0"){enqueue_stage(order,dt_hbc);return;}
+    if(setting&&std::string(setting)=="0"){enqueue_stage(order,dt_hbc,cache);return;}
     if(setting&&std::string(setting)!="1")throw std::runtime_error("SKY3D_GPU_GRAPHS must be 0 or 1");
     // Each alternating wavefunction buffer and Taylor order has its own graph.
-    // Field values change in place; timestep changes select a different key.
-    GraphKey key{order,dt_hbc,reinterpret_cast<uintptr_t>(psi)};
+    // Field values change in place; timestep and cache use select different keys.
+    GraphKey key{order,dt_hbc,reinterpret_cast<uintptr_t>(psi),static_cast<int>(cache)};
     auto found=graphs.entries.find(key);
     if(found==graphs.entries.end()){
       cudaGraph_t graph=nullptr;cudaGraphExec_t executable=nullptr;
       CUDA(cudaStreamBeginCapture(stream,cudaStreamCaptureModeThreadLocal));
-      try{enqueue_stage(order,dt_hbc);}catch(...){cudaStreamEndCapture(stream,&graph);if(graph)cudaGraphDestroy(graph);throw;}
+      try{enqueue_stage(order,dt_hbc,cache);}catch(...){cudaStreamEndCapture(stream,&graph);if(graph)cudaGraphDestroy(graph);throw;}
       CUDA(cudaStreamEndCapture(stream,&graph));
       try{CUDA(cudaGraphInstantiateWithFlags(&executable,graph,0));}catch(...){cudaGraphDestroy(graph);throw;}
       cudaGraphDestroy(graph);
@@ -663,7 +756,7 @@ extern "C" void sky_gpu_stage(void* pointer,int order,double dt_hbc,int commit,d
   try{State& p=*(State*)pointer;
     if(order<0||!std::isfinite(dt_hbc))throw std::runtime_error("Invalid propagator order or timestep");
     if(resident&&!commit)CUDA(cudaMemcpyAsync(p.old_den,p.den,size_t(p.g)*22*8,cudaMemcpyDeviceToDevice,p.stream));
-    p.stage(order,dt_hbc);
+    p.stage(order,dt_hbc,commit!=0);
     if(resident&&!commit)average_density<<<(22*p.g-1)/256+1,256,0,p.stream>>>(p.den,p.old_den,22*p.g);
     CUDA(cudaStreamSynchronize(p.stream));
     if(!resident)CUDA(cudaMemcpy(density,p.den,size_t(p.g)*22*8,cudaMemcpyDeviceToHost));
@@ -675,7 +768,7 @@ extern "C" void sky_gpu_pull(void* pointer,Z* output){
   try{State& p=*(State*)pointer;CUDA(cudaStreamSynchronize(p.stream));CUDA(cudaMemcpy(output,p.psi,size_t(p.count)*sizeof(Z),cudaMemcpyDeviceToHost));}catch(const std::exception& e){failure(e);}
 }
 extern "C" void sky_gpu_push(void* pointer,const Z* input){
-  try{State& p=*(State*)pointer;CUDA(cudaMemcpy(p.psi,input,size_t(p.count)*sizeof(Z),cudaMemcpyHostToDevice));p.density_current=false;}catch(const std::exception& e){failure(e);}
+  try{State& p=*(State*)pointer;CUDA(cudaMemcpy(p.psi,input,size_t(p.count)*sizeof(Z),cudaMemcpyHostToDevice));p.density_current=false;p.stage_derivatives_valid=false;}catch(const std::exception& e){failure(e);}
 }
 extern "C" void sky_gpu_fields_pull(void* pointer,double* u,double* b,double* s,double* dbm,double* a,double* w){
   try{State& p=*(State*)pointer;CUDA(cudaStreamSynchronize(p.stream));
@@ -691,6 +784,7 @@ extern "C" void sky_gpu_density_pull(void* pointer,double* density){
 }
 extern "C" void sky_gpu_density_refresh(void* pointer,const Z* psi,const double* weights,double* density){
   try{State& p=*(State*)pointer;
+    p.stage_derivatives_valid=false;
     CUDA(cudaMemcpyAsync(p.psi,psi,size_t(p.count)*sizeof(Z),cudaMemcpyHostToDevice,p.stream));
     CUDA(cudaMemcpyAsync(p.weights,weights,size_t(p.states)*8,cudaMemcpyHostToDevice,p.stream));
     p.densities(p.psi);CUDA(cudaStreamSynchronize(p.stream));
@@ -720,7 +814,8 @@ extern "C" void sky_gpu_static_step(void* pointer,const Z* input,const double* e
   catch(const std::exception& e){failure(e);}
 }
 extern "C" void sky_gpu_hamiltonian(void* pointer,const Z* input,Z* output){
-  try{State& p=*(State*)pointer;CUDA(cudaMemcpyAsync(p.psi,input,size_t(p.count)*sizeof(Z),cudaMemcpyHostToDevice,p.stream));
+  try{State& p=*(State*)pointer;p.stage_derivatives_valid=false;
+    CUDA(cudaMemcpyAsync(p.psi,input,size_t(p.count)*sizeof(Z),cudaMemcpyHostToDevice,p.stream));
     p.hpsi(p.psi);CUDA(cudaStreamSynchronize(p.stream));CUDA(cudaMemcpy(output,p.h,size_t(p.count)*sizeof(Z),cudaMemcpyDeviceToHost));}
   catch(const std::exception& e){failure(e);}
 }
