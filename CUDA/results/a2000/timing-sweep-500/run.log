@@ -1,0 +1,90 @@
+Starting O16-24 static cpu
+Completed O16-24 static cpu: 4.919s
+Starting O16-24 static gpu-off
+Completed O16-24 static gpu-off: 4.184s
+Starting O16-24 dynamic cpu
+Completed O16-24 dynamic cpu: 138.068s
+Starting O16-24 dynamic gpu-off
+Completed O16-24 dynamic gpu-off: 66.061s
+Starting O16-24 dynamic gpu-on
+Completed O16-24 dynamic gpu-on: 65.239s
+Starting O16-32 static cpu
+Completed O16-32 static cpu: 11.759s
+Starting O16-32 static gpu-off
+Completed O16-32 static gpu-off: 8.729s
+Starting O16-32 dynamic gpu-on
+Completed O16-32 dynamic gpu-on: 171.732s
+Starting O16-32 dynamic gpu-off
+Completed O16-32 dynamic gpu-off: 182.474s
+Starting O16-32 dynamic cpu
+Completed O16-32 dynamic cpu: 392.627s
+Starting O16-40 static cpu
+Completed O16-40 static cpu: 27.302s
+Starting O16-40 static gpu-off
+Completed O16-40 static gpu-off: 18.385s
+Starting O16-40 dynamic cpu
+Completed O16-40 dynamic cpu: 904.387s
+Starting O16-40 dynamic gpu-off
+Completed O16-40 dynamic gpu-off: 365.650s
+Starting O16-40 dynamic gpu-on
+Completed O16-40 dynamic gpu-on: 352.224s
+Starting Sn120-24 static cpu
+Completed Sn120-24 static cpu: 47.459s
+Starting Sn120-24 static gpu-off
+Completed Sn120-24 static gpu-off: 63.177s
+Starting Sn120-24 dynamic gpu-on
+Completed Sn120-24 dynamic gpu-on: 596.709s
+Starting Sn120-24 dynamic gpu-off
+Completed Sn120-24 dynamic gpu-off: 628.236s
+Starting Sn120-24 dynamic cpu
+Completed Sn120-24 dynamic cpu: 367.357s
+Starting Sn120-32 static cpu
+Completed Sn120-32 static cpu: 158.429s
+Starting Sn120-32 static gpu-off
+Completed Sn120-32 static gpu-off: 201.447s
+Starting Sn120-32 dynamic cpu
+Completed Sn120-32 dynamic cpu: 1141.518s
+Starting Sn120-32 dynamic gpu-off
+Completed Sn120-32 dynamic gpu-off: 1706.918s
+Starting Sn120-32 dynamic gpu-on
+Completed Sn120-32 dynamic gpu-on: 1610.062s
+Starting Sn120-40 static cpu
+Completed Sn120-40 static cpu: 401.390s
+Starting Sn120-40 static gpu-off
+Completed Sn120-40 static gpu-off: 448.582s
+Starting Sn120-40 dynamic gpu-on
+Completed Sn120-40 dynamic gpu-on: 3328.227s
+Starting Sn120-40 dynamic gpu-off
+Completed Sn120-40 dynamic gpu-off: 3532.584s
+Starting Sn120-40 dynamic cpu
+Completed Sn120-40 dynamic cpu: 4018.432s
+Starting Pb208-24 static cpu
+Completed Pb208-24 static cpu: 69.887s
+Starting Pb208-24 static gpu-off
+Completed Pb208-24 static gpu-off: 92.835s
+Starting Pb208-24 dynamic cpu
+Completed Pb208-24 dynamic cpu: 426.186s
+Starting Pb208-24 dynamic gpu-off
+Completed Pb208-24 dynamic gpu-off: 756.471s
+Starting Pb208-24 dynamic gpu-on
+Completed Pb208-24 dynamic gpu-on: 726.957s
+Starting Pb208-32 static cpu
+Completed Pb208-32 static cpu: 230.028s
+Starting Pb208-32 static gpu-off
+Completed Pb208-32 static gpu-off: 292.530s
+Starting Pb208-32 dynamic gpu-on
+Completed Pb208-32 dynamic gpu-on: 1957.306s
+Starting Pb208-32 dynamic gpu-off
+Completed Pb208-32 dynamic gpu-off: 2084.847s
+Starting Pb208-32 dynamic cpu
+Completed Pb208-32 dynamic cpu: 1347.473s
+Starting Pb208-40 static cpu
+Completed Pb208-40 static cpu: 576.898s
+Starting Pb208-40 static gpu-off
+Completed Pb208-40 static gpu-off: 645.811s
+Starting Pb208-40 dynamic cpu
+Completed Pb208-40 dynamic cpu: 4740.534s
+Starting Pb208-40 dynamic gpu-off
+Completed Pb208-40 dynamic gpu-off: 4381.633s
+Starting Pb208-40 dynamic gpu-on
+Completed Pb208-40 dynamic gpu-on: 4112.236s
