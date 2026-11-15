@@ -3,6 +3,7 @@
   "grid_lengths": [
     24,
     32,
+    36,
     40
   ],
   "spacing_fm": 1.0,
@@ -928,8 +929,308 @@
         }
       },
       "shared_static_sha256": "80c7fb05a12e56788a6bccf7f507da40d34395d06c0dbee2dc83ea758a542487"
+    },
+    "O16-36": {
+      "static": {
+        "cpu": {
+          "status": "complete",
+          "path": "runs/O16-36/static/cpu",
+          "seconds": 18.314855666831136,
+          "loop_seconds": 16.063521103933454,
+          "iterations": 100,
+          "converged": false,
+          "fluctuation_mev": 0.00284343026,
+          "states": 16,
+          "final_particles": [
+            8.0,
+            8.000000000000005
+          ]
+        },
+        "gpu-off": {
+          "status": "complete",
+          "path": "runs/O16-36/static/gpu-off",
+          "seconds": 13.389581801369786,
+          "required_mib": 273.2,
+          "free_mib": 11707.8,
+          "loop_seconds": 11.218961471691728,
+          "iterations": 100,
+          "converged": false,
+          "fluctuation_mev": 0.00284343026,
+          "states": 16,
+          "final_particles": [
+            8.000000000000002,
+            8.0
+          ]
+        }
+      },
+      "dynamic": {
+        "cpu": {
+          "status": "complete",
+          "path": "runs/O16-36/dynamic/cpu",
+          "seconds": 589.9020091220737,
+          "final_time": 499.99999999998016,
+          "states": 16,
+          "final_particles": [
+            7.999999837958881,
+            7.99999991576991
+          ]
+        },
+        "gpu-off": {
+          "status": "complete",
+          "path": "runs/O16-36/dynamic/gpu-off",
+          "seconds": 275.65011613070965,
+          "required_mib": 273.2,
+          "free_mib": 11707.8,
+          "final_time": 499.99999999998016,
+          "states": 16,
+          "final_particles": [
+            7.999999837958892,
+            7.999999915769925
+          ],
+          "cpu_comparison": {
+            "wavefunction": {
+              "relative_l2": 1.2360341968352217e-13,
+              "max_abs": 3.181463904402559e-14
+            },
+            "wavefunction_passed": true,
+            "particle_max_abs_difference": 1.4210854715202004e-14,
+            "observables": {
+              "energies.res": true,
+              "quadrupoles.res": true,
+              "monopoles.res": true
+            }
+          }
+        },
+        "gpu-on": {
+          "status": "complete",
+          "path": "runs/O16-36/dynamic/gpu-on",
+          "seconds": 266.28246372006834,
+          "required_mib": 409.9,
+          "free_mib": 11707.8,
+          "final_time": 499.99999999998016,
+          "states": 16,
+          "final_particles": [
+            7.999999837958895,
+            7.999999915769922
+          ],
+          "cpu_comparison": {
+            "wavefunction": {
+              "relative_l2": 1.2264887604061194e-13,
+              "max_abs": 2.9928249790940726e-14
+            },
+            "wavefunction_passed": true,
+            "particle_max_abs_difference": 1.4210854715202004e-14,
+            "observables": {
+              "energies.res": true,
+              "quadrupoles.res": true,
+              "monopoles.res": true
+            }
+          }
+        }
+      },
+      "shared_static_sha256": "d04176d3a06471128447fc951595e173e58987b8644f76120159af764cf3e2bd"
+    },
+    "Sn120-36": {
+      "static": {
+        "cpu": {
+          "status": "complete",
+          "path": "runs/Sn120-36/static/cpu",
+          "seconds": 261.33669724687934,
+          "loop_seconds": 256.89086479879916,
+          "iterations": 100,
+          "converged": false,
+          "fluctuation_mev": 0.0565503322,
+          "states": 170,
+          "final_particles": [
+            70.00000000000016,
+            50.000000000000085
+          ]
+        },
+        "gpu-off": {
+          "status": "complete",
+          "path": "runs/Sn120-36/static/gpu-off",
+          "seconds": 316.00579010136425,
+          "required_mib": 2468.1,
+          "free_mib": 11707.8,
+          "loop_seconds": 311.71645637229085,
+          "iterations": 100,
+          "converged": false,
+          "fluctuation_mev": 0.0565503322,
+          "states": 170,
+          "final_particles": [
+            70.00000000000014,
+            50.000000000000085
+          ]
+        }
+      },
+      "dynamic": {
+        "gpu-on": {
+          "status": "complete",
+          "path": "runs/Sn120-36/dynamic/gpu-on",
+          "seconds": 2494.954888664186,
+          "required_mib": 3920.4,
+          "free_mib": 11707.8,
+          "final_time": 499.99999999998016,
+          "states": 170,
+          "final_particles": [
+            70.00004973434025,
+            50.00001561564172
+          ],
+          "cpu_comparison": {
+            "wavefunction": {
+              "relative_l2": 6.38708889900194e-14,
+              "max_abs": 1.1123730840335638e-14
+            },
+            "wavefunction_passed": true,
+            "particle_max_abs_difference": 1.4210854715202004e-14,
+            "observables": {
+              "energies.res": true,
+              "quadrupoles.res": true,
+              "monopoles.res": true
+            }
+          }
+        },
+        "gpu-off": {
+          "status": "complete",
+          "path": "runs/Sn120-36/dynamic/gpu-off",
+          "seconds": 2661.1431959625334,
+          "required_mib": 2468.1,
+          "free_mib": 11707.8,
+          "final_time": 499.99999999998016,
+          "states": 170,
+          "final_particles": [
+            70.00004973434025,
+            50.000015615641715
+          ],
+          "cpu_comparison": {
+            "wavefunction": {
+              "relative_l2": 6.368861740046334e-14,
+              "max_abs": 1.1213201156339867e-14
+            },
+            "wavefunction_passed": true,
+            "particle_max_abs_difference": 7.105427357601002e-15,
+            "observables": {
+              "energies.res": true,
+              "quadrupoles.res": true,
+              "monopoles.res": true
+            }
+          }
+        },
+        "cpu": {
+          "status": "complete",
+          "path": "runs/Sn120-36/dynamic/cpu",
+          "seconds": 2251.501840820536,
+          "final_time": 499.99999999998016,
+          "states": 170,
+          "final_particles": [
+            70.00004973434025,
+            50.00001561564171
+          ]
+        }
+      },
+      "shared_static_sha256": "b0baa828ff4bfde3b6ee08ee968469847c60206511702054049b226fa5025804"
+    },
+    "Pb208-36": {
+      "static": {
+        "cpu": {
+          "status": "complete",
+          "path": "runs/Pb208-36/static/cpu",
+          "seconds": 379.65519626252353,
+          "loop_seconds": 374.35636803135276,
+          "iterations": 100,
+          "converged": false,
+          "fluctuation_mev": 0.283901138,
+          "states": 208,
+          "final_particles": [
+            126.00000000000018,
+            82.00000000000014
+          ]
+        },
+        "gpu-off": {
+          "status": "complete",
+          "path": "runs/Pb208-36/static/gpu-off",
+          "seconds": 456.1864812094718,
+          "required_mib": 3009.7,
+          "free_mib": 11709.6,
+          "loop_seconds": 451.24004715308547,
+          "iterations": 100,
+          "converged": false,
+          "fluctuation_mev": 0.283901138,
+          "states": 208,
+          "final_particles": [
+            126.00000000000017,
+            82.00000000000013
+          ]
+        }
+      },
+      "dynamic": {
+        "cpu": {
+          "status": "complete",
+          "path": "runs/Pb208-36/dynamic/cpu",
+          "seconds": 2674.3771492484957,
+          "final_time": 499.99999999998016,
+          "states": 208,
+          "final_particles": [
+            125.99886905352847,
+            82.00013796283986
+          ]
+        },
+        "gpu-off": {
+          "status": "complete",
+          "path": "runs/Pb208-36/dynamic/gpu-off",
+          "seconds": 3262.7108736727387,
+          "required_mib": 3009.7,
+          "free_mib": 11709.6,
+          "final_time": 499.99999999998016,
+          "states": 208,
+          "final_particles": [
+            125.9988690535285,
+            82.00013796283987
+          ],
+          "cpu_comparison": {
+            "wavefunction": {
+              "relative_l2": 9.793101250501073e-14,
+              "max_abs": 1.7436591291053848e-14
+            },
+            "wavefunction_passed": true,
+            "particle_max_abs_difference": 2.842170943040401e-14,
+            "observables": {
+              "energies.res": true,
+              "quadrupoles.res": true,
+              "monopoles.res": true
+            }
+          }
+        },
+        "gpu-on": {
+          "status": "complete",
+          "path": "runs/Pb208-36/dynamic/gpu-on",
+          "seconds": 3069.125285897404,
+          "required_mib": 4786.6,
+          "free_mib": 11709.6,
+          "final_time": 499.99999999998016,
+          "states": 208,
+          "final_particles": [
+            125.99886905352851,
+            82.00013796283987
+          ],
+          "cpu_comparison": {
+            "wavefunction": {
+              "relative_l2": 9.798710127197215e-14,
+              "max_abs": 1.743909702141947e-14
+            },
+            "wavefunction_passed": true,
+            "particle_max_abs_difference": 4.263256414560601e-14,
+            "observables": {
+              "energies.res": true,
+              "quadrupoles.res": true,
+              "monopoles.res": true
+            }
+          }
+        }
+      },
+      "shared_static_sha256": "01b13717e2f780ae649e7ba92629b1e16eb4fe6e8fc49b39edaea8421a664396"
     }
   },
-  "completed_runs": 45,
-  "expected_runs": 45
+  "completed_runs": 60,
+  "expected_runs": 60
 }
