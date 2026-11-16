@@ -229,21 +229,21 @@ __device__ inline void line_fft9(Z (&values)[9]){
   values[6]=v2; values[7]=v5;
 }
 
-template<bool Accumulate,bool Curvature>
+template<bool Accumulate,bool Curvature,bool Contiguous=false>
 __global__ void derivative36(const Z* input,Z* first,Z* second,int lines,int stride,
                              const SpectralFactors* factors){
   int lane=threadIdx.x%32,column=lane/8;
   int line=blockIdx.x*(blockDim.x/4)+(threadIdx.x/32)*8+lane%8;
   if(line>=lines) return;
   // The other grid lengths are even, so each participating warp owns eight full lines.
-  int base=(line/stride)*(36*stride)+line%stride;
+  int base=Contiguous?line*36:(line/stride)*(36*stride)+line%stride;
   int frequency_column=((column&1)<<1)|(column>>1);
   // Good-Thomas indexing for the coprime lengths 4 and 9.
   int points[9],modes[9];
   Z values[9],gradients[9];
   #pragma unroll
   for(int r=0;r<9;r++){
-    points[r]=base+((4*r+9*column)%36)*stride;
+    points[r]=base+((4*r+9*column)%36)*(Contiguous?1:stride);
     modes[r]=(28*r+9*frequency_column)%36;
     values[r]=line_fft4<false>(input[points[r]],lane);
   }
@@ -731,6 +731,25 @@ struct State:PlanSet{
       else
         derivative_strided<3,false,false,true,false><<<(lines+31)/32,256,0,stream>>>
           (input,first,nullptr,lines,1,spectral_factors[axis],nullptr,nullptr,0);
+      return;
+    }
+    if(!Accumulate&&axis==0&&(n==36||n==40)){
+      int lines=count/n;
+      if(n==36){
+        if(second_output)
+          derivative36<false,true,true><<<(lines+31)/32,128,0,stream>>>
+            (input,first,second_output,lines,1,spectral_factors[axis]);
+        else
+          derivative36<false,false,true><<<(lines+31)/32,128,0,stream>>>
+            (input,first,nullptr,lines,1,spectral_factors[axis]);
+      }else{
+        if(second_output)
+          derivative_strided<5,false,false,true,true><<<(lines+31)/32,256,0,stream>>>
+            (input,first,second_output,lines,1,spectral_factors[axis],nullptr,nullptr,0);
+        else
+          derivative_strided<5,false,false,true,false><<<(lines+31)/32,256,0,stream>>>
+            (input,first,nullptr,lines,1,spectral_factors[axis],nullptr,nullptr,0);
+      }
       return;
     }
     if(axis!=0&&n==36){

@@ -1,0 +1,10 @@
+{
+  "selected": [
+    36,
+    40
+  ],
+  "build": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/fft-x36-40.G3a29E/final-run/candidate",
+  "baseline": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/hamiltonian-final.D7396l/candidate",
+  "source_hash": "a774861c9786de3062316de80bd7c77bbd404d20",
+  "source": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/fft-x36-40.G3a29E/final-run/source"
+}

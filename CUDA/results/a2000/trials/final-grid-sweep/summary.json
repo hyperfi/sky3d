@@ -1,0 +1,374 @@
+{
+  "status": "complete",
+  "nucleus": "Pb208",
+  "dt_fm_c": 0.2,
+  "steps": 25,
+  "spacing_fm": 1.0,
+  "cpu_threads": 24,
+  "gpu_host_threads": 8,
+  "selection": {
+    "selected": [
+      36,
+      40
+    ],
+    "build": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/fft-x36-40.G3a29E/final-run/candidate",
+    "baseline": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/hamiltonian-final.D7396l/candidate",
+    "source_hash": "a774861c9786de3062316de80bd7c77bbd404d20",
+    "source": "/home/users/abhishek/sky3dgpu/sky3d/CUDA/build/fft-x36-40.G3a29E/final-run/source"
+  },
+  "runs": [
+    {
+      "label": "24-1-cpu",
+      "backend": "cpu",
+      "grid": [
+        24,
+        24,
+        24
+      ],
+      "steps": 25,
+      "wall_seconds": 5.826964007690549
+    },
+    {
+      "label": "24-1-gpu",
+      "backend": "gpu",
+      "grid": [
+        24,
+        24,
+        24
+      ],
+      "steps": 25,
+      "wall_seconds": 8.341225428506732,
+      "required_mib": 1418.3,
+      "reference": "24-1-cpu",
+      "wavefunction": {
+        "relative_l2": 2.749171806770239e-15,
+        "max_abs": 2.797157557069881e-16
+      }
+    },
+    {
+      "label": "24-2-gpu",
+      "backend": "gpu",
+      "grid": [
+        24,
+        24,
+        24
+      ],
+      "steps": 25,
+      "wall_seconds": 8.357772275805473,
+      "required_mib": 1418.3,
+      "reference": "24-2-cpu",
+      "wavefunction": {
+        "relative_l2": 2.7743561166447477e-15,
+        "max_abs": 2.840924175897301e-16
+      }
+    },
+    {
+      "label": "24-2-cpu",
+      "backend": "cpu",
+      "grid": [
+        24,
+        24,
+        24
+      ],
+      "steps": 25,
+      "wall_seconds": 5.496855653822422
+    },
+    {
+      "label": "32-1-cpu",
+      "backend": "cpu",
+      "grid": [
+        32,
+        32,
+        32
+      ],
+      "steps": 25,
+      "wall_seconds": 16.098150616511703
+    },
+    {
+      "label": "32-1-gpu",
+      "backend": "gpu",
+      "grid": [
+        32,
+        32,
+        32
+      ],
+      "steps": 25,
+      "wall_seconds": 22.783860486000776,
+      "required_mib": 2113.8,
+      "reference": "32-1-cpu",
+      "wavefunction": {
+        "relative_l2": 1.0326794520056636e-15,
+        "max_abs": 1.8619006149354548e-16
+      }
+    },
+    {
+      "label": "32-2-gpu",
+      "backend": "gpu",
+      "grid": [
+        32,
+        32,
+        32
+      ],
+      "steps": 25,
+      "wall_seconds": 23.007739363238215,
+      "required_mib": 2113.8,
+      "reference": "32-2-cpu",
+      "wavefunction": {
+        "relative_l2": 1.0363040794776352e-15,
+        "max_abs": 1.5917919408906608e-16
+      }
+    },
+    {
+      "label": "32-2-cpu",
+      "backend": "cpu",
+      "grid": [
+        32,
+        32,
+        32
+      ],
+      "steps": 25,
+      "wall_seconds": 16.054525876417756
+    },
+    {
+      "label": "36-1-cpu",
+      "backend": "cpu",
+      "grid": [
+        36,
+        36,
+        36
+      ],
+      "steps": 25,
+      "wall_seconds": 30.398092651739717
+    },
+    {
+      "label": "36-1-gpu",
+      "backend": "gpu",
+      "grid": [
+        36,
+        36,
+        36
+      ],
+      "steps": 25,
+      "wall_seconds": 23.982383960857987,
+      "required_mib": 3009.7,
+      "reference": "36-1-cpu",
+      "wavefunction": {
+        "relative_l2": 1.2745091772481765e-15,
+        "max_abs": 1.3725160206182533e-16
+      }
+    },
+    {
+      "label": "36-2-gpu",
+      "backend": "gpu",
+      "grid": [
+        36,
+        36,
+        36
+      ],
+      "steps": 25,
+      "wall_seconds": 24.162867918610573,
+      "required_mib": 3009.7,
+      "reference": "36-2-cpu",
+      "wavefunction": {
+        "relative_l2": 1.2669005126761655e-15,
+        "max_abs": 1.302314116208532e-16
+      }
+    },
+    {
+      "label": "36-2-cpu",
+      "backend": "cpu",
+      "grid": [
+        36,
+        36,
+        36
+      ],
+      "steps": 25,
+      "wall_seconds": 30.620272243395448
+    },
+    {
+      "label": "40-1-cpu",
+      "backend": "cpu",
+      "grid": [
+        40,
+        40,
+        40
+      ],
+      "steps": 25,
+      "wall_seconds": 54.19844525679946
+    },
+    {
+      "label": "40-1-gpu",
+      "backend": "gpu",
+      "grid": [
+        40,
+        40,
+        40
+      ],
+      "steps": 25,
+      "wall_seconds": 41.8965322766453,
+      "required_mib": 4128.5,
+      "reference": "40-1-cpu",
+      "wavefunction": {
+        "relative_l2": 1.852973745334858e-15,
+        "max_abs": 2.615696107623295e-16
+      }
+    },
+    {
+      "label": "40-2-gpu",
+      "backend": "gpu",
+      "grid": [
+        40,
+        40,
+        40
+      ],
+      "steps": 25,
+      "wall_seconds": 42.467373970896006,
+      "required_mib": 4128.5,
+      "reference": "40-2-cpu",
+      "wavefunction": {
+        "relative_l2": 1.840130590571697e-15,
+        "max_abs": 2.387624894196368e-16
+      }
+    },
+    {
+      "label": "40-2-cpu",
+      "backend": "cpu",
+      "grid": [
+        40,
+        40,
+        40
+      ],
+      "steps": 25,
+      "wall_seconds": 53.19594754651189
+    },
+    {
+      "label": "36-mixed-base",
+      "backend": "gpu",
+      "grid": [
+        36,
+        32,
+        24
+      ],
+      "steps": 6,
+      "wall_seconds": 7.130058191716671,
+      "required_mib": 1783.5
+    },
+    {
+      "label": "36-mixed-graphs-off",
+      "backend": "gpu",
+      "grid": [
+        36,
+        32,
+        24
+      ],
+      "steps": 6,
+      "wall_seconds": 7.1838011760264635,
+      "required_mib": 1783.5
+    },
+    {
+      "label": "36-mixed-restart-base",
+      "backend": "gpu",
+      "grid": [
+        36,
+        32,
+        24
+      ],
+      "steps": 16,
+      "wall_seconds": 10.034981530159712,
+      "required_mib": 1783.5
+    },
+    {
+      "label": "36-mixed-restart-graphs-off",
+      "backend": "gpu",
+      "grid": [
+        36,
+        32,
+        24
+      ],
+      "steps": 16,
+      "wall_seconds": 9.833464089781046,
+      "required_mib": 1783.5,
+      "reference": "36-mixed-restart-base",
+      "wavefunction": {
+        "relative_l2": 4.80824759049682e-16,
+        "max_abs": 4.654751537338637e-17
+      }
+    },
+    {
+      "label": "40-mixed-base",
+      "backend": "gpu",
+      "grid": [
+        40,
+        32,
+        24
+      ],
+      "steps": 6,
+      "wall_seconds": 8.113505650311708,
+      "required_mib": 1981.7
+    },
+    {
+      "label": "40-mixed-restart-base",
+      "backend": "gpu",
+      "grid": [
+        40,
+        32,
+        24
+      ],
+      "steps": 16,
+      "wall_seconds": 11.722460379824042,
+      "required_mib": 1981.7
+    },
+    {
+      "label": "40-mixed-restart-graphs-off",
+      "backend": "gpu",
+      "grid": [
+        40,
+        32,
+        24
+      ],
+      "steps": 16,
+      "wall_seconds": 11.650892991572618,
+      "required_mib": 1981.7,
+      "reference": "40-mixed-restart-base",
+      "wavefunction": {
+        "relative_l2": 4.21326841041749e-16,
+        "max_abs": 5.003707553108402e-17
+      }
+    }
+  ],
+  "grids": {
+    "24": {
+      "grid_length": 24,
+      "cpu_seconds": 5.6619098307564855,
+      "gpu_seconds": 8.349498852156103,
+      "cpu_over_gpu": 0.6781137324540625,
+      "checkpoint_sha256": "d79b55c94df55b11d93f445db6d378b0b336093cf939fc2c8339b179ba4f2132"
+    },
+    "32": {
+      "grid_length": 32,
+      "cpu_seconds": 16.07633824646473,
+      "gpu_seconds": 22.895799924619496,
+      "cpu_over_gpu": 0.702152285545529,
+      "checkpoint_sha256": "d336e01ec51747579fa7158224d01d2d742b850abfaf9eefb3808864f8ee5bd2"
+    },
+    "36": {
+      "grid_length": 36,
+      "cpu_seconds": 30.509182447567582,
+      "gpu_seconds": 24.07262593973428,
+      "cpu_over_gpu": 1.2673807387672287,
+      "checkpoint_sha256": "01b13717e2f780ae649e7ba92629b1e16eb4fe6e8fc49b39edaea8421a664396"
+    },
+    "40": {
+      "grid_length": 40,
+      "cpu_seconds": 53.697196401655674,
+      "gpu_seconds": 42.181953123770654,
+      "cpu_over_gpu": 1.2729898078473725,
+      "checkpoint_sha256": "80c7fb05a12e56788a6bccf7f507da40d34395d06c0dbee2dc83ea758a542487"
+    }
+  },
+  "rectangular_initialization_check": {
+    "status": "failed",
+    "diagnostic": "AssertionError: energies.res",
+    "initial_collective_flow_difference_mev": 6.038000000000007e-05
+  }
+}

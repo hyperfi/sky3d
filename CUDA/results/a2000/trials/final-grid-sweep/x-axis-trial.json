@@ -1,0 +1,100 @@
+{
+  "status": "complete",
+  "runs": [
+    {
+      "grid": 36,
+      "mode": 0,
+      "label": "timing-36-1-0",
+      "seconds": 24.88714829273522,
+      "steps": 25
+    },
+    {
+      "grid": 36,
+      "mode": 1,
+      "label": "timing-36-1-1",
+      "seconds": 23.9211238399148,
+      "steps": 25,
+      "wavefunction": {
+        "relative_l2": 6.721645050490159e-16,
+        "max_abs": 6.834017936133213e-17
+      }
+    },
+    {
+      "grid": 36,
+      "mode": 1,
+      "label": "timing-36-2-1",
+      "seconds": 24.14538231305778,
+      "steps": 25,
+      "wavefunction": {
+        "relative_l2": 5.500500493657659e-16,
+        "max_abs": 7.473417450352271e-17
+      }
+    },
+    {
+      "grid": 36,
+      "mode": 0,
+      "label": "timing-36-2-0",
+      "seconds": 25.585916571319103,
+      "steps": 25,
+      "wavefunction": {
+        "relative_l2": 4.056397289995848e-16,
+        "max_abs": 6.546139416680338e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 0,
+      "label": "timing-40-1-0",
+      "seconds": 44.23176089115441,
+      "steps": 25
+    },
+    {
+      "grid": 40,
+      "mode": 1,
+      "label": "timing-40-1-1",
+      "seconds": 43.64605242945254,
+      "steps": 25,
+      "wavefunction": {
+        "relative_l2": 4.227661645823021e-16,
+        "max_abs": 7.152448122690996e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 1,
+      "label": "timing-40-2-1",
+      "seconds": 43.85237260721624,
+      "steps": 25,
+      "wavefunction": {
+        "relative_l2": 5.075022709940134e-16,
+        "max_abs": 5.594315114139762e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 0,
+      "label": "timing-40-2-0",
+      "seconds": 45.01514170318842,
+      "steps": 25,
+      "wavefunction": {
+        "relative_l2": 5.881589568551447e-16,
+        "max_abs": 7.433832808391446e-17
+      }
+    }
+  ],
+  "profiles": {},
+  "median_36": {
+    "0": 25.23653243202716,
+    "1": 24.03325307648629
+  },
+  "won_both_36": true,
+  "median_40": {
+    "0": 44.623451297171414,
+    "1": 43.74921251833439
+  },
+  "won_both_40": true,
+  "selected": [
+    36,
+    40
+  ]
+}
