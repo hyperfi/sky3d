@@ -1,0 +1,154 @@
+{
+  "status": "complete",
+  "runs": [
+    {
+      "label": "cpu-36",
+      "variant": "cpu",
+      "grid": [
+        36,
+        36,
+        36
+      ],
+      "steps": 50,
+      "seconds": 64.85829945653677
+    },
+    {
+      "label": "timing-1-baseline",
+      "variant": "baseline",
+      "grid": [
+        36,
+        36,
+        36
+      ],
+      "steps": 50,
+      "seconds": 68.78430399671197
+    },
+    {
+      "label": "timing-1-candidate",
+      "variant": "candidate",
+      "grid": [
+        36,
+        36,
+        36
+      ],
+      "steps": 50,
+      "seconds": 54.08883954025805
+    },
+    {
+      "label": "timing-2-candidate",
+      "variant": "candidate",
+      "grid": [
+        36,
+        36,
+        36
+      ],
+      "steps": 50,
+      "seconds": 54.39578316360712
+    },
+    {
+      "label": "timing-2-baseline",
+      "variant": "baseline",
+      "grid": [
+        36,
+        36,
+        36
+      ],
+      "steps": 50,
+      "seconds": 70.1811064761132
+    },
+    {
+      "label": "mixed-base",
+      "variant": "baseline",
+      "grid": [
+        40,
+        36,
+        40
+      ],
+      "steps": 10,
+      "seconds": 22.394215121865273
+    },
+    {
+      "label": "mixed-new-graphs-off",
+      "variant": "candidate",
+      "grid": [
+        40,
+        36,
+        40
+      ],
+      "steps": 10,
+      "seconds": 20.517203552648425
+    },
+    {
+      "label": "40-base",
+      "variant": "baseline",
+      "grid": [
+        40,
+        40,
+        40
+      ],
+      "steps": 10,
+      "seconds": 23.61630075983703
+    },
+    {
+      "label": "40-new",
+      "variant": "candidate",
+      "grid": [
+        40,
+        40,
+        40
+      ],
+      "steps": 10,
+      "seconds": 23.534283701330423
+    }
+  ],
+  "checks": {
+    "timing-1-baseline": {
+      "reference": "cpu-36",
+      "wavefunction": {
+        "relative_l2": 2.294820858059664e-15,
+        "max_abs": 2.1149402582199232e-16
+      }
+    },
+    "timing-1-candidate": {
+      "reference": "cpu-36",
+      "wavefunction": {
+        "relative_l2": 2.2424242632136607e-15,
+        "max_abs": 2.2911487958381183e-16
+      }
+    },
+    "timing-2-candidate": {
+      "reference": "cpu-36",
+      "wavefunction": {
+        "relative_l2": 2.2429869736986106e-15,
+        "max_abs": 2.1025428193296755e-16
+      }
+    },
+    "timing-2-baseline": {
+      "reference": "cpu-36",
+      "wavefunction": {
+        "relative_l2": 2.2944853759448222e-15,
+        "max_abs": 2.23449622528746e-16
+      }
+    },
+    "mixed-new-graphs-off": {
+      "reference": "mixed-base",
+      "wavefunction": {
+        "relative_l2": 2.567199267315997e-16,
+        "max_abs": 6.071532165918825e-17
+      }
+    },
+    "40-new": {
+      "reference": "40-base",
+      "wavefunction": {
+        "relative_l2": 4.990373118720635e-16,
+        "max_abs": 6.369057972232327e-17
+      }
+    }
+  },
+  "median_seconds": {
+    "baseline": 69.48270523641258,
+    "candidate": 54.242311351932585
+  },
+  "gpu_speedup": 1.2809687401703431,
+  "cpu_over_new_gpu": 1.1957141545043315
+}

@@ -1,0 +1,13 @@
+{
+  "status": "complete",
+  "grid": [
+    40,
+    40,
+    40
+  ],
+  "iterations": 10,
+  "density": {
+    "relative_l2": 1.4196246911246156e-16,
+    "max_abs": 5.551115123125783e-17
+  }
+}

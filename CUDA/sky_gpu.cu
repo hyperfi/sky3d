@@ -137,15 +137,16 @@ __device__ inline void odd_fft(Z (&values)[Odd]){
   else line_fft5<Inverse>(values);
 }
 
-template<int Odd,bool Accumulate>
+template<int Odd,bool Accumulate,bool Advance=false,bool Contiguous=false,bool Curvature=true>
 __global__ void derivative_strided(const Z* input,Z* first,Z* second,int lines,int stride,
-                                   const SpectralFactors* factors){
+                                   const SpectralFactors* factors,Z* term,Z* result,double coefficient){
   constexpr int n=8*Odd;
   int lane=threadIdx.x%32,column=lane/4;
   int line=blockIdx.x*(blockDim.x/8)+(threadIdx.x/32)*4+lane%4;
   // Other grid lengths are even, so all four lines in a participating warp exist.
   if(line>=lines) return;
-  int base=(line/stride)*(n*stride)+line%stride;
+  // Each warp finishes reading its own lines before writing, including in place.
+  int base=Contiguous?line*n:(line/stride)*(n*stride)+line%stride;
   // Good-Thomas indexing for the coprime transform lengths 8 and Odd.
   // The 8-point forward FFT leaves its mode in bit-reversed order.
   int mode_column=((column&1)<<2)|(column&2)|(column>>2);
@@ -154,7 +155,7 @@ __global__ void derivative_strided(const Z* input,Z* first,Z* second,int lines,i
   Z values[Odd],first_modes[Odd];
   #pragma unroll
   for(int row=0;row<Odd;row++){
-    points[row]=base+((8*row+Odd*column)%n)*stride;
+    points[row]=base+((8*row+Odd*column)%n)*(Contiguous?1:stride);
     modes[row]=(row_mode*row+column_mode*mode_column)%n;
     values[row]=line_fft8<false>(input[points[row]],lane);
   }
@@ -166,16 +167,103 @@ __global__ void derivative_strided(const Z* input,Z* first,Z* second,int lines,i
   #pragma unroll
   for(int row=0;row<Odd;row++){
     Z value=line_fft8<true>(first_modes[row],lane);
-    if constexpr(Accumulate) first[points[row]]=first[points[row]]+value;
-    else first[points[row]]=value;
+    int point=points[row];
+    if constexpr(Advance){
+      Z h=first[point]+value;
+      Z next{-coefficient*h.y,coefficient*h.x};
+      term[point]=next;
+      result[point]=result[point]+next;
+    }else if constexpr(Accumulate) first[point]=first[point]+value;
+    else first[point]=value;
   }
-  if(second){
+  if(Curvature&&second){
     #pragma unroll
     for(int row=0;row<Odd;row++) values[row]=factors[modes[row]].second*values[row];
     odd_fft<Odd,true>(values);
     #pragma unroll
     for(int row=0;row<Odd;row++)
       second[points[row]]=line_fft8<true>(values[row],lane);
+  }
+}
+
+// Four lanes per line, with eight adjacent lines sharing a warp.
+template<bool Inverse>
+__device__ inline Z line_fft4(Z v,int lane){
+  constexpr int separation=8;
+  if constexpr(Inverse){
+    Z peer=line_shuffle(v,lane^separation);
+    v=(lane&separation)?peer-v:peer+v;
+    peer=line_shuffle(v,lane^(2*separation));
+    bool upper=lane&(2*separation);
+    Z a=upper?peer:v,b=upper?v:peer;
+    if(lane&separation) b=line_rotate<true>(b);
+    return upper?a-b:a+b;
+  }else{
+    Z peer=line_shuffle(v,lane^(2*separation));
+    bool upper=lane&(2*separation);
+    v=upper?peer-v:peer+v;
+    if(upper&&(lane&separation)) v=line_rotate<false>(v);
+    peer=line_shuffle(v,lane^separation);
+    return (lane&separation)?peer-v:peer+v;
+  }
+}
+
+template<bool Inverse>
+__device__ inline void line_fft9(Z (&values)[9]){
+  // For n=r+3*j, transform j, apply W9^(r*k), then transform r.
+  #pragma unroll
+  for(int r=0;r<3;r++) line_fft3<Inverse>(values[r],values[r+3],values[r+6]);
+  constexpr double sign=Inverse?1:-1;
+  constexpr Z w1{0.766044443118978035,sign*0.642787609686539326};
+  constexpr Z w2{0.173648177666930349,sign*0.984807753012208020};
+  constexpr Z w4{-0.939692620785908384,sign*0.342020143325668733};
+  values[4]=values[4]*w1;
+  values[5]=values[5]*w2;
+  values[7]=values[7]*w2;
+  values[8]=values[8]*w4;
+  #pragma unroll
+  for(int k=0;k<3;k++) line_fft3<Inverse>(values[3*k],values[3*k+1],values[3*k+2]);
+  Z v1=values[1],v2=values[2],v5=values[5];
+  values[1]=values[3]; values[2]=values[6];
+  values[3]=v1; values[5]=values[7];
+  values[6]=v2; values[7]=v5;
+}
+
+template<bool Accumulate,bool Curvature>
+__global__ void derivative36(const Z* input,Z* first,Z* second,int lines,int stride,
+                             const SpectralFactors* factors){
+  int lane=threadIdx.x%32,column=lane/8;
+  int line=blockIdx.x*(blockDim.x/4)+(threadIdx.x/32)*8+lane%8;
+  if(line>=lines) return;
+  // The other grid lengths are even, so each participating warp owns eight full lines.
+  int base=(line/stride)*(36*stride)+line%stride;
+  int frequency_column=((column&1)<<1)|(column>>1);
+  // Good-Thomas indexing for the coprime lengths 4 and 9.
+  int points[9],modes[9];
+  Z values[9],gradients[9];
+  #pragma unroll
+  for(int r=0;r<9;r++){
+    points[r]=base+((4*r+9*column)%36)*stride;
+    modes[r]=(28*r+9*frequency_column)%36;
+    values[r]=line_fft4<false>(input[points[r]],lane);
+  }
+  line_fft9<false>(values);
+  #pragma unroll
+  for(int r=0;r<9;r++){
+    gradients[r]=factors[modes[r]].first*Z{-values[r].y,values[r].x};
+    if constexpr(Curvature) values[r]=factors[modes[r]].second*values[r];
+  }
+  line_fft9<true>(gradients);
+  #pragma unroll
+  for(int r=0;r<9;r++){
+    Z v=line_fft4<true>(gradients[r],lane);
+    if constexpr(Accumulate) first[points[r]]=first[points[r]]+v;
+    else first[points[r]]=v;
+  }
+  if constexpr(Curvature){
+    line_fft9<true>(values);
+    #pragma unroll
+    for(int r=0;r<9;r++) second[points[r]]=line_fft4<true>(values[r],lane);
   }
 }
 
@@ -226,6 +314,33 @@ __global__ void h_axis(const Z* p,const Z* d1,const Z* d2,Z* h,Z* coupled,
   int other=t+(spin==0?g:-g);
   apply_h_axis(cell,spin,q,g,axis,p[t],p[other],d1[t],d1[other],d2[t],
                h[t],coupled[t],b,dbm,a,w);
+}
+// Both spin components share the same fields and each other's gradient.
+template<int Axis>
+__global__ void h_axis_spin_pair(const Z* p,const Z* d1,const Z* d2,Z* h,Z* coupled,
+                                int g,const int* iq,const double* b,const double* dbm,
+                                const double* a,const double* w,const double* u,const double* s){
+  int cell=blockIdx.x*blockDim.x+threadIdx.x;
+  if(cell>=g) return;
+  int q=iq[blockIdx.y]-1;
+  int up=2*g*blockIdx.y+cell,down=up+g;
+  Z up_p=p[up],down_p=p[down],up_d1=d1[up],down_d1=d1[down];
+  Z up_h,down_h,up_c{},down_c{};
+  if constexpr(Axis==0){
+    int base=cell+g*q;
+    double potential=u[base],sx=s[field_index(cell,0,q,g)],sy=s[field_index(cell,1,q,g)],sz=s[field_index(cell,2,q,g)];
+    up_h=potential*up_p+Z{sx,-sy}*down_p+sz*up_p;
+    down_h=potential*down_p+Z{sx,sy}*up_p+(-sz)*down_p;
+  }else{
+    up_h=h[up];down_h=h[down];
+  }
+  if constexpr(Axis==1){
+    up_c=coupled[up];down_c=coupled[down];
+  }
+  apply_h_axis(cell,0,q,g,Axis,up_p,down_p,up_d1,down_d1,d2[up],up_h,up_c,b,dbm,a,w);
+  apply_h_axis(cell,1,q,g,Axis,down_p,up_p,down_d1,up_d1,d2[down],down_h,down_c,b,dbm,a,w);
+  h[up]=up_h;h[down]=down_h;
+  coupled[up]=up_c;coupled[down]=down_c;
 }
 // Adjacent lanes own the two spin components at the same grid point.
 template<int Axis>
@@ -608,12 +723,30 @@ struct State:PlanSet{
   template<bool Accumulate=false>
   void derivative(const Z* input,int axis,Z* first,Z* second_output=nullptr){
     int n=axis==0?nx:(axis==1?ny:nz);
+    if(!Accumulate&&axis==0&&n==24){
+      int lines=count/24;
+      if(second_output)
+        derivative_strided<3,false,false,true,true><<<(lines+31)/32,256,0,stream>>>
+          (input,first,second_output,lines,1,spectral_factors[axis],nullptr,nullptr,0);
+      else
+        derivative_strided<3,false,false,true,false><<<(lines+31)/32,256,0,stream>>>
+          (input,first,nullptr,lines,1,spectral_factors[axis],nullptr,nullptr,0);
+      return;
+    }
+    if(axis!=0&&n==36){
+      int lines=count/n,stride=axis==1?nx:nx*ny;
+      if(second_output)
+        derivative36<Accumulate,true><<<(lines+31)/32,128,0,stream>>>(input,first,second_output,lines,stride,spectral_factors[axis]);
+      else
+        derivative36<Accumulate,false><<<(lines+31)/32,128,0,stream>>>(input,first,nullptr,lines,stride,spectral_factors[axis]);
+      return;
+    }
     if(axis!=0&&(n==24||n==40)){
       int lines=count/n,stride=axis==1?nx:nx*ny;
       if(n==24)
-        derivative_strided<3,Accumulate><<<(lines+31)/32,256,0,stream>>>(input,first,second_output,lines,stride,spectral_factors[axis]);
+        derivative_strided<3,Accumulate><<<(lines+31)/32,256,0,stream>>>(input,first,second_output,lines,stride,spectral_factors[axis],nullptr,nullptr,0);
       else
-        derivative_strided<5,Accumulate><<<(lines+31)/32,256,0,stream>>>(input,first,second_output,lines,stride,spectral_factors[axis]);
+        derivative_strided<5,Accumulate><<<(lines+31)/32,256,0,stream>>>(input,first,second_output,lines,stride,spectral_factors[axis],nullptr,nullptr,0);
       return;
     }
     // X lines are contiguous. cuFFT's out-of-place input is read-only,
@@ -631,27 +764,47 @@ struct State:PlanSet{
     FFT(cufftExecZ2Z(plans[axis],frequency,contiguous?first:frequency,CUFFT_INVERSE));
     if(!contiguous) unpack_axis<Accumulate><<<blocks(),256,0,stream>>>(frequency,first,count,nx,ny,nz,axis);
   }
-  void hpsi(const Z* input,DerivativeCache cache=DerivativeCache::none){
+  void apply_axis(const Z* input,const Z* first,const Z* second,int axis,bool pair_spins){
+    if(!pair_spins){
+      h_axis<<<blocks(),256,0,stream>>>(input,first,second,h,coupled,count,g,iq,axis,b,dbm,a,w);
+      return;
+    }
+    const dim3 grid((g-1)/256+1,states);
+    if(axis==0)
+      h_axis_spin_pair<0><<<grid,256,0,stream>>>(input,first,second,h,coupled,g,iq,b,dbm,a,w,u,s);
+    else if(axis==1)
+      h_axis_spin_pair<1><<<grid,256,0,stream>>>(input,first,second,h,coupled,g,iq,b,dbm,a,w,u,s);
+    else
+      h_axis_spin_pair<2><<<grid,256,0,stream>>>(input,first,second,h,coupled,g,iq,b,dbm,a,w,u,s);
+  }
+  void hpsi(const Z* input,DerivativeCache cache=DerivativeCache::none,
+            bool advance=false,double coefficient=0){
     const bool fuse_axes=nx==24&&ny==24&&nz==24;
-    h_local<<<blocks(),256,0,stream>>>(input,h,count,g,iq,u,s);
+    const bool pair_spins=nx==ny&&ny==nz&&(nx==36||nx==40)&&states<=65535;
+    // On these meshes the paired X update also initializes h.
+    if(!pair_spins) h_local<<<blocks(),256,0,stream>>>(input,h,count,g,iq,u,s);
     for(int axis=0;axis<3;axis++){
       if(cache!=DerivativeCache::none){
         Z* first=stage_first[axis];
         Z* second=stage_second[axis];
         if(cache==DerivativeCache::populate) derivative(input,axis,first,second);
-        h_axis<<<blocks(),256,0,stream>>>(input,first,second,h,coupled,count,g,iq,axis,b,dbm,a,w);
+        apply_axis(input,first,second,axis,pair_spins);
       }else if(fuse_axes&&axis==1)
         h_axis24<1><<<(count/48+15)/16,256,0,stream>>>(input,h,coupled,count,g,nx,iq,spectral_factors[1],b,dbm,a,w);
       else if(fuse_axes&&axis==2)
         h_axis24<2><<<(count/48+15)/16,256,0,stream>>>(input,h,coupled,count,g,nx*ny,iq,spectral_factors[2],b,dbm,a,w);
       else{
         derivative(input,axis,d1,d2);
-        h_axis<<<blocks(),256,0,stream>>>(input,d1,d2,h,coupled,count,g,iq,axis,b,dbm,a,w);
+        apply_axis(input,d1,d2,axis,pair_spins);
       }
       // The X inverse can reuse coupled because the forward FFT has
       // consumed it. Y and Z add to h as they store the inverse result.
       if(axis==0) derivative(coupled,axis,coupled);
-      else derivative<true>(coupled,axis,h);
+      else if(axis==2&&advance){
+        const int lines=count/24;
+        derivative_strided<3,true,true><<<(lines+31)/32,256,0,stream>>>
+          (coupled,h,nullptr,lines,nx*ny,spectral_factors[axis],term,result,coefficient);
+      }else derivative<true>(coupled,axis,h);
     }
   }
   void densities(const Z* input){
@@ -661,13 +814,16 @@ struct State:PlanSet{
   void enqueue_stage(int order,double dt_hbc,DerivativeCache cache){
     size_t bytes=size_t(count)*sizeof(Z);
     CUDA(cudaMemcpyAsync(result,psi,bytes,cudaMemcpyDeviceToDevice,stream));
-    // Both stages start from psi, which stays read-only until commit.
+    const bool advance=nx==24&&ny==24&&nz==24;
+    // The last derivative and the recurrence write the same grid points.
     if(order>0){
-      hpsi(psi,cache);
-      recurrence<<<blocks(),256,0,stream>>>(term,result,h,count,-dt_hbc);
+      hpsi(psi,cache,advance,-dt_hbc);
+      if(!advance) recurrence<<<blocks(),256,0,stream>>>(term,result,h,count,-dt_hbc);
     }
     for(int m=2;m<=order;m++){
-      hpsi(term);recurrence<<<blocks(),256,0,stream>>>(term,result,h,count,-dt_hbc/m);
+      const double coefficient=-dt_hbc/m;
+      hpsi(term,DerivativeCache::none,advance,coefficient);
+      if(!advance) recurrence<<<blocks(),256,0,stream>>>(term,result,h,count,coefficient);
     }
     densities(result);CUDA(cudaGetLastError());
   }

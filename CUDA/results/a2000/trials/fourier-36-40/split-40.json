@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "runs": [
+    {
+      "grid": 40,
+      "mode": 0,
+      "label": "timing-1-0",
+      "seconds": 71.77537059225142,
+      "steps": 40
+    },
+    {
+      "grid": 40,
+      "mode": 1,
+      "label": "timing-1-1",
+      "seconds": 72.24320763908327,
+      "steps": 40,
+      "wavefunction": {
+        "relative_l2": 5.335506057649556e-16,
+        "max_abs": 7.632783294297951e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 1,
+      "label": "timing-2-1",
+      "seconds": 72.4654724728316,
+      "steps": 40,
+      "wavefunction": {
+        "relative_l2": 5.307367803631741e-16,
+        "max_abs": 7.376145397762941e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 0,
+      "label": "timing-2-0",
+      "seconds": 72.61903597228229,
+      "steps": 40,
+      "wavefunction": {
+        "relative_l2": 6.114463514403698e-16,
+        "max_abs": 7.645093845980274e-17
+      }
+    }
+  ],
+  "profiles": {},
+  "medians": {
+    "0": 72.19720328226686,
+    "1": 72.35434005595744
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "status": "complete",
+  "runs": [
+    {
+      "grid": 36,
+      "mode": 0,
+      "label": "profile-36-baseline",
+      "seconds": 30.152952877804637,
+      "steps": 20
+    },
+    {
+      "grid": 36,
+      "mode": 36,
+      "label": "profile-36-candidate",
+      "seconds": 24.817866645753384,
+      "steps": 20,
+      "wavefunction": {
+        "relative_l2": 5.045066291627654e-16,
+        "max_abs": 7.016522229951154e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 0,
+      "label": "profile-40-baseline",
+      "seconds": 40.451457895338535,
+      "steps": 20
+    },
+    {
+      "grid": 40,
+      "mode": 40,
+      "label": "profile-40-candidate",
+      "seconds": 47.10008625127375,
+      "steps": 20,
+      "wavefunction": {
+        "relative_l2": 3.9331200002493654e-16,
+        "max_abs": 6.546139416680338e-17
+      }
+    },
+    {
+      "grid": 36,
+      "mode": 36,
+      "label": "36-graphs-off",
+      "seconds": 22.986801939085126,
+      "steps": 20,
+      "wavefunction": {
+        "relative_l2": 4.1853343134243743e-16,
+        "max_abs": 6.39734408315113e-17
+      }
+    },
+    {
+      "grid": 36,
+      "mode": 0,
+      "label": "timing-36-1-0",
+      "seconds": 65.61591892503202,
+      "steps": 50
+    },
+    {
+      "grid": 36,
+      "mode": 36,
+      "label": "timing-36-1-36",
+      "seconds": 51.79062404111028,
+      "steps": 50,
+      "wavefunction": {
+        "relative_l2": 8.276778250145881e-16,
+        "max_abs": 8.092071311423671e-17
+      }
+    },
+    {
+      "grid": 36,
+      "mode": 36,
+      "label": "timing-36-2-36",
+      "seconds": 51.796220641583204,
+      "steps": 50,
+      "wavefunction": {
+        "relative_l2": 7.448579756252613e-16,
+        "max_abs": 9.813077866773594e-17
+      }
+    },
+    {
+      "grid": 36,
+      "mode": 0,
+      "label": "timing-36-2-0",
+      "seconds": 66.36616591922939,
+      "steps": 50,
+      "wavefunction": {
+        "relative_l2": 7.110673941430565e-16,
+        "max_abs": 7.609091204154493e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 0,
+      "label": "timing-40-1-0",
+      "seconds": 89.10001625493169,
+      "steps": 50
+    },
+    {
+      "grid": 40,
+      "mode": 40,
+      "label": "timing-40-1-40",
+      "seconds": 105.0165805183351,
+      "steps": 50,
+      "wavefunction": {
+        "relative_l2": 6.567386280295882e-16,
+        "max_abs": 7.076311083754596e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 40,
+      "label": "timing-40-2-40",
+      "seconds": 105.00217252969742,
+      "steps": 50,
+      "wavefunction": {
+        "relative_l2": 8.359354666305925e-16,
+        "max_abs": 7.681907133143445e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 0,
+      "label": "timing-40-2-0",
+      "seconds": 89.03443892300129,
+      "steps": 50,
+      "wavefunction": {
+        "relative_l2": 7.508218814969638e-16,
+        "max_abs": 6.938893903907228e-17
+      }
+    }
+  ],
+  "profiles": {
+    "profile-36-baseline": {
+      "cuFFT": 10.872066812,
+      "h_axis": 4.852422603,
+      "spectral_scale": 2.331681706,
+      "pack_axis": 1.291176128,
+      "unpack_axis": 2.320088202,
+      "other": 1.4529892070000001,
+      "density_kernel": 0.43047306
+    },
+    "profile-36-candidate": {
+      "h_axis": 4.853961876,
+      "derivative36": 7.0490918780000005,
+      "cuFFT": 3.5373781419999997,
+      "spectral_scale": 0.777240291,
+      "other": 1.442906112,
+      "density_kernel": 0.404184951
+    },
+    "profile-40-baseline": {
+      "derivative_strided": 14.583402145,
+      "cuFFT": 6.804623825999999,
+      "h_axis": 6.652120044,
+      "spectral_scale": 1.06659475,
+      "other": 2.0357410310000006,
+      "density_kernel": 0.535967109
+    },
+    "profile-40-candidate": {
+      "cuFFT": 21.188901475,
+      "h_axis": 6.650240207,
+      "spectral_scale": 3.199048741,
+      "pack_axis": 1.768955783,
+      "unpack_axis": 3.1344575810000004,
+      "other": 2.055070892,
+      "density_kernel": 0.584220747
+    }
+  },
+  "median_36": {
+    "0": 65.9910424221307,
+    "36": 51.79342234134674
+  },
+  "median_40": {
+    "0": 89.06722758896649,
+    "40": 105.00937652401626
+  }
+}

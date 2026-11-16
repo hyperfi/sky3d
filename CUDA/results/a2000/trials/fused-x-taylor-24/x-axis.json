@@ -1,0 +1,176 @@
+{
+  "status": "complete",
+  "runs": [
+    {
+      "grid": 24,
+      "mode": 0,
+      "label": "screen-1-0",
+      "seconds": 11.227613709867,
+      "steps": 35
+    },
+    {
+      "grid": 24,
+      "mode": 1,
+      "label": "screen-1-1",
+      "seconds": 10.96866101399064,
+      "steps": 35,
+      "wavefunction": {
+        "relative_l2": 6.14476995001879e-16,
+        "max_abs": 7.244417918960238e-17
+      }
+    },
+    {
+      "grid": 24,
+      "mode": 4,
+      "label": "screen-1-4",
+      "seconds": 11.104757158085704,
+      "steps": 35,
+      "wavefunction": {
+        "relative_l2": 6.146894436205742e-16,
+        "max_abs": 8.121767085755589e-17
+      }
+    },
+    {
+      "grid": 24,
+      "mode": 4,
+      "label": "screen-2-4",
+      "seconds": 11.145411079749465,
+      "steps": 35,
+      "wavefunction": {
+        "relative_l2": 6.667273105625266e-16,
+        "max_abs": 8.092071311423671e-17
+      }
+    },
+    {
+      "grid": 24,
+      "mode": 1,
+      "label": "screen-2-1",
+      "seconds": 11.29428655281663,
+      "steps": 35,
+      "wavefunction": {
+        "relative_l2": 5.251738782295197e-16,
+        "max_abs": 6.206335383118183e-17
+      }
+    },
+    {
+      "grid": 24,
+      "mode": 0,
+      "label": "screen-2-0",
+      "seconds": 11.467322248965502,
+      "steps": 35,
+      "wavefunction": {
+        "relative_l2": 6.034367878416732e-16,
+        "max_abs": 8.092071311423671e-17
+      }
+    },
+    {
+      "grid": 24,
+      "mode": 0,
+      "label": "profile-baseline",
+      "seconds": 9.406651826575398,
+      "steps": 20
+    },
+    {
+      "grid": 24,
+      "mode": 4,
+      "label": "profile-best",
+      "seconds": 9.463561588898301,
+      "steps": 20,
+      "wavefunction": {
+        "relative_l2": 5.848476307052916e-16,
+        "max_abs": 8.886119947416683e-17
+      }
+    },
+    {
+      "grid": 24,
+      "mode": 0,
+      "label": "confirm-1-0",
+      "seconds": 30.05799457617104,
+      "steps": 100,
+      "wavefunction": {
+        "relative_l2": 1.099955001624836e-14,
+        "max_abs": 1.007860903556854e-15
+      }
+    },
+    {
+      "grid": 24,
+      "mode": 4,
+      "label": "confirm-1-4",
+      "seconds": 29.91246915049851,
+      "steps": 100,
+      "wavefunction": {
+        "relative_l2": 1.1045288141914585e-14,
+        "max_abs": 9.941040200671662e-16
+      }
+    },
+    {
+      "grid": 24,
+      "mode": 4,
+      "label": "confirm-2-4",
+      "seconds": 30.135717909783125,
+      "steps": 100,
+      "wavefunction": {
+        "relative_l2": 1.1063240193816769e-14,
+        "max_abs": 1.0069767205451572e-15
+      }
+    },
+    {
+      "grid": 24,
+      "mode": 0,
+      "label": "confirm-2-0",
+      "seconds": 30.886015625670552,
+      "steps": 100,
+      "wavefunction": {
+        "relative_l2": 1.0963084210298997e-14,
+        "max_abs": 1.0061396160665481e-15
+      }
+    },
+    {
+      "grid": 24,
+      "mode": 0,
+      "label": "graph-reference",
+      "seconds": 4.539338830858469,
+      "steps": 10
+    },
+    {
+      "grid": 24,
+      "mode": 4,
+      "label": "graphs-off",
+      "seconds": 4.485688051208854,
+      "steps": 10,
+      "wavefunction": {
+        "relative_l2": 5.48175581140225e-16,
+        "max_abs": 7.076311083754596e-17
+      }
+    }
+  ],
+  "profiles": {
+    "profile-baseline": {
+      "cuFFT": 1.203831518,
+      "derivative_strided": 1.7340726260000001,
+      "other": 1.805410103,
+      "h_axis": 0.559555962,
+      "spectral_scale": 0.230561183,
+      "density_kernel": 0.141467342
+    },
+    "profile-best": {
+      "derivative_strided": 1.7077866470000003,
+      "other": 1.7803302959999994,
+      "derivative_x24": 1.368850756,
+      "h_axis": 0.559331681,
+      "density_kernel": 0.13809155,
+      "cuFFT": 0.032206714
+    }
+  },
+  "screen_medians": {
+    "0": 11.347467979416251,
+    "1": 11.131473783403635,
+    "4": 11.125084118917584
+  },
+  "best_mode": 4,
+  "confirmation_medians": {
+    "0": 30.472005100920796,
+    "4": 30.024093530140817
+  },
+  "won_both": true
+}

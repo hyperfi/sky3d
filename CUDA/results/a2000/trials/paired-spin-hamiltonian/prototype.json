@@ -1,0 +1,202 @@
+{
+  "status": "complete",
+  "runs": [
+    {
+      "grid": 36,
+      "mode": 0,
+      "label": "screen-36-0",
+      "seconds": 18.63751377724111,
+      "steps": 15
+    },
+    {
+      "grid": 36,
+      "mode": 1,
+      "label": "screen-36-1",
+      "seconds": 17.47785426490009,
+      "steps": 15,
+      "wavefunction": {
+        "relative_l2": 5.636500721450008e-16,
+        "max_abs": 6.938893903907228e-17
+      }
+    },
+    {
+      "grid": 36,
+      "mode": 2,
+      "label": "screen-36-2",
+      "seconds": 17.02943069860339,
+      "steps": 15,
+      "wavefunction": {
+        "relative_l2": 5.451758116237425e-16,
+        "max_abs": 7.473417450352271e-17
+      }
+    },
+    {
+      "grid": 36,
+      "mode": 0,
+      "label": "timing-36-1-0",
+      "seconds": 38.65945913270116,
+      "steps": 35
+    },
+    {
+      "grid": 36,
+      "mode": 2,
+      "label": "timing-36-1-2",
+      "seconds": 34.57428450137377,
+      "steps": 35,
+      "wavefunction": {
+        "relative_l2": 6.535376874891628e-16,
+        "max_abs": 6.664589960562512e-17
+      }
+    },
+    {
+      "grid": 36,
+      "mode": 2,
+      "label": "timing-36-2-2",
+      "seconds": 34.75281828455627,
+      "steps": 35,
+      "wavefunction": {
+        "relative_l2": 6.550088416802908e-16,
+        "max_abs": 8.694409141350492e-17
+      }
+    },
+    {
+      "grid": 36,
+      "mode": 0,
+      "label": "timing-36-2-0",
+      "seconds": 39.84106563217938,
+      "steps": 35,
+      "wavefunction": {
+        "relative_l2": 6.84586818681009e-16,
+        "max_abs": 7.505561329662603e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 0,
+      "label": "screen-40-0",
+      "seconds": 32.146949319168925,
+      "steps": 15
+    },
+    {
+      "grid": 40,
+      "mode": 1,
+      "label": "screen-40-1",
+      "seconds": 30.171589313074946,
+      "steps": 15,
+      "wavefunction": {
+        "relative_l2": 4.991756342123499e-16,
+        "max_abs": 6.059128614320848e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 2,
+      "label": "screen-40-2",
+      "seconds": 29.334599202498794,
+      "steps": 15,
+      "wavefunction": {
+        "relative_l2": 2.7943300796396947e-16,
+        "max_abs": 4.443059973708341e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 0,
+      "label": "timing-40-1-0",
+      "seconds": 67.24945857189596,
+      "steps": 35
+    },
+    {
+      "grid": 40,
+      "mode": 2,
+      "label": "timing-40-1-2",
+      "seconds": 60.752865836024284,
+      "steps": 35,
+      "wavefunction": {
+        "relative_l2": 6.389029980097137e-16,
+        "max_abs": 9.106885210113025e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 2,
+      "label": "timing-40-2-2",
+      "seconds": 60.76238152757287,
+      "steps": 35,
+      "wavefunction": {
+        "relative_l2": 6.155951400406547e-16,
+        "max_abs": 9.12668998568199e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 0,
+      "label": "timing-40-2-0",
+      "seconds": 67.51934630051255,
+      "steps": 35,
+      "wavefunction": {
+        "relative_l2": 6.494609016007322e-16,
+        "max_abs": 7.632783294297951e-17
+      }
+    },
+    {
+      "grid": 40,
+      "mode": 0,
+      "label": "profile-40-baseline",
+      "seconds": 43.658634055405855,
+      "steps": 20
+    },
+    {
+      "grid": 40,
+      "mode": 2,
+      "label": "profile-40-candidate",
+      "seconds": 39.51569543592632,
+      "steps": 20,
+      "wavefunction": {
+        "relative_l2": 5.912418296150312e-16,
+        "max_abs": 6.938893903907228e-17
+      }
+    }
+  ],
+  "profiles": {
+    "profile-40-baseline": {
+      "derivative_strided": 16.936843458000002,
+      "cuFFT": 7.867641916999999,
+      "h_axis": 6.650105096,
+      "spectral_scale": 1.165808273,
+      "h_local": 0.989675989,
+      "other": 1.056903934,
+      "density_kernel": 0.563600494
+    },
+    "profile-40-candidate": {
+      "derivative_strided": 16.400187495,
+      "cuFFT": 7.572763598,
+      "h_axis_spin_pair": 4.5428269199999995,
+      "spectral_scale": 1.165884095,
+      "other": 1.0553774190000003,
+      "density_kernel": 0.560050781
+    }
+  },
+  "screen_36": {
+    "0": 18.63751377724111,
+    "1": 17.47785426490009,
+    "2": 17.02943069860339
+  },
+  "best_36": 2,
+  "median_36": {
+    "0": 39.25026238244027,
+    "2": 34.66355139296502
+  },
+  "won_both_36": true,
+  "screen_40": {
+    "0": 32.146949319168925,
+    "1": 30.171589313074946,
+    "2": 29.334599202498794
+  },
+  "best_40": 2,
+  "median_40": {
+    "0": 67.38440243620425,
+    "2": 60.75762368179858
+  },
+  "won_both_40": true
+}
