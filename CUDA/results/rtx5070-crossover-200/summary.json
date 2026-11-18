@@ -1,0 +1,2168 @@
+{
+  "status": "complete",
+  "raw_directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52",
+  "build": {
+    "arch": "sm_120",
+    "cuda_home": "/usr/local/cuda",
+    "nvcc_path": "/usr/local/cuda/bin/nvcc",
+    "cuda_lib_dir": "/usr/local/cuda/lib64",
+    "host_compiler": null,
+    "variants": {
+      "reference": "-O3 -march=native -ffp-contract=off -fopenmp",
+      "cpu": "-O3 -march=native -ffast-math -fopenmp",
+      "gpu": "-O3 -march=native -ffast-math -fopenmp"
+    },
+    "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+    "gfortran": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "source_commit": "4267f80cb0892feb610b9a85dbfb067740b01c3b",
+    "source_dirty": true,
+    "executable_sha256": {
+      "reference": "bf8ba655e2ae506646540b1f64dee88790390efa529fee9cef9e5c131de9e9d4",
+      "cpu": "6d0849613841bcef980b9e9b553c639fd1b10ff3a0ae4027bcbc22af552a319e",
+      "gpu": "60ff7a576b818ffe1da1d56fc5a144143162b8c53e606e55168801a33fe7dbd7"
+    },
+    "library_sha256": "8f94ea469ccec02e18bbbe835ddc3933cf9b6e3770e7510e05bd666af01d659d",
+    "source_sha256": {
+      "Code/coulomb.f90": "5d9011974a3ec788b109455033e79d4e7fe3962421e1adc649e23a071690a31d",
+      "Code/densities.f90": "4430ddd24940b67f564814a61dbcb68459c18528a9bc8935131bdf0253bfb9b1",
+      "Code/dynamic.f90": "bb09b047cdb4d95bb15205e1c4fe161e5bcc599341db6622bf1ed5d7955a9e40",
+      "Code/energies.f90": "60d00ab2a55afa73525c175c09651d4d596d248ca8724f258d7c5487e73bb2cc",
+      "Code/external.f90": "4d911dd988e77d805fa49cbd93d6519dc9e8098ecc7f09cfc350613779e750a8",
+      "Code/fftw3.f": "8bdbee5f7a7a28762abd79f536aaf28deaca0197cc0e931b1cb9364f43b2a314",
+      "Code/forces.data": "2c5712b83aed67d310abc50590a3078a8d0e5d8e16b46315d92ba6dfe76f4728",
+      "Code/forces.f90": "380153c21f072d8bc49a59619d9c0c3aa478bd8ebadf483b2c0b7a7e0126373e",
+      "Code/fourier.f90": "ff323a3c9c85aad2e85a01251c1db939c5cb882922330764c9ec0403552c6f40",
+      "Code/fragments.f90": "47aead4560e57fee09dd3012cb79539381dddfa7196b07b58425e092df5f937c",
+      "Code/gpu_runtime.f90": "acf964b740f5f0c50af3e00ab647e3f0f2ce8ed17dd9c9d07e0b23c7cf4f3230",
+      "Code/grids.f90": "2899b53e968f968cd910d220ffa3200ce835b292f21f991aed549907b32226ba",
+      "Code/inout.f90": "fdce0c5da532a2520330fe0f4fe1d3e1cb1df7c904c1b60995999306c5461585",
+      "Code/levels.f90": "40a0cf9bc4ee7e4233766ea6fec057ae21f355a1686d1aa867c6d92f54161bc6",
+      "Code/main3d.f90": "06fc16477195b6eefc61276fec50bd27624937d855cef81ca540258d311bebc7",
+      "Code/Makefile": "9a23610ad88afabf2103e31532d56ccbcb07c55d47b2b4c55833e0c66731fb2c",
+      "Code/meanfield.f90": "59846be7a8b959eca5e1d4007a39538018d5bb4d77f67d0437f6864e34a9972d",
+      "Code/moment.f90": "db336897cd25969b51cb81dad618790a57f74934ce24761ba92861891321a29f",
+      "Code/pairs.f90": "d872046715200166c9adab75b03d2db36936b5b1d65e9f818e22b734f64ae4a9",
+      "Code/parallel.f90": "e6d3e2e2543bedeb90575f859e26e990e2ff14a52f4cefd49d20a8f1c23ce2b8",
+      "Code/params.f90": "975aec6ec0ad3d11d07c3ac763ec2a1fa7543bf82079ade6ac986cad259dc074",
+      "Code/sequential.f90": "89bd10da9abcbf7bf4fd482c72250e0f6ea23e0a45cc89fa324943273e18cecd",
+      "Code/static.f90": "bc9243946fe926e818c47702f66046cb9395da39ea9579187dad968e57bd2906",
+      "Code/trivial.f90": "e44c37e3fc59391b4fe641d480e5154aa9c9e9bc48a71db8932e1b07b76a8708",
+      "Code/twobody.f90": "69ab4cb00f7c8d8cf13aa2e2f833a4ceff59a4035825670e1f231c88a218b5ab",
+      "Code/user.f90": "59adf01b45cd06afabb57b8a3e232f02605547993ecdbfe4a4717b8f97e74d89",
+      "Code/user_sample.f90": "788f06dcbd29a047ca218a21e73447bee3a7f47e00db5d1a86cbf8009fbabc7b",
+      "Code/ylm.f90": "58b3b7eb7190e8fee4e3e69b46282d75d7efd776445139dcc308c7418afff610",
+      "CUDA/reductions.cuh": "77dfc2a75931c73cbede7106255a02eaddc7a0ab32b868e39c3a59650b42a9e6",
+      "CUDA/gpu_runtime.f90": "774a0bcc5d77ec79e364c8b86078bcb990cdcfb7f01e9974218a50f3b8c315c6",
+      "CUDA/sky_gpu.cu": "d6769bc8f4fc3f632a71a4b86ef4e4c5aba761a0ae8571bb2961f939d5cd6541",
+      "CUDA/build.py": "1f2a802becc285c83571a8bda72e0ff32642f5fa834b1add2e52ba14087f17be"
+    }
+  },
+  "runner_sha256": "5df74ade355901b93cb3eadfdadd0a629366d0a18404166d198ce8800bab9256",
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) Ultra 7 265K",
+    "gpu": "NVIDIA GeForce RTX 5070, 610.88, 12227 MiB",
+    "kernel": "6.18.58.1-microsoft-standard-WSL2"
+  },
+  "dt_fm_c": 0.2,
+  "duration_fm_c": 200.0,
+  "steps": 1000,
+  "spacing_fm": 1.0,
+  "cpu_pilot_threads": [
+    4,
+    8,
+    12,
+    16,
+    20
+  ],
+  "pilot_steps": 50,
+  "gpu_host_threads": 8,
+  "static_preparation": "Same A2000 archive input, up to 100 static iterations. Shared CPU-prepared checkpoint per pair.",
+  "timings": "Sequential complete jobs, one 200 fm/c pair per case, alternating backend order by case. Pilot chooses fastest tested OpenMP configuration.",
+  "omp_places": "cores",
+  "omp_proc_bind": "close",
+  "openblas_threads": 1,
+  "cases": {
+    "Pb208-24": {
+      "static": {
+        "status": "complete",
+        "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-24/static",
+        "input_sha256": "2dbac005ea85d1ffbcb6b726ec7122f2bef7ad39576fba804d70048869c8b8ab",
+        "threads": 8,
+        "seconds": 53.858035652,
+        "returncode": 0,
+        "states": 208,
+        "step": 100,
+        "time_fm_c": 0.0,
+        "converged": false,
+        "gram_error": 3.774758283725532e-15
+      },
+      "cpu_pilots": {
+        "4": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-24/pilot/cpu-4",
+          "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+          "threads": 4,
+          "seconds": 15.652209683999999,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "8": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-24/pilot/cpu-8",
+          "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+          "threads": 8,
+          "seconds": 9.506782665000003,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "12": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-24/pilot/cpu-12",
+          "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+          "threads": 12,
+          "seconds": 8.534844219999997,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "16": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-24/pilot/cpu-16",
+          "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+          "threads": 16,
+          "seconds": 7.687907805000009,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-24/pilot/retest-cpu-16",
+            "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+            "threads": 16,
+            "seconds": 7.898920681000007,
+            "returncode": 0,
+            "states": 208,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "20": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-24/pilot/cpu-20",
+          "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+          "threads": 20,
+          "seconds": 8.05031232200001,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-24/pilot/retest-cpu-20",
+            "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+            "threads": 20,
+            "seconds": 7.992183890999996,
+            "returncode": 0,
+            "states": 208,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        }
+      },
+      "dynamic": {
+        "cpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-24/cpu",
+          "input_sha256": "2805ff55d8218e70b33237cf10d2fa12965d18476656bf1b31770a91e33b7ba4",
+          "threads": 16,
+          "seconds": 134.270809349,
+          "returncode": 0,
+          "states": 208,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            126.00000262054081,
+            81.99997713202683
+          ],
+          "endpoint_gram_error": 0.00015883283777688495,
+          "integrated_energy_max_drift_mev": 0.00787439999999151,
+          "checkpoint_sha256": "9d33e7f6ffb2f5e6403c292c6cfad19b10c898b10138f78fe1e695175dd770a5",
+          "particle_max_drift": 2.2867973171969425e-05,
+          "endpoint_invariants_passed": false
+        },
+        "gpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-24/gpu",
+          "input_sha256": "2805ff55d8218e70b33237cf10d2fa12965d18476656bf1b31770a91e33b7ba4",
+          "threads": 8,
+          "seconds": 88.71053940999997,
+          "returncode": 0,
+          "required_mib": 1330.5,
+          "free_mib": 11009.0,
+          "states": 208,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            126.00000262054081,
+            81.99997713202683
+          ],
+          "endpoint_gram_error": 0.0001588328377766722,
+          "integrated_energy_max_drift_mev": 0.00787439999999151,
+          "checkpoint_sha256": "8534ad88f4dcf6146555d3e6eae7c813f93d6b97987c799c672ada7e28813362",
+          "particle_max_drift": 2.2867973171969425e-05,
+          "endpoint_invariants_passed": false
+        }
+      },
+      "shared_seed_sha256": "a81001ffaf8adca34667797cb0e59465cfcc400781100fb0c348fd11d41c28ea",
+      "selected_cpu_threads": 16,
+      "comparison": {
+        "wavefunction": {
+          "relative_l2": 1.1086472900373931e-13,
+          "max_abs": 9.865606444165003e-15
+        },
+        "observables": {
+          "energies.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "quadrupoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              1.4733103625985677e-11,
+              5.7127635955112055e-12
+            ]
+          },
+          "monopoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              2.0463630789890885e-11,
+              1.7053025658242404e-11
+            ]
+          }
+        },
+        "equivalence_passed": true
+      },
+      "cpu_over_gpu": 1.5135835070107149
+    },
+    "Sn120-24": {
+      "static": {
+        "status": "complete",
+        "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-24/static",
+        "input_sha256": "e1a856c6fe69782c2504a065ef325af5db1dfbaf1e9c618d3acc5bdaae1e3b1f",
+        "threads": 8,
+        "seconds": 39.00923228800002,
+        "returncode": 0,
+        "states": 170,
+        "step": 100,
+        "time_fm_c": 0.0,
+        "converged": false,
+        "gram_error": 3.8975219095296006e-15
+      },
+      "cpu_pilots": {
+        "20": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-24/pilot/cpu-20",
+          "input_sha256": "b11188af5cf60e77186cc46a5ca4527999b944246c5f82c2dfdb74ded6fccaaa",
+          "threads": 20,
+          "seconds": 8.725754130000041,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "16": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-24/pilot/cpu-16",
+          "input_sha256": "b11188af5cf60e77186cc46a5ca4527999b944246c5f82c2dfdb74ded6fccaaa",
+          "threads": 16,
+          "seconds": 7.3405140630000005,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-24/pilot/retest-cpu-16",
+            "input_sha256": "b11188af5cf60e77186cc46a5ca4527999b944246c5f82c2dfdb74ded6fccaaa",
+            "threads": 16,
+            "seconds": 6.81336978600001,
+            "returncode": 0,
+            "states": 170,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "12": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-24/pilot/cpu-12",
+          "input_sha256": "b11188af5cf60e77186cc46a5ca4527999b944246c5f82c2dfdb74ded6fccaaa",
+          "threads": 12,
+          "seconds": 7.282369996999989,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-24/pilot/retest-cpu-12",
+            "input_sha256": "b11188af5cf60e77186cc46a5ca4527999b944246c5f82c2dfdb74ded6fccaaa",
+            "threads": 12,
+            "seconds": 7.2677882670000145,
+            "returncode": 0,
+            "states": 170,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "8": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-24/pilot/cpu-8",
+          "input_sha256": "b11188af5cf60e77186cc46a5ca4527999b944246c5f82c2dfdb74ded6fccaaa",
+          "threads": 8,
+          "seconds": 8.167635160000032,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "4": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-24/pilot/cpu-4",
+          "input_sha256": "b11188af5cf60e77186cc46a5ca4527999b944246c5f82c2dfdb74ded6fccaaa",
+          "threads": 4,
+          "seconds": 13.311886867999988,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        }
+      },
+      "dynamic": {
+        "gpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-24/gpu",
+          "input_sha256": "3b435acbb1543c9d33f196fbc344c150c4b500cd539848bca47da6b702a99d3d",
+          "threads": 8,
+          "seconds": 72.983913669,
+          "returncode": 0,
+          "required_mib": 1089.9,
+          "free_mib": 11009.0,
+          "states": 170,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            69.99998464703778,
+            50.000004993144245
+          ],
+          "endpoint_gram_error": 0.0006501723915235068,
+          "integrated_energy_max_drift_mev": 0.0018373000000337925,
+          "checkpoint_sha256": "1f91f4899624a15a30a1053ff9b484ab44ecc7c9156e9aa7f87810f4a336d6da",
+          "particle_max_drift": 1.5352962222436872e-05,
+          "endpoint_invariants_passed": false
+        },
+        "cpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-24/cpu",
+          "input_sha256": "3b435acbb1543c9d33f196fbc344c150c4b500cd539848bca47da6b702a99d3d",
+          "threads": 16,
+          "seconds": 119.58668453999996,
+          "returncode": 0,
+          "states": 170,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            69.99998464703779,
+            50.000004993144245
+          ],
+          "endpoint_gram_error": 0.0006501723915233317,
+          "integrated_energy_max_drift_mev": 0.0018373000000337925,
+          "checkpoint_sha256": "871bb4e2f7761c2be0e656e4ff5ad46dba6198214f46d398401807f8206eff94",
+          "particle_max_drift": 1.5352962208226018e-05,
+          "endpoint_invariants_passed": false
+        }
+      },
+      "shared_seed_sha256": "2f6adc650690a53b7e9ac4554fa445840fe0713bfa9f96733cc76a8ab618898e",
+      "selected_cpu_threads": 16,
+      "comparison": {
+        "wavefunction": {
+          "relative_l2": 8.363029329382129e-14,
+          "max_abs": 1.0420666285481406e-14
+        },
+        "observables": {
+          "energies.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "quadrupoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              3.353761712787673e-12,
+              3.1370461783808423e-12
+            ]
+          },
+          "monopoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              5.7980287238024175e-12,
+              8.071765478234738e-12
+            ]
+          }
+        },
+        "equivalence_passed": true
+      },
+      "cpu_over_gpu": 1.638534829501676
+    },
+    "O16-24": {
+      "static": {
+        "status": "complete",
+        "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-24/static",
+        "input_sha256": "6dd9d4733b9c96d42560ddfc7c536816d860bf94226eec6264e9ed7691b567d4",
+        "threads": 8,
+        "seconds": 2.4793484389999776,
+        "returncode": 0,
+        "states": 16,
+        "step": 100,
+        "time_fm_c": 0.0,
+        "converged": false,
+        "gram_error": 3.552713678800501e-15
+      },
+      "cpu_pilots": {
+        "4": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-24/pilot/cpu-4",
+          "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+          "threads": 4,
+          "seconds": 2.893646406000016,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "8": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-24/pilot/cpu-8",
+          "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+          "threads": 8,
+          "seconds": 2.48877032900009,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-24/pilot/retest-cpu-8",
+            "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+            "threads": 8,
+            "seconds": 2.517448983999998,
+            "returncode": 0,
+            "states": 16,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "12": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-24/pilot/cpu-12",
+          "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+          "threads": 12,
+          "seconds": 2.5693234700000858,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "16": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-24/pilot/cpu-16",
+          "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+          "threads": 16,
+          "seconds": 2.543174021000027,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-24/pilot/retest-cpu-16",
+            "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+            "threads": 16,
+            "seconds": 2.6087575249999873,
+            "returncode": 0,
+            "states": 16,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "20": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-24/pilot/cpu-20",
+          "input_sha256": "7fcad4666f49ccdd075712f66779036914d5e976c73fd10bf5c21430e9bc243e",
+          "threads": 20,
+          "seconds": 2.721301044000029,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        }
+      },
+      "dynamic": {
+        "cpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-24/cpu",
+          "input_sha256": "2805ff55d8218e70b33237cf10d2fa12965d18476656bf1b31770a91e33b7ba4",
+          "threads": 8,
+          "seconds": 38.16117367000004,
+          "returncode": 0,
+          "states": 16,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            7.999999926485373,
+            7.999999931725297
+          ],
+          "endpoint_gram_error": 1.8566460509432703e-07,
+          "integrated_energy_max_drift_mev": 3.5999999994373866e-06,
+          "checkpoint_sha256": "21f1c8136f46562ec375a6e45525f76f4d957ff96d164d19ce95e937ff9dfc10",
+          "particle_max_drift": 7.351462727456237e-08,
+          "endpoint_invariants_passed": true
+        },
+        "gpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-24/gpu",
+          "input_sha256": "2805ff55d8218e70b33237cf10d2fa12965d18476656bf1b31770a91e33b7ba4",
+          "threads": 8,
+          "seconds": 9.268303861999925,
+          "returncode": 0,
+          "required_mib": 114.7,
+          "free_mib": 11009.0,
+          "states": 16,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            7.999999926485364,
+            7.999999931725294
+          ],
+          "endpoint_gram_error": 1.8566460495127704e-07,
+          "integrated_energy_max_drift_mev": 3.5999999994373866e-06,
+          "checkpoint_sha256": "81a74b27af9814bda3e1f7971e95493ff6602dd3d22143de2a06f5f458c9db92",
+          "particle_max_drift": 7.351463615634657e-08,
+          "endpoint_invariants_passed": true
+        }
+      },
+      "shared_seed_sha256": "9aae4950520b17ec93be4e89a5c9b2c5eb24d3c3bac4e49123748b102aea92b6",
+      "selected_cpu_threads": 8,
+      "comparison": {
+        "wavefunction": {
+          "relative_l2": 2.344587503019363e-14,
+          "max_abs": 3.698163560617978e-15
+        },
+        "observables": {
+          "energies.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "quadrupoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              9.199932482495399e-14,
+              1.1300010406556371e-13
+            ]
+          },
+          "monopoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              6.323830348264892e-13,
+              4.2599257454867256e-13
+            ]
+          }
+        },
+        "equivalence_passed": true
+      },
+      "cpu_over_gpu": 4.117384824472682
+    },
+    "Pb208-32": {
+      "static": {
+        "status": "complete",
+        "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-32/static",
+        "input_sha256": "3d916180fcad77b93239d79a7f0a77b2d3eb942159a6cc66c06b2e92cac6b680",
+        "threads": 8,
+        "seconds": 153.08360341599996,
+        "returncode": 0,
+        "states": 208,
+        "step": 100,
+        "time_fm_c": 0.0,
+        "converged": false,
+        "gram_error": 1.0214766289429108e-14
+      },
+      "cpu_pilots": {
+        "20": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-32/pilot/cpu-20",
+          "input_sha256": "178e89fc8249e967ee60bc98b20c4a845dbb930fa31033ff38ec7286d9166669",
+          "threads": 20,
+          "seconds": 42.672035654999945,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "16": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-32/pilot/cpu-16",
+          "input_sha256": "178e89fc8249e967ee60bc98b20c4a845dbb930fa31033ff38ec7286d9166669",
+          "threads": 16,
+          "seconds": 41.53453067700002,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "12": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-32/pilot/cpu-12",
+          "input_sha256": "178e89fc8249e967ee60bc98b20c4a845dbb930fa31033ff38ec7286d9166669",
+          "threads": 12,
+          "seconds": 33.58983899300006,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "8": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-32/pilot/cpu-8",
+          "input_sha256": "178e89fc8249e967ee60bc98b20c4a845dbb930fa31033ff38ec7286d9166669",
+          "threads": 8,
+          "seconds": 28.33039511800007,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "4": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-32/pilot/cpu-4",
+          "input_sha256": "178e89fc8249e967ee60bc98b20c4a845dbb930fa31033ff38ec7286d9166669",
+          "threads": 4,
+          "seconds": 45.39816255599999,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        }
+      },
+      "dynamic": {
+        "gpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-32/gpu",
+          "input_sha256": "6ce53ff6a1cd7e186766b68dc619e3042ae9e8d11fddc9b7ffbdd6cc3c713ca0",
+          "threads": 8,
+          "seconds": 260.05443737199994,
+          "returncode": 0,
+          "required_mib": 1905.8,
+          "free_mib": 11009.0,
+          "states": 208,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            125.99992435780142,
+            81.99998239587975
+          ],
+          "endpoint_gram_error": 0.00016900508304618978,
+          "integrated_energy_max_drift_mev": 0.008948199999849749,
+          "checkpoint_sha256": "8eac26187af4f0a1a54707ec09b42ff3dc12b27133d321da70d93301d17d4ad5",
+          "particle_max_drift": 7.564219858124943e-05,
+          "endpoint_invariants_passed": false
+        },
+        "cpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-32/cpu",
+          "input_sha256": "6ce53ff6a1cd7e186766b68dc619e3042ae9e8d11fddc9b7ffbdd6cc3c713ca0",
+          "threads": 8,
+          "seconds": 523.8869672360001,
+          "returncode": 0,
+          "states": 208,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            125.99992435780143,
+            81.99998239587977
+          ],
+          "endpoint_gram_error": 0.00016900508304594906,
+          "integrated_energy_max_drift_mev": 0.008948199999849749,
+          "checkpoint_sha256": "8e6f90c6f2ebccec26b581b8e5b1dbcd5223a44398680ea3250bf32179ceaea7",
+          "particle_max_drift": 7.564219856703858e-05,
+          "endpoint_invariants_passed": false
+        }
+      },
+      "shared_seed_sha256": "511abb534641a019fde7abf1ab67f9e8a08d8fea7aed9f55d71c22173d135b51",
+      "selected_cpu_threads": 8,
+      "comparison": {
+        "wavefunction": {
+          "relative_l2": 2.8748397749465793e-14,
+          "max_abs": 3.3125279490746107e-15
+        },
+        "observables": {
+          "energies.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "quadrupoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              1.2505552149377763e-11,
+              9.094947017729282e-12
+            ]
+          },
+          "monopoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              3.319655661471188e-11,
+              3.694822225952521e-11
+            ]
+          }
+        },
+        "equivalence_passed": true
+      },
+      "cpu_over_gpu": 2.0145280831589725
+    },
+    "Sn120-32": {
+      "static": {
+        "status": "complete",
+        "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-32/static",
+        "input_sha256": "a46bf63a15be810dabc6d9e39fd9f8c377b7961ca84f4113065006317e808186",
+        "threads": 8,
+        "seconds": 101.78240507100008,
+        "returncode": 0,
+        "states": 170,
+        "step": 100,
+        "time_fm_c": 0.0,
+        "converged": false,
+        "gram_error": 1.0977601861964786e-14
+      },
+      "cpu_pilots": {
+        "4": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-32/pilot/cpu-4",
+          "input_sha256": "6cc75ab47797baac6f4f9c98a79e2eb54c008ff1219b7de1f2a87317b3bade63",
+          "threads": 4,
+          "seconds": 37.94762583900001,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "8": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-32/pilot/cpu-8",
+          "input_sha256": "6cc75ab47797baac6f4f9c98a79e2eb54c008ff1219b7de1f2a87317b3bade63",
+          "threads": 8,
+          "seconds": 23.903077847000077,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-32/pilot/retest-cpu-8",
+            "input_sha256": "6cc75ab47797baac6f4f9c98a79e2eb54c008ff1219b7de1f2a87317b3bade63",
+            "threads": 8,
+            "seconds": 25.51290976600012,
+            "returncode": 0,
+            "states": 170,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "12": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-32/pilot/cpu-12",
+          "input_sha256": "6cc75ab47797baac6f4f9c98a79e2eb54c008ff1219b7de1f2a87317b3bade63",
+          "threads": 12,
+          "seconds": 25.963459444000137,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-32/pilot/retest-cpu-12",
+            "input_sha256": "6cc75ab47797baac6f4f9c98a79e2eb54c008ff1219b7de1f2a87317b3bade63",
+            "threads": 12,
+            "seconds": 25.48384698699965,
+            "returncode": 0,
+            "states": 170,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "16": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-32/pilot/cpu-16",
+          "input_sha256": "6cc75ab47797baac6f4f9c98a79e2eb54c008ff1219b7de1f2a87317b3bade63",
+          "threads": 16,
+          "seconds": 32.780922135999845,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "20": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-32/pilot/cpu-20",
+          "input_sha256": "6cc75ab47797baac6f4f9c98a79e2eb54c008ff1219b7de1f2a87317b3bade63",
+          "threads": 20,
+          "seconds": 38.275914393999756,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        }
+      },
+      "dynamic": {
+        "cpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-32/cpu",
+          "input_sha256": "6ed317c14925fc9d9b1aa030a220d86062a05a1e020f6fb8d3a3ac747f54367f",
+          "threads": 8,
+          "seconds": 484.0176102720002,
+          "returncode": 0,
+          "states": 170,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            69.99999794505737,
+            50.000003520183334
+          ],
+          "endpoint_gram_error": 0.0006263045079720882,
+          "integrated_energy_max_drift_mev": 0.0010997000000543267,
+          "checkpoint_sha256": "a38fa605e3baa4c52d4b97dc030f921d2d726141ed7c71a3d186d1462c05e54d",
+          "particle_max_drift": 3.520183334160265e-06,
+          "endpoint_invariants_passed": false
+        },
+        "gpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-32/gpu",
+          "input_sha256": "6ed317c14925fc9d9b1aa030a220d86062a05a1e020f6fb8d3a3ac747f54367f",
+          "threads": 8,
+          "seconds": 233.802628509,
+          "returncode": 0,
+          "required_mib": 1563.4,
+          "free_mib": 11009.0,
+          "states": 170,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            69.99999794505737,
+            50.000003520183334
+          ],
+          "endpoint_gram_error": 0.0006263045079721551,
+          "integrated_energy_max_drift_mev": 0.0010997000000543267,
+          "checkpoint_sha256": "ea7dcc420b63f9823aefbec898f4cd73523b1a38577d9fc8e9aa35cf5bc8304c",
+          "particle_max_drift": 3.520183334160265e-06,
+          "endpoint_invariants_passed": false
+        }
+      },
+      "shared_seed_sha256": "6689d1ca89241a3d31ae2292d0f114d1432e9b0d804b733d17be839446465054",
+      "selected_cpu_threads": 8,
+      "comparison": {
+        "wavefunction": {
+          "relative_l2": 2.1067547735647124e-14,
+          "max_abs": 2.9332158101322363e-15
+        },
+        "observables": {
+          "energies.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "quadrupoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              4.75353090223507e-12,
+              3.2862601528904634e-12
+            ]
+          },
+          "monopoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              1.48929757415317e-11,
+              9.038103598868474e-12
+            ]
+          }
+        },
+        "equivalence_passed": true
+      },
+      "cpu_over_gpu": 2.0701974710834716
+    },
+    "O16-32": {
+      "static": {
+        "status": "complete",
+        "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-32/static",
+        "input_sha256": "90add4b823257e8a313e9e816d8956ef228e22512ec2799edc1b0be5ec7f90aa",
+        "threads": 8,
+        "seconds": 6.900366010000198,
+        "returncode": 0,
+        "states": 16,
+        "step": 100,
+        "time_fm_c": 0.0,
+        "converged": false,
+        "gram_error": 5.654699584206293e-15
+      },
+      "cpu_pilots": {
+        "20": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-32/pilot/cpu-20",
+          "input_sha256": "178e89fc8249e967ee60bc98b20c4a845dbb930fa31033ff38ec7286d9166669",
+          "threads": 20,
+          "seconds": 7.920011186000011,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "16": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-32/pilot/cpu-16",
+          "input_sha256": "178e89fc8249e967ee60bc98b20c4a845dbb930fa31033ff38ec7286d9166669",
+          "threads": 16,
+          "seconds": 7.63471156300011,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "12": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-32/pilot/cpu-12",
+          "input_sha256": "178e89fc8249e967ee60bc98b20c4a845dbb930fa31033ff38ec7286d9166669",
+          "threads": 12,
+          "seconds": 7.217465519000143,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-32/pilot/retest-cpu-12",
+            "input_sha256": "178e89fc8249e967ee60bc98b20c4a845dbb930fa31033ff38ec7286d9166669",
+            "threads": 12,
+            "seconds": 7.137320343999818,
+            "returncode": 0,
+            "states": 16,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "8": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-32/pilot/cpu-8",
+          "input_sha256": "178e89fc8249e967ee60bc98b20c4a845dbb930fa31033ff38ec7286d9166669",
+          "threads": 8,
+          "seconds": 6.7861222530000305,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-32/pilot/retest-cpu-8",
+            "input_sha256": "178e89fc8249e967ee60bc98b20c4a845dbb930fa31033ff38ec7286d9166669",
+            "threads": 8,
+            "seconds": 6.786017454000103,
+            "returncode": 0,
+            "states": 16,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "4": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-32/pilot/cpu-4",
+          "input_sha256": "178e89fc8249e967ee60bc98b20c4a845dbb930fa31033ff38ec7286d9166669",
+          "threads": 4,
+          "seconds": 7.983696076999877,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        }
+      },
+      "dynamic": {
+        "gpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-32/gpu",
+          "input_sha256": "6ce53ff6a1cd7e186766b68dc619e3042ae9e8d11fddc9b7ffbdd6cc3c713ca0",
+          "threads": 8,
+          "seconds": 21.119322500999715,
+          "returncode": 0,
+          "required_mib": 175.9,
+          "free_mib": 11009.0,
+          "states": 16,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            7.999999936409,
+            7.999999955698924
+          ],
+          "endpoint_gram_error": 1.96992738644663e-07,
+          "integrated_energy_max_drift_mev": 2.8999999983625457e-06,
+          "checkpoint_sha256": "1cb4d1074f6f90ccdbe9cb4ac03d217ce04c0eb74a0259c3f0e98efef54b2043",
+          "particle_max_drift": 6.359100002129026e-08,
+          "endpoint_invariants_passed": true
+        },
+        "cpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-32/cpu",
+          "input_sha256": "6ce53ff6a1cd7e186766b68dc619e3042ae9e8d11fddc9b7ffbdd6cc3c713ca0",
+          "threads": 8,
+          "seconds": 121.27819997899996,
+          "returncode": 0,
+          "states": 16,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            7.999999936408998,
+            7.999999955698924
+          ],
+          "endpoint_gram_error": 1.9699273892902857e-07,
+          "integrated_energy_max_drift_mev": 2.8999999983625457e-06,
+          "checkpoint_sha256": "dad01aea1cd3e8eab47e895b0d7b5efe415d1490be73a1fea528e4e6e2011e43",
+          "particle_max_drift": 6.35910017976471e-08,
+          "endpoint_invariants_passed": true
+        }
+      },
+      "shared_seed_sha256": "51c00adec4da88b6128768499c1260f7a0972bf7e68b0853d631d37082ff2851",
+      "selected_cpu_threads": 8,
+      "comparison": {
+        "wavefunction": {
+          "relative_l2": 3.687106036241265e-14,
+          "max_abs": 9.137119710461826e-15
+        },
+        "observables": {
+          "energies.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "quadrupoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              2.1099994581413872e-13,
+              1.1500002339293047e-13
+            ]
+          },
+          "monopoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              7.815970093361102e-13,
+              5.95967719618784e-13
+            ]
+          }
+        },
+        "equivalence_passed": true
+      },
+      "cpu_over_gpu": 5.74252322598223
+    },
+    "Pb208-36": {
+      "static": {
+        "status": "complete",
+        "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-36/static",
+        "input_sha256": "fe537247594443f5be1cd4d60460245c5c1c95ff64bd4e845408487e9436090a",
+        "threads": 8,
+        "seconds": 244.26209021399973,
+        "returncode": 0,
+        "states": 208,
+        "step": 100,
+        "time_fm_c": 0.0,
+        "converged": false,
+        "gram_error": 1.6205146581062644e-14
+      },
+      "cpu_pilots": {
+        "4": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-36/pilot/cpu-4",
+          "input_sha256": "33614193102fce1dbb6c0457e829102dbca3ff45312a61bff7514e1c4b5b1aab",
+          "threads": 4,
+          "seconds": 71.14556906000007,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "8": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-36/pilot/cpu-8",
+          "input_sha256": "33614193102fce1dbb6c0457e829102dbca3ff45312a61bff7514e1c4b5b1aab",
+          "threads": 8,
+          "seconds": 57.03804160000027,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "12": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-36/pilot/cpu-12",
+          "input_sha256": "33614193102fce1dbb6c0457e829102dbca3ff45312a61bff7514e1c4b5b1aab",
+          "threads": 12,
+          "seconds": 68.61981859300022,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "16": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-36/pilot/cpu-16",
+          "input_sha256": "33614193102fce1dbb6c0457e829102dbca3ff45312a61bff7514e1c4b5b1aab",
+          "threads": 16,
+          "seconds": 87.18033673899981,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "20": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-36/pilot/cpu-20",
+          "input_sha256": "33614193102fce1dbb6c0457e829102dbca3ff45312a61bff7514e1c4b5b1aab",
+          "threads": 20,
+          "seconds": 98.01829517999977,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        }
+      },
+      "dynamic": {
+        "cpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-36/cpu",
+          "input_sha256": "f35d4b6757891bb3fd49a19cddfe118e7fd1b3633ff1892955261cac21b59c42",
+          "threads": 8,
+          "seconds": 1125.2546986389998,
+          "returncode": 0,
+          "states": 208,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            125.99992989190561,
+            81.99998189597238
+          ],
+          "endpoint_gram_error": 0.00015194402111937198,
+          "integrated_energy_max_drift_mev": 0.009267199999840159,
+          "checkpoint_sha256": "dc136d34dedd9fc9458aa75a7917b64cb2948437ba93df01c6fe3ca953a41674",
+          "particle_max_drift": 7.010809439123022e-05,
+          "endpoint_invariants_passed": false
+        },
+        "gpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-36/gpu",
+          "input_sha256": "f35d4b6757891bb3fd49a19cddfe118e7fd1b3633ff1892955261cac21b59c42",
+          "threads": 8,
+          "seconds": 287.28296472700004,
+          "returncode": 0,
+          "required_mib": 2713.5,
+          "free_mib": 11009.0,
+          "states": 208,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            125.99992989190568,
+            81.99998189597241
+          ],
+          "endpoint_gram_error": 0.0001519440211196626,
+          "integrated_energy_max_drift_mev": 0.009267199999840159,
+          "checkpoint_sha256": "ebaf94b9d40d5dbf621e76ea30a132d8b9f3cb27e9e8a03f494faf8b1607c39e",
+          "particle_max_drift": 7.010809432017595e-05,
+          "endpoint_invariants_passed": false
+        }
+      },
+      "shared_seed_sha256": "784d901ff7d02381ce51dfdf54096d08ffa719e6cd3e7c5bba5770fa8c52064b",
+      "selected_cpu_threads": 8,
+      "comparison": {
+        "wavefunction": {
+          "relative_l2": 3.6878243255995604e-14,
+          "max_abs": 7.868855599977208e-15
+        },
+        "observables": {
+          "energies.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "quadrupoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              2.3533175408374518e-11,
+              1.787725523172412e-11
+            ]
+          },
+          "monopoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              5.047695594839752e-11,
+              5.10453901370056e-11
+            ]
+          }
+        },
+        "equivalence_passed": true
+      },
+      "cpu_over_gpu": 3.916886264760981
+    },
+    "Sn120-36": {
+      "static": {
+        "status": "complete",
+        "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-36/static",
+        "input_sha256": "31fe40ae0878aefda0ca379a3495423152d5a677c0d27661d019da34ac039756",
+        "threads": 8,
+        "seconds": 186.73290023699974,
+        "returncode": 0,
+        "states": 170,
+        "step": 100,
+        "time_fm_c": 0.0,
+        "converged": false,
+        "gram_error": 1.3238153277416897e-14
+      },
+      "cpu_pilots": {
+        "20": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-36/pilot/cpu-20",
+          "input_sha256": "c454bbc8a0a35a261878f3b3e0e9033bb7153eebfe66555bd43ea1199832229c",
+          "threads": 20,
+          "seconds": 79.96488798500013,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "16": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-36/pilot/cpu-16",
+          "input_sha256": "c454bbc8a0a35a261878f3b3e0e9033bb7153eebfe66555bd43ea1199832229c",
+          "threads": 16,
+          "seconds": 71.69154021299983,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "12": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-36/pilot/cpu-12",
+          "input_sha256": "c454bbc8a0a35a261878f3b3e0e9033bb7153eebfe66555bd43ea1199832229c",
+          "threads": 12,
+          "seconds": 58.340669475999675,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "8": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-36/pilot/cpu-8",
+          "input_sha256": "c454bbc8a0a35a261878f3b3e0e9033bb7153eebfe66555bd43ea1199832229c",
+          "threads": 8,
+          "seconds": 48.95677128999978,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "4": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-36/pilot/cpu-4",
+          "input_sha256": "c454bbc8a0a35a261878f3b3e0e9033bb7153eebfe66555bd43ea1199832229c",
+          "threads": 4,
+          "seconds": 59.405472252000436,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        }
+      },
+      "dynamic": {
+        "gpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-36/gpu",
+          "input_sha256": "352e6b26c3b720e5ee458ced0a9fb770c09aac00ebd5be32edb62e8e2b482331",
+          "threads": 8,
+          "seconds": 230.98780220699973,
+          "returncode": 0,
+          "required_mib": 2226.0,
+          "free_mib": 11009.0,
+          "states": 170,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            69.99999528382898,
+            50.000003666281856
+          ],
+          "endpoint_gram_error": 0.0006181958363788349,
+          "integrated_energy_max_drift_mev": 0.0008784000000332526,
+          "checkpoint_sha256": "ece32ad4fe72b7dfd5daf8a0abd1d21d933671d2dcf3d28d1a857014c9cfd161",
+          "particle_max_drift": 4.716171019936155e-06,
+          "endpoint_invariants_passed": false
+        },
+        "cpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-36/cpu",
+          "input_sha256": "352e6b26c3b720e5ee458ced0a9fb770c09aac00ebd5be32edb62e8e2b482331",
+          "threads": 8,
+          "seconds": 916.463815053,
+          "returncode": 0,
+          "states": 170,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            69.99999528382898,
+            50.000003666281856
+          ],
+          "endpoint_gram_error": 0.0006181958363795395,
+          "integrated_energy_max_drift_mev": 0.0008784000000332526,
+          "checkpoint_sha256": "a4c8a3efaf4ed71503e8f623aa572d8da235c911dee42be6594acd4e9e3903cc",
+          "particle_max_drift": 4.716171019936155e-06,
+          "endpoint_invariants_passed": false
+        }
+      },
+      "shared_seed_sha256": "f9bc08508cce6a8ced71607419ff5cd66d96af809f547e58eb1cb60ed28c47a9",
+      "selected_cpu_threads": 8,
+      "comparison": {
+        "wavefunction": {
+          "relative_l2": 2.068295723292894e-14,
+          "max_abs": 3.8839215091725306e-15
+        },
+        "observables": {
+          "energies.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "quadrupoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              5.8122395785176195e-12,
+              5.5209170568559784e-12
+            ]
+          },
+          "monopoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              2.523847797419876e-11,
+              1.830358087318018e-11
+            ]
+          }
+        },
+        "equivalence_passed": true
+      },
+      "cpu_over_gpu": 3.9675853283010625
+    },
+    "O16-36": {
+      "static": {
+        "status": "complete",
+        "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-36/static",
+        "input_sha256": "92fffd20d30657ee34202e3916c52e9c173e712eda02c1caa11233c4251709a4",
+        "threads": 8,
+        "seconds": 10.955695616999947,
+        "returncode": 0,
+        "states": 16,
+        "step": 100,
+        "time_fm_c": 0.0,
+        "converged": false,
+        "gram_error": 4.440892104201794e-15
+      },
+      "cpu_pilots": {
+        "4": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-36/pilot/cpu-4",
+          "input_sha256": "33614193102fce1dbb6c0457e829102dbca3ff45312a61bff7514e1c4b5b1aab",
+          "threads": 4,
+          "seconds": 11.582389605000571,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "8": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-36/pilot/cpu-8",
+          "input_sha256": "33614193102fce1dbb6c0457e829102dbca3ff45312a61bff7514e1c4b5b1aab",
+          "threads": 8,
+          "seconds": 10.79563277500074,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-36/pilot/retest-cpu-8",
+            "input_sha256": "33614193102fce1dbb6c0457e829102dbca3ff45312a61bff7514e1c4b5b1aab",
+            "threads": 8,
+            "seconds": 10.83037082699957,
+            "returncode": 0,
+            "states": 16,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "12": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-36/pilot/cpu-12",
+          "input_sha256": "33614193102fce1dbb6c0457e829102dbca3ff45312a61bff7514e1c4b5b1aab",
+          "threads": 12,
+          "seconds": 11.511454810999567,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-36/pilot/retest-cpu-12",
+            "input_sha256": "33614193102fce1dbb6c0457e829102dbca3ff45312a61bff7514e1c4b5b1aab",
+            "threads": 12,
+            "seconds": 11.606287603000055,
+            "returncode": 0,
+            "states": 16,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "16": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-36/pilot/cpu-16",
+          "input_sha256": "33614193102fce1dbb6c0457e829102dbca3ff45312a61bff7514e1c4b5b1aab",
+          "threads": 16,
+          "seconds": 13.140959287000442,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "20": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-36/pilot/cpu-20",
+          "input_sha256": "33614193102fce1dbb6c0457e829102dbca3ff45312a61bff7514e1c4b5b1aab",
+          "threads": 20,
+          "seconds": 13.413390912999603,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        }
+      },
+      "dynamic": {
+        "cpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-36/cpu",
+          "input_sha256": "f35d4b6757891bb3fd49a19cddfe118e7fd1b3633ff1892955261cac21b59c42",
+          "threads": 8,
+          "seconds": 188.58919062799941,
+          "returncode": 0,
+          "states": 16,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            7.999999929734518,
+            7.99999996133703
+          ],
+          "endpoint_gram_error": 2.063970237218935e-07,
+          "integrated_energy_max_drift_mev": 2.6999999960253263e-06,
+          "checkpoint_sha256": "578f8a7164307d298f78ab3e15436380623432fab45a299c84f841376e0a25c3",
+          "particle_max_drift": 7.026548232147434e-08,
+          "endpoint_invariants_passed": true
+        },
+        "gpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-36/gpu",
+          "input_sha256": "f35d4b6757891bb3fd49a19cddfe118e7fd1b3633ff1892955261cac21b59c42",
+          "threads": 8,
+          "seconds": 27.92422413300028,
+          "returncode": 0,
+          "required_mib": 250.5,
+          "free_mib": 11009.0,
+          "states": 16,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            7.999999929734516,
+            7.9999999613370285
+          ],
+          "endpoint_gram_error": 2.0639702354612745e-07,
+          "integrated_energy_max_drift_mev": 2.6999999960253263e-06,
+          "checkpoint_sha256": "35117ec9735f29eba4d28d79d9dad883729003997f62aea6c45ee75d0835e2bf",
+          "particle_max_drift": 7.026548409783118e-08,
+          "endpoint_invariants_passed": true
+        }
+      },
+      "shared_seed_sha256": "77317b6408e86e5e270bac8b3c5aa1301482e021e0c348267abfa591fa650d27",
+      "selected_cpu_threads": 8,
+      "comparison": {
+        "wavefunction": {
+          "relative_l2": 2.9744149857244195e-14,
+          "max_abs": 8.094795976730512e-15
+        },
+        "observables": {
+          "energies.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "quadrupoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              1.449985964629974e-13,
+              1.1200003598166308e-13
+            ]
+          },
+          "monopoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              1.6342482922482304e-12,
+              6.399880625451715e-13
+            ]
+          }
+        },
+        "equivalence_passed": true
+      },
+      "cpu_over_gpu": 6.753605390422595
+    },
+    "Pb208-40": {
+      "static": {
+        "status": "complete",
+        "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-40/static",
+        "input_sha256": "3264322d7ce5d1ef93b18833ddc3eb2f1dbca9e7f0a936b93ad1af69801fe4d5",
+        "threads": 8,
+        "seconds": 395.4228790900006,
+        "returncode": 0,
+        "states": 208,
+        "step": 100,
+        "time_fm_c": 0.0,
+        "converged": false,
+        "gram_error": 1.284357546405638e-14
+      },
+      "cpu_pilots": {
+        "20": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-40/pilot/cpu-20",
+          "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+          "threads": 20,
+          "seconds": 166.16360125700066,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "16": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-40/pilot/cpu-16",
+          "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+          "threads": 16,
+          "seconds": 162.50563981300002,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "12": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-40/pilot/cpu-12",
+          "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+          "threads": 12,
+          "seconds": 160.38212297300015,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "8": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-40/pilot/cpu-8",
+          "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+          "threads": 8,
+          "seconds": 120.43409920800059,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-40/pilot/retest-cpu-8",
+            "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+            "threads": 8,
+            "seconds": 123.19661720099975,
+            "returncode": 0,
+            "states": 208,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "4": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-40/pilot/cpu-4",
+          "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+          "threads": 4,
+          "seconds": 126.76391938500001,
+          "returncode": 0,
+          "states": 208,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-40/pilot/retest-cpu-4",
+            "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+            "threads": 4,
+            "seconds": 131.34235426799933,
+            "returncode": 0,
+            "states": 208,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        }
+      },
+      "dynamic": {
+        "gpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-40/gpu",
+          "input_sha256": "06793b7c3d7a3d3a6c988f40a6a5dd1e071d44ff1f6f61266c4e1393b5ce6f87",
+          "threads": 8,
+          "seconds": 530.2721306470012,
+          "returncode": 0,
+          "required_mib": 3722.2,
+          "free_mib": 11009.0,
+          "states": 208,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            125.99992834327334,
+            81.99998177691198
+          ],
+          "endpoint_gram_error": 0.00018212325780801137,
+          "integrated_energy_max_drift_mev": 0.00933830000008129,
+          "checkpoint_sha256": "ec4ee6de103b436364eb164f215b29ac13493533412beaaa772234992ac95dee",
+          "particle_max_drift": 7.165672666076262e-05,
+          "endpoint_invariants_passed": false
+        },
+        "cpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Pb208-40/cpu",
+          "input_sha256": "06793b7c3d7a3d3a6c988f40a6a5dd1e071d44ff1f6f61266c4e1393b5ce6f87",
+          "threads": 8,
+          "seconds": 2153.615565917,
+          "returncode": 0,
+          "states": 208,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            125.99992834327337,
+            81.999981776912
+          ],
+          "endpoint_gram_error": 0.00018212325780733369,
+          "integrated_energy_max_drift_mev": 0.00933830000008129,
+          "checkpoint_sha256": "28cb9b83686965a3bc8fc877157c17586cfb2366d085064ca5246e00f34e43ea",
+          "particle_max_drift": 7.16567266323409e-05,
+          "endpoint_invariants_passed": false
+        }
+      },
+      "shared_seed_sha256": "ecfbfadf6711f4c086cf3516dbbb9691fe2b4fc5ae3403b16796037b4cd946e0",
+      "selected_cpu_threads": 8,
+      "comparison": {
+        "wavefunction": {
+          "relative_l2": 7.434224412759583e-14,
+          "max_abs": 1.820263255890239e-14
+        },
+        "observables": {
+          "energies.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "quadrupoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              1.807620719773695e-11,
+              1.3990586467116373e-11
+            ]
+          },
+          "monopoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              1.2596501619555056e-10,
+              5.60476109967567e-11
+            ]
+          }
+        },
+        "equivalence_passed": true
+      },
+      "cpu_over_gpu": 4.061340284448493
+    },
+    "Sn120-40": {
+      "static": {
+        "status": "complete",
+        "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-40/static",
+        "input_sha256": "397c806651e61f99f78e345a4900b5eb134a317d5adea0c301284d591c935936",
+        "threads": 8,
+        "seconds": 274.19247964900023,
+        "returncode": 0,
+        "states": 170,
+        "step": 100,
+        "time_fm_c": 0.0,
+        "converged": false,
+        "gram_error": 1.5553353058417548e-14
+      },
+      "cpu_pilots": {
+        "4": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-40/pilot/cpu-4",
+          "input_sha256": "833ae4951dbacffdd0af5b822aaf6763e69a6f7fef07611fc9c119119cc7a291",
+          "threads": 4,
+          "seconds": 100.74048325200056,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-40/pilot/retest-cpu-4",
+            "input_sha256": "833ae4951dbacffdd0af5b822aaf6763e69a6f7fef07611fc9c119119cc7a291",
+            "threads": 4,
+            "seconds": 99.76397511300092,
+            "returncode": 0,
+            "states": 170,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "8": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-40/pilot/cpu-8",
+          "input_sha256": "833ae4951dbacffdd0af5b822aaf6763e69a6f7fef07611fc9c119119cc7a291",
+          "threads": 8,
+          "seconds": 94.42791684900112,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-40/pilot/retest-cpu-8",
+            "input_sha256": "833ae4951dbacffdd0af5b822aaf6763e69a6f7fef07611fc9c119119cc7a291",
+            "threads": 8,
+            "seconds": 92.89767249299985,
+            "returncode": 0,
+            "states": 170,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "12": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-40/pilot/cpu-12",
+          "input_sha256": "833ae4951dbacffdd0af5b822aaf6763e69a6f7fef07611fc9c119119cc7a291",
+          "threads": 12,
+          "seconds": 111.97201168399988,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "16": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-40/pilot/cpu-16",
+          "input_sha256": "833ae4951dbacffdd0af5b822aaf6763e69a6f7fef07611fc9c119119cc7a291",
+          "threads": 16,
+          "seconds": 129.3222684609991,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "20": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-40/pilot/cpu-20",
+          "input_sha256": "833ae4951dbacffdd0af5b822aaf6763e69a6f7fef07611fc9c119119cc7a291",
+          "threads": 20,
+          "seconds": 139.37249381400034,
+          "returncode": 0,
+          "states": 170,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        }
+      },
+      "dynamic": {
+        "cpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-40/cpu",
+          "input_sha256": "837db2ac84b5675f8ae0aefff97d1aa45eea09dace1a62d63b34856514d68f58",
+          "threads": 8,
+          "seconds": 1777.4721095450004,
+          "returncode": 0,
+          "states": 170,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            69.99999738309529,
+            50.00000337027588
+          ],
+          "endpoint_gram_error": 0.000639089698128127,
+          "integrated_energy_max_drift_mev": 0.0007315000000289729,
+          "checkpoint_sha256": "43a8d9438dd370f7129dc40bb903119ff4dda2c2898d23b1fdc1cb60628e2d56",
+          "particle_max_drift": 3.3702758770459695e-06,
+          "endpoint_invariants_passed": false
+        },
+        "gpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/Sn120-40/gpu",
+          "input_sha256": "837db2ac84b5675f8ae0aefff97d1aa45eea09dace1a62d63b34856514d68f58",
+          "threads": 8,
+          "seconds": 421.2332386340004,
+          "returncode": 0,
+          "required_mib": 3053.5,
+          "free_mib": 11009.0,
+          "states": 170,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            69.99999738309528,
+            50.000003370275856
+          ],
+          "endpoint_gram_error": 0.0006390896981290243,
+          "integrated_energy_max_drift_mev": 0.0007315000000289729,
+          "checkpoint_sha256": "eb29ea87b5cb3debd31b963ec33ff6b1f0c307380b3a9223892b9ba4556c8ed3",
+          "particle_max_drift": 3.3702758557296875e-06,
+          "endpoint_invariants_passed": false
+        }
+      },
+      "shared_seed_sha256": "36400ce87d724bfef41c19c38bf6b00545d8d28bc381b8622a0ce954a71e4dd5",
+      "selected_cpu_threads": 8,
+      "comparison": {
+        "wavefunction": {
+          "relative_l2": 6.694278375684155e-14,
+          "max_abs": 2.0911741461409585e-14
+        },
+        "observables": {
+          "energies.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "quadrupoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              6.437517185986508e-12,
+              6.217248937900877e-12
+            ]
+          },
+          "monopoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              4.0245140553452075e-11,
+              2.3646862246096134e-11
+            ]
+          }
+        },
+        "equivalence_passed": true
+      },
+      "cpu_over_gpu": 4.219686260536064
+    },
+    "O16-40": {
+      "static": {
+        "status": "complete",
+        "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-40/static",
+        "input_sha256": "9e155ff21e6aac37845284c5c1204ec45471469a4e66c34db38dfd9c41ef8c25",
+        "threads": 8,
+        "seconds": 17.077351570000246,
+        "returncode": 0,
+        "states": 16,
+        "step": 100,
+        "time_fm_c": 0.0,
+        "converged": false,
+        "gram_error": 3.552713716606802e-15
+      },
+      "cpu_pilots": {
+        "20": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-40/pilot/cpu-20",
+          "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+          "threads": 20,
+          "seconds": 21.115455272998588,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "16": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-40/pilot/cpu-16",
+          "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+          "threads": 16,
+          "seconds": 21.087356803998773,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "12": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-40/pilot/cpu-12",
+          "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+          "threads": 12,
+          "seconds": 18.634464647999266,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996
+        },
+        "8": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-40/pilot/cpu-8",
+          "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+          "threads": 8,
+          "seconds": 17.27505064700017,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-40/pilot/retest-cpu-8",
+            "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+            "threads": 8,
+            "seconds": 17.26308897600029,
+            "returncode": 0,
+            "states": 16,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        },
+        "4": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-40/pilot/cpu-4",
+          "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+          "threads": 4,
+          "seconds": 17.99632930199914,
+          "returncode": 0,
+          "states": 16,
+          "step": 50,
+          "time_fm_c": 9.999999999999996,
+          "retest": {
+            "status": "complete",
+            "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-40/pilot/retest-cpu-4",
+            "input_sha256": "590d17f332c321390158669214cd187051a7a7deb095a1f12d23c55d31f94a38",
+            "threads": 4,
+            "seconds": 17.938762497000425,
+            "returncode": 0,
+            "states": 16,
+            "step": 50,
+            "time_fm_c": 9.999999999999996
+          }
+        }
+      },
+      "dynamic": {
+        "gpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-40/gpu",
+          "input_sha256": "06793b7c3d7a3d3a6c988f40a6a5dd1e071d44ff1f6f61266c4e1393b5ce6f87",
+          "threads": 8,
+          "seconds": 49.10672490199977,
+          "returncode": 0,
+          "required_mib": 343.6,
+          "free_mib": 11009.0,
+          "states": 16,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            7.999999934091905,
+            7.999999957664656
+          ],
+          "endpoint_gram_error": 2.0566458992111244e-07,
+          "integrated_energy_max_drift_mev": 2.8000000042993634e-06,
+          "checkpoint_sha256": "25ce21cb7e1023696fb3894341430178b701327a7e7001c26a2b05238050cbee",
+          "particle_max_drift": 6.590809498163708e-08,
+          "endpoint_invariants_passed": true
+        },
+        "cpu": {
+          "status": "complete",
+          "directory": "/home/abhishek/.cache/sky3d-local-crossover-200-yvSO52/O16-40/cpu",
+          "input_sha256": "06793b7c3d7a3d3a6c988f40a6a5dd1e071d44ff1f6f61266c4e1393b5ce6f87",
+          "threads": 8,
+          "seconds": 308.1666257019988,
+          "returncode": 0,
+          "states": 16,
+          "step": 1000,
+          "time_fm_c": 199.9999999999972,
+          "final_particles": [
+            7.99999993409191,
+            7.999999957664658
+          ],
+          "endpoint_gram_error": 2.056645899465567e-07,
+          "integrated_energy_max_drift_mev": 2.8000000042993634e-06,
+          "checkpoint_sha256": "9d5b0f17d55fbad8c9ab5d457b0e6abbe082c72541c3d42d4d36860f9c07b994",
+          "particle_max_drift": 6.590808965256656e-08,
+          "endpoint_invariants_passed": true
+        }
+      },
+      "shared_seed_sha256": "74ef8563bc84ab81932bab02f3a3cb8c58c6a82bf471de52efa252671b4be82a",
+      "selected_cpu_threads": 8,
+      "comparison": {
+        "wavefunction": {
+          "relative_l2": 3.957076123601922e-14,
+          "max_abs": 1.2238894949123402e-14
+        },
+        "observables": {
+          "energies.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "quadrupoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              1.5500101202547967e-13,
+              1.060000611591283e-13
+            ]
+          },
+          "monopoles.res": {
+            "passed": true,
+            "max_abs_by_column": [
+              0.0,
+              3.822719918389339e-12,
+              6.959988141375106e-13
+            ]
+          }
+        },
+        "equivalence_passed": true
+      },
+      "cpu_over_gpu": 6.275446516072778
+    }
+  }
+}

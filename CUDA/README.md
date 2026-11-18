@@ -29,6 +29,10 @@ integrated implementation.
 
 ## Current measured results
 
+The [200 fm/c grid sweep](results/rtx5070-crossover-200/README.md) records
+the RTX 5070 timings for oxygen-16, tin-120 and lead-208, with a comparison
+against the RTX A2000 and Xeon workstation.
+
 The completed 40³/0.6 fm 20Ne benchmark takes **19.8037 s on GPU versus
 63.1325 s on the best measured parallel CPU: 3.1879x faster**. These are
 three-repetition medians of complete 200-step jobs, with identical output and

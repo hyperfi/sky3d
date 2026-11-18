@@ -36,6 +36,10 @@ bank is populated before diagnostics even when CPU fields are selected.
 
 ## Measurements
 
+See the [200 fm/c grid sweep](../CUDA/results/rtx5070-crossover-200/README.md)
+for the later RTX 5070 timings and the comparison with the RTX A2000 and
+Xeon workstation.
+
 The field-construction milestone measured 62.2160 s on CPU8 and 30.1976 s on
 GPU8: **2.0603x** for 200 steps on the 40³/0.6 fm SLy5 20Ne state, dt=0.1,
 Taylor order 4. Three complete jobs per configuration were interleaved;
